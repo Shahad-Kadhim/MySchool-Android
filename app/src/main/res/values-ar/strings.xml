@@ -1,10 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">My-School</string>
     <string name="sign_up">Hello ! \nSign Up to get \nstarted ...</string>
-    <string name="name">Name</string>
-    <string name="password">Password</string>
+    <string name="name">name</string>
+    <string name="password">password</string>
     <string name="phone">Phone</string>
     <string name="teaching_specialization">Teaching Specialization</string>
-    <string name="sign_up_button">Sign Up</string>
+
+    <string name="sign_up_button">sign Up</string>
     <string name="nav_login">I already have account</string>
 </resources>
