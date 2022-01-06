@@ -1,4 +1,4 @@
-package com.shahad.app.my_school.ui.tab
+package com.shahad.app.my_school.ui.identity
 
 import com.shahad.app.my_school.data.MySchoolRepository
 import com.shahad.app.my_school.ui.base.BaseViewModel
@@ -6,6 +6,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class TabViewModel @Inject constructor(
+class IdentityViewModel @Inject constructor(
     repository: MySchoolRepository
 ): BaseViewModel()
