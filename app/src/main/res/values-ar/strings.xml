@@ -6,7 +6,9 @@
     <string name="password">password</string>
     <string name="phone">Phone</string>
     <string name="teaching_specialization">Teaching Specialization</string>
-
+    <string name="sign_up_nav">I dont have account</string>
+    <string name="login">Hello Again !\nWelcom \nBack</string>
     <string name="sign_up_button">sign Up</string>
     <string name="nav_login">I already have account</string>
+    <string name="login_button">Login</string>
 </resources>
