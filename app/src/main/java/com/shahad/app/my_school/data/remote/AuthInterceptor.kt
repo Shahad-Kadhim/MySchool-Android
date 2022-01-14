@@ -10,7 +10,9 @@ class AuthInterceptor @Inject constructor() :Interceptor {
         with(chain.request()){
             url.newBuilder()
                 .build().also { httpUrl ->
-                    return chain.proceed(this.newBuilder().url(httpUrl).build())
+                    return chain.proceed(
+                        this.newBuilder().url(httpUrl).addHeader("Content-Type","application/json").build()
+                    )
                 }
         }
     }

@@ -44,7 +44,6 @@
             android:layout_width="match_parent"
             style="@style/EditTextField"
             android:hint="@string/password"
-            app:setNumber="@={viewModel.phone}"
             android:text="@={viewModel.password}"
             android:inputType="textPassword"
             android:background="@drawable/reg_rounded"
@@ -55,6 +54,7 @@
             android:layout_width="match_parent"
             style="@style/EditTextField"
             android:hint="@string/phone"
+            app:setNumber="@={viewModel.phone}"
             android:inputType="phone"
             android:background="@drawable/reg_rounded"
             app:layout_constraintTop_toBottomOf="@id/edit_password"/>
