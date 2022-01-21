@@ -5,16 +5,13 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
-import com.shahad.app.my_school.PreferencesKeys
 import com.shahad.app.my_school.R
-import com.shahad.app.my_school.dataStore
 import com.shahad.app.my_school.databinding.ActivityIdentityBinding
 import com.shahad.app.my_school.ui.base.BaseActivity
 import com.shahad.app.my_school.ui.main.MainActivity
-import com.shahad.app.my_school.util.writeTo
+import com.shahad.app.my_school.util.isTrue
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.map
 
 @AndroidEntryPoint
 class IdentityActivity : BaseActivity<ActivityIdentityBinding>() {
@@ -29,10 +26,11 @@ class IdentityActivity : BaseActivity<ActivityIdentityBinding>() {
 
     private fun checkIfAlreadyLogin(){
         lifecycleScope.launchWhenCreated {
-            this@IdentityActivity.dataStore.data
-                .collect { preferences ->
-                    preferences[PreferencesKeys.Token]?.let { navToHome() }
+            viewModel.isAuth.collect { isAuth->
+                takeIf {isAuth.isTrue()}?.let {
+                    navToHome()
                 }
+            }
         }
     }
 
@@ -47,9 +45,7 @@ class IdentityActivity : BaseActivity<ActivityIdentityBinding>() {
     }
 
      private fun saveToken(token: String) {
-        lifecycleScope.launchWhenStarted {
-            writeTo(PreferencesKeys.Token, token)
-        }
+         viewModel.storeToken(token)
     }
 
     private fun navToHome() {
