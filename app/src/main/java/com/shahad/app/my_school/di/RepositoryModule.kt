@@ -1,5 +1,6 @@
 package com.shahad.app.my_school.di
 
+import com.shahad.app.my_school.data.MySchoolFakeRepository
 import com.shahad.app.my_school.data.MySchoolRepositoryImpl
 import com.shahad.app.my_school.data.MySchoolRepository
 import dagger.*
@@ -14,7 +15,7 @@ abstract class RepositoryModule {
     @Singleton
     @Binds
     abstract fun provideMySchoolRepository(
-        impl: MySchoolRepositoryImpl
+        impl: MySchoolFakeRepository
     ): MySchoolRepository
 
 }

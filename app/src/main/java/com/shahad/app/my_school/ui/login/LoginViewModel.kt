@@ -1,16 +1,19 @@
 package com.shahad.app.my_school.ui.login
 
-import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.gson.JsonElement
 import com.shahad.app.my_school.data.MySchoolRepository
 import com.shahad.app.my_school.ui.base.BaseViewModel
-import com.shahad.app.my_school.ui.register.TeacherRegisterBody
 import com.shahad.app.my_school.util.DataClassParser
 import com.shahad.app.my_school.util.Event
+import com.shahad.app.my_school.util.State
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -23,11 +26,20 @@ class LoginViewModel @Inject constructor(
     val password = MutableStateFlow("")
     val userType = MutableStateFlow(UserType.TEACHER)
 
-    private val _clickLoginEvent = MutableStateFlow<Event<Boolean>?>(null)
-    val clickLoginEvent: StateFlow<Event<Boolean>?> = _clickLoginEvent
+    private val _loginState = MutableLiveData<State<String?>>()
+    val loginState: LiveData<State<String?>> = _loginState
 
     private val _clickNavSignUpEvent = MutableStateFlow<Event<Boolean>?>(null)
     val clickNavSignUpEvent: StateFlow<Event<Boolean>?> = _clickNavSignUpEvent
+
+    val whenSuccess: LiveData<String> =
+        MediatorLiveData<String>().apply {
+            addSource(_loginState){ state->
+                takeIf { state is State.Success<*> }?.let {
+                    this.postValue(state.toData())
+                }
+            }
+        }
 
     fun onClickLogin(){
 
@@ -55,8 +67,9 @@ class LoginViewModel @Inject constructor(
 
     private fun loginTeacher(body: JsonElement) {
         viewModelScope.launch {
-            repository.loginTeacher(body)
-            _clickLoginEvent.tryEmit(Event(true))
+            repository.loginTeacher(body).collect {
+                _loginState.postValue(it)
+            }
         }
 
     }

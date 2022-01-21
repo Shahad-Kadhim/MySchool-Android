@@ -7,6 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import com.shahad.app.my_school.R
 import com.shahad.app.my_school.databinding.FragmentRegisterBinding
 import com.shahad.app.my_school.ui.base.BaseFragment
+import com.shahad.app.my_school.ui.identity.IdentityActivity
 import com.shahad.app.my_school.util.goToFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -25,20 +26,20 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>() {
     private fun observeEvents() {
         with(viewModel){
             lifecycleScope.launchWhenStarted {
-
                 clickNavLoginEvent.collect {
                     it?.let {
                         viewDataBinding.root.goToFragment(RegisterFragmentDirections.actionRegisterFragmentToLoginFragment())
                     }
                 }
-
-                clickSignUpEvent.collect{
-                    it?.let{
-                        //TODO add code later
-                    }
-                }
             }
+
+            whenSuccess.observe(
+                this@RegisterFragment,
+                (requireActivity() as IdentityActivity)::onAuth
+            )
 
         }
     }
+
+
 }
