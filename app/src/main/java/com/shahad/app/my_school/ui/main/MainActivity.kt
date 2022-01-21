@@ -14,8 +14,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     override fun getLayoutId() =  R.layout.activity_main
     override val viewModel: MainViewModel by viewModels()
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
         viewDataBinding.navigation
             .setupWithNavController(findNavController(R.id.fragment_host))
     }

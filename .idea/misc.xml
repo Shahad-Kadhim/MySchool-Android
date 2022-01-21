@@ -5,12 +5,14 @@
       <map>
         <entry key="..\:/Users/MJ/MySchool/app/src/main/res/drawable/ic_home.xml" value="0.2194871794871795" />
         <entry key="..\:/Users/MJ/MySchool/app/src/main/res/drawable/ic_notification.xml" value="0.2194871794871795" />
+        <entry key="..\:/Users/MJ/MySchool/app/src/main/res/drawable/reg_rounded.xml" value="0.18703703703703703" />
         <entry key="..\:/Users/MJ/MySchool/app/src/main/res/layout/activity_main.xml" value="0.19270833333333334" />
         <entry key="..\:/Users/MJ/MySchool/app/src/main/res/layout/activity_tab.xml" value="0.20677083333333332" />
+        <entry key="..\:/Users/MJ/MySchool/app/src/main/res/layout/edit_text.xml" value="0.20677083333333332" />
         <entry key="..\:/Users/MJ/MySchool/app/src/main/res/layout/fragment_book.xml" value="0.1" />
         <entry key="..\:/Users/MJ/MySchool/app/src/main/res/layout/fragment_class_screen.xml" value="0.1" />
         <entry key="..\:/Users/MJ/MySchool/app/src/main/res/layout/fragment_home.xml" value="0.20677083333333332" />
-        <entry key="..\:/Users/MJ/MySchool/app/src/main/res/layout/fragment_login.xml" value="0.20677083333333332" />
+        <entry key="..\:/Users/MJ/MySchool/app/src/main/res/layout/fragment_login.xml" value="0.1" />
         <entry key="..\:/Users/MJ/MySchool/app/src/main/res/layout/fragment_notification.xml" value="0.20677083333333332" />
         <entry key="..\:/Users/MJ/MySchool/app/src/main/res/layout/fragment_profile.xml" value="0.20677083333333332" />
         <entry key="..\:/Users/MJ/MySchool/app/src/main/res/layout/fragment_register.xml" value="0.20677083333333332" />

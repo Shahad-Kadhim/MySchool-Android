@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">My-School</string>
+    <string name="sign_up">Hello ! \nSign Up to get \nstarted ...</string>
+    <string name="name">Name</string>
+    <string name="password">Password</string>
+    <string name="phone">Phone</string>
+    <string name="teaching_specialization">Teaching Specialization</string>
+    <string name="sign_up_button">Sign Up</string>
+    <string name="nav_login">I already have account</string>
+    <string name="login">Hello Again !\nWelcom \nBack</string>
+    <string name="login_button">Login</string>
+    <string name="sign_up_nav">I don\'t have account</string>
+    <array name="user_types">
+        <item>Teacher</item>
+        <item>Student</item>
+        <item>Manger</item>
+    </array>
 </resources>
