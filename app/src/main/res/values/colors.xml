@@ -9,14 +9,14 @@
     <color name="white">#FFFFFFFF</color>
 
 
-    <color name="brand_color">#FFE26A6A</color>
+    <color name="brand_color">#FF6AB7E2</color>
 
     <color name="background_color">#FFFFFAFA</color>
     <color name="card_background_color">#FFFFFFFF</color>
 
-    <color name="shade_primary_color">#DF401212</color>
-    <color name="shade_secondary_color">#9A401212</color>
-    <color name="shade_ternary_color">#61401212</color>
+    <color name="shade_primary_color">#DF122F40</color>
+    <color name="shade_secondary_color">#9A122F40</color>
+    <color name="shade_ternary_color">#61122F40</color>
 
     <color name="tool_bar_color">#FCEDED</color>
 </resources>
