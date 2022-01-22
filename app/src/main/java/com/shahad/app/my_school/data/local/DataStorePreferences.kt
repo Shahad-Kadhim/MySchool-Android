@@ -1,4 +1,4 @@
-package com.shahad.app.my_school
+package com.shahad.app.my_school.data.local
 
 import android.content.Context
 import androidx.datastore.core.DataStore

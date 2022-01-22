@@ -1,7 +1,7 @@
 package com.shahad.app.my_school.ui.identity
 
 import androidx.lifecycle.viewModelScope
-import com.shahad.app.my_school.DataStorePreferences
+import com.shahad.app.my_school.data.local.DataStorePreferences
 import com.shahad.app.my_school.data.MySchoolRepository
 import com.shahad.app.my_school.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

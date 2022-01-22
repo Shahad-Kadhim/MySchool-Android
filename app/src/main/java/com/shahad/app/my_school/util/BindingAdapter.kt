@@ -9,6 +9,7 @@ import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
 import com.shahad.app.my_school.ui.login.UserType
+import com.shahad.app.my_school.util.extension.toUserType
 
 @BindingAdapter(value = ["app:setNumber"])
 fun setNumber(view: EditText, number: Long?){

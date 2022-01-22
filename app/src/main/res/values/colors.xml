@@ -18,5 +18,5 @@
     <color name="shade_secondary_color">#9A122F40</color>
     <color name="shade_ternary_color">#61122F40</color>
 
-    <color name="tool_bar_color">#FCEDED</color>
+    <color name="tool_bar_color">#EDF7FC</color>
 </resources>

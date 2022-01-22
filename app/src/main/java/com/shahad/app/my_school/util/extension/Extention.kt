@@ -1,4 +1,4 @@
-package com.shahad.app.my_school.util
+package com.shahad.app.my_school.util.extension
 
 import android.content.Context
 import android.view.View

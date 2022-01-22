@@ -8,7 +8,7 @@ import com.shahad.app.my_school.R
 import com.shahad.app.my_school.databinding.FragmentLoginBinding
 import com.shahad.app.my_school.ui.base.BaseFragment
 import com.shahad.app.my_school.ui.identity.IdentityActivity
-import com.shahad.app.my_school.util.goToFragment
+import com.shahad.app.my_school.util.extension.goToFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
