@@ -19,21 +19,6 @@ class IdentityActivity : BaseActivity<ActivityIdentityBinding>() {
     override fun getLayoutId() = R.layout.activity_identity
     override val viewModel: IdentityViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        checkIfAlreadyLogin()
-        super.onCreate(savedInstanceState)
-    }
-
-    private fun checkIfAlreadyLogin(){
-        lifecycleScope.launchWhenCreated {
-            viewModel.isAuth.collect { isAuth->
-                takeIf {isAuth.isTrue()}?.let {
-                    navToHome()
-                }
-            }
-        }
-    }
-
     override fun onSupportNavigateUp(): Boolean {
         findNavController(R.id.fragment_host_main).navigateUp()
         return true

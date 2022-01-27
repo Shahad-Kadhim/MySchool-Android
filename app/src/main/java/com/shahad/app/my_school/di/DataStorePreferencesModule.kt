@@ -1,7 +1,7 @@
 package com.shahad.app.my_school.di
 
 import android.content.Context
-import com.shahad.app.my_school.DataStorePreferences
+import com.shahad.app.my_school.data.local.DataStorePreferences
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

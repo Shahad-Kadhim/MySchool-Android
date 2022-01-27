@@ -10,6 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:disableOnLoading="@{viewModel.loginState}"
         android:background="@color/background_color">
 
         <TextView
@@ -84,5 +85,18 @@
             app:layout_constraintEnd_toEndOf="@+id/appCompatButton"
             app:layout_constraintStart_toStartOf="@+id/appCompatButton"
             app:layout_constraintTop_toBottomOf="@+id/appCompatButton" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:showOnLoading="@{viewModel.loginState}"
+            android:indeterminate="true"
+            android:indeterminateTintMode="src_atop"
+            android:indeterminateTint="@color/brand_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

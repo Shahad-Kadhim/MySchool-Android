@@ -12,7 +12,9 @@
         android:name=".MySchoolApplication"
         android:theme="@style/Theme.MySchool">
         <activity
-            android:name=".ui.identity.IdentityActivity"
+            android:name=".ui.identity.IdentityActivity"/>
+
+        <activity android:name=".ui.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,7 +22,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.main.MainActivity"/>
     </application>
 
 </manifest>
