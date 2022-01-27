@@ -1,8 +1,9 @@
 package com.shahad.app.my_school.di
 
+import com.google.gson.GsonBuilder
+import com.shahad.app.my_school.BuildConfig
 import com.shahad.app.my_school.data.remote.AuthInterceptor
 import com.shahad.app.my_school.data.remote.MySchoolService
-import com.shahad.app.my_school.util.Constants
 import dagger.*
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
@@ -24,7 +25,7 @@ object NetworkModule {
     ): MySchoolService {
         return Retrofit.Builder()
             .client(okHttpClient)
-            .baseUrl(Constants.BASE_URL) // change base url later
+            .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(gsonConverterFactory)
             .build()
             .create(MySchoolService::class.java)
@@ -55,6 +56,7 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideGsonConverter(): GsonConverterFactory =
-        GsonConverterFactory.create()
+        GsonConverterFactory
+            .create( GsonBuilder().setLenient().create() )
 
 }

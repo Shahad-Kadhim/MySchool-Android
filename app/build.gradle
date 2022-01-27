@@ -9,6 +9,9 @@ plugins {
 android {
     compileSdk 31
 
+    def properties =new Properties()
+    properties.load(new FileInputStream(rootProject.file("local.properties")))
+
     defaultConfig {
         applicationId "com.shahad.app.my_school"
         minSdk 22
@@ -17,6 +20,9 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "BASE_URL" , "\"https://my-school-app-87.herokuapp.com/\""
+
     }
 
     buildTypes {
