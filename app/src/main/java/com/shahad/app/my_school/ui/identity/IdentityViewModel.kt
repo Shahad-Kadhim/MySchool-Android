@@ -14,11 +14,6 @@ class IdentityViewModel @Inject constructor(
     repository: MySchoolRepository,
     private val dataStorePreferences: DataStorePreferences
 ): BaseViewModel(){
-    private val token = dataStorePreferences.readTokenPre()
-
-    val isAuth = token.map {
-        it?.let { true }
-    }
 
     fun storeToken(token: String){
         viewModelScope.launch {
