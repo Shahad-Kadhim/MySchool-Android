@@ -4,7 +4,7 @@ import android.content.Context
 import com.shahad.app.my_school.data.local.DataStorePreferences
 import com.shahad.app.my_school.util.extension.checkAuthentication
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import okhttp3.*
 import javax.inject.Inject
@@ -14,7 +14,7 @@ class AuthInterceptor @Inject constructor(
     private val dataStorePreferences: DataStorePreferences
 ) :Interceptor {
 
-    override fun intercept(chain: Interceptor.Chain): Response {
+    override  fun intercept(chain: Interceptor.Chain): Response {
         with(chain.request()){
             url.newBuilder()
                 .build().also { httpUrl ->
@@ -29,11 +29,13 @@ class AuthInterceptor @Inject constructor(
 
     private fun addHerders(request: Request, httpUrl: HttpUrl) =
         request.newBuilder()
-            .url(httpUrl).apply {
+            .url(httpUrl)
+            .apply {
                 runBlocking {
-                    dataStorePreferences.readTokenPre().collect { token ->
-                        addHeader("Authorization", "Bearer $token")
-                    }
+                    addHeader(
+                        name= "Authorization",
+                        value= "Bearer ${dataStorePreferences.readTokenPre().first()}"
+                    )
                 }
             }
             .addHeader("Content-Type","application/json")

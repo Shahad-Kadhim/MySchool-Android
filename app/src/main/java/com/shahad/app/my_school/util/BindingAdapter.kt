@@ -60,3 +60,15 @@ fun onChange(spinner: Spinner, attChange: InverseBindingListener){
         override fun onNothingSelected(parent: AdapterView<*>?) {}
     }
 }
+
+
+@BindingAdapter(value = ["app:showOnLoading"])
+fun <T>showOnLoading(view: View, state: State<T>?){
+    view.visibility = if(state is State.Loading) View.VISIBLE else View.GONE
+}
+
+@BindingAdapter(value = ["app:disableOnLoading"])
+fun <T>disableOnLoading(view: View, state: State<T>?){
+    view.isEnabled = state !is State.Loading
+}
+
