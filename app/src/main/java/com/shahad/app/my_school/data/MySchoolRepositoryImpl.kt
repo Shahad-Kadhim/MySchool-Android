@@ -3,6 +3,7 @@ package com.shahad.app.my_school.data
 import com.google.gson.JsonElement
 import com.shahad.app.my_school.data.local.daos.MySchoolDao
 import com.shahad.app.my_school.data.remote.MySchoolService
+import com.shahad.app.my_school.data.remote.response.BaseResponse
 import com.shahad.app.my_school.util.State
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -21,6 +22,10 @@ class MySchoolRepositoryImpl @Inject constructor(
     override fun loginTeacher(loginBody: JsonElement): Flow<State<String?>> =
         wrapWithFlow { apiService.loginTeacher(loginBody) }
 
+    override fun getTeacherClasses(): Flow<State<BaseResponse<List<String>>?>> =
+        wrapWithFlow { apiService.getTeacherClasses() }
+
+
     private fun <T> wrapWithFlow(function: suspend () -> Response<T>): Flow<State<T?>> {
         return flow {
             emit(State.Loading)
@@ -35,7 +40,10 @@ class MySchoolRepositoryImpl @Inject constructor(
     private fun <T> checkIsSuccessful(response: Response<T>): State<T?> =
         if (response.isSuccessful) {
             State.Success(response.body())
-        } else {
+        } else if (response.code()==401) {
+            State.UnAuthorization
+        }else{
             State.Error(response.message())
+
         }
 }

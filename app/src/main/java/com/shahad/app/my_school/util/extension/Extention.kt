@@ -26,15 +26,6 @@ fun Context.showToast(message: String){
     Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
 }
 
-fun Response.checkAuthentication(context: Context): Response{
-    takeIf{ code == 401 }?.let {
-        with(context) {
-            startActivity(Intent(this, IdentityActivity::class.java))
-            (this as Activity).finish()
-        }
-    }
-    return this
-}
 
 
 

@@ -2,7 +2,6 @@ package com.shahad.app.my_school.data.remote
 
 import android.content.Context
 import com.shahad.app.my_school.data.local.DataStorePreferences
-import com.shahad.app.my_school.util.extension.checkAuthentication
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -22,7 +21,7 @@ class AuthInterceptor @Inject constructor(
                         .proceed(
                             addHerders(this,httpUrl)
                         )
-                        .checkAuthentication(context)
+                     //   .checkAuthentication(context)
                 }
         }
     }
