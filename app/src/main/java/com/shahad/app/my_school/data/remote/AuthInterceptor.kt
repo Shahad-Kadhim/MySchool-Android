@@ -1,15 +1,12 @@
 package com.shahad.app.my_school.data.remote
 
-import android.content.Context
 import com.shahad.app.my_school.data.local.DataStorePreferences
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import okhttp3.*
 import javax.inject.Inject
 
 class AuthInterceptor @Inject constructor(
-    @ApplicationContext private val context: Context,
     private val dataStorePreferences: DataStorePreferences
 ) :Interceptor {
 
@@ -21,7 +18,6 @@ class AuthInterceptor @Inject constructor(
                         .proceed(
                             addHerders(this,httpUrl)
                         )
-                     //   .checkAuthentication(context)
                 }
         }
     }

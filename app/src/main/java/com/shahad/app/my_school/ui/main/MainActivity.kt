@@ -1,6 +1,5 @@
 package com.shahad.app.my_school.ui.main
 
-import android.app.Activity
 import android.content.Intent
 import androidx.activity.viewModels
 import androidx.navigation.findNavController

@@ -12,8 +12,8 @@ import java.lang.Exception
 import javax.inject.Inject
 
 class MySchoolRepositoryImpl @Inject constructor(
-    val dao: MySchoolDao,
-    val apiService: MySchoolService,
+    private val dao: MySchoolDao,
+    private val apiService: MySchoolService,
 ): MySchoolRepository{
 
     override fun addTeacher(registerBody: JsonElement): Flow<State<String?>> =
@@ -38,12 +38,15 @@ class MySchoolRepositoryImpl @Inject constructor(
     }
 
     private fun <T> checkIsSuccessful(response: Response<T>): State<T?> =
-        if (response.isSuccessful) {
-            State.Success(response.body())
-        } else if (response.code()==401) {
-            State.UnAuthorization
-        }else{
-            State.Error(response.message())
-
+        when {
+            response.isSuccessful -> {
+                State.Success(response.body())
+            }
+            response.code()==401 -> {
+                State.UnAuthorization
+            }
+            else -> {
+                State.Error(response.message())
+            }
         }
 }
