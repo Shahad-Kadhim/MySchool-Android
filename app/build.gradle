@@ -122,4 +122,8 @@ dependencies {
     // When using a AppCompat theme
     implementation "com.google.accompanist:accompanist-appcompat-theme:0.16.0"
 
+    implementation "com.google.accompanist:accompanist-pager:0.12.0"
+
+    implementation 'androidx.compose.runtime:runtime-livedata:1.2.0-alpha02'
+
 }

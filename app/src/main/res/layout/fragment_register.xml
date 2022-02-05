@@ -29,58 +29,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
-        <EditText
-            android:id="@+id/edit_name"
+        <androidx.compose.ui.platform.ComposeView
+            android:id="@+id/form"
             android:layout_width="match_parent"
-            style="@style/EditTextField"
-            android:hint="@string/name"
-            android:text="@={viewModel.name}"
-            android:background="@drawable/reg_rounded"
-            android:layout_marginTop="56dp"
+            android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-        <EditText
-            android:id="@+id/edit_password"
-            android:layout_width="match_parent"
-            style="@style/EditTextField"
-            android:hint="@string/password"
-            android:text="@={viewModel.password}"
-            android:inputType="textPassword"
-            android:background="@drawable/reg_rounded"
-            app:layout_constraintTop_toBottomOf="@id/edit_name"/>
-
-        <EditText
-            android:id="@+id/edit_phone"
-            android:layout_width="match_parent"
-            style="@style/EditTextField"
-            android:hint="@string/phone"
-            app:setNumber="@={viewModel.phone}"
-            android:inputType="phone"
-            android:background="@drawable/reg_rounded"
-            app:layout_constraintTop_toBottomOf="@id/edit_password"/>
-
-        <EditText
-            android:id="@+id/edit_teaching_specialization"
-            android:layout_width="match_parent"
-            style="@style/EditTextField"
-            android:text="@={viewModel.teachingSpecialization}"
-            android:hint="@string/teaching_specialization"
-            android:background="@drawable/reg_rounded"
-            app:layout_constraintTop_toBottomOf="@id/edit_phone"/>
-
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/appCompatButton"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginHorizontal="24dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/reg_rounded"
             android:backgroundTint="@color/brand_color"
             android:text="@string/sign_up_button"
             android:onClick="@{() -> viewModel.onClickSignUp()}"
             android:textColor="@color/shade_primary_color"
-            app:layout_constraintTop_toBottomOf="@+id/edit_teaching_specialization" />
+            app:layout_constraintTop_toBottomOf="@+id/form" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -94,16 +59,17 @@
             app:layout_constraintTop_toBottomOf="@+id/appCompatButton" />
 
         <ProgressBar
+            android:id="@+id/progressBar2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:showOnLoading="@{viewModel.signUpState}"
             android:indeterminate="true"
-            android:indeterminateTintMode="src_atop"
             android:indeterminateTint="@color/brand_color"
+            android:indeterminateTintMode="src_atop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:showOnLoading="@{viewModel.signUpState}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
