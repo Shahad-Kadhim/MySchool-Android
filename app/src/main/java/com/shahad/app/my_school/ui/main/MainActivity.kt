@@ -1,11 +1,13 @@
 package com.shahad.app.my_school.ui.main
 
+import android.content.Intent
 import androidx.activity.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.shahad.app.my_school.R
 import com.shahad.app.my_school.databinding.ActivityMainBinding
 import com.shahad.app.my_school.ui.base.BaseActivity
+import com.shahad.app.my_school.ui.identity.IdentityActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,5 +27,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         return true
     }
 
-
+    fun navToIdentity(){
+        startActivity(Intent(this, IdentityActivity::class.java))
+        finish()
+    }
 }

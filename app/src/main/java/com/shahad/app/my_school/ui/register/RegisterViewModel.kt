@@ -18,10 +18,14 @@ class RegisterViewModel @Inject constructor(
     val repository: MySchoolRepository
 ): BaseViewModel(){
 
-    val name = MutableStateFlow("")
-    val password = MutableStateFlow("")
-    val phone = MutableStateFlow<Long?>(null)
-    val teachingSpecialization = MutableStateFlow("")
+    val name = MutableLiveData<String?>()
+    val password = MutableLiveData<String?>()
+    val phone = MutableLiveData<String?>()
+    val teachingSpecialization = MutableLiveData<String?>()
+    val note = MutableLiveData<String?>()
+    val stage = MutableLiveData<String?>()
+    val age = MutableLiveData<String?>()
+    val role = MutableLiveData<Role>(Role.TEACHER)
 
     private val _signUpState = MutableLiveData<State<String?>>()
 
@@ -40,12 +44,12 @@ class RegisterViewModel @Inject constructor(
     val clickNavLoginEvent: StateFlow<Event<Boolean>?> = _clickNavLoginEvent
 
     fun onClickSignUp(){
-        phone.value?.let {
+        phone.value?.toLongOrNull()?.let {
             val body =DataClassParser.parseToJson(
                 TeacherRegisterBody(
-                name.value,
-                password.value,
-                teachingSpecialization.value,
+                name.value!!,
+                password.value!!,
+                teachingSpecialization.value!!,
                 it
                 )
                                              )

@@ -38,28 +38,32 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    composeOptions{
+        kotlinCompilerExtensionVersion '1.0.5'
+    }
     buildFeatures {
-        dataBinding = true
+        dataBinding  true
+        compose true
     }
 }
 
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.0'
-    implementation 'com.google.android.material:material:1.6.0-alpha01'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.6.0-alpha02'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
     implementation "androidx.activity:activity-ktx:1.4.0"
-    implementation "androidx.fragment:fragment-ktx:1.4.0"
+    implementation "androidx.fragment:fragment-ktx:1.4.1"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.0"
 
     //navigation
-    def nav_version = "2.3.5"
+    def nav_version = "2.4.0"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
@@ -83,9 +87,9 @@ dependencies {
     implementation "io.coil-kt:coil:1.4.0"
 
     //room database
-    def room_version = "2.4.0"
+    def room_version = "2.4.1"
     implementation "androidx.room:room-runtime:$room_version"
-    kapt "org.xerial:sqlite-jdbc:3.34.0"
+    kapt "org.xerial:sqlite-jdbc:3.36.0"
     kapt "androidx.room:room-compiler:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
@@ -95,7 +99,31 @@ dependencies {
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
 
-
+    //data store preferences
     implementation "androidx.datastore:datastore-preferences:1.0.0"
+
+    //compose
+    // Integration with activities
+    implementation 'androidx.activity:activity-compose:1.4.0'
+    // Compose Material Design
+    implementation 'androidx.compose.material:material:1.0.5'
+    // Animations
+    implementation 'androidx.compose.animation:animation:1.0.5'
+    // Tooling support (Previews, etc.)
+    implementation 'androidx.compose.ui:ui-tooling:1.0.5'
+    // Integration with ViewModels
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.5.0-alpha01'
+    // UI Tests
+    androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.0.5'
+
+    // When using a MDC theme
+    implementation "com.google.android.material:compose-theme-adapter:1.1.3"
+
+    // When using a AppCompat theme
+    implementation "com.google.accompanist:accompanist-appcompat-theme:0.16.0"
+
+    implementation "com.google.accompanist:accompanist-pager:0.12.0"
+
+    implementation 'androidx.compose.runtime:runtime-livedata:1.2.0-alpha02'
 
 }
