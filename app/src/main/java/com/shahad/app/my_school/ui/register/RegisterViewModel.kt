@@ -1,12 +1,15 @@
 package com.shahad.app.my_school.ui.register
 
 import androidx.lifecycle.*
+import com.google.gson.JsonElement
 import com.shahad.app.my_school.data.MySchoolRepository
 import com.shahad.app.my_school.ui.base.BaseViewModel
+import com.shahad.app.my_school.ui.login.LoginBody
 import com.shahad.app.my_school.util.DataClassParser
 import com.shahad.app.my_school.util.Event
 import com.shahad.app.my_school.util.State
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
@@ -78,24 +81,47 @@ class RegisterViewModel @Inject constructor(
     }
 
     private fun signUpManger() {
-
+        dataClassParser.parseToJson(
+            LoginBody(
+                name.value!!,
+                password.value!!,
+            )
+        ).apply {
+            signUp(this,repository::addManger)
+        }
     }
 
     private fun signUpStudent() {
-
+        dataClassParser.parseToJson(
+            StudentRegisterBody(
+                name.value!!,
+                password.value!!,
+                phone.value!!,
+                note.value ?: "",
+                age.value!!,
+                stage.value!!
+            )
+        ).apply {
+            signUp(this,repository::addStudent)
+        }
     }
 
     private fun signUpTeacher() {
-        val body =dataClassParser.parseToJson(
+        dataClassParser.parseToJson(
             TeacherRegisterBody(
                 name.value!!,
                 password.value!!,
                 teachingSpecialization.value!!,
                 phone.value!!
             )
-        )
+        ).run {
+            signUp(this,repository::addTeacher)
+        }
+    }
+
+    fun signUp(body: JsonElement, signUp: (JsonElement) -> Flow<State<String?>>){
         viewModelScope.launch {
-            repository.addTeacher(body).collect{ state ->
+            signUp(body).collect{ state ->
                 _signUpState.postValue(state)
             }
         }

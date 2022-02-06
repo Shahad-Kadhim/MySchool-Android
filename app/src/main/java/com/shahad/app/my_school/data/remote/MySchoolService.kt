@@ -15,6 +15,18 @@ interface MySchoolService{
     @POST("/teacher/login")
     suspend fun loginTeacher(@Body loginBody: JsonElement):  Response<String>
 
+    @POST("/student/register")
+    suspend fun addStudent(@Body registerBody: JsonElement): Response<String>
+
+    @POST("/student/login")
+    suspend fun loginStudent(@Body loginBody: JsonElement):  Response<String>
+
+    @POST("/manger/new")
+    suspend fun addManger(@Body registerBody: JsonElement): Response<String>
+
+    @POST("/manger/login")
+    suspend fun loginManger(@Body loginBody: JsonElement):  Response<String>
+
     @GET("/teacher/classes")
     suspend fun getTeacherClasses(): Response<BaseResponse<List<String>>>
 }

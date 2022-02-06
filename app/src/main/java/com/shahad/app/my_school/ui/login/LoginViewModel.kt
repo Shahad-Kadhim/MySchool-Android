@@ -11,6 +11,7 @@ import com.shahad.app.my_school.util.DataClassParser
 import com.shahad.app.my_school.util.Event
 import com.shahad.app.my_school.util.State
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
@@ -43,36 +44,26 @@ class LoginViewModel @Inject constructor(
         }
 
     fun onClickLogin(){
+        when(userType.value){
+            UserType.TEACHER -> login(repository::loginTeacher)
+            UserType.STUDENT -> login(repository::loginStudent)
+            UserType.MANGER -> login(repository::loginManger)
+        }
+    }
 
-        val body = dataClassParser.parseToJson(
+    private fun login(loginRequest: (JsonElement) -> Flow<State<String?>>) {
+        dataClassParser.parseToJson(
             LoginBody(
                 name.value,
-                password.value,
+                password.value
             )
-        )
-
-        when(userType.value){
-            UserType.TEACHER -> loginTeacher(body)
-            UserType.STUDENT -> loginStudent(body)
-            UserType.MANGER -> loginManger(body)
-        }
-    }
-
-    private fun loginManger(body: JsonElement) {
-
-    }
-
-    private fun loginStudent(body: JsonElement) {
-
-    }
-
-    private fun loginTeacher(body: JsonElement) {
-        viewModelScope.launch {
-            repository.loginTeacher(body).collect {
-                _loginState.postValue(it)
+        ).also{
+            viewModelScope.launch {
+                loginRequest(it).collect {
+                    _loginState.postValue(it)
+                }
             }
         }
-
     }
 
     fun onClickNavSignUp(){

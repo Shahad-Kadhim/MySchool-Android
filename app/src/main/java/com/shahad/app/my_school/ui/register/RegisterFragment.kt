@@ -38,7 +38,6 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>() {
     override fun getLayoutId() = R.layout.fragment_register
     override val viewModel: RegisterViewModel by viewModels()
 
-    @ExperimentalPagerApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewDataBinding.form.setContent {

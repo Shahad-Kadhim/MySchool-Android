@@ -11,5 +11,14 @@ interface MySchoolRepository{
 
     fun loginTeacher(loginBody: JsonElement): Flow<State<String?>>
 
+    fun addStudent(registerBody: JsonElement): Flow<State<String?>>
+
+    fun loginStudent(loginBody: JsonElement): Flow<State<String?>>
+
+    fun addManger(registerBody: JsonElement): Flow<State<String?>>
+
+    fun loginManger(loginBody: JsonElement): Flow<State<String?>>
+
     fun getTeacherClasses(): Flow<State<BaseResponse<List<String>>?>>
+
 }
