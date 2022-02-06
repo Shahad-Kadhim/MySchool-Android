@@ -6,20 +6,20 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.fontResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -52,31 +52,74 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>() {
             ChooseRole(viewModel.role)
             when(viewModel.role.observeAsState().value){
                 Role.TEACHER -> {
-                    BasicForm(
-                        mapOf(
-                            Pair("phone", viewModel.phone),
-                            Pair("Teaching Specialization", viewModel.teachingSpecialization)
-                        )
+                    Form1(
+                        @Composable{NameAndPasswordField()},
+                        @Composable{PhoneField()},
+                        @Composable{
+                            EditTextField(
+                                modifier = Modifier.padding(top = 16.dp),
+                                value = viewModel.teachingSpecialization.observeAsState().value ?: "",
+                                hint = "teachingSpecialization",
+                                onchange = { value->
+                                    viewModel.teachingSpecialization.value =if(value.isNotBlank()) value else null
+                                },
+                                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
+                            )
+                        }
                     )
                 }
                 Role.STUDENT -> {
-                    BasicForm(
-                        mapOf(
-                            Pair("phone", viewModel.phone),
-                            Pair("age", viewModel.age),
-                            Pair("stage", viewModel.stage),
-                            Pair("note", viewModel.note),
-                        )
+                    Form1(
+                        @Composable{NameAndPasswordField()},
+                        @Composable{PhoneField()},
+                        @Composable{
+                            EditTextField(
+                                modifier = Modifier.padding(top = 16.dp),
+                                value = (viewModel.age.observeAsState().value ?: "").toString(),
+                                hint = "age",
+                                onchange = { value ->
+                                    value.toIntOrNull().let {
+                                        viewModel.age.postValue(it)
+                                    }
+                                },
+                                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                            )
+                        },
+                        @Composable{
+                            EditTextField(
+                                modifier = Modifier.padding(top = 16.dp),
+                                value = (viewModel.stage.observeAsState().value ?: "").toString(),
+                                hint = "stage",
+                                onchange = { value ->
+                                    value.toIntOrNull().let {
+                                        viewModel.stage.postValue(it)
+                                    }
+                                },
+                                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                            )
+                        },
+                        @Composable{
+                            EditTextField(
+                                modifier = Modifier.padding(top = 16.dp),
+                                value = viewModel.note.observeAsState().value ?: "",
+                                hint = "note",
+                                onchange = { value ->
+                                    viewModel.note.value =if(value.isNotBlank()) value else null
+                                },
+                                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
+                            )
+                        },
                     )
                 }
                 Role.MANGER -> {
-                    BasicForm()
+                  Form1(@Composable{NameAndPasswordField()})
                 }
             }
         }
     }
+
     @Composable
-    private fun BasicForm(list: Map<String,MutableLiveData<String?>> = mapOf()){
+    private fun Form1( vararg content: @Composable() () -> Unit) {
         Box(
             Modifier
                 .background(Color.Transparent)
@@ -88,25 +131,51 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>() {
                 modifier = Modifier
                     .background(Color.Transparent)
             ) {
-                mapOf(
-                    Pair("name",viewModel.name),
-                    Pair("password", viewModel.password)
-                ).forEach{
-                    EditTextField(
-                        modifier = Modifier.padding(top = 16.dp),
-                        liveData = it.value,
-                        hint = it.key
-                    )
+                content.forEach {
+                    it()
                 }
-                list.forEach {
-                    EditTextField(
-                        modifier = Modifier.padding(top = 16.dp),
-                        liveData = it.value,
-                        hint = it.key
-                    )
-                }
+
             }
         }
+    }
+
+    @Composable
+    fun NameAndPasswordField(){
+        Column {
+            EditTextField(
+                modifier = Modifier.padding(top = 16.dp),
+                value = (viewModel.name.observeAsState().value) ?: "" ,
+                hint = "name",
+                onchange = { value->
+                    viewModel.name.value =if(value.isNotBlank()) value else null
+                },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
+            )
+            EditTextField(
+                modifier = Modifier.padding(top = 16.dp),
+                value = (viewModel.password.observeAsState().value) ?: "",
+                hint = "password",
+                onchange = { value->
+                    viewModel.password.value =if(value.isNotBlank()) value else null
+                },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
+            )
+        }
+    }
+
+    @Composable
+    fun PhoneField(){
+        EditTextField(
+            modifier = Modifier.padding(top = 16.dp),
+            value = (viewModel.phone.observeAsState().value ?: "").toString(),
+            hint = "phone",
+            onchange = { value->
+                value.toLongOrNull().let{
+                    viewModel.phone.value = it
+                }
+            },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone)
+        )
     }
 
     @Composable
@@ -153,19 +222,20 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>() {
     @Composable
     private fun EditTextField(
         modifier: Modifier = Modifier,
-        liveData: MutableLiveData<String?>,
-        hint: String
+        hint: String,
+        value: String,
+        onchange:(String) -> Unit,
+        keyboardOptions : KeyboardOptions
     ){
         TextField(
-            value = liveData.observeAsState().value ?: "",
-            onValueChange = {
-               liveData.postValue(it)
-            },
+            value = value ,
+            onValueChange = onchange,
             textStyle = TextStyle(
                 color =  colorResource(R.color.shade_secondary_color),
                 fontFamily = FontFamily(Font(R.font.monda_regular400)),
                 fontSize = 12.sp
             ),
+            keyboardOptions = keyboardOptions,
             placeholder = @Composable{
                  Text(
                      text = hint,

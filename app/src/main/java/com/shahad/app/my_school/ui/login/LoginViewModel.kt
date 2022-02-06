@@ -19,7 +19,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    val repository: MySchoolRepository
+    val repository: MySchoolRepository,
+    private val dataClassParser: DataClassParser
 ): BaseViewModel(){
 
     val name = MutableStateFlow("")
@@ -43,7 +44,7 @@ class LoginViewModel @Inject constructor(
 
     fun onClickLogin(){
 
-        val body = DataClassParser.parseToJson(
+        val body = dataClassParser.parseToJson(
             LoginBody(
                 name.value,
                 password.value,
