@@ -43,6 +43,7 @@
             android:background="@drawable/reg_rounded"
             android:backgroundTint="@color/brand_color"
             android:text="@string/sign_up_button"
+            android:enabled="@{viewModel.vaild}"
             android:onClick="@{() -> viewModel.onClickSignUp()}"
             android:textColor="@color/shade_primary_color"
             app:layout_constraintTop_toBottomOf="@+id/form" />

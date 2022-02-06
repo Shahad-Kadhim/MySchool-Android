@@ -1,6 +1,5 @@
 package com.shahad.app.my_school.ui.register
 
-import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.*
 import com.shahad.app.my_school.data.MySchoolRepository
 import com.shahad.app.my_school.ui.base.BaseViewModel
@@ -29,19 +28,29 @@ class RegisterViewModel @Inject constructor(
     val age = MutableLiveData<Int?>()
     val role = MutableLiveData<Role>(Role.TEACHER)
 
-    val jj= MediatorLiveData<TeacherRegisterBody?>().apply {
-        addSource(name,){
-            validateField()
+    val vaild= MediatorLiveData<Boolean>().apply {
+        addSource(name){
+            this.postValue(validateField())
         }
         addSource(password){
-            validateField()
+            this.postValue(validateField())
         }
         addSource(phone){
-
+            this.postValue(validateField())
         }
 
+        addSource(age){
+            this.postValue(validateField())
+        }
 
+        addSource(stage){
+            this.postValue(validateField())
+        }
+        addSource(role){
+            this.postValue(validateField())
+        }
     }
+
     private val _signUpState = MutableLiveData<State<String?>>()
 
     val signUpState: LiveData<State<String?>> = _signUpState
@@ -73,12 +82,16 @@ class RegisterViewModel @Inject constructor(
     }
 
     private fun signUpStudent() {
+
+    }
+
+    private fun signUpTeacher() {
         val body =dataClassParser.parseToJson(
             TeacherRegisterBody(
                 name.value!!,
                 password.value!!,
                 teachingSpecialization.value!!,
-                phone.value!!.toLong()
+                phone.value!!
             )
         )
         viewModelScope.launch {
@@ -88,42 +101,25 @@ class RegisterViewModel @Inject constructor(
         }
     }
 
-    private fun signUpTeacher() {
-        val body = dataClassParser.parseToJson(
-                TeacherRegisterBody(
-                    name.value!!,
-                    password.value!!,
-                    teachingSpecialization.value!!,
-                    phone.value!!.toLong()
-                )
-        )
-        viewModelScope.launch {
-            repository.addTeacher(body).collect{ state ->
-                _signUpState.postValue(state)
+    private fun validateField() =
+        when(role.value!!) {
+            Role.TEACHER -> {
+                !(name.value.isNullOrBlank())
+                        && (password.value ?: "").length >= 8
+                        && phone.value !=null
+            }
+            Role.STUDENT->{
+                !(name.value.isNullOrBlank())
+                    && (password.value ?: "").length >= 8
+                        && phone.value !=null
+                        && age.value !=null
+                        && stage.value !=null
+            }
+            Role.MANGER-> {
+                !(name.value.isNullOrBlank())
+                        && (password.value ?: "").length >= 8
             }
         }
-    }
-
-    private fun validateField(
-//        phoneValue:Long = phone.value
-    ) = true
-//        when(role.value!!) {
-//            Role.TEACHER -> {
-//                name.value.isNullOrBlank()
-//                        && (password.value ?: "").length >= 8
-//            }
-//            Role.STUDENT->{
-//                name.value.isNullOrBlank()
-//                        && (password.value ?: "").length >= 8
-//                        && phone.value?.length == 11
-//                        && (phone.value ?: "").isDigitsOnly()
-//                        && age.value?.toIntOrNull() in 6..19
-//                        && stage.value?.toIntOrNull() in 1..13
-//            }
-//            Role.MANGER-> {
-//                name.value.isNullOrBlank() && (password.value ?: "").length >= 8
-//            }
-//        }
 
 
     fun onClickNavLogin(){
@@ -131,20 +127,3 @@ class RegisterViewModel @Inject constructor(
     }
 
 }
-
-
-//        phone.value?.toLongOrNull()?.let {
-//            val body =DataClassParser.parseToJson(
-//                TeacherRegisterBody(
-//                name.value!!,
-//                password.value!!,
-//                teachingSpecialization.value!!,
-//                it
-//                )
-//                                             )
-//            viewModelScope.launch {
-//                repository.addTeacher(body).collect{ state ->
-//                    _signUpState.postValue(state)
-//                }
-//            }
-//        }

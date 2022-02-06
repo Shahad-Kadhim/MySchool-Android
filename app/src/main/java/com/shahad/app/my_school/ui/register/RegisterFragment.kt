@@ -1,6 +1,7 @@
 package com.shahad.app.my_school.ui.register
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -271,7 +272,6 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>() {
                     }
                 }
             }
-
             whenSuccess.observe(
                 this@RegisterFragment,
                 (requireActivity() as IdentityActivity)::onAuth
