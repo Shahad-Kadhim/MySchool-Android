@@ -54,8 +54,6 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>() {
                 Role.TEACHER -> {
                     BasicForm(
                         mapOf(
-                            Pair("name", viewModel.name),
-                            Pair("password", viewModel.password),
                             Pair("phone", viewModel.phone),
                             Pair("Teaching Specialization", viewModel.teachingSpecialization)
                         )
@@ -64,8 +62,6 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>() {
                 Role.STUDENT -> {
                     BasicForm(
                         mapOf(
-                            Pair("name",viewModel.name),
-                            Pair("password", viewModel.password),
                             Pair("phone", viewModel.phone),
                             Pair("age", viewModel.age),
                             Pair("stage", viewModel.stage),
@@ -74,18 +70,13 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>() {
                     )
                 }
                 Role.MANGER -> {
-                    BasicForm(
-                        mapOf(
-                            Pair("name",viewModel.name),
-                            Pair("password", viewModel.password),
-                        )
-                    )
+                    BasicForm()
                 }
             }
         }
     }
     @Composable
-    private fun BasicForm(list: Map<String,MutableLiveData<String?>>){
+    private fun BasicForm(list: Map<String,MutableLiveData<String?>> = mapOf()){
         Box(
             Modifier
                 .background(Color.Transparent)
@@ -97,6 +88,16 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>() {
                 modifier = Modifier
                     .background(Color.Transparent)
             ) {
+                mapOf(
+                    Pair("name",viewModel.name),
+                    Pair("password", viewModel.password)
+                ).forEach{
+                    EditTextField(
+                        modifier = Modifier.padding(top = 16.dp),
+                        liveData = it.value,
+                        hint = it.key
+                    )
+                }
                 list.forEach {
                     EditTextField(
                         modifier = Modifier.padding(top = 16.dp),
