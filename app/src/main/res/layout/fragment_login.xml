@@ -57,7 +57,7 @@
             android:background="@drawable/reg_rounded"
             android:textColor="@color/shade_secondary_color"
             android:paddingStart="16dp"
-            selectedItem="@={viewModel.userType}"
+            selectedItem="@={viewModel.role}"
             android:textSize="14sp"
             android:entries="@array/user_types"
             app:layout_constraintTop_toBottomOf="@id/edit_password" />

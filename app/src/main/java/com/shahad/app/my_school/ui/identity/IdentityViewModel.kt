@@ -21,4 +21,10 @@ class IdentityViewModel @Inject constructor(
         }
     }
 
+    fun storeRole(role: String){
+        viewModelScope.launch {
+            dataStorePreferences.writeRolePre(role)
+        }
+    }
+
 }

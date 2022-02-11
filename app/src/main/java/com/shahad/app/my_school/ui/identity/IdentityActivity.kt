@@ -1,17 +1,14 @@
 package com.shahad.app.my_school.ui.identity
 
 import android.content.Intent
-import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.shahad.app.my_school.R
 import com.shahad.app.my_school.databinding.ActivityIdentityBinding
 import com.shahad.app.my_school.ui.base.BaseActivity
 import com.shahad.app.my_school.ui.main.MainActivity
-import com.shahad.app.my_school.util.isTrue
+import com.shahad.app.my_school.util.extension.toRole
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class IdentityActivity : BaseActivity<ActivityIdentityBinding>() {
@@ -24,18 +21,24 @@ class IdentityActivity : BaseActivity<ActivityIdentityBinding>() {
         return true
     }
 
-    fun onAuth(token: String){
-        saveToken(token)
-        navToHome()
+    fun onAuth(identification: Pair<String,String>){
+        saveToken(identification.second)
+        saveRole(identification.first)
+        navToHome(identification.first)
     }
 
-     private fun saveToken(token: String) {
+    private fun saveRole(role: String) {
+        viewModel.storeRole(role)
+    }
+
+    private fun saveToken(token: String) {
          viewModel.storeToken(token)
     }
 
-    private fun navToHome() {
+    private fun navToHome(role: String) {
         startActivity(
             Intent(this, MainActivity::class.java)
+                .putExtra("ROLE",role)
         )
         finish()
     }

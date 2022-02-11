@@ -1,4 +1,4 @@
-package com.shahad.app.my_school.ui.home
+package com.shahad.app.my_school.ui.home.student
 
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.asLiveData
@@ -9,15 +9,15 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class HomeStudentViewModel @Inject constructor(
     repository: MySchoolRepository
 ): BaseViewModel(){
 
-    val classes = repository.getTeacherClasses().asLiveData()
+   // val classes = repository.getTeacherClasses().asLiveData()
 
     val unAuthentication = MediatorLiveData<State.UnAuthorization?>().apply {
-        addSource(classes){
-            if(it is State.UnAuthorization) this.postValue(it)
-        }
+//        addSource(classes){
+//            if(it is State.UnAuthorization) this.postValue(it)
+//        }
     }
 }

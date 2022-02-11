@@ -1,7 +1,6 @@
 package com.shahad.app.my_school.ui.register
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -23,7 +22,6 @@ import androidx.compose.ui.unit.sp
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
-import com.google.accompanist.pager.ExperimentalPagerApi
 import com.shahad.app.my_school.R
 import com.shahad.app.my_school.databinding.FragmentRegisterBinding
 import com.shahad.app.my_school.ui.base.BaseFragment
@@ -119,7 +117,7 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>() {
     }
 
     @Composable
-    private fun Form1( vararg content: @Composable() () -> Unit) {
+    private fun Form1( vararg content: @Composable () -> Unit) {
         Box(
             Modifier
                 .background(Color.Transparent)
@@ -275,7 +273,6 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>() {
                 this@RegisterFragment,
                 (requireActivity() as IdentityActivity)::onAuth
             )
-
         }
     }
 

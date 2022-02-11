@@ -17,16 +17,28 @@ class DataStorePreferences(context: Context){
 
     fun readTokenPre(): Flow<String?> =
         prefDataStore.data.map { preferences ->
-            preferences[Token]
+            preferences[tokenKey]
         }
 
     suspend fun writeTokenPre(token: String){
         prefDataStore.edit { settings ->
-            settings[Token] = token
+            settings[tokenKey] = token
+        }
+    }
+
+    fun readRolePre(): Flow<String?> =
+        prefDataStore.data.map { preferences ->
+            preferences[roleKey]
+        }
+
+    suspend fun writeRolePre(role: String){
+        prefDataStore.edit { settings ->
+            settings[roleKey] = role
         }
     }
 
     companion object{
-        val Token = stringPreferencesKey("token")
+        val tokenKey = stringPreferencesKey("token")
+        val roleKey = stringPreferencesKey("role")
     }
 }

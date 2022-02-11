@@ -31,7 +31,7 @@ class RegisterViewModel @Inject constructor(
     val age = MutableLiveData<Int?>()
     val role = MutableLiveData<Role>(Role.TEACHER)
 
-    val vaild= MediatorLiveData<Boolean>().apply {
+    val valid= MediatorLiveData<Boolean>().apply {
         addSource(name){
             this.postValue(validateField())
         }
@@ -58,11 +58,11 @@ class RegisterViewModel @Inject constructor(
 
     val signUpState: LiveData<State<String?>> = _signUpState
 
-    val whenSuccess: LiveData<String> =
-        MediatorLiveData<String>().apply {
+    val whenSuccess: LiveData<Pair<String,String>> =
+        MediatorLiveData<Pair<String,String>>().apply {
             addSource(_signUpState){ state->
                 takeIf { state is State.Success<*> }?.let {
-                    this.postValue(state.toData())
+                    this.postValue(Pair(role.value?.name.toString(),state.toData().toString()))
                 }
             }
         }

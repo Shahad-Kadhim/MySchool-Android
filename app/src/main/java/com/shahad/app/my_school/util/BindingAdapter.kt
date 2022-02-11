@@ -8,8 +8,8 @@ import androidx.core.widget.doOnTextChanged
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
-import com.shahad.app.my_school.ui.login.UserType
-import com.shahad.app.my_school.util.extension.toUserType
+import com.shahad.app.my_school.ui.register.Role
+import com.shahad.app.my_school.util.extension.toRole
 
 @BindingAdapter(value = ["app:setNumber"])
 fun setNumber(view: EditText, number: Long?){
@@ -37,7 +37,7 @@ fun onEnterEvent(view: EditText, attChange: InverseBindingListener){
 @BindingAdapter(value = ["selectedItem"], requireAll = false)
 fun bindSpinnerData(
     spinner: Spinner,
-    newSelectedValue: UserType?
+    newSelectedValue: Role?
 ) {
     newSelectedValue?.let {
         val pos = spinner.selectedItemPosition
@@ -46,8 +46,8 @@ fun bindSpinnerData(
 }
 
 @InverseBindingAdapter(attribute = "selectedItem", event = "selectedItemAttrChanged")
-fun captureSelectedValue(spinner: Spinner): UserType {
-    return spinner.selectedItem.toString().toUserType()
+fun captureSelectedValue(spinner: Spinner): Role {
+    return spinner.selectedItem.toString().uppercase().toRole()
 }
 
 @BindingAdapter("selectedItemAttrChanged")

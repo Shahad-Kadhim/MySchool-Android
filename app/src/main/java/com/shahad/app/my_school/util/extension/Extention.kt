@@ -6,16 +6,17 @@ import android.widget.Toast
 import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
 import com.shahad.app.my_school.ui.login.UserType
+import com.shahad.app.my_school.ui.register.Role
 
 fun View.goToFragment(navDir: NavDirections) {
     Navigation.findNavController(this).navigate(navDir)
 }
 
-fun String.toUserType()=
+fun String.toRole()=
     when(this){
-        "Teacher" -> UserType.TEACHER
-        "Student" -> UserType.STUDENT
-        else -> UserType.MANGER
+        "TEACHER" -> Role.TEACHER
+        "STUDENT" -> Role.STUDENT
+        else -> Role.MANGER
     }
 
 fun Context.showToast(message: String){
