@@ -34,9 +34,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 }else{
                     val startDestination =
                         when(it.toRole()){
-                            Role.TEACHER -> R.id.homeFragment
-                            Role.STUDENT -> R.id.homeStudentFragment
-                            Role.MANGER -> R.id.homeMangerFragment
+                            Role.TEACHER -> R.id.teacher_nav
+                            Role.STUDENT -> R.id.student_nav
+                            Role.MANGER -> R.id.manger_nav
                         }
                     setStartDestination(startDestination)
                     setBottomNavigation()

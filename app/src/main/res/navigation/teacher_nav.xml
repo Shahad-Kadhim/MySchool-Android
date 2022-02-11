@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/teacher_nav"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.shahad.app.my_school.ui.home.teacher.HomeTeacherFragment"
+        android:label="HomeTeacherFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.shahad.app.my_school.ui.profile.ProfileFragment"
+        android:label="ProfileFragment" />
+    <fragment
+        android:id="@+id/bookFragment"
+        android:name="com.shahad.app.my_school.ui.book.BookFragment"
+        android:label="BookFragment" />
+    <fragment
+        android:id="@+id/duty_Fragment"
+        android:name="com.shahad.app.my_school.ui.duty.DutyFragment"
+        android:label="DutyFragment" />
+</navigation>
