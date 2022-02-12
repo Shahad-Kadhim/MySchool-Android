@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.shahad.app.my_school.ui.home.teacher.HomeTeacherViewModel" />
+            type="com.shahad.app.my_school.ui.teacher.home.HomeTeacherViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -1,4 +1,4 @@
-package com.shahad.app.my_school.ui.home.teacher
+package com.shahad.app.my_school.ui.teacher.home
 
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.asLiveData

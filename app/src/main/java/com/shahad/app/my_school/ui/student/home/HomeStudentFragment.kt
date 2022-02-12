@@ -1,29 +1,29 @@
-package com.shahad.app.my_school.ui.home.teacher
+package com.shahad.app.my_school.ui.student.home
 
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.viewModels
 import com.shahad.app.my_school.R
-import com.shahad.app.my_school.databinding.FragmentTeacherHomeBinding
+import com.shahad.app.my_school.databinding.FragmentStudentHomeBinding
 import com.shahad.app.my_school.ui.base.BaseFragment
 import com.shahad.app.my_school.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeTeacherFragment: BaseFragment<FragmentTeacherHomeBinding>() {
+class HomeStudentFragment: BaseFragment<FragmentStudentHomeBinding>() {
 
-    override fun getLayoutId() = R.layout.fragment_teacher_home
-    override val viewModel: HomeTeacherViewModel by viewModels()
+    override fun getLayoutId() = R.layout.fragment_student_home
+    override val viewModel: HomeStudentViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.i("TAG","TEACHER")
+        Log.i("TAG","STUDENT")
         super.onCreate(savedInstanceState)
         observe()
     }
 
     private fun observe() {
         with(viewModel){
-            unAuthentication.observe(this@HomeTeacherFragment){
+            unAuthentication.observe(this@HomeStudentFragment){
                 (requireActivity() as MainActivity).navToIdentity()
             }
         }
