@@ -7,6 +7,8 @@ import com.shahad.app.my_school.R
 import com.shahad.app.my_school.databinding.FragmentMangerHomeBinding
 import com.shahad.app.my_school.ui.base.BaseFragment
 import com.shahad.app.my_school.ui.main.MainActivity
+import com.shahad.app.my_school.util.extension.goToFragment
+import com.shahad.app.my_school.util.extension.observeEvent
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,11 +36,8 @@ class HomeMangerFragment: BaseFragment<FragmentMangerHomeBinding>() {
             unAuthentication.observe(this@HomeMangerFragment){
                 (requireActivity() as MainActivity).navToIdentity()
             }
-            schools.observe(this@HomeMangerFragment){
-                Log.i("TAG",it.toData().toString())
-            }
-            classes.observe(this@HomeMangerFragment){
-                Log.i("TAG",it.toData().toString())
+            clickCreateSchoolEvent.observeEvent(this@HomeMangerFragment){
+                viewDataBinding.root.goToFragment(HomeMangerFragmentDirections.actionHomeFragmentToNewSchoolFragment())
             }
         }
     }

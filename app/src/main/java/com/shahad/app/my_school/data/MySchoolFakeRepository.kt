@@ -39,6 +39,9 @@ class MySchoolFakeRepository @Inject constructor(): MySchoolRepository{
     override fun getMangerClasses(): Flow<State<BaseResponse<List<ClassList>>?>> =
         getFakFlow(BaseResponse(200, listOf()))
 
+    override fun createSchool(schoolName: String)=
+        getFakFlow(2)
+
 
     private  fun <T> getFakFlow(respond: T)=
         flow{

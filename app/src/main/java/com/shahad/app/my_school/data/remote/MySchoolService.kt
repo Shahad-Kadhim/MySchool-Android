@@ -5,9 +5,7 @@ import com.shahad.app.my_school.data.remote.response.BaseResponse
 import com.shahad.app.my_school.data.remote.response.ClassList
 import com.shahad.app.my_school.data.remote.response.SchoolDto
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface MySchoolService{
 
@@ -37,4 +35,8 @@ interface MySchoolService{
 
     @GET("/manger/classes")
     suspend fun getMangerClasses(): Response<BaseResponse<List<ClassList>>>
+
+    @POST("/school/new")
+    suspend fun createSchool(@Query("name") schoolName: String): Response<Int>
+
 }

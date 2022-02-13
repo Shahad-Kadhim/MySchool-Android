@@ -45,6 +45,9 @@ class MySchoolRepositoryImpl @Inject constructor(
     override fun getMangerClasses(): Flow<State<BaseResponse<List<ClassList>>?>> =
         wrapWithFlow { apiService.getMangerClasses() }
 
+    override fun createSchool(schoolName: String): Flow<State<Int?>> =
+        wrapWithFlow{ apiService.createSchool(schoolName) }
+
 
     private fun <T> wrapWithFlow(function: suspend () -> Response<T>): Flow<State<T?>> {
         return flow {

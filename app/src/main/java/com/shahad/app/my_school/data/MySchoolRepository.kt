@@ -26,4 +26,6 @@ interface MySchoolRepository{
     fun getMangerSchool(): Flow<State<BaseResponse<List<SchoolDto>>?>>
     fun getMangerClasses(): Flow<State<BaseResponse<List<ClassList>>?>>
 
+    fun createSchool(schoolName: String): Flow<State<Int?>>
+
 }
