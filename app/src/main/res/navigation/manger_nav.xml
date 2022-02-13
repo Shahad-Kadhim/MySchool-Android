@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeFragment_to_schoolFragment"
             app:destination="@id/schoolFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_classesMangerFragment"
+            app:destination="@id/classesMangerFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -43,4 +46,9 @@
             android:id="@+id/action_schoolFragment_to_newSchoolFragment"
             app:destination="@id/newSchoolFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/classesMangerFragment"
+        android:name="com.shahad.app.my_school.ui.manger.classes.ClassesMangerFragment"
+        android:label="ClassesMangerFragment"
+        tools:layout="@layout/fragment_classes_manger"/>
 </navigation>

@@ -42,6 +42,9 @@ class HomeMangerFragment: BaseFragment<FragmentMangerHomeBinding>() {
             clickSchoolsEvent.observeEvent(this@HomeMangerFragment){
                 viewDataBinding.root.goToFragment(HomeMangerFragmentDirections.actionHomeFragmentToSchoolFragment())
             }
+            clickClassesEvent.observeEvent(this@HomeMangerFragment){
+                viewDataBinding.root.goToFragment(HomeMangerFragmentDirections.actionHomeFragmentToClassesMangerFragment())
+            }
         }
     }
 
