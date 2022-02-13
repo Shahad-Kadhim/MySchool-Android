@@ -12,8 +12,7 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="8dp"
         app:cardCornerRadius="24dp"
-        app:cardBackgroundColor="@color/card_background_color"
-        app:strokeColor="@color/brand_color">
+        app:cardBackgroundColor="#F8F8F7">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -21,14 +20,14 @@
 
             <TextView
                 android:id="@+id/textView2"
-                android:layout_width="260dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="24dp"
                 android:ellipsize="end"
-                android:fontFamily="@font/monda_bold"
+                android:fontFamily="@font/playfairdisplay_extrabold"
                 android:text="Math"
-                android:textColor="@color/shade_primary_color"
-                android:textSize="36sp"
+                android:textColor="#2E3731"
+                android:textSize="30sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,18 +35,19 @@
                 android:id="@+id/textView3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/monda_regular400"
+                android:fontFamily="@font/playfairdisplay_bold"
                 android:text="mr. Ahmed"
-                android:textColor="@color/shade_secondary_color"
+                android:textColor="#DE2F3832"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="@+id/textView2"
                 app:layout_constraintStart_toStartOf="@+id/textView2"
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
             <ImageView
-                android:layout_width="0dp"
+                android:layout_width="100dp"
                 android:layout_height="0dp"
                 android:layout_marginHorizontal="16dp"
+                app:layout_constraintHorizontal_bias="1"
                 app:layout_constraintBottom_toBottomOf="@+id/textView3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView2"
