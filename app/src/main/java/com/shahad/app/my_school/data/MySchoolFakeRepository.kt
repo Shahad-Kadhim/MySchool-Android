@@ -2,6 +2,8 @@ package com.shahad.app.my_school.data
 
 import com.google.gson.JsonElement
 import com.shahad.app.my_school.data.remote.response.BaseResponse
+import com.shahad.app.my_school.data.remote.response.ClassList
+import com.shahad.app.my_school.data.remote.response.SchoolDto
 import com.shahad.app.my_school.util.State
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -31,6 +33,11 @@ class MySchoolFakeRepository @Inject constructor(): MySchoolRepository{
     override fun getTeacherClasses(): Flow<State<BaseResponse<List<String>>?>> =
         getFakFlow(BaseResponse(4, listOf("")))
 
+    override fun getMangerSchool(): Flow<State<BaseResponse<List<SchoolDto>>?>> =
+        getFakFlow(BaseResponse(200,listOf<SchoolDto>()))
+
+    override fun getMangerClasses(): Flow<State<BaseResponse<List<ClassList>>?>> =
+        getFakFlow(BaseResponse(200, listOf()))
 
 
     private  fun <T> getFakFlow(respond: T)=

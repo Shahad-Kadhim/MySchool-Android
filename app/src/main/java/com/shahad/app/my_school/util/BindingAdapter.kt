@@ -8,6 +8,8 @@ import androidx.core.widget.doOnTextChanged
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
+import androidx.recyclerview.widget.RecyclerView
+import com.shahad.app.my_school.ui.base.BaseRecyclerAdapter
 import com.shahad.app.my_school.ui.register.Role
 import com.shahad.app.my_school.util.extension.toRole
 
@@ -72,3 +74,8 @@ fun <T>disableOnLoading(view: View, state: State<T>?){
     view.isEnabled = state !is State.Loading
 }
 
+
+@BindingAdapter(value = ["items"])
+fun <T> setRecyclerItems(view: RecyclerView, items: List<T>?) {
+    (view.adapter as? BaseRecyclerAdapter<T>)?.setItems(items ?: emptyList())
+}

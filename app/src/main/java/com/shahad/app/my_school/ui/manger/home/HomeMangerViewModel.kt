@@ -1,6 +1,7 @@
 package com.shahad.app.my_school.ui.manger.home
 
 import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.asLiveData
 import com.shahad.app.my_school.data.MySchoolRepository
 import com.shahad.app.my_school.ui.base.BaseViewModel
 import com.shahad.app.my_school.util.State
@@ -10,13 +11,20 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeMangerViewModel @Inject constructor(
     repository: MySchoolRepository
-): BaseViewModel(){
+): BaseViewModel(),
+   SchoolInteractionListener,
+   ClassInteractionListener {
 
-   // val classes = repository.getTeacherClasses().asLiveData()
+    val classes = repository.getMangerClasses().asLiveData()
+
+    val schools = repository.getMangerSchool().asLiveData()
 
     val unAuthentication = MediatorLiveData<State.UnAuthorization?>().apply {
-//        addSource(classes){
-//            if(it is State.UnAuthorization) this.postValue(it)
-//        }
+        addSource(schools,::whenUnAuthorization)
+        addSource(classes,::whenUnAuthorization)
+    }
+
+    private fun <T>whenUnAuthorization(state: State<T>){
+        if(state is State.UnAuthorization) unAuthentication.postValue(state)
     }
 }

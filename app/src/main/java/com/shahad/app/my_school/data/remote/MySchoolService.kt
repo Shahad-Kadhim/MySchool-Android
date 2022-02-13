@@ -2,6 +2,8 @@ package com.shahad.app.my_school.data.remote
 
 import com.google.gson.JsonElement
 import com.shahad.app.my_school.data.remote.response.BaseResponse
+import com.shahad.app.my_school.data.remote.response.ClassList
+import com.shahad.app.my_school.data.remote.response.SchoolDto
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -29,4 +31,10 @@ interface MySchoolService{
 
     @GET("/teacher/classes")
     suspend fun getTeacherClasses(): Response<BaseResponse<List<String>>>
+
+    @GET("/manger/schools")
+    suspend fun getMangerSchools(): Response<BaseResponse<List<SchoolDto>>>
+
+    @GET("/manger/classes")
+    suspend fun getMangerClasses(): Response<BaseResponse<List<ClassList>>>
 }

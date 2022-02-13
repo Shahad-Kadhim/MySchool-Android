@@ -3,6 +3,7 @@ package com.shahad.app.my_school.ui.base
 import android.view.*
 import androidx.databinding.*
 import androidx.recyclerview.widget.*
+import com.shahad.app.my_school.BR
 
 abstract class BaseRecyclerAdapter<T>(
     private var items: List<T>,
@@ -33,10 +34,9 @@ abstract class BaseRecyclerAdapter<T>(
         )
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
-        // uncomment after add item xml
         if (holder is ItemViewHolder && items.isNotEmpty() ) {
-//                holder.binding.setVariable(BR.item, items[position])
-//                holder.binding.setVariable(BR.listener, listener)
+                holder.binding.setVariable(BR.item, items[position])
+                holder.binding.setVariable(BR.listener, listener)
         }
     }
 

@@ -4,7 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="item"
+            type="com.shahad.app.my_school.data.remote.response.SchoolDto" />
+        <variable
+            name="listener"
+            type="com.shahad.app.my_school.ui.manger.home.SchoolInteractionListener" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -26,6 +31,7 @@
                 android:fontFamily="@font/playfairdisplay_extrabold"
                 android:textColor="#2E3731"
                 android:textSize="36sp"
+                android:text="@{item.name}"
                 android:layout_margin="16dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

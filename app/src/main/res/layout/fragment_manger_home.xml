@@ -81,11 +81,12 @@
             app:layout_constraintTop_toBottomOf="@+id/editText" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/schoolRecycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:orientation="horizontal"
+            items="@{viewModel.schools.toData().data}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@+id/textView4"
             tools:listitem="@layout/item_school" />
@@ -101,7 +102,7 @@
             app:layout_constraintEnd_toStartOf="@+id/imageView2"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+            app:layout_constraintTop_toBottomOf="@+id/schoolRecycler" />
 
         <ImageView
             android:id="@+id/imageView2"
@@ -114,7 +115,7 @@
             app:layout_constraintEnd_toStartOf="@+id/imageView3"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+            app:layout_constraintTop_toBottomOf="@+id/schoolRecycler" />
 
         <ImageView
             android:id="@+id/imageView3"
@@ -126,7 +127,7 @@
             app:layout_constraintEnd_toStartOf="@+id/imageView4"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+            app:layout_constraintTop_toBottomOf="@+id/schoolRecycler" />
 
         <ImageView
             android:id="@+id/imageView4"
@@ -138,7 +139,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/imageView3"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+            app:layout_constraintTop_toBottomOf="@+id/schoolRecycler" />
 
         <TextView
             android:id="@+id/textView6"
@@ -154,11 +155,13 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/classRecycler"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:paddingBottom="64dp"
             android:clipToPadding="true"
             android:orientation="vertical"
+            items="@{viewModel.classes.toData().data}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

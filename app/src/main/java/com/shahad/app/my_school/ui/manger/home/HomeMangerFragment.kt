@@ -17,14 +17,28 @@ class HomeMangerFragment: BaseFragment<FragmentMangerHomeBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.i("TAG","MANGER")
         observe()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        recycler()
+    }
+    private fun recycler() {
+        viewDataBinding.schoolRecycler.adapter= SchoolAdapterRecycler(emptyList(),viewModel)
+        viewDataBinding.classRecycler.adapter= ClassesAdapterRecycler(emptyList(),viewModel)
     }
 
     private fun observe() {
         with(viewModel){
             unAuthentication.observe(this@HomeMangerFragment){
                 (requireActivity() as MainActivity).navToIdentity()
+            }
+            schools.observe(this@HomeMangerFragment){
+                Log.i("TAG",it.toData().toString())
+            }
+            classes.observe(this@HomeMangerFragment){
+                Log.i("TAG",it.toData().toString())
             }
         }
     }
