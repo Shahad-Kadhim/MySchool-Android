@@ -36,4 +36,13 @@
     <style name="BottomSheetModal" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@android:color/transparent</item>
     </style>
+    <style name="TitleText">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">280dp</item>
+        <item name="android:textColor">#2E3731</item>
+        <item name="android:textSize">30sp</item>
+        <item name="fontFamily">@font/playfairdisplay_medium</item>
+        <item name="android:gravity">center</item>
+    </style>
+
 </resources>

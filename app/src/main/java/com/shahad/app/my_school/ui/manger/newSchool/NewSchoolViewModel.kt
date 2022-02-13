@@ -1,4 +1,4 @@
-package com.shahad.app.my_school.ui.manger
+package com.shahad.app.my_school.ui.manger.newSchool
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

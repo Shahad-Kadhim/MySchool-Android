@@ -1,4 +1,4 @@
-package com.shahad.app.my_school.ui.manger.home
+package com.shahad.app.my_school.ui.manger.schools
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
@@ -6,42 +6,41 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import com.shahad.app.my_school.data.MySchoolRepository
 import com.shahad.app.my_school.ui.base.BaseViewModel
+import com.shahad.app.my_school.ui.manger.home.ClassInteractionListener
+import com.shahad.app.my_school.ui.manger.home.SchoolInteractionListener
 import com.shahad.app.my_school.util.Event
 import com.shahad.app.my_school.util.State
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeMangerViewModel @Inject constructor(
+class SchoolMangerViewModel @Inject constructor(
     repository: MySchoolRepository
 ): BaseViewModel(),
-   SchoolInteractionListener,
-   ClassInteractionListener {
-
-    val classes = repository.getMangerClasses().asLiveData()
+    SchoolInteractionListener
+{
 
     val schools = repository.getMangerSchool().asLiveData()
+
+    private val _clickBackEvent = MutableLiveData<Event<Boolean>>()
+    val clickBackEvent: LiveData<Event<Boolean>> = _clickBackEvent
 
     private val _clickCreateSchoolEvent = MutableLiveData<Event<Boolean>>()
     val clickCreateSchoolEvent: LiveData<Event<Boolean>> = _clickCreateSchoolEvent
 
-    private val _clickSchoolsEvent = MutableLiveData<Event<Boolean>>()
-    val clickSchoolsEvent: LiveData<Event<Boolean>> = _clickSchoolsEvent
-
     val unAuthentication = MediatorLiveData<State.UnAuthorization?>().apply {
         addSource(schools,::whenUnAuthorization)
-        addSource(classes,::whenUnAuthorization)
     }
 
     private fun <T>whenUnAuthorization(state: State<T>){
         if(state is State.UnAuthorization) unAuthentication.postValue(state)
     }
 
-    fun onClickCreateSchool(){
-        _clickCreateSchoolEvent.postValue(Event(true))
+    fun onClickBack(){
+        _clickBackEvent.postValue(Event(true))
     }
 
-    fun onClickSchools(){
-        _clickSchoolsEvent.postValue(Event(true))
+    fun onClickCreateSchool(){
+        _clickCreateSchoolEvent.postValue(Event(true))
     }
 }

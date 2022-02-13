@@ -1,21 +1,25 @@
-package com.shahad.app.my_school.ui.manger.home
+package com.shahad.app.my_school.ui.manger.schools
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.shahad.app.my_school.R
 import com.shahad.app.my_school.databinding.FragmentMangerHomeBinding
+import com.shahad.app.my_school.databinding.FragmentSchoolsBinding
 import com.shahad.app.my_school.ui.base.BaseFragment
 import com.shahad.app.my_school.ui.main.MainActivity
+import com.shahad.app.my_school.ui.manger.home.HomeMangerFragmentDirections
+import com.shahad.app.my_school.ui.manger.home.HomeMangerViewModel
+import com.shahad.app.my_school.ui.manger.home.SchoolAdapterRecycler
 import com.shahad.app.my_school.util.extension.goToFragment
 import com.shahad.app.my_school.util.extension.observeEvent
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeMangerFragment: BaseFragment<FragmentMangerHomeBinding>() {
+class SchoolFragment: BaseFragment<FragmentSchoolsBinding>() {
 
-    override fun getLayoutId() = R.layout.fragment_manger_home
-    override val viewModel: HomeMangerViewModel by viewModels()
+    override fun getLayoutId() = R.layout.fragment_schools
+    override val viewModel: SchoolMangerViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,19 +32,18 @@ class HomeMangerFragment: BaseFragment<FragmentMangerHomeBinding>() {
     }
     private fun recycler() {
         viewDataBinding.schoolRecycler.adapter= SchoolAdapterRecycler(emptyList(),viewModel)
-        viewDataBinding.classRecycler.adapter= ClassesAdapterRecycler(emptyList(),viewModel)
     }
 
     private fun observe() {
         with(viewModel){
-            unAuthentication.observe(this@HomeMangerFragment){
+            unAuthentication.observe(this@SchoolFragment){
                 (requireActivity() as MainActivity).navToIdentity()
             }
-            clickCreateSchoolEvent.observeEvent(this@HomeMangerFragment){
-                viewDataBinding.root.goToFragment(HomeMangerFragmentDirections.actionHomeFragmentToNewSchoolFragment())
+            clickBackEvent.observeEvent(this@SchoolFragment){
+                findNavController().navigateUp()
             }
-            clickSchoolsEvent.observeEvent(this@HomeMangerFragment){
-                viewDataBinding.root.goToFragment(HomeMangerFragmentDirections.actionHomeFragmentToSchoolFragment())
+            clickCreateSchoolEvent.observeEvent(this@SchoolFragment){
+                viewDataBinding.root.goToFragment(SchoolFragmentDirections.actionSchoolFragmentToNewSchoolFragment())
             }
         }
     }

@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModelBottom"
-            type="com.shahad.app.my_school.ui.manger.NewSchoolViewModel" />
+            type="com.shahad.app.my_school.ui.manger.newSchool.NewSchoolViewModel" />
 
     </data>
 

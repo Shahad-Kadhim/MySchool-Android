@@ -1,4 +1,4 @@
-package com.shahad.app.my_school.ui.manger
+package com.shahad.app.my_school.ui.manger.newSchool
 
 import android.os.Bundle
 import androidx.fragment.app.viewModels
