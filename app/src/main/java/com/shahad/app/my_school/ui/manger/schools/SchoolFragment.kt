@@ -4,12 +4,9 @@ import android.os.Bundle
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.shahad.app.my_school.R
-import com.shahad.app.my_school.databinding.FragmentMangerHomeBinding
 import com.shahad.app.my_school.databinding.FragmentSchoolsBinding
 import com.shahad.app.my_school.ui.base.BaseFragment
 import com.shahad.app.my_school.ui.main.MainActivity
-import com.shahad.app.my_school.ui.manger.home.HomeMangerFragmentDirections
-import com.shahad.app.my_school.ui.manger.home.HomeMangerViewModel
 import com.shahad.app.my_school.ui.manger.home.SchoolAdapterRecycler
 import com.shahad.app.my_school.util.extension.goToFragment
 import com.shahad.app.my_school.util.extension.observeEvent

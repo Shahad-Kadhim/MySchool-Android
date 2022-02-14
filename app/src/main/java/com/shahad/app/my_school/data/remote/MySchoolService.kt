@@ -28,7 +28,7 @@ interface MySchoolService{
     suspend fun loginManger(@Body loginBody: JsonElement):  Response<String>
 
     @GET("/teacher/classes")
-    suspend fun getTeacherClasses(): Response<BaseResponse<List<String>>>
+    suspend fun getTeacherClasses(): Response<BaseResponse<List<ClassList>>>
 
     @GET("/manger/schools")
     suspend fun getMangerSchools(): Response<BaseResponse<List<SchoolDto>>>

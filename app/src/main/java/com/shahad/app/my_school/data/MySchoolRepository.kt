@@ -21,11 +21,13 @@ interface MySchoolRepository{
 
     fun loginManger(loginBody: JsonElement): Flow<State<String?>>
 
-    fun getTeacherClasses(): Flow<State<BaseResponse<List<String>>?>>
+    fun getTeacherClasses(): Flow<State<BaseResponse<List<ClassList>>?>>
 
     fun getMangerSchool(): Flow<State<BaseResponse<List<SchoolDto>>?>>
     fun getMangerClasses(): Flow<State<BaseResponse<List<ClassList>>?>>
 
     fun createSchool(schoolName: String): Flow<State<Int?>>
+
+//    fun createClass(className: String): Flow<State<Int?>>
 
 }

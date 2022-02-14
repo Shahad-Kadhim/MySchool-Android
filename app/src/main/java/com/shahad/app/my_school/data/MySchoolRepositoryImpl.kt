@@ -36,7 +36,7 @@ class MySchoolRepositoryImpl @Inject constructor(
     override fun loginManger(loginBody: JsonElement): Flow<State<String?>> =
         wrapWithFlow { apiService.loginManger(loginBody) }
 
-    override fun getTeacherClasses(): Flow<State<BaseResponse<List<String>>?>> =
+    override fun getTeacherClasses(): Flow<State<BaseResponse<List<ClassList>>?>> =
         wrapWithFlow { apiService.getTeacherClasses() }
 
     override fun getMangerSchool(): Flow<State<BaseResponse<List<SchoolDto>>?>> =
