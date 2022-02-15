@@ -4,9 +4,10 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/brand_color</item>
         <item name="colorOnPrimary">@color/background_color</item>
-        <item name="android:statusBarColor" tools:targetApi="l">@color/tool_bar_color</item>
+        <item name="android:statusBarColor" tools:targetApi="l">#00000000</item>
         <!-- Customize your theme here. -->
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
         <!-- Customize your theme here. -->
     </style>
 
@@ -43,6 +44,33 @@
         <item name="android:textSize">30sp</item>
         <item name="fontFamily">@font/playfairdisplay_medium</item>
         <item name="android:gravity">center</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay_card_custom_corners" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">32dp</item>
+        <item name="cornerSizeTopLeft">32dp</item>
+    </style>
+
+    <style name="TextLabeled">
+        <item name="android:textSize">12sp</item>
+        <item name="fontFamily">@font/source_sans_pro_regular</item>
+        <item name="android:textColor">#A5A5A5</item>
+    </style>
+
+    <style name="EditTextStyle">
+        <item name="android:textSize">16sp</item>
+        <item name="maxLines">1</item>
+        <item name="fontFamily">@font/source_sans_pro_regular</item>
+        <item name="android:textColor">#323643</item>
+    </style>
+
+    <style name="EditTextStyle.Text">
+        <item name="android:textColor">#313131</item>
+    </style>
+
+    <style name="mySpinnerItemStyle" >
+        <item name="android:textColor">#323643</item>
     </style>
 
 </resources>
