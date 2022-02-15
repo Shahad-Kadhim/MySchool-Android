@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/teacher_nav"
     app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.shahad.app.my_school.ui.teacher.home.HomeTeacherFragment"
-        android:label="HomeTeacherFragment" />
+        android:label="HomeTeacherFragment"
+        tools:layout="@layout/fragment_teacher_home">
+        <action
+            android:id="@+id/action_homeFragment_to_newClassFragment"
+            app:destination="@id/newClassFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.shahad.app.my_school.ui.profile.ProfileFragment"
@@ -20,4 +26,9 @@
         android:id="@+id/dutyFragment"
         android:name="com.shahad.app.my_school.ui.duty.DutyFragment"
         android:label="DutyFragment" />
+    <dialog
+        android:id="@+id/newClassFragment"
+        android:name="com.shahad.app.my_school.ui.teacher.newClass.NewClassFragment"
+        android:label="NewClassFragment"
+        tools:layout="@layout/fragment_dailog_new_class"/>
 </navigation>

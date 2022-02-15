@@ -28,6 +28,6 @@ interface MySchoolRepository{
 
     fun createSchool(schoolName: String): Flow<State<Int?>>
 
-//    fun createClass(className: String): Flow<State<Int?>>
+    fun createClass(requestBody: JsonElement): Flow<State<Int?>>
 
 }

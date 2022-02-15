@@ -42,8 +42,8 @@ class MySchoolFakeRepository @Inject constructor(): MySchoolRepository{
     override fun createSchool(schoolName: String)=
         getFakeFlow(2)
 
-//    override fun createClass(className: String): Flow<State<Int?>> =
-//        getFakeFlow(2)
+    override fun createClass(requestBody: JsonElement): Flow<State<Int?>> =
+        getFakeFlow(2)
 
     private  fun <T> getFakeFlow(respond: T)=
         flow{

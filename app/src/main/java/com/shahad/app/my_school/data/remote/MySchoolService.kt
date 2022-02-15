@@ -39,4 +39,7 @@ interface MySchoolService{
     @POST("/school/new")
     suspend fun createSchool(@Query("name") schoolName: String): Response<Int>
 
+    @POST("/class/new")
+    suspend fun createClass(@Body requestBody: JsonElement): Response<Int>
+
 }

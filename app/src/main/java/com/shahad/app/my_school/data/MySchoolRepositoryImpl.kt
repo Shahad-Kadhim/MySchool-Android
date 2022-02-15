@@ -48,6 +48,9 @@ class MySchoolRepositoryImpl @Inject constructor(
     override fun createSchool(schoolName: String): Flow<State<Int?>> =
         wrapWithFlow{ apiService.createSchool(schoolName) }
 
+    override fun createClass(requestBody: JsonElement): Flow<State<Int?>> =
+        wrapWithFlow{ apiService.createClass(requestBody) }
+
 
     private fun <T> wrapWithFlow(function: suspend () -> Response<T>): Flow<State<T?>> {
         return flow {

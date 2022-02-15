@@ -8,6 +8,9 @@ import com.shahad.app.my_school.databinding.FragmentTeacherHomeBinding
 import com.shahad.app.my_school.ui.base.BaseFragment
 import com.shahad.app.my_school.ui.main.MainActivity
 import com.shahad.app.my_school.ui.manger.home.ClassesAdapterRecycler
+import com.shahad.app.my_school.ui.manger.home.HomeMangerFragmentDirections
+import com.shahad.app.my_school.util.extension.goToFragment
+import com.shahad.app.my_school.util.extension.observeEvent
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,13 +29,18 @@ class HomeTeacherFragment: BaseFragment<FragmentTeacherHomeBinding>() {
         super.onStart()
         recycler()
     }
+
     private fun recycler() {
         viewDataBinding.classRecycler.adapter= ClassesAdapterRecycler(emptyList(),viewModel)
     }
+
     private fun observe() {
         with(viewModel){
             unAuthentication.observe(this@HomeTeacherFragment){
                 (requireActivity() as MainActivity).navToIdentity()
+            }
+            clickCreateClassEvent.observeEvent(this@HomeTeacherFragment){
+                viewDataBinding.root.goToFragment(HomeTeacherFragmentDirections.actionHomeFragmentToNewClassFragment())
             }
         }
     }
