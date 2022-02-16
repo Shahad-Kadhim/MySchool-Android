@@ -13,17 +13,17 @@
 
     <style name="EditTextField">
         <item name="android:layout_height">50dp</item>
-        <item name="android:layout_marginTop">24dp</item>
+        <item name="android:layout_marginTop">@dimen/space_large</item>
         <item name="background">@drawable/reg_rounded</item>
         <item name="android:textColorHint">@color/shade_secondary_color</item>
         <item name="android:textColor">@color/shade_secondary_color</item>
         <item name="android:textSize">14sp</item>
         <item name="maxLines">1</item>
-        <item name="android:paddingStart">16dp</item>
-        <item name="android:paddingEnd">16dp</item>
-        <item name="fontFamily">@font/monda_regular400</item>
-        <item name="android:layout_marginStart">24dp</item>
-        <item name="android:layout_marginEnd">24dp</item>
+        <item name="android:paddingStart">@dimen/space_medium</item>
+        <item name="android:paddingEnd">@dimen/space_medium</item>
+        <item name="fontFamily">@font/source_sans_pro_regular</item>
+        <item name="android:layout_marginStart">@dimen/space_large</item>
+        <item name="android:layout_marginEnd">@dimen/space_large</item>
     </style>
 
     <style name="imageCorner50" >
@@ -40,16 +40,16 @@
     <style name="TitleText">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">280dp</item>
-        <item name="android:textColor">#2E3731</item>
+        <item name="android:textColor">#202020</item>
         <item name="android:textSize">30sp</item>
-        <item name="fontFamily">@font/playfairdisplay_medium</item>
+        <item name="fontFamily">@font/source_sans_pro_semi_bold</item>
         <item name="android:gravity">center</item>
     </style>
 
     <style name="ShapeAppearanceOverlay_card_custom_corners" parent="">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSizeTopRight">32dp</item>
-        <item name="cornerSizeTopLeft">32dp</item>
+        <item name="cornerSizeTopRight">@dimen/space_large_2x</item>
+        <item name="cornerSizeTopLeft">@dimen/space_large_2x</item>
     </style>
 
     <style name="Chip">
@@ -62,14 +62,14 @@
     <style name="TextLabeled">
         <item name="android:textSize">12sp</item>
         <item name="fontFamily">@font/source_sans_pro_regular</item>
-        <item name="android:textColor">#A5A5A5</item>
+        <item name="android:textColor">@color/text_secondary_color</item>
     </style>
 
     <style name="EditTextStyle">
         <item name="android:textSize">16sp</item>
         <item name="maxLines">1</item>
         <item name="fontFamily">@font/source_sans_pro_regular</item>
-        <item name="android:textColor">#323643</item>
+        <item name="android:textColor">@color/text_primary_color</item>
     </style>
 
     <style name="EditTextStyle.Text">
@@ -80,4 +80,25 @@
         <item name="android:textColor">#323643</item>
     </style>
 
+    <style name="cardView">
+        <item name="strokeColor">@color/stroke_color</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+    <style name="Subject">
+        <item name="android:textColor">@color/text</item>
+        <item name="fontFamily">@font/source_sans_pro_regular</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:layout_marginTop">@dimen/space_medium</item>
+    </style>
+    <style name="SearchBar">
+        <item name="android:layout_marginStart">@dimen/space_medium</item>
+        <item name="android:layout_marginEnd">@dimen/space_medium</item>
+        <item name="android:drawableStart">@drawable/ic_search</item>
+        <item name="android:drawablePadding">@dimen/space_small</item>
+        <item name="fontFamily">@font/source_sans_pro_regular</item>
+        <item name="android:hint">search ...</item>
+        <item name="android:textColorHint">@color/text_secondary_color</item>
+        <item name="android:textColor">@color/text_primary_color</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 </resources>

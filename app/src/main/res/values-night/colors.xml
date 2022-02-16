@@ -8,5 +8,6 @@
     <color name="shade_secondary_color">#9AEFF6FB</color>
     <color name="shade_ternary_color">#61EFF6FB</color>
 
+    <color name="text">#ffffff</color>
     <color name="tool_bar_color">#FF171C22</color>
 </resources>

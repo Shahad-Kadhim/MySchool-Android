@@ -9,13 +9,17 @@
     <color name="white">#FFFFFFFF</color>
 
 
-    <color name="brand_color">#FF6AB7E2</color>
+    <color name="stroke_color">#5278C1</color>
+    <color name="brand_color">#2855AE</color>
 
     <color name="background_color">#FFFFFAFA</color>
     <color name="card_background_color">#FFFFFFFF</color>
 
+    <color name="text">#000000</color>
     <color name="shade_primary_color">#DF122F40</color>
+    <color name="text_primary_color">#323643</color>
     <color name="shade_secondary_color">#9A122F40</color>
+    <color name="text_secondary_color">#A5A5A5</color>
     <color name="shade_ternary_color">#61122F40</color>
 
     <color name="tool_bar_color">#EDF7FC</color>

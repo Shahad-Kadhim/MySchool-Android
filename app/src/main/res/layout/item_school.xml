@@ -26,13 +26,16 @@
             android:background="@drawable/school_background">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/playfairdisplay_extrabold"
-                android:textColor="#2E3731"
-                android:textSize="36sp"
+                android:layout_marginTop="@dimen/space_large"
+                android:layout_marginStart="@dimen/space_large"
+                android:fontFamily="@font/source_sans_pro_bold"
                 android:text="@{item.name}"
-                android:layout_margin="16dp"
+                android:layout_marginEnd="@dimen/space_large_5x"
+                android:textColor="#2E3731"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="SCHOOL 1" />

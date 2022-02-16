@@ -16,7 +16,7 @@
             android:layout_height="match_parent"
             android:hint="Post new news to Student"
             android:paddingHorizontal="16dp"
-            android:fontFamily="@font/monda_regular400"
+            android:fontFamily="@font/source_sans_pro_bold"
             android:textSize="14sp"
             android:background="@drawable/reg_rounded" />
     </androidx.constraintlayout.widget.ConstraintLayout>
