@@ -1,9 +1,9 @@
 package com.shahad.app.my_school.ui.register
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -20,7 +20,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import com.shahad.app.my_school.R
 import com.shahad.app.my_school.databinding.FragmentRegisterBinding
@@ -47,7 +46,6 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>() {
     @Composable
     private fun Form() {
         Column {
-            ChooseRole(viewModel.role)
             when(viewModel.role.observeAsState().value){
                 Role.TEACHER -> {
                     Form1(
@@ -55,9 +53,8 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>() {
                         @Composable{PhoneField()},
                         @Composable{
                             EditTextField(
-                                modifier = Modifier.padding(top = 16.dp),
                                 value = viewModel.teachingSpecialization.observeAsState().value ?: "",
-                                hint = "teachingSpecialization",
+                                label = "teachingSpecialization",
                                 onchange = { value->
                                     viewModel.teachingSpecialization.value =if(value.isNotBlank()) value else null
                                 },
@@ -72,9 +69,8 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>() {
                         @Composable{PhoneField()},
                         @Composable{
                             EditTextField(
-                                modifier = Modifier.padding(top = 16.dp),
                                 value = (viewModel.age.observeAsState().value ?: "").toString(),
-                                hint = "age",
+                                label = "Age",
                                 onchange = { value ->
                                     value.toIntOrNull().let {
                                         viewModel.age.postValue(it)
@@ -85,9 +81,8 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>() {
                         },
                         @Composable{
                             EditTextField(
-                                modifier = Modifier.padding(top = 16.dp),
                                 value = (viewModel.stage.observeAsState().value ?: "").toString(),
-                                hint = "stage",
+                                label = "Stage",
                                 onchange = { value ->
                                     value.toIntOrNull().let {
                                         viewModel.stage.postValue(it)
@@ -98,9 +93,8 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>() {
                         },
                         @Composable{
                             EditTextField(
-                                modifier = Modifier.padding(top = 16.dp),
                                 value = viewModel.note.observeAsState().value ?: "",
-                                hint = "note",
+                                label = "Note",
                                 onchange = { value ->
                                     viewModel.note.value =if(value.isNotBlank()) value else null
                                 },
@@ -122,7 +116,6 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>() {
             Modifier
                 .background(Color.Transparent)
                 .fillMaxWidth()
-                .padding(horizontal = 24.dp)
                 .wrapContentHeight()
         ){
             Column(
@@ -141,18 +134,16 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>() {
     fun NameAndPasswordField(){
         Column {
             EditTextField(
-                modifier = Modifier.padding(top = 16.dp),
                 value = (viewModel.name.observeAsState().value) ?: "" ,
-                hint = "name",
+                label = "Name",
                 onchange = { value->
                     viewModel.name.value =if(value.isNotBlank()) value else null
                 },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
             )
             EditTextField(
-                modifier = Modifier.padding(top = 16.dp),
                 value = (viewModel.password.observeAsState().value) ?: "",
-                hint = "password",
+                label = "Password",
                 onchange = { value->
                     viewModel.password.value =if(value.isNotBlank()) value else null
                 },
@@ -164,9 +155,8 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>() {
     @Composable
     fun PhoneField(){
         EditTextField(
-            modifier = Modifier.padding(top = 16.dp),
             value = (viewModel.phone.observeAsState().value ?: "").toString(),
-            hint = "phone",
+            label = "Phone",
             onchange = { value->
                 value.toLongOrNull().let{
                     viewModel.phone.value = it
@@ -177,50 +167,9 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>() {
     }
 
     @Composable
-    private fun ChooseRole(roleState: MutableLiveData<Role>) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 16.dp, end = 16.dp, top = 16.dp)
-                .height(24.dp)
-        ){
-            CustomRadioButton(roleState = roleState, role = Role.TEACHER)
-            Spacer(modifier = Modifier.size(4.dp))
-            CustomRadioButton(roleState = roleState, role = Role.STUDENT)
-            Spacer(modifier = Modifier.size(4.dp))
-            CustomRadioButton(roleState = roleState, role = Role.MANGER)
-        }
-    }
-
-    @Composable
-    private fun CustomRadioButton(roleState: MutableLiveData<Role>, role: Role){
-        Row{
-            RadioButton(
-                selected = roleState.observeAsState().value == role,
-                onClick = { roleState.postValue(role) },
-                colors = RadioButtonDefaults.colors(
-                    selectedColor = colorResource(R.color.brand_color),
-                    unselectedColor = colorResource(R.color.shade_primary_color)
-                )
-            )
-            Text(
-                text = role.name,
-                modifier = Modifier
-                    .clickable(onClick = { roleState.postValue(role) })
-                    .padding(start = 2.dp),
-                style = TextStyle(
-                    color = takeIf {roleState.observeAsState().value == role}?.let {
-                        colorResource(R.color.brand_color)
-                    } ?: colorResource(R.color.shade_primary_color)
-                )
-            )
-        }
-    }
-
-    @Composable
     private fun EditTextField(
         modifier: Modifier = Modifier,
-        hint: String,
+        label: String,
         value: String,
         onchange:(String) -> Unit,
         keyboardOptions : KeyboardOptions
@@ -229,34 +178,37 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>() {
             value = value ,
             onValueChange = onchange,
             textStyle = TextStyle(
-                color =  colorResource(R.color.shade_secondary_color),
-                fontFamily = FontFamily(Font(R.font.monda_regular400)),
-                fontSize = 12.sp
+                color =  Color(50,54,87),
+                fontFamily = FontFamily(Font(R.font.source_sans_pro_regular)),
+                fontSize = 16.sp
             ),
             keyboardOptions = keyboardOptions,
-            placeholder = @Composable{
-                 Text(
-                     text = hint,
-                     color =  colorResource(R.color.shade_secondary_color),
-                     style = TextStyle(
-                         color =  colorResource(R.color.shade_secondary_color),
-                         fontFamily = FontFamily(Font(R.font.monda_regular400)),
-                         fontSize = 12.sp
-                     ),
-                     modifier=Modifier.fillMaxSize()
-                 )
-            },
             shape = RoundedCornerShape(8.dp) ,
             modifier = modifier
-                .height(50.dp)
+                .padding(top = 16.dp)
                 .fillMaxWidth(),
             colors = TextFieldDefaults.textFieldColors(
                 backgroundColor = colorResource(R.color.card_background_color),
-                cursorColor = colorResource(R.color.shade_secondary_color),
+                cursorColor = Color(225, 227, 232, 255),
                 disabledLabelColor = colorResource(R.color.card_background_color),
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent
-            )
+                focusedIndicatorColor = Color(225, 227, 232, 255),
+                unfocusedIndicatorColor = Color(225, 227, 232, 255)
+            ),
+            label = { TextLabel(label) }
+        )
+    }
+
+    @Composable
+    fun TextLabel(label: String){
+        Text(
+            text = label,
+            style = TextStyle(
+                color =  Color(165,165,165),
+                fontFamily = FontFamily(Font(R.font.source_sans_pro_regular)),
+                fontSize = 12.sp
+            ),
+            modifier = Modifier
+                .fillMaxWidth()
         )
     }
 
@@ -273,6 +225,9 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>() {
                 this@RegisterFragment,
                 (requireActivity() as IdentityActivity)::onAuth
             )
+            role.observe(this@RegisterFragment){
+                Log.i("TAG",it.toString())
+            }
         }
     }
 

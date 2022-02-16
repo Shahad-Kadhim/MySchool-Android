@@ -9,61 +9,157 @@
             type="com.shahad.app.my_school.ui.register.RegisterViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+   <androidx.constraintlayout.motion.widget.MotionLayout
+       android:id="@+id/motion"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+       app:layoutDescription="@xml/fragment_register_scene"
         app:disableOnLoading="@{viewModel.signUpState}"
-        android:background="@color/background_color">
+        android:background="@drawable/background">
+
+       <ImageView
+           android:id="@+id/imageView5"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="24dp"
+           android:layout_marginEnd="16dp"
+           android:background="@drawable/ic_logo_login"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="24dp"
-            android:layout_marginTop="55dp"
-            android:fontFamily="@font/monda_bold"
-            android:text="@string/sign_up"
-            android:textColor="@color/brand_color"
-            android:textSize="32sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.compose.ui.platform.ComposeView
-            android:id="@+id/form"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/appCompatButton"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginHorizontal="24dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/reg_rounded"
-            android:backgroundTint="@color/brand_color"
-            android:text="@string/sign_up_button"
-            android:enabled="@{viewModel.valid}"
-            android:onClick="@{() -> viewModel.onClickSignUp()}"
-            android:textColor="@color/shade_primary_color"
-            app:layout_constraintTop_toBottomOf="@+id/form" />
-
-        <TextView
+            android:id="@+id/textView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/nav_login"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="24dp"
-            android:textColor="@color/shade_secondary_color"
-            android:onClick="@{() -> viewModel.onClickNavLogin()}"
-            app:layout_constraintEnd_toEndOf="@+id/appCompatButton"
-            app:layout_constraintStart_toStartOf="@+id/appCompatButton"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatButton" />
+            tools:text="Hi Student"
+            android:text="@{`HI ` + viewModel.role.name()}"
+            android:textColor="@color/white"
+            android:textSize="34sp"
+            android:fontFamily="@font/source_sans_pro_semi_bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/source_sans_pro_regular"
+            android:text="Sign in continue"
+            android:textColor="#80FFFFFF"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/textView10"
+            app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardoo"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="32dp"
+            android:paddingBottom="16dp"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay_card_custom_corners"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView11">
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/nested"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/c"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/chipGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal"
+                        app:selectionRequired="true"
+                        app:checkedChip="@={viewModel.role}"
+                        android:layout_marginHorizontal="24dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:singleSelection="true">
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chip_student"
+                            style="@style/Chip"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Student" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chip_teacher"
+                            style="@style/Chip"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Teacher" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chip_manger"
+                            style="@style/Chip"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Manger" />
+                    </com.google.android.material.chip.ChipGroup>
+
+                    <androidx.compose.ui.platform.ComposeView
+                        android:id="@+id/form"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="24dp"
+                        app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/appCompatButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="54dp"
+                        android:layout_marginHorizontal="24dp"
+                        android:layout_marginTop="32dp"
+                        android:background="@drawable/background_rounded"
+                        android:drawableEnd="@drawable/ic_right"
+                        android:enabled="@{viewModel.valid}"
+                        android:fontFamily="@font/source_sans_pro_semi_bold"
+                        android:gravity="center"
+                        android:onClick="@{() -> viewModel.onClickSignUp()}"
+                        android:paddingStart="48dp"
+                        android:paddingEnd="24dp"
+                        android:text="@string/sign_up_button"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        app:layout_constraintTop_toBottomOf="@id/form"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView"
+                        style="@style/EditTextStyle.Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:onClick="@{() -> viewModel.onClickNavLogin()}"
+                        android:text="@string/nav_login"
+                        app:layout_constraintEnd_toEndOf="@+id/appCompatButton"
+                        app:layout_constraintStart_toStartOf="@+id/appCompatButton"
+                        app:layout_constraintTop_toBottomOf="@id/appCompatButton" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+        </com.google.android.material.card.MaterialCardView>
 
         <ProgressBar
             android:id="@+id/progressBar2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:indeterminate="true"
+            android:visibility="gone"
             android:indeterminateTint="@color/brand_color"
             android:indeterminateTintMode="src_atop"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -72,5 +168,5 @@
             app:layout_constraintTop_toTopOf="parent"
             app:showOnLoading="@{viewModel.signUpState}" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>

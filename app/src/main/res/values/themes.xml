@@ -52,6 +52,13 @@
         <item name="cornerSizeTopLeft">32dp</item>
     </style>
 
+    <style name="Chip">
+        <item name="android:textColor">@color/white</item>
+        <item name="chipBackgroundColor">@color/chip_color</item>
+        <item name="android:checkable">true</item>
+
+    </style>
+
     <style name="TextLabeled">
         <item name="android:textSize">12sp</item>
         <item name="fontFamily">@font/source_sans_pro_regular</item>

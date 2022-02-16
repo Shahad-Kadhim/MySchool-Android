@@ -9,6 +9,9 @@ import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
+import com.shahad.app.my_school.R
 import com.shahad.app.my_school.ui.base.BaseRecyclerAdapter
 import com.shahad.app.my_school.ui.register.Role
 import com.shahad.app.my_school.util.extension.toRole
@@ -78,4 +81,37 @@ fun <T>disableOnLoading(view: View, state: State<T>?){
 @BindingAdapter(value = ["items"])
 fun <T> setRecyclerItems(view: RecyclerView, items: List<T>?) {
     (view.adapter as? BaseRecyclerAdapter<T>)?.setItems(items ?: emptyList())
+}
+
+
+@BindingAdapter(value = ["checkedChip"])
+fun setCheckedChip(view: ChipGroup, role:Role?){
+    role?.let{
+        when(it){
+            Role.TEACHER -> check(view,R.id.chip_teacher)
+            Role.STUDENT -> check(view,R.id.chip_student)
+            Role.MANGER -> check(view,R.id.chip_manger)
+        }
+    }
+}
+
+@InverseBindingAdapter(attribute = "checkedChip",event = "onChipCheckedListener")
+fun getCheckedChip(view:ChipGroup): Role? =
+    when(view.checkedChipId){
+        R.id.chip_teacher-> Role.TEACHER
+        R.id.chip_manger-> Role.MANGER
+        R.id.chip_student-> Role.STUDENT
+        else-> null
+    }
+
+@BindingAdapter( "onChipCheckedListener")
+fun onChangeChecked(view: ChipGroup, attChange: InverseBindingListener){
+    view.setOnCheckedChangeListener { group, checkedId ->
+            attChange.onChange()
+    }
+}
+fun check(view: ChipGroup,id: Int){
+    view.checkedChipId.takeIf { it!=id }?.let {
+        view.check(id)
+    }
 }
