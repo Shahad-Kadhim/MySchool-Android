@@ -6,12 +6,10 @@ import com.shahad.app.my_school.data.MySchoolRepository
 import com.shahad.app.my_school.data.remote.AuthenticationResponse
 import com.shahad.app.my_school.data.remote.response.BaseResponse
 import com.shahad.app.my_school.ui.base.BaseViewModel
-import com.shahad.app.my_school.ui.login.LoginBody
 import com.shahad.app.my_school.util.DataClassParser
 import com.shahad.app.my_school.util.Event
 import com.shahad.app.my_school.util.State
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
@@ -134,23 +132,24 @@ class RegisterViewModel @Inject constructor(
     private fun validateField() =
         when(role.value!!) {
             Role.TEACHER -> {
-                !(name.value.isNullOrBlank())
-                        && (password.value ?: "").length >= 8
-                        && phone.value !=null
+                isValidNamePasswordPhoneField()
+                        && !(teachingSpecialization.value.isNullOrBlank())
             }
             Role.STUDENT->{
-                !(name.value.isNullOrBlank())
-                    && (password.value ?: "").length >= 8
-                        && phone.value !=null
+                isValidNamePasswordPhoneField()
                         && age.value !=null
                         && stage.value !=null
             }
             Role.MANGER-> {
-                !(name.value.isNullOrBlank())
-                        && (password.value ?: "").length >= 8
-                        && phone.value !=null
+                isValidNamePasswordPhoneField()
             }
         }
+
+
+    private fun isValidNamePasswordPhoneField() =
+        !(name.value.isNullOrBlank())
+                && (password.value ?: "").length >= 8
+                && phone.value !=null
 
 
     fun onClickNavLogin(){
