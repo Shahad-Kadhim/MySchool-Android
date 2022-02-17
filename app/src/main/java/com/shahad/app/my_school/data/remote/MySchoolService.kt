@@ -9,23 +9,14 @@ import retrofit2.http.*
 
 interface MySchoolService{
 
-    @POST("/teacher/new")
-    suspend fun addTeacher(@Body registerBody: JsonElement): Response<String>
+    @POST("/user/create")
+    suspend fun addUser(
+        @Query("role") role: String,
+        @Body registerBody: JsonElement
+    ): Response<BaseResponse<AuthenticationResponse>>
 
-    @POST("/teacher/login")
-    suspend fun loginTeacher(@Body loginBody: JsonElement):  Response<String>
-
-    @POST("/student/register")
-    suspend fun addStudent(@Body registerBody: JsonElement): Response<String>
-
-    @POST("/student/login")
-    suspend fun loginStudent(@Body loginBody: JsonElement):  Response<String>
-
-    @POST("/manger/new")
-    suspend fun addManger(@Body registerBody: JsonElement): Response<String>
-
-    @POST("/manger/login")
-    suspend fun loginManger(@Body loginBody: JsonElement):  Response<String>
+    @POST("/user/login")
+    suspend fun loginUser(@Body loginBody: JsonElement):  Response<BaseResponse<AuthenticationResponse>>
 
     @GET("/teacher/classes")
     suspend fun getTeacherClasses(): Response<BaseResponse<List<ClassList>>>

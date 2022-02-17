@@ -1,7 +1,6 @@
 package com.shahad.app.my_school.ui.register
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -49,8 +48,7 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>() {
             when(viewModel.role.observeAsState().value){
                 Role.TEACHER -> {
                     Form1(
-                        @Composable{NameAndPasswordField()},
-                        @Composable{PhoneField()},
+                        @Composable{NameAndPasswordAndPhoneField()},
                         @Composable{
                             EditTextField(
                                 value = viewModel.teachingSpecialization.observeAsState().value ?: "",
@@ -65,8 +63,7 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>() {
                 }
                 Role.STUDENT -> {
                     Form1(
-                        @Composable{NameAndPasswordField()},
-                        @Composable{PhoneField()},
+                        @Composable{NameAndPasswordAndPhoneField()},
                         @Composable{
                             EditTextField(
                                 value = (viewModel.age.observeAsState().value ?: "").toString(),
@@ -104,7 +101,7 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>() {
                     )
                 }
                 Role.MANGER -> {
-                  Form1(@Composable{NameAndPasswordField()})
+                  Form1(@Composable{NameAndPasswordAndPhoneField()})
                 }
             }
         }
@@ -131,7 +128,7 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>() {
     }
 
     @Composable
-    fun NameAndPasswordField(){
+    fun NameAndPasswordAndPhoneField(){
         Column {
             EditTextField(
                 value = (viewModel.name.observeAsState().value) ?: "" ,
@@ -149,21 +146,17 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>() {
                 },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
             )
+            EditTextField(
+                value = (viewModel.phone.observeAsState().value ?: "").toString(),
+                label = "Phone",
+                onchange = { value->
+                    value.toLongOrNull().let{
+                        viewModel.phone.value = it
+                    }
+                },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone)
+            )
         }
-    }
-
-    @Composable
-    fun PhoneField(){
-        EditTextField(
-            value = (viewModel.phone.observeAsState().value ?: "").toString(),
-            label = "Phone",
-            onchange = { value->
-                value.toLongOrNull().let{
-                    viewModel.phone.value = it
-                }
-            },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone)
-        )
     }
 
     @Composable
@@ -225,9 +218,6 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>() {
                 this@RegisterFragment,
                 (requireActivity() as IdentityActivity)::onAuth
             )
-            role.observe(this@RegisterFragment){
-                Log.i("TAG",it.toString())
-            }
         }
     }
 

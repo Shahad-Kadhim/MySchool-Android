@@ -1,6 +1,7 @@
 package com.shahad.app.my_school.data
 
 import com.google.gson.JsonElement
+import com.shahad.app.my_school.data.remote.AuthenticationResponse
 import com.shahad.app.my_school.data.remote.response.BaseResponse
 import com.shahad.app.my_school.data.remote.response.ClassList
 import com.shahad.app.my_school.data.remote.response.SchoolDto
@@ -10,25 +11,11 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class MySchoolFakeRepository @Inject constructor(): MySchoolRepository{
-    override fun addTeacher(registerBody: JsonElement): Flow<State<String?>> =
-        getFakeFlow("hfjhgdgjdhgjd")
+    override fun addUser(role: String , registerBody: JsonElement): Flow<State<BaseResponse<AuthenticationResponse>?>> =
+        getFakeFlow(BaseResponse(200, AuthenticationResponse(role,"")))
 
-    override fun loginTeacher(loginBody: JsonElement): Flow<State<String?>> =
-       getFakeFlow("hfjhgdgjdhgjd")
-
-    override fun addStudent(registerBody: JsonElement): Flow<State<String?>> =
-        getFakeFlow("hfjhgdgjdhgjd")
-
-    override fun loginStudent(loginBody: JsonElement): Flow<State<String?>> =
-        getFakeFlow("hfjhgdgjdhgjd")
-
-    override fun addManger(registerBody: JsonElement): Flow<State<String?>> =
-        getFakeFlow("hfjhgdgjdhgjd")
-
-
-    override fun loginManger(loginBody: JsonElement): Flow<State<String?>> =
-        getFakeFlow("hfjhgdgjdhgjd")
-
+    override fun loginUser(loginBody: JsonElement): Flow<State<BaseResponse<AuthenticationResponse>?>> =
+       getFakeFlow(BaseResponse(200,AuthenticationResponse("MANGER","")))
 
     override fun getTeacherClasses(): Flow<State<BaseResponse<List<ClassList>>?>> =
         getFakeFlow(BaseResponse(4, listOf()))

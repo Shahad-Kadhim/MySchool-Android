@@ -1,19 +1,17 @@
 package com.shahad.app.my_school.ui.login
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.google.gson.JsonElement
 import com.shahad.app.my_school.data.MySchoolRepository
+import com.shahad.app.my_school.data.remote.AuthenticationResponse
+import com.shahad.app.my_school.data.remote.response.BaseResponse
 import com.shahad.app.my_school.ui.base.BaseViewModel
-import com.shahad.app.my_school.ui.register.Role
 import com.shahad.app.my_school.util.DataClassParser
 import com.shahad.app.my_school.util.Event
 import com.shahad.app.my_school.util.State
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
@@ -28,32 +26,23 @@ class LoginViewModel @Inject constructor(
 
     val name = MutableStateFlow("")
     val password = MutableStateFlow("")
-    val role = MutableStateFlow(Role.TEACHER)
 
-    private val _loginState = MutableLiveData<State<String?>>()
-    val loginState: LiveData<State<String?>> = _loginState
+    private val _loginState = MutableLiveData<State<BaseResponse<AuthenticationResponse>?>>()
+    val loginState: LiveData<State<BaseResponse<AuthenticationResponse>?>> = _loginState
 
     private val _clickNavSignUpEvent = MutableStateFlow<Event<Boolean>?>(null)
     val clickNavSignUpEvent: StateFlow<Event<Boolean>?> = _clickNavSignUpEvent
 
-    val whenSuccess: LiveData<Pair<String,String>> =
-        MediatorLiveData<Pair<String,String>>().apply {
+    val whenSuccess: LiveData<AuthenticationResponse> =
+        MediatorLiveData<AuthenticationResponse>().apply {
             addSource(_loginState){ state->
                 takeIf { state is State.Success<*> }?.let {
-                    this.postValue(Pair(role.value.name,state.toData().toString()))
+                    this.postValue((state.toData() as BaseResponse<AuthenticationResponse>).data)
                 }
             }
         }
 
     fun onClickLogin(){
-        when(role.value){
-            Role.TEACHER -> login(repository::loginTeacher)
-            Role.STUDENT -> login(repository::loginStudent)
-            Role.MANGER -> login(repository::loginManger)
-        }
-    }
-
-    private fun login(loginRequest: (JsonElement) -> Flow<State<String?>>) {
         dataClassParser.parseToJson(
             LoginBody(
                 name.value,
@@ -61,12 +50,13 @@ class LoginViewModel @Inject constructor(
             )
         ).also{
             viewModelScope.launch {
-                loginRequest(it).collect {
+                repository.loginUser(it).collect {
                     _loginState.postValue(it)
                 }
             }
         }
     }
+
 
     fun onClickNavSignUp(){
         _clickNavSignUpEvent.tryEmit(Event(true))

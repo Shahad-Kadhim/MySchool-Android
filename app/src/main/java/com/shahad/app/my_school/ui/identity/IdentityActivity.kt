@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.activity.viewModels
 import androidx.navigation.findNavController
 import com.shahad.app.my_school.R
+import com.shahad.app.my_school.data.remote.AuthenticationResponse
 import com.shahad.app.my_school.databinding.ActivityIdentityBinding
 import com.shahad.app.my_school.ui.base.BaseActivity
 import com.shahad.app.my_school.ui.main.MainActivity
@@ -21,10 +22,10 @@ class IdentityActivity : BaseActivity<ActivityIdentityBinding>() {
         return true
     }
 
-    fun onAuth(identification: Pair<String,String>){
-        saveToken(identification.second)
-        saveRole(identification.first)
-        navToHome(identification.first)
+    fun onAuth(identification: AuthenticationResponse){
+        saveToken(identification.token)
+        saveRole(identification.role)
+        navToHome(identification.role)
     }
 
     private fun saveRole(role: String) {

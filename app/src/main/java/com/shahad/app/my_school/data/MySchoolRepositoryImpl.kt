@@ -2,6 +2,7 @@ package com.shahad.app.my_school.data
 
 import com.google.gson.JsonElement
 import com.shahad.app.my_school.data.local.daos.MySchoolDao
+import com.shahad.app.my_school.data.remote.AuthenticationResponse
 import com.shahad.app.my_school.data.remote.MySchoolService
 import com.shahad.app.my_school.data.remote.response.BaseResponse
 import com.shahad.app.my_school.data.remote.response.ClassList
@@ -18,23 +19,11 @@ class MySchoolRepositoryImpl @Inject constructor(
     private val apiService: MySchoolService,
 ): MySchoolRepository{
 
-    override fun addTeacher(registerBody: JsonElement): Flow<State<String?>> =
-        wrapWithFlow { apiService.addTeacher(registerBody) }
+    override fun addUser(role: String,registerBody: JsonElement): Flow<State<BaseResponse<AuthenticationResponse>?>> =
+        wrapWithFlow { apiService.addUser(role,registerBody) }
 
-    override fun loginTeacher(loginBody: JsonElement): Flow<State<String?>> =
-        wrapWithFlow { apiService.loginTeacher(loginBody) }
-
-    override fun addStudent(registerBody: JsonElement): Flow<State<String?>> =
-        wrapWithFlow { apiService.addStudent(registerBody) }
-
-    override fun loginStudent(loginBody: JsonElement): Flow<State<String?>> =
-        wrapWithFlow { apiService.loginStudent(loginBody) }
-
-    override fun addManger(registerBody: JsonElement): Flow<State<String?>> =
-        wrapWithFlow { apiService.addManger(registerBody) }
-
-    override fun loginManger(loginBody: JsonElement): Flow<State<String?>> =
-        wrapWithFlow { apiService.loginManger(loginBody) }
+    override fun loginUser(loginBody: JsonElement): Flow<State<BaseResponse<AuthenticationResponse>?>> =
+        wrapWithFlow { apiService.loginUser(loginBody) }
 
     override fun getTeacherClasses(): Flow<State<BaseResponse<List<ClassList>>?>> =
         wrapWithFlow { apiService.getTeacherClasses() }

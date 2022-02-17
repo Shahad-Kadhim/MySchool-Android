@@ -31,8 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/space_large_2x"
             android:layout_marginTop="@dimen/space_large"
-            tools:text="Hi Student"
-            android:text="@{`HI ` + viewModel.role.name()}"
+            android:text="Hi User"
             android:textColor="@color/white"
             android:textSize="34sp"
             android:fontFamily="@font/source_sans_pro_semi_bold"
@@ -127,30 +126,6 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView13"
                     tools:text="Shahad Kadhim Haty" />
 
-                <TextView
-                    android:id="@+id/textView14"
-                    style="@style/TextLabeled"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/space_large_2x"
-                    android:text="User Type"
-                    app:layout_constraintEnd_toEndOf="@+id/textView12"
-                    app:layout_constraintStart_toStartOf="@+id/textView12"
-                    app:layout_constraintTop_toBottomOf="@+id/edit_password" />
-
-
-                <Spinner
-                    android:id="@+id/user_type"
-                    selectedItem="@={viewModel.role}"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="@dimen/space_small"
-                    android:entries="@array/user_types"
-                    android:theme="@style/mySpinnerItemStyle"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="@+id/textView12"
-                    app:layout_constraintStart_toStartOf="@+id/textView12"
-                    app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
 
             <androidx.appcompat.widget.AppCompatButton
@@ -169,7 +144,7 @@
                 android:background="@drawable/background_rounded"
                 android:text="@string/login_button"
                 android:onClick="@{() -> viewModel.onClickLogin()}"
-                app:layout_constraintTop_toBottomOf="@+id/user_type" />
+                app:layout_constraintTop_toBottomOf="@+id/edit_password" />
 
             <TextView
                 android:layout_width="wrap_content"

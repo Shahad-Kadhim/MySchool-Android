@@ -1,6 +1,7 @@
 package com.shahad.app.my_school.data
 
 import com.google.gson.JsonElement
+import com.shahad.app.my_school.data.remote.AuthenticationResponse
 import com.shahad.app.my_school.data.remote.response.BaseResponse
 import com.shahad.app.my_school.data.remote.response.ClassList
 import com.shahad.app.my_school.data.remote.response.SchoolDto
@@ -9,17 +10,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface MySchoolRepository{
 
-    fun addTeacher(registerBody: JsonElement): Flow<State<String?>>
+    fun addUser(role: String,registerBody: JsonElement): Flow<State<BaseResponse<AuthenticationResponse>?>>
 
-    fun loginTeacher(loginBody: JsonElement): Flow<State<String?>>
-
-    fun addStudent(registerBody: JsonElement): Flow<State<String?>>
-
-    fun loginStudent(loginBody: JsonElement): Flow<State<String?>>
-
-    fun addManger(registerBody: JsonElement): Flow<State<String?>>
-
-    fun loginManger(loginBody: JsonElement): Flow<State<String?>>
+    fun loginUser(loginBody: JsonElement): Flow<State<BaseResponse<AuthenticationResponse>?>>
 
     fun getTeacherClasses(): Flow<State<BaseResponse<List<ClassList>>?>>
 

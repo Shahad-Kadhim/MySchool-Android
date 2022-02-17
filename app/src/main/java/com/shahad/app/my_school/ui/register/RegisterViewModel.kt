@@ -3,6 +3,8 @@ package com.shahad.app.my_school.ui.register
 import androidx.lifecycle.*
 import com.google.gson.JsonElement
 import com.shahad.app.my_school.data.MySchoolRepository
+import com.shahad.app.my_school.data.remote.AuthenticationResponse
+import com.shahad.app.my_school.data.remote.response.BaseResponse
 import com.shahad.app.my_school.ui.base.BaseViewModel
 import com.shahad.app.my_school.ui.login.LoginBody
 import com.shahad.app.my_school.util.DataClassParser
@@ -54,15 +56,15 @@ class RegisterViewModel @Inject constructor(
         }
     }
 
-    private val _signUpState = MutableLiveData<State<String?>>()
+    private val _signUpState = MutableLiveData<State<BaseResponse<AuthenticationResponse>?>>()
 
-    val signUpState: LiveData<State<String?>> = _signUpState
+    val signUpState: LiveData<State<BaseResponse<AuthenticationResponse>?>> = _signUpState
 
-    val whenSuccess: LiveData<Pair<String,String>> =
-        MediatorLiveData<Pair<String,String>>().apply {
+    val whenSuccess: LiveData<AuthenticationResponse> =
+        MediatorLiveData<AuthenticationResponse>().apply {
             addSource(_signUpState){ state->
                 takeIf { state is State.Success<*> }?.let {
-                    this.postValue(Pair(role.value?.name.toString(),state.toData().toString()))
+                    this.postValue((state.toData() as BaseResponse<AuthenticationResponse>).data)
                 }
             }
         }
@@ -72,26 +74,39 @@ class RegisterViewModel @Inject constructor(
 
     fun onClickSignUp(){
         takeIf { validateField() }?.let{
-            when(role.value!!){
-                Role.TEACHER -> signUpTeacher()
-                Role.STUDENT -> signUpStudent()
-                Role.MANGER -> signUpManger()
-              }
+            role.value?.let { currentRole ->
+                signUpUser(currentRole,getRequestBody(currentRole))
+            }
         }
     }
 
-    private fun signUpManger() {
+    private fun getRequestBody(role: Role) =
+        when(role){
+            Role.TEACHER -> getTeacherRequestBody()
+            Role.STUDENT -> getStudentRequestBody()
+            Role.MANGER -> getMangerRequestBody()
+        }
+
+
+    private fun signUpUser(currentRole: Role ,body: JsonElement){
+        viewModelScope.launch{
+            repository.addUser(currentRole.name, body).collect {
+                _signUpState.postValue(it)
+            }
+        }
+    }
+
+    private fun getMangerRequestBody() =
         dataClassParser.parseToJson(
-            LoginBody(
+            MangerRegisterBody(
                 name.value!!,
                 password.value!!,
+                phone.value!!
             )
-        ).apply {
-            signUp(this,repository::addManger)
-        }
-    }
+        )
 
-    private fun signUpStudent() {
+
+    private fun getStudentRequestBody() =
         dataClassParser.parseToJson(
             StudentRegisterBody(
                 name.value!!,
@@ -101,12 +116,10 @@ class RegisterViewModel @Inject constructor(
                 age.value!!,
                 stage.value!!
             )
-        ).apply {
-            signUp(this,repository::addStudent)
-        }
-    }
+        )
 
-    private fun signUpTeacher() {
+
+    private fun getTeacherRequestBody() =
         dataClassParser.parseToJson(
             TeacherRegisterBody(
                 name.value!!,
@@ -114,18 +127,9 @@ class RegisterViewModel @Inject constructor(
                 teachingSpecialization.value!!,
                 phone.value!!
             )
-        ).run {
-            signUp(this,repository::addTeacher)
-        }
-    }
+        )
 
-    fun signUp(body: JsonElement, signUp: (JsonElement) -> Flow<State<String?>>){
-        viewModelScope.launch {
-            signUp(body).collect{ state ->
-                _signUpState.postValue(state)
-            }
-        }
-    }
+
 
     private fun validateField() =
         when(role.value!!) {
@@ -144,6 +148,7 @@ class RegisterViewModel @Inject constructor(
             Role.MANGER-> {
                 !(name.value.isNullOrBlank())
                         && (password.value ?: "").length >= 8
+                        && phone.value !=null
             }
         }
 
