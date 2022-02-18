@@ -4,9 +4,7 @@ import com.google.gson.JsonElement
 import com.shahad.app.my_school.data.local.daos.MySchoolDao
 import com.shahad.app.my_school.data.remote.AuthenticationResponse
 import com.shahad.app.my_school.data.remote.MySchoolService
-import com.shahad.app.my_school.data.remote.response.BaseResponse
-import com.shahad.app.my_school.data.remote.response.ClassList
-import com.shahad.app.my_school.data.remote.response.SchoolDto
+import com.shahad.app.my_school.data.remote.response.*
 import com.shahad.app.my_school.util.State
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -34,10 +32,10 @@ class MySchoolRepositoryImpl @Inject constructor(
     override fun getMangerClasses(): Flow<State<BaseResponse<List<ClassList>>?>> =
         wrapWithFlow { apiService.getMangerClasses() }
 
-    override fun createSchool(schoolName: String): Flow<State<Int?>> =
+    override fun createSchool(schoolName: String): Flow<State<BaseResponse<School>?>> =
         wrapWithFlow{ apiService.createSchool(schoolName) }
 
-    override fun createClass(requestBody: JsonElement): Flow<State<Int?>> =
+    override fun createClass(requestBody: JsonElement): Flow<State<BaseResponse<ClassDto>?>> =
         wrapWithFlow{ apiService.createClass(requestBody) }
 
 

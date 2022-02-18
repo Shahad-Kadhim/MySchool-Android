@@ -1,9 +1,7 @@
 package com.shahad.app.my_school.data.remote
 
 import com.google.gson.JsonElement
-import com.shahad.app.my_school.data.remote.response.BaseResponse
-import com.shahad.app.my_school.data.remote.response.ClassList
-import com.shahad.app.my_school.data.remote.response.SchoolDto
+import com.shahad.app.my_school.data.remote.response.*
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -28,9 +26,9 @@ interface MySchoolService{
     suspend fun getMangerClasses(): Response<BaseResponse<List<ClassList>>>
 
     @POST("/school/new")
-    suspend fun createSchool(@Query("name") schoolName: String): Response<Int>
+    suspend fun createSchool(@Query("name") schoolName: String): Response<BaseResponse<School>>
 
     @POST("/class/new")
-    suspend fun createClass(@Body requestBody: JsonElement): Response<Int>
+    suspend fun createClass(@Body requestBody: JsonElement): Response<BaseResponse<ClassDto>>
 
 }

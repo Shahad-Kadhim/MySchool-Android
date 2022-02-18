@@ -1,8 +1,7 @@
 package com.shahad.app.my_school.data.remote.response
 
-data class ClassList(
+data class School(
     val id: String,
     val name: String,
-    val teacherName: String,
-    val stage: Int
+    val mangerId: String
 )
