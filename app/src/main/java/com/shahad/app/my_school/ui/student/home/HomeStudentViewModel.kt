@@ -1,6 +1,7 @@
 package com.shahad.app.my_school.ui.student.home
 
 import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.asLiveData
 import com.shahad.app.my_school.data.MySchoolRepository
 import com.shahad.app.my_school.ui.base.BaseViewModel
 import com.shahad.app.my_school.util.State
@@ -12,7 +13,8 @@ class HomeStudentViewModel @Inject constructor(
     repository: MySchoolRepository
 ): BaseViewModel(){
 
-   // val classes = repository.getTeacherClasses().asLiveData()
+    // TODO LATER GET CLASSES OF STUDENT
+    val classes = repository.getTeacherClasses().asLiveData()
 
     val unAuthentication = MediatorLiveData<State.UnAuthorization?>().apply {
 //        addSource(classes){
