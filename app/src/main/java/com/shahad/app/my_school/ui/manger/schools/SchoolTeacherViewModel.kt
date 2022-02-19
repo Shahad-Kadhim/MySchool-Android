@@ -16,7 +16,7 @@ class SchoolTeacherViewModel @Inject constructor(
     private val repository: MySchoolRepository
 ): SchoolBaseViewModel() {
     //TODO LATER CHANGER FUNCTION GET SCHOOLS OF TEACHER
-    override val schools: LiveData<State<BaseResponse<List<SchoolDto>>?>> = repository.getMangerSchool().asLiveData()
+    override val schools = repository.getTeacherSchools().asLiveData()
 
     private val _clickJoinSchoolEvent = MutableLiveData<Event<Boolean>>()
     val clickJoinSchoolEvent: LiveData<Event<Boolean>> = _clickJoinSchoolEvent

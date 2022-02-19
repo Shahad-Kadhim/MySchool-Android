@@ -19,6 +19,9 @@ interface MySchoolService{
     @GET("/teacher/classes")
     suspend fun getTeacherClasses(): Response<BaseResponse<List<ClassList>>>
 
+    @GET("/teacher/schools")
+    suspend fun getTeacherSchools(): Response<BaseResponse<List<SchoolDto>>>
+
     @GET("/manger/schools")
     suspend fun getMangerSchools(): Response<BaseResponse<List<SchoolDto>>>
 
@@ -26,7 +29,7 @@ interface MySchoolService{
     suspend fun getMangerClasses(): Response<BaseResponse<List<ClassList>>>
 
     @POST("/school/new")
-    suspend fun createSchool(@Query("name") schoolName: String): Response<BaseResponse<School>>
+    suspend fun createSchool(@Query("name") schoolName: String): Response<BaseResponse<SchoolDto>>
 
     @POST("/class/new")
     suspend fun createClass(@Body requestBody: JsonElement): Response<BaseResponse<ClassDto>>

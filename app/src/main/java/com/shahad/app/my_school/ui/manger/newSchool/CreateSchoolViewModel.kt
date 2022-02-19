@@ -6,8 +6,7 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
 import com.shahad.app.my_school.data.MySchoolRepository
 import com.shahad.app.my_school.data.remote.response.BaseResponse
-import com.shahad.app.my_school.data.remote.response.School
-import com.shahad.app.my_school.ui.base.BaseViewModel
+import com.shahad.app.my_school.data.remote.response.SchoolDto
 import com.shahad.app.my_school.util.Event
 import com.shahad.app.my_school.util.State
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,8 +18,8 @@ class CreateSchoolViewModel @Inject constructor(
     private val repository: MySchoolRepository
 ): BaseNewSchoolViewModel() {
 
-    private val _createRequestStatus = MutableLiveData<State<BaseResponse<School>?>>()
-    val createRequestStatus: LiveData<State<BaseResponse<School>?>> = _createRequestStatus
+    private val _createRequestStatus = MutableLiveData<State<BaseResponse<SchoolDto>?>>()
+    val createRequestStatus: LiveData<State<BaseResponse<SchoolDto>?>> = _createRequestStatus
 
     val onSuccessCreated = Transformations.map(createRequestStatus){
         if(it is State.Success) Event(true) else Event(false)
