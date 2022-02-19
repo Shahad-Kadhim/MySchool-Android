@@ -21,4 +21,5 @@ interface MySchoolRepository{
 
     fun createClass(requestBody: JsonElement): Flow<State<BaseResponse<ClassDto>?>>
 
+    fun joinTeacher(schoolName: String): Flow<State<BaseResponse<String>?>>
 }

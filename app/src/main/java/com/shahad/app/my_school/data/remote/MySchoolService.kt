@@ -31,4 +31,6 @@ interface MySchoolService{
     @POST("/class/new")
     suspend fun createClass(@Body requestBody: JsonElement): Response<BaseResponse<ClassDto>>
 
+    @POST("/teacher/joinTeacher")
+    suspend fun joinTeacher(@Query("school_name") schoolName: String): Response<BaseResponse<String>>
 }

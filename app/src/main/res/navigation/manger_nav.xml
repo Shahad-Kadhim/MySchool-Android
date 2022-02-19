@@ -38,7 +38,7 @@
         android:label="DutyFragment" />
     <dialog
         android:id="@+id/newSchoolFragment"
-        android:name="com.shahad.app.my_school.ui.manger.newSchool.NewSchoolFragment"
+        android:name="com.shahad.app.my_school.ui.manger.newSchool.CreateSchoolFragment"
         android:label="NewSchoolFragment"
         tools:layout="@layout/fragment_dailog_new_school"/>
     <fragment

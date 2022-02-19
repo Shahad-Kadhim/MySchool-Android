@@ -40,7 +40,7 @@ class TeacherSchoolsFragment: BaseFragment<FragmentSchoolsBinding>() {
                 findNavController().navigateUp()
             }
             clickJoinSchoolEvent.observeEvent(this@TeacherSchoolsFragment){
-//                viewDataBinding.root.goToFragment(SchoolFragmentDirections.actionSchoolFragmentToNewSchoolFragment())
+                viewDataBinding.root.goToFragment(TeacherSchoolsFragmentDirections.actionTeacherSchoolsFragmentToJoinSchoolFragment())
             }
         }
     }

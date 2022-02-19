@@ -30,6 +30,9 @@ class MySchoolFakeRepository @Inject constructor(): MySchoolRepository{
     override fun createClass(requestBody: JsonElement): Flow<State<BaseResponse<ClassDto>?>> =
         getFakeFlow(BaseResponse(200,ClassDto("","","","",2)))
 
+    override fun joinTeacher(schoolName: String): Flow<State<BaseResponse<String>?>> =
+        getFakeFlow(BaseResponse(200,"Fake Join HAHAHAHAHAHA"))
+
     private  fun <T> getFakeFlow(respond: T)=
         flow{
             emit(State.Loading)
