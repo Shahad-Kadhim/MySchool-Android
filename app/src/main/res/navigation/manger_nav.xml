@@ -43,7 +43,7 @@
         tools:layout="@layout/fragment_dailog_new_school"/>
     <fragment
         android:id="@+id/schoolFragment"
-        android:name="com.shahad.app.my_school.ui.manger.schools.SchoolFragment"
+        android:name="com.shahad.app.my_school.ui.manger.schools.SchoolMangerFragment"
         android:label="SchoolFragment"
         tools:layout="@layout/fragment_schools">
 

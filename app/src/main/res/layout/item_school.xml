@@ -16,28 +16,37 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="24dp"
-        android:layout_marginVertical="8dp"
-        android:layout_marginHorizontal="16dp"
+        android:layout_margin="8dp"
         app:cardBackgroundColor="#F0EFEE">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="156dp"
-            android:background="@drawable/school_background">
+            android:background="@drawable/reg_rounded_stroke_24dp">
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="32dp"
+                android:src="@drawable/ic_school"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_large"
-                android:layout_marginStart="@dimen/space_large"
                 android:fontFamily="@font/source_sans_pro_bold"
                 android:text="@{item.name}"
-                android:layout_marginEnd="@dimen/space_large_5x"
                 android:textColor="#2E3731"
-                android:textSize="30sp"
+                android:textSize="20sp"
+                android:maxLines="1"
+                android:layout_marginTop="8dp"
+                android:ellipsize="end"
+                android:paddingEnd="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/imageView6"
+                app:layout_constraintTop_toBottomOf="@+id/imageView6"
                 tools:text="SCHOOL 1" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

@@ -12,68 +12,78 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="false">
 
-
-        <TextView
-            android:id="@+id/logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/space_medium"
-            android:layout_marginTop="@dimen/space_medium"
-            android:fontFamily="@font/source_sans_pro_bold"
-            android:text="MY SCHOOL"
-            android:textColor="#202020"
-            android:textSize="34sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/space_medium"
-            android:src="@drawable/ic_notifaction"
-            app:layout_constraintBottom_toBottomOf="@+id/logo"
-            app:layout_constraintEnd_toStartOf="@+id/shapeableImageView"
-            app:layout_constraintTop_toTopOf="@+id/logo" />
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/shapeableImageView"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginEnd="@dimen/space_medium"
-            android:src="@drawable/profile_photo_test"
-            app:layout_constraintBottom_toBottomOf="@id/logo"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/logo"
-            app:shapeAppearanceOverlay="@style/imageCorner50" />
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="56dp" />
-
-        <EditText
-            android:id="@+id/search_bar"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/header"
             android:layout_width="match_parent"
-            android:layout_height="44dp"
-            android:layout_marginHorizontal="@dimen/space_medium"
-            android:layout_marginTop="@dimen/space_medium"
-            android:background="@drawable/reg_rounded_24dp"
-            android:paddingHorizontal="@dimen/space_medium"
-            android:paddingVertical="@dimen/space_small"
-           style="@style/SearchBar"
-            app:layout_constraintTop_toBottomOf="@+id/guideline" />
+            android:layout_height="wrap_content"
+            app:backgroundResource="@{true}"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:cardBackgroundColor="@color/brand_color">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_medium"
+                    android:layout_marginTop="@dimen/space_large_3x"
+                    android:fontFamily="@font/source_sans_pro_semi_bold"
+                    android:text="My School"
+                    android:textColor="#FFFFFF"
+                    android:textSize="34sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="@dimen/space_medium"
+                    android:src="@drawable/ic_school"
+                    android:onClick="@{() -> viewModel.onClickSchools()}"
+                    app:layout_constraintBottom_toBottomOf="@+id/logo"
+                    app:layout_constraintEnd_toStartOf="@+id/shapeableImageView"
+                    app:layout_constraintTop_toTopOf="@+id/logo"
+                    app:tint="@color/white" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/shapeableImageView"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="@dimen/space_medium"
+                    android:src="@drawable/profile_photo_test"
+                    app:layout_constraintBottom_toBottomOf="@id/logo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/logo"
+                    app:shapeAppearanceOverlay="@style/imageCorner50" />
+
+                <EditText
+                    android:id="@+id/editText"
+                    style="@style/SearchBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:layout_marginTop="@dimen/space_large"
+                    android:background="@drawable/reg_rounded_24dp"
+                    android:paddingHorizontal="@dimen/space_medium"
+                    android:paddingVertical="@dimen/space_small"
+                    android:layout_marginBottom="24dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/logo"
+                    tools:layout_editor_absoluteX="16dp" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/label_school"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/Subject"
             android:text="Classes"
-            app:layout_constraintStart_toStartOf="@+id/search_bar"
-            app:layout_constraintTop_toBottomOf="@+id/search_bar" />
+            android:layout_marginStart="@dimen/space_medium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/header" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/classRecycler"
@@ -87,14 +97,14 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:listitem="@layout/item_class"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+            app:layout_constraintTop_toBottomOf="@+id/label_school" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/space_medium"
-            android:src="@drawable/ic_create_post"
-            android:backgroundTint="#2E3731"
+            android:src="@drawable/ic_baseline_add_24"
+            android:backgroundTint="@color/brand_color"
             android:onClick="@{() -> viewModel.onClickCreateClass()}"
             app:borderWidth="0dp"
             app:elevation="6dp"

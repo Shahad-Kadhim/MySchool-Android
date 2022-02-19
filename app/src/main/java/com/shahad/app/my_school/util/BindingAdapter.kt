@@ -9,6 +9,7 @@ import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.shahad.app.my_school.R
@@ -114,4 +115,8 @@ fun check(view: ChipGroup,id: Int){
     view.checkedChipId.takeIf { it!=id }?.let {
         view.check(id)
     }
+}
+@BindingAdapter(value = ["app:backgroundResource"])
+fun setBackgroundDrawableLinear(view: MaterialCardView, value: Boolean ){
+    view.setBackgroundResource(R.drawable.background_card)
 }

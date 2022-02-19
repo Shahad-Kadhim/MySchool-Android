@@ -16,17 +16,11 @@ import javax.inject.Inject
 @HiltViewModel
 class SchoolMangerViewModel @Inject constructor(
     repository: MySchoolRepository
-): BaseViewModel(),
+): SchoolBaseViewModel(),
     SchoolInteractionListener
 {
 
-    val schools = repository.getMangerSchool().asLiveData()
-
-    private val _clickBackEvent = MutableLiveData<Event<Boolean>>()
-    val clickBackEvent: LiveData<Event<Boolean>> = _clickBackEvent
-
-    private val _clickCreateSchoolEvent = MutableLiveData<Event<Boolean>>()
-    val clickCreateSchoolEvent: LiveData<Event<Boolean>> = _clickCreateSchoolEvent
+    override val schools = repository.getMangerSchool().asLiveData()
 
     val unAuthentication = MediatorLiveData<State.UnAuthorization?>().apply {
         addSource(schools,::whenUnAuthorization)
@@ -36,11 +30,10 @@ class SchoolMangerViewModel @Inject constructor(
         if(state is State.UnAuthorization) unAuthentication.postValue(state)
     }
 
-    fun onClickBack(){
-        _clickBackEvent.postValue(Event(true))
-    }
+    private val _clickCreateSchoolEvent = MutableLiveData<Event<Boolean>>()
+    val clickCreateSchoolEvent: LiveData<Event<Boolean>> = _clickCreateSchoolEvent
 
-    fun onClickCreateSchool(){
+    override fun onClickAddSchool(){
         _clickCreateSchoolEvent.postValue(Event(true))
     }
 }

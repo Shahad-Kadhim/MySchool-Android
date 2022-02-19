@@ -13,10 +13,10 @@ import com.shahad.app.my_school.util.extension.observeEvent
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SchoolFragment: BaseFragment<FragmentSchoolsBinding>() {
+class TeacherSchoolsFragment: BaseFragment<FragmentSchoolsBinding>() {
 
     override fun getLayoutId() = R.layout.fragment_schools
-    override val viewModel: SchoolMangerViewModel by viewModels()
+    override val viewModel: SchoolTeacherViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,17 +30,17 @@ class SchoolFragment: BaseFragment<FragmentSchoolsBinding>() {
     private fun recycler() {
         viewDataBinding.schoolRecycler.adapter= SchoolAdapterRecycler(emptyList(),viewModel)
     }
-
+    //TODO LATER
     private fun observe() {
         with(viewModel){
-            unAuthentication.observe(this@SchoolFragment){
-                (requireActivity() as MainActivity).navToIdentity()
-            }
-            clickBackEvent.observeEvent(this@SchoolFragment){
+//            unAuthentication.observe(this@TeacherSchoolsFragment){
+//                (requireActivity() as MainActivity).navToIdentity()
+//            }
+            clickBackEvent.observeEvent(this@TeacherSchoolsFragment){
                 findNavController().navigateUp()
             }
-            clickCreateSchoolEvent.observeEvent(this@SchoolFragment){
-                viewDataBinding.root.goToFragment(SchoolFragmentDirections.actionSchoolFragmentToNewSchoolFragment())
+            clickJoinSchoolEvent.observeEvent(this@TeacherSchoolsFragment){
+//                viewDataBinding.root.goToFragment(SchoolFragmentDirections.actionSchoolFragmentToNewSchoolFragment())
             }
         }
     }
