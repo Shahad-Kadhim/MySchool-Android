@@ -91,6 +91,7 @@
             app:borderWidth="0dp"
             app:elevation="6dp"
             app:fabSize="normal"
+            android:onClick="@{() -> viewModel.onClickAddStudent()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>

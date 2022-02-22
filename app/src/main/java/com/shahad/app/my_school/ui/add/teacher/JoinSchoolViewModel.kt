@@ -1,4 +1,4 @@
-package com.shahad.app.my_school.ui.manger.newSchool
+package com.shahad.app.my_school.ui.add.teacher
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,7 +6,7 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
 import com.shahad.app.my_school.data.MySchoolRepository
 import com.shahad.app.my_school.data.remote.response.BaseResponse
-import com.shahad.app.my_school.data.remote.response.SchoolDto
+import com.shahad.app.my_school.ui.add.BaseNewViewModel
 import com.shahad.app.my_school.util.Event
 import com.shahad.app.my_school.util.State
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,22 +14,22 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 @HiltViewModel
-class CreateSchoolViewModel @Inject constructor(
+class JoinSchoolViewModel @Inject constructor(
     private val repository: MySchoolRepository
-): BaseNewSchoolViewModel() {
+): BaseNewViewModel() {
 
-    private val _createRequestStatus = MutableLiveData<State<BaseResponse<SchoolDto>?>>()
-    val createRequestStatus: LiveData<State<BaseResponse<SchoolDto>?>> = _createRequestStatus
+    private val _joinRequestStatus = MutableLiveData<State<BaseResponse<String>?>>()
+    val joinRequestStatus: LiveData<State<BaseResponse<String>?>> = _joinRequestStatus
 
-    val onSuccessCreated = Transformations.map(createRequestStatus){
+    val onSuccessJoined = Transformations.map(joinRequestStatus){
         if(it is State.Success) Event(true) else Event(false)
     }
 
-    override fun onClickAddSchool(){
-        schoolName.value?.takeIf { it.isNotBlank() }?.let {
-            viewModelScope.launch {
-                repository.createSchool(it).collect {
-                    _createRequestStatus.postValue(it)
+    override fun onClickAdd(){
+        viewModelScope.launch{
+            name.value?.takeIf { it.isNotBlank() }?.let { schoolName ->
+                repository.joinTeacher(schoolName).collect {
+                    _joinRequestStatus.postValue(it)
                 }
             }
         }

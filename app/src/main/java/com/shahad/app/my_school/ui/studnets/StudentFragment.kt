@@ -4,9 +4,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.shahad.app.my_school.R
 import com.shahad.app.my_school.databinding.FragmentStudentsBinding
 import com.shahad.app.my_school.ui.base.BaseFragment
+import com.shahad.app.my_school.util.extension.goToFragment
+import com.shahad.app.my_school.util.extension.observeEvent
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,8 +31,8 @@ class StudentFragment: BaseFragment<FragmentStudentsBinding>() {
 
     private fun observe() {
         with(viewModel){
-            schoolName.observe(this@StudentFragment){
-                Log.i("TAG",it.toString())
+            clickAddStudentEvent.observeEvent(this@StudentFragment){
+                viewDataBinding.root.goToFragment(StudentFragmentDirections.actionSecondFragmentToAddStudentFragment(it))
             }
         }
     }

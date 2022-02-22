@@ -5,10 +5,9 @@ import com.shahad.app.my_school.data.MySchoolRepository
 import com.shahad.app.my_school.data.remote.response.BaseResponse
 import com.shahad.app.my_school.data.remote.response.StudentDto
 import com.shahad.app.my_school.ui.base.BaseViewModel
+import com.shahad.app.my_school.util.Event
 import com.shahad.app.my_school.util.State
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,10 +19,19 @@ class StudentsViewModel @Inject constructor(
 
     val schoolName = MutableLiveData<String?>()
 
+
+    private val _clickAddStudentEvent = MutableLiveData<Event<String>>()
+    val clickAddStudentEvent: LiveData<Event<String>> = _clickAddStudentEvent
+
     val students: LiveData<State<BaseResponse<List<StudentDto>>?>> = Transformations.switchMap(schoolName){
         it?.let {
             repository.getSchoolStudents(it).asLiveData()
         }
     }
 
+    fun onClickAddStudent(){
+        schoolName.value?.let {
+            _clickAddStudentEvent.postValue(Event(it))
+        }
+    }
 }

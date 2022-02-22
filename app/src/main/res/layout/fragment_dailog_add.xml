@@ -6,10 +6,14 @@
     <data>
         <variable
             name="viewModelBottom"
-            type="com.shahad.app.my_school.ui.manger.newSchool.BaseNewSchoolViewModel" />
+            type="com.shahad.app.my_school.ui.add.BaseNewViewModel" />
 
         <variable
             name="operation"
+            type="String" />
+
+        <variable
+            name="type"
             type="String" />
     </data>
 
@@ -25,7 +29,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/space_large"
             style="@style/Subject"
-            android:text="New School"
+            tools:text="New School"
+            android:text="@{`New` + type}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,7 +39,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/space_large"
-            android:text="School Name"
+            tools:text="School Name"
+            android:text="@{type +`Name`}"
             style="@style/TextLabeled"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/label_new_school" />
@@ -47,7 +53,7 @@
             android:layout_marginTop="@dimen/space_small"
             android:paddingHorizontal="@dimen/space_medium"
             style="@style/EditTextStyle"
-            android:text="@={viewModelBottom.schoolName}"
+            android:text="@={viewModelBottom.name}"
             android:background="@drawable/reg_rounded"
             app:layout_constraintTop_toBottomOf="@+id/label_school_name" />
         <View
@@ -69,7 +75,7 @@
             android:fontFamily="@font/source_sans_pro_regular"
             android:textAllCaps="false"
             android:layout_margin="@dimen/space_large"
-            android:onClick="@{() -> viewModelBottom.onClickAddSchool()}"
+            android:onClick="@{() -> viewModelBottom.onClickAdd()}"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

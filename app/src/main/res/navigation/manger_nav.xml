@@ -39,12 +39,16 @@
         android:id="@+id/secondFragment"
         android:name="com.shahad.app.my_school.ui.studnets.StudentFragment"
         android:label="StudentFragment"
-        tools:layout="@layout/fragment_students"/>
+        tools:layout="@layout/fragment_students">
+        <action
+            android:id="@+id/action_secondFragment_to_addStudentFragment"
+            app:destination="@id/addStudentFragment" />
+    </fragment>
     <dialog
         android:id="@+id/newSchoolFragment"
-        android:name="com.shahad.app.my_school.ui.manger.newSchool.CreateSchoolFragment"
+        android:name="com.shahad.app.my_school.ui.add.school.CreateSchoolFragment"
         android:label="NewSchoolFragment"
-        tools:layout="@layout/fragment_dailog_new_school"/>
+        tools:layout="@layout/fragment_dailog_add"/>
     <fragment
         android:id="@+id/schoolFragment"
         android:name="com.shahad.app.my_school.ui.manger.schools.SchoolMangerFragment"
@@ -60,4 +64,13 @@
         android:name="com.shahad.app.my_school.ui.manger.classes.ClassesMangerFragment"
         android:label="ClassesMangerFragment"
         tools:layout="@layout/fragment_classes_manger"/>
+    <dialog
+        android:id="@+id/addStudentFragment"
+        android:name="com.shahad.app.my_school.ui.add.student.AddStudentFragment"
+        android:label="AddStudentFragment"
+        tools:layout="@layout/fragment_dailog_add">
+        <argument
+            android:name="SchoolName"
+            app:argType="string" />
+    </dialog>
 </navigation>
