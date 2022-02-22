@@ -51,4 +51,8 @@ class HomeMangerViewModel @Inject constructor(
     fun onClickClasses(){
         _clickClassesEvent.postValue(Event(true))
     }
+
+    override fun onClickClass(classId: String, className: String) {
+        TODO("Not yet implemented")
+    }
 }

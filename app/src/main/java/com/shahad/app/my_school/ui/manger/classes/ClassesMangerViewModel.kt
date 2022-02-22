@@ -36,4 +36,8 @@ class ClassesMangerViewModel @Inject constructor(
         _clickBackEvent.postValue(Event(true))
     }
 
+    override fun onClickClass(classId: String,className: String) {
+        TODO("Not yet implemented")
+    }
+
 }

@@ -1,25 +1,25 @@
-package com.shahad.app.my_school.ui.manger.home
+package com.shahad.app.my_school.ui.posts
 
 import com.shahad.app.my_school.R
 import com.shahad.app.my_school.data.remote.response.ClassList
+import com.shahad.app.my_school.data.remote.response.PostDto
 import com.shahad.app.my_school.ui.base.BaseInteractionListener
 import com.shahad.app.my_school.ui.base.BaseRecyclerAdapter
 
-class ClassesAdapterRecycler(
-    items: List<ClassList>,
-    listener: ClassInteractionListener
-): BaseRecyclerAdapter<ClassList>(items,listener) {
-    override val layoutId: Int = R.layout.item_class
+class PostsAdapterRecycler(
+    items: List<PostDto>,
+    listener: PostInteractionListener
+): BaseRecyclerAdapter<PostDto>(items,listener) {
+    override val layoutId: Int = R.layout.item_post
 
     override fun areItemsTheSame(
         oldItemPosition: Int,
         newItemPosition: Int,
-        newItems: List<ClassList>
+        newItems: List<PostDto>
     ): Boolean =
         getItems()[oldItemPosition].id == newItems[newItemPosition].id
 
 }
 
-interface ClassInteractionListener: BaseInteractionListener{
-    fun onClickClass(classId: String,className: String)
+interface PostInteractionListener: BaseInteractionListener{
 }

@@ -9,11 +9,15 @@ import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.shahad.app.my_school.R
 import com.shahad.app.my_school.ui.base.BaseRecyclerAdapter
+import com.shahad.app.my_school.ui.classScreen.ClassPagerAdapter
 import com.shahad.app.my_school.ui.register.Role
 import com.shahad.app.my_school.util.extension.toRole
 
@@ -119,4 +123,12 @@ fun check(view: ChipGroup,id: Int){
 @BindingAdapter(value = ["app:backgroundResource"])
 fun setBackgroundDrawableLinear(view: MaterialCardView, value: Boolean ){
     view.setBackgroundResource(R.drawable.background_card)
+}
+
+@BindingAdapter(value = ["titles"])
+fun setViewPager(tabLayout: TabLayout,viewPager: ViewPager2){
+    val tabTitle = listOf("Post", "Members")
+    TabLayoutMediator(tabLayout,viewPager){tab ,postion ->
+        tab.text= tabTitle[postion]
+    }.attach()
 }
