@@ -7,6 +7,10 @@
         <variable
             name="viewModel"
             type="com.shahad.app.my_school.ui.posts.PostViewModel" />
+
+        <variable
+            name="isAuth"
+            type="Boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,6 +38,7 @@
             android:backgroundTint="@color/brand_color"
             app:borderWidth="0dp"
             app:elevation="6dp"
+            app:hide="@{isAuth}"
             app:fabSize="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />

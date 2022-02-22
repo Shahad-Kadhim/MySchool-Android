@@ -9,6 +9,7 @@ import com.shahad.app.my_school.ui.base.BaseFragment
 import com.shahad.app.my_school.ui.main.MainActivity
 import com.shahad.app.my_school.ui.manger.home.ClassesAdapterRecycler
 import com.shahad.app.my_school.ui.manger.home.HomeMangerFragmentDirections
+import com.shahad.app.my_school.ui.register.Role
 import com.shahad.app.my_school.util.extension.goToFragment
 import com.shahad.app.my_school.util.extension.observeEvent
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,7 +47,7 @@ class HomeTeacherFragment: BaseFragment<FragmentTeacherHomeBinding>() {
                 viewDataBinding.root.goToFragment(HomeTeacherFragmentDirections.actionHomeFragmentToTeacherSchoolsFragment())
             }
             clickClassEvent.observeEvent(this@HomeTeacherFragment){ pair ->
-                viewDataBinding.root.goToFragment(HomeTeacherFragmentDirections.actionHomeFragmentToClassScreenFragment(pair.first,pair.second))
+                viewDataBinding.root.goToFragment(HomeTeacherFragmentDirections.actionHomeFragmentToClassScreenFragment(pair.first,pair.second,Role.TEACHER))
             }
 
         }

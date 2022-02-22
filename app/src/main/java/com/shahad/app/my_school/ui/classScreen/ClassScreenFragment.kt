@@ -19,7 +19,7 @@ class ClassScreenFragment: BaseFragment<FragmentClassScreenBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewDataBinding.pager.adapter =ClassPagerAdapter(this)
+        viewDataBinding.pager.adapter =ClassPagerAdapter(this,args.isAuth)
         viewDataBinding.className= args.className
     }
 
