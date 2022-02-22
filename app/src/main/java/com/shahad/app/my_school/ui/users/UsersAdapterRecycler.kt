@@ -1,9 +1,7 @@
-package com.shahad.app.my_school.ui.studnets
+package com.shahad.app.my_school.ui.users
 
 import com.shahad.app.my_school.R
-import com.shahad.app.my_school.data.remote.response.ClassList
 import com.shahad.app.my_school.data.remote.response.StudentDto
-import com.shahad.app.my_school.data.remote.response.UserDto
 import com.shahad.app.my_school.ui.base.BaseInteractionListener
 import com.shahad.app.my_school.ui.base.BaseRecyclerAdapter
 

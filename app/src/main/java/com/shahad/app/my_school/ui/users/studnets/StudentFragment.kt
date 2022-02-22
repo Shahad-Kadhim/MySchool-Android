@@ -1,13 +1,11 @@
-package com.shahad.app.my_school.ui.studnets
+package com.shahad.app.my_school.ui.users.studnets
 
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.shahad.app.my_school.R
 import com.shahad.app.my_school.databinding.FragmentStudentsBinding
 import com.shahad.app.my_school.ui.base.BaseFragment
+import com.shahad.app.my_school.ui.users.UsersAdapterRecycler
 import com.shahad.app.my_school.util.extension.goToFragment
 import com.shahad.app.my_school.util.extension.observeEvent
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,13 +24,16 @@ class StudentFragment: BaseFragment<FragmentStudentsBinding>() {
     override fun onStart() {
         super.onStart()
         viewDataBinding.studentRecycle.adapter = UsersAdapterRecycler(listOf(),viewModel)
+        viewDataBinding.type = "Student"
     }
 
 
     private fun observe() {
         with(viewModel){
             clickAddStudentEvent.observeEvent(this@StudentFragment){
-                viewDataBinding.root.goToFragment(StudentFragmentDirections.actionSecondFragmentToAddStudentFragment(it))
+                viewDataBinding.root.goToFragment(
+                    StudentFragmentDirections.actionSecondFragmentToAddStudentFragment(it)
+                )
             }
         }
     }

@@ -40,7 +40,7 @@
         android:label="BookFragment" />
     <fragment
         android:id="@+id/secondFragment"
-        android:name="com.shahad.app.my_school.ui.studnets.StudentFragment"
+        android:name="com.shahad.app.my_school.ui.users.studnets.StudentFragment"
         android:label="StudentFragment"
         tools:layout="@layout/fragment_students">
         <action

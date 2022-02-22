@@ -6,7 +6,10 @@
     <data>
         <variable
             name="viewModel"
-            type="com.shahad.app.my_school.ui.studnets.StudentsViewModel" />
+            type="com.shahad.app.my_school.ui.users.BaseUsersViewModel" />
+        <variable
+            name="type"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,7 +32,8 @@
         <TextView
             android:id="@+id/categories_headline"
             style="@style/TitleText"
-            android:text="Students"
+            tools:text="Students"
+            android:text="@{type}"
             android:textColor="@color/black"
             android:layout_marginStart="@dimen/space_small"
             app:layout_constraintBottom_toBottomOf="@+id/back_button"
@@ -75,7 +79,7 @@
             android:orientation="vertical"
             android:layout_marginTop="8dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:items="@{viewModel.students.toData().data}"
+            app:items="@{viewModel.users.toData().data}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -91,7 +95,7 @@
             app:borderWidth="0dp"
             app:elevation="6dp"
             app:fabSize="normal"
-            android:onClick="@{() -> viewModel.onClickAddStudent()}"
+            android:onClick="@{() -> viewModel.onClickAdd()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
