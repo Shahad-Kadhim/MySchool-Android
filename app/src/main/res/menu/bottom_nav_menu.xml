@@ -6,7 +6,7 @@
         android:title="Home" />
 
     <item
-        android:id="@+id/dutyFragment"
+        android:id="@+id/secondFragment"
         android:icon="@drawable/ic_duty"
         android:title="Duty" />
     <item

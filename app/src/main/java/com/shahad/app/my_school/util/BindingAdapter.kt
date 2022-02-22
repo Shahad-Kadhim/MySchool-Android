@@ -4,6 +4,10 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.EditText
 import android.widget.Spinner
+import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
+import androidx.core.view.children
+import androidx.core.view.get
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
@@ -12,10 +16,12 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipDrawable
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.shahad.app.my_school.R
+import com.shahad.app.my_school.data.remote.response.SchoolDto
 import com.shahad.app.my_school.ui.base.BaseRecyclerAdapter
 import com.shahad.app.my_school.ui.classScreen.ClassPagerAdapter
 import com.shahad.app.my_school.ui.register.Role
@@ -115,6 +121,7 @@ fun onChangeChecked(view: ChipGroup, attChange: InverseBindingListener){
             attChange.onChange()
     }
 }
+
 fun check(view: ChipGroup,id: Int){
     view.checkedChipId.takeIf { it!=id }?.let {
         view.check(id)
@@ -132,3 +139,28 @@ fun setViewPager(tabLayout: TabLayout,viewPager: ViewPager2){
         tab.text= tabTitle[postion]
     }.attach()
 }
+
+@BindingAdapter(value = ["app:chipItems"])
+fun setChipGroup(view: ChipGroup,items:List<SchoolDto>?){
+    items?.forEach {
+        view.addView(
+            Chip(view.context).apply {
+                text = it.name
+                isClickable =true
+                chipBackgroundColor = ContextCompat.getColorStateList(view.context,R.color.chip_color)
+                setOnClickListener {
+                    view.check(this.id)
+                }
+            }
+        )
+    }
+}
+
+
+@BindingAdapter(value = ["checkedChipSchool"])
+fun setCheckedChipSchool(view: ChipGroup, schoolName: String?){
+}
+
+@InverseBindingAdapter(attribute = "checkedChipSchool",event = "onChipCheckedListener")
+fun getCheckedChipSchool(view:ChipGroup): String? =
+    (view.children.find {  it.id==(view.checkedChipId)} as Chip).text.toString()

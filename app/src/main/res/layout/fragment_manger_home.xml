@@ -58,7 +58,7 @@
                     app:shapeAppearanceOverlay="@style/imageCorner50" />
 
                 <EditText
-                    android:id="@+id/editText"
+                    android:id="@+id/search_bar"
                     style="@style/SearchBar"
                     android:layout_width="match_parent"
                     android:layout_height="44dp"
@@ -103,6 +103,7 @@
             android:layout_marginTop="@dimen/space_large"
             android:src="@drawable/ic_books"
             android:padding="@dimen/space_medium"
+            android:onClick="@{() -> viewModel.onClickStudent()}"
             android:background="@drawable/reg_rounded_24dp"
             app:layout_constraintEnd_toStartOf="@+id/imageView2"
             app:layout_constraintHorizontal_bias="0.5"

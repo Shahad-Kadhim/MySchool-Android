@@ -44,6 +44,8 @@ class MySchoolRepositoryImpl @Inject constructor(
     override fun joinTeacher(schoolName: String): Flow<State<BaseResponse<String>?>> =
         wrapWithFlow { apiService.joinTeacher(schoolName) }
 
+    override fun getSchoolStudents(schoolName: String): Flow<State<BaseResponse<List<StudentDto>>?>> =
+        wrapWithFlow { apiService.getSchoolStudent(schoolName) }
 
     private fun <T> wrapWithFlow(function: suspend () -> Response<T>): Flow<State<T?>> {
         return flow {

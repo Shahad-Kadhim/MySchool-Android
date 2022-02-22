@@ -49,7 +49,7 @@
                     app:shapeAppearanceOverlay="@style/imageCorner50" />
 
                 <EditText
-                    android:id="@+id/editText"
+                    android:id="@+id/search_bar"
                     style="@style/SearchBar"
                     android:layout_width="match_parent"
                     android:layout_height="44dp"

@@ -31,6 +31,9 @@ class HomeMangerViewModel @Inject constructor(
     private val _clickClassesEvent = MutableLiveData<Event<Boolean>>()
     val clickClassesEvent: LiveData<Event<Boolean>> = _clickClassesEvent
 
+    private val _clickStudentEvent = MutableLiveData<Event<Boolean>>()
+    val clickStudentEvent: LiveData<Event<Boolean>> = _clickStudentEvent
+
     val unAuthentication = MediatorLiveData<State.UnAuthorization?>().apply {
         addSource(schools,::whenUnAuthorization)
         addSource(classes,::whenUnAuthorization)
@@ -50,6 +53,10 @@ class HomeMangerViewModel @Inject constructor(
 
     fun onClickClasses(){
         _clickClassesEvent.postValue(Event(true))
+    }
+
+    fun onClickStudent(){
+        _clickStudentEvent.postValue(Event(true))
     }
 
     override fun onClickClass(classId: String, className: String) {

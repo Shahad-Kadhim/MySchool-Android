@@ -28,6 +28,9 @@ interface MySchoolService{
     @GET("/manger/classes")
     suspend fun getMangerClasses(): Response<BaseResponse<List<ClassList>>>
 
+    @GET("/school/students")
+    suspend fun getSchoolStudent(@Query("school_name") schoolName: String): Response<BaseResponse<List<StudentDto>>>
+
     @POST("/school/new")
     suspend fun createSchool(@Query("name") schoolName: String): Response<BaseResponse<SchoolDto>>
 
