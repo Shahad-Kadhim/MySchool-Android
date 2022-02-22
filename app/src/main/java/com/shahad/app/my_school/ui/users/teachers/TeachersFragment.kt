@@ -1,4 +1,4 @@
-package com.shahad.app.my_school.ui.users.studnets
+package com.shahad.app.my_school.ui.users.teachers
 
 import android.os.Bundle
 import androidx.fragment.app.viewModels
@@ -6,15 +6,14 @@ import com.shahad.app.my_school.R
 import com.shahad.app.my_school.databinding.FragmentUsersBinding
 import com.shahad.app.my_school.ui.base.BaseFragment
 import com.shahad.app.my_school.ui.users.UsersAdapterRecycler
-import com.shahad.app.my_school.util.extension.goToFragment
 import com.shahad.app.my_school.util.extension.observeEvent
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class StudentFragment: BaseFragment<FragmentUsersBinding>() {
+class TeachersFragment: BaseFragment<FragmentUsersBinding>() {
 
     override fun getLayoutId() = R.layout.fragment_users
-    override val viewModel: StudentsViewModel by viewModels()
+    override val viewModel: TeachersViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,16 +23,16 @@ class StudentFragment: BaseFragment<FragmentUsersBinding>() {
     override fun onStart() {
         super.onStart()
         viewDataBinding.studentRecycle.adapter = UsersAdapterRecycler(listOf(),viewModel)
-        viewDataBinding.type = "Student"
+        viewDataBinding.type = "Teachers"
     }
 
 
     private fun observe() {
         with(viewModel){
-            clickAddStudentEvent.observeEvent(this@StudentFragment){
-                viewDataBinding.root.goToFragment(
-                    StudentFragmentDirections.actionSecondFragmentToAddStudentFragment(it)
-                )
+            clickAddStudentEvent.observeEvent(this@TeachersFragment){
+//                viewDataBinding.root.goToFragment(
+//                    StudentFragmentDirections.actionSecondFragmentToAddStudentFragment(it)
+//                )
             }
         }
     }

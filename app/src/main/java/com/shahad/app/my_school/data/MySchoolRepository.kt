@@ -26,6 +26,8 @@ interface MySchoolRepository{
 
     fun joinTeacher(schoolName: String): Flow<State<BaseResponse<String>?>>
 
-    fun getSchoolStudents(schoolName: String): Flow<State<BaseResponse<List<StudentDto>>?>>
+    fun getSchoolStudents(schoolName: String): Flow<State<BaseResponse<List<UserDto>>?>>
+
+    fun getSchoolTeachers(schoolName: String): Flow<State<BaseResponse<List<UserDto>>?>>
 
 }

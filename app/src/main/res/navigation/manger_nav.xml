@@ -29,6 +29,9 @@
         <action
             android:id="@+id/action_homeFragment_to_classScreenFragment2"
             app:destination="@id/classScreenFragment2" />
+        <action
+            android:id="@+id/action_homeFragment_to_teachersFragment"
+            app:destination="@id/teachersFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -42,7 +45,7 @@
         android:id="@+id/secondFragment"
         android:name="com.shahad.app.my_school.ui.users.studnets.StudentFragment"
         android:label="StudentFragment"
-        tools:layout="@layout/fragment_students">
+        tools:layout="@layout/fragment_users">
         <action
             android:id="@+id/action_secondFragment_to_addStudentFragment"
             app:destination="@id/addStudentFragment" />
@@ -92,4 +95,9 @@
             app:argType="com.shahad.app.my_school.ui.register.Role" />
 
     </fragment>
+    <fragment
+        android:id="@+id/teachersFragment"
+        android:name="com.shahad.app.my_school.ui.users.teachers.TeachersFragment"
+        android:label="TeachersFragment"
+        tools:layout="@layout/fragment_users"/>
 </navigation>

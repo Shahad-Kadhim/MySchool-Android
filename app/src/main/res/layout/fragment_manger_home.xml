@@ -117,6 +117,7 @@
             android:layout_marginTop="@dimen/space_large"
             android:src="@drawable/ic_teacher"
             android:padding="@dimen/space_medium"
+            android:onClick="@{() -> viewModel.onClickTeachers()}"
             android:background="@drawable/reg_rounded_24dp"
             app:layout_constraintEnd_toStartOf="@+id/imageView3"
             app:layout_constraintHorizontal_bias="0.5"

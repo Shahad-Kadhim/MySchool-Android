@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.shahad.app.my_school.data.MySchoolRepository
 import com.shahad.app.my_school.data.remote.response.BaseResponse
 import com.shahad.app.my_school.data.remote.response.StudentDto
+import com.shahad.app.my_school.data.remote.response.UserDto
 import com.shahad.app.my_school.ui.base.BaseViewModel
 import com.shahad.app.my_school.ui.users.UserInteractionListener
 import com.shahad.app.my_school.util.Event
@@ -19,7 +20,7 @@ abstract class BaseUsersViewModel(
 
     val schoolName = MutableLiveData<String?>()
 
-    abstract val users: LiveData<State<BaseResponse<List<StudentDto>>?>>
+    abstract val users: LiveData<State<BaseResponse<List<UserDto>>?>>
 
     abstract fun onClickAdd()
 }

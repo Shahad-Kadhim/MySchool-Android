@@ -6,7 +6,7 @@
     <data>
         <variable
             name="item"
-            type="com.shahad.app.my_school.data.remote.response.StudentDto" />
+            type="com.shahad.app.my_school.data.remote.response.UserDto" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

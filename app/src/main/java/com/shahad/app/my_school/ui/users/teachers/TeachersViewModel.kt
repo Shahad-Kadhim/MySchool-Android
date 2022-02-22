@@ -1,4 +1,4 @@
-package com.shahad.app.my_school.ui.users.studnets
+package com.shahad.app.my_school.ui.users.teachers
 
 import androidx.lifecycle.*
 import com.shahad.app.my_school.data.MySchoolRepository
@@ -11,7 +11,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class StudentsViewModel @Inject constructor(
+class TeachersViewModel @Inject constructor(
     repository: MySchoolRepository
 ): BaseUsersViewModel(repository){
 
@@ -20,7 +20,7 @@ class StudentsViewModel @Inject constructor(
 
     override val users: LiveData<State<BaseResponse<List<UserDto>>?>> = Transformations.switchMap(schoolName){
         it?.let {
-            repository.getSchoolStudents(it).asLiveData()
+            repository.getSchoolTeachers(it).asLiveData()
         }
     }
 

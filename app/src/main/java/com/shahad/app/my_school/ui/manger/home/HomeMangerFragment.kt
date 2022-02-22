@@ -50,6 +50,9 @@ class HomeMangerFragment: BaseFragment<FragmentMangerHomeBinding>() {
             clickStudentEvent.observeEvent(this@HomeMangerFragment){
                 viewDataBinding.root.goToFragment(HomeMangerFragmentDirections.actionHomeFragmentToSecondFragment())
             }
+            clickTeachersEvent.observeEvent(this@HomeMangerFragment){
+                viewDataBinding.root.goToFragment(HomeMangerFragmentDirections.actionHomeFragmentToTeachersFragment())
+            }
             clickClassEvent.observeEvent(this@HomeMangerFragment){ pair ->
                 viewDataBinding.root.goToFragment(
                     HomeMangerFragmentDirections.actionHomeFragmentToClassScreenFragment2(pair.first,pair.second, Role.MANGER))

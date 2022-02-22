@@ -39,8 +39,11 @@ class MySchoolFakeRepository @Inject constructor(): MySchoolRepository{
     override fun joinTeacher(schoolName: String): Flow<State<BaseResponse<String>?>> =
         getFakeFlow(BaseResponse(200,"Fake Join HAHAHAHAHAHA"))
 
-    override fun getSchoolStudents(schoolName: String): Flow<State<BaseResponse<List<StudentDto>>?>> =
-        getFakeFlow(BaseResponse(200, listOf<StudentDto>()))
+    override fun getSchoolStudents(schoolName: String): Flow<State<BaseResponse<List<UserDto>>?>> =
+        getFakeFlow(BaseResponse(200, listOf()))
+
+    override fun getSchoolTeachers(schoolName: String): Flow<State<BaseResponse<List<UserDto>>?>> =
+        getFakeFlow(BaseResponse(200, listOf()))
 
     private  fun <T> getFakeFlow(respond: T)=
         flow{
