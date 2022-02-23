@@ -6,9 +6,10 @@ import com.shahad.app.my_school.ui.members.MemberFragment
 import com.shahad.app.my_school.ui.posts.PostFragment
 import com.shahad.app.my_school.ui.register.Role
 
-class ClassPagerAdapter(fragment: Fragment, role: Role): FragmentStateAdapter(fragment){
-
-     val fragments = listOf(PostFragment(role),MemberFragment())
+class ClassPagerAdapter(
+    fragment: Fragment,
+    val fragments: List<Fragment>,
+): FragmentStateAdapter(fragment){
 
     override fun getItemCount(): Int  =fragments.size
 
