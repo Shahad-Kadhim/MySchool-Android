@@ -6,6 +6,7 @@ import com.shahad.app.my_school.R
 import com.shahad.app.my_school.databinding.FragmentUsersBinding
 import com.shahad.app.my_school.ui.base.BaseFragment
 import com.shahad.app.my_school.ui.users.UsersAdapterRecycler
+import com.shahad.app.my_school.util.extension.goToFragment
 import com.shahad.app.my_school.util.extension.observeEvent
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,10 +30,10 @@ class TeachersFragment: BaseFragment<FragmentUsersBinding>() {
 
     private fun observe() {
         with(viewModel){
-            clickAddStudentEvent.observeEvent(this@TeachersFragment){
-//                viewDataBinding.root.goToFragment(
-//                    StudentFragmentDirections.actionSecondFragmentToAddStudentFragment(it)
-//                )
+            clickAddTeacherEvent.observeEvent(this@TeachersFragment){
+                viewDataBinding.root.goToFragment(
+                    TeachersFragmentDirections.actionTeachersFragmentToAddTeacherFragment(it)
+                )
             }
         }
     }

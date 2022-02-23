@@ -9,22 +9,22 @@ import com.shahad.app.my_school.util.extension.observeEvent
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class JoinSchoolFragment: BaseBottomSheetDialogFragment<FragmentDailogAddBinding>() {
+class AddTeacherFragment: BaseBottomSheetDialogFragment<FragmentDailogAddBinding>() {
 
     override fun getLayoutId(): Int = R.layout.fragment_dailog_add
 
-    override val viewModel: JoinSchoolViewModel by viewModels()
+    override val viewModel: AddTeacherViewModel by viewModels()
 
     override fun onStart() {
         super.onStart()
-        viewDataBinding.operation= "Join"
-        viewDataBinding.type= "School"
+        viewDataBinding.operation= "Add"
+        viewDataBinding.type= " Teacher "
         observe()
     }
 
     private fun observe() {
         with(viewModel){
-            onSuccessJoined.observeEvent(this@JoinSchoolFragment){ ifSuccess ->
+            onSuccessJoined.observeEvent(this@AddTeacherFragment){ ifSuccess ->
                 takeIf { ifSuccess }?.let {
                     findNavController().navigateUp()
                 }

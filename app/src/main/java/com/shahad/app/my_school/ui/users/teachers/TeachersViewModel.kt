@@ -15,8 +15,8 @@ class TeachersViewModel @Inject constructor(
     repository: MySchoolRepository
 ): BaseUsersViewModel(repository){
 
-    private val _clickAddStudentEvent = MutableLiveData<Event<String>>()
-    val clickAddStudentEvent: LiveData<Event<String>> = _clickAddStudentEvent
+    private val _clickAddTeacherEvent = MutableLiveData<Event<String>>()
+    val clickAddTeacherEvent: LiveData<Event<String>> = _clickAddTeacherEvent
 
     override val users: LiveData<State<BaseResponse<List<UserDto>>?>> = Transformations.switchMap(schoolName){
         it?.let {
@@ -26,7 +26,7 @@ class TeachersViewModel @Inject constructor(
 
     override fun onClickAdd() {
         schoolName.value?.let {
-            _clickAddStudentEvent.postValue(Event(it))
+            _clickAddTeacherEvent.postValue(Event(it))
         }
     }
 }

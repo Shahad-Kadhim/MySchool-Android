@@ -99,5 +99,18 @@
         android:id="@+id/teachersFragment"
         android:name="com.shahad.app.my_school.ui.users.teachers.TeachersFragment"
         android:label="TeachersFragment"
-        tools:layout="@layout/fragment_users"/>
+        tools:layout="@layout/fragment_users">
+        <action
+            android:id="@+id/action_teachersFragment_to_addTeacherFragment"
+            app:destination="@id/addTeacherFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/addTeacherFragment"
+        android:name="com.shahad.app.my_school.ui.add.teacher.AddTeacherFragment"
+        android:label="AddTeacherFragment"
+        tools:layout="@layout/fragment_dailog_add">
+        <argument
+            android:name="SchoolName"
+            app:argType="string" />
+    </dialog>
 </navigation>

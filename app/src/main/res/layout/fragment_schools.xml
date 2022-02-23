@@ -7,6 +7,9 @@
         <variable
             name="viewModel"
             type="com.shahad.app.my_school.ui.manger.schools.SchoolBaseViewModel" />
+        <variable
+            name="isAuth"
+            type="Boolean" />
 
     </data>
 
@@ -92,6 +95,7 @@
             app:elevation="6dp"
             android:onClick="@{() -> viewModel.onClickAddSchool()}"
             app:fabSize="normal"
+            app:hide="@{isAuth}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

@@ -25,6 +25,7 @@ class SchoolMangerFragment: BaseFragment<FragmentSchoolsBinding>() {
 
     override fun onStart() {
         super.onStart()
+        viewDataBinding.isAuth= true
         recycler()
     }
     private fun recycler() {

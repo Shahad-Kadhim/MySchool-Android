@@ -25,6 +25,7 @@ class TeacherSchoolsFragment: BaseFragment<FragmentSchoolsBinding>() {
 
     override fun onStart() {
         super.onStart()
+        viewDataBinding.isAuth = false
         recycler()
     }
     private fun recycler() {
@@ -39,9 +40,7 @@ class TeacherSchoolsFragment: BaseFragment<FragmentSchoolsBinding>() {
             clickBackEvent.observeEvent(this@TeacherSchoolsFragment){
                 findNavController().navigateUp()
             }
-            clickJoinSchoolEvent.observeEvent(this@TeacherSchoolsFragment){
-                viewDataBinding.root.goToFragment(TeacherSchoolsFragmentDirections.actionTeacherSchoolsFragmentToJoinSchoolFragment())
-            }
+
         }
     }
 
