@@ -2,6 +2,7 @@ package com.shahad.app.my_school.ui.users.teachers
 
 import android.os.Bundle
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.shahad.app.my_school.R
 import com.shahad.app.my_school.databinding.FragmentUsersBinding
 import com.shahad.app.my_school.ui.base.BaseFragment
@@ -34,6 +35,9 @@ class TeachersFragment: BaseFragment<FragmentUsersBinding>() {
                 viewDataBinding.root.goToFragment(
                     TeachersFragmentDirections.actionTeachersFragmentToAddTeacherFragment(it)
                 )
+            }
+            clickBackEvent.observeEvent(this@TeachersFragment){
+                findNavController().navigateUp()
             }
         }
     }

@@ -17,12 +17,11 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="24dp"
         android:layout_margin="8dp"
-        app:cardBackgroundColor="#F0EFEE">
+        style="@style/cardView">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="156dp"
-            android:background="@drawable/reg_rounded_stroke_24dp">
+            android:layout_height="156dp">
 
             <ImageView
                 android:id="@+id/imageView6"

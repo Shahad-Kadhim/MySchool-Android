@@ -23,6 +23,7 @@
             android:layout_height="24dp"
             android:layout_marginStart="@dimen/space_large"
             android:layout_marginTop="@dimen/space_large"
+            android:onClick="@{() -> viewModel.onClickBack()}"
             android:src="@drawable/ic_baseline_arrow_back_ios_24"
             app:layout_constraintBottom_toTopOf="@id/guideline"
             app:layout_constraintStart_toStartOf="parent"

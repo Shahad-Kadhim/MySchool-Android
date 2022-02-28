@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 @HiltViewModel
-class AddStudentViewModel @Inject constructor(
+class AddStudentToSchoolViewModel @Inject constructor(
     private val repository: MySchoolRepository,
     private val savedStateHandle: SavedStateHandle,
     private val dataClassParser: DataClassParser

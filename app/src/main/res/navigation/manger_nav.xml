@@ -16,16 +16,15 @@
         <action
             android:id="@+id/action_homeFragment_to_schoolFragment"
             app:destination="@id/schoolFragment"
-            app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="false" />
+            app:popUpTo="@id/homeFragment" />
         <action
             android:id="@+id/action_homeFragment_to_classesMangerFragment"
             app:destination="@id/classesMangerFragment"
-            app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="false" />
+            app:popUpTo="@id/homeFragment" />
         <action
             android:id="@+id/action_homeFragment_to_secondFragment"
-            app:destination="@id/secondFragment" />
+            app:destination="@id/secondFragment"
+            app:popUpTo="@id/homeFragment" />
         <action
             android:id="@+id/action_homeFragment_to_classScreenFragment2"
             app:destination="@id/classScreenFragment2" />
@@ -72,7 +71,7 @@
         tools:layout="@layout/fragment_classes_manger"/>
     <dialog
         android:id="@+id/addStudentFragment"
-        android:name="com.shahad.app.my_school.ui.add.student.AddStudentFragment"
+        android:name="com.shahad.app.my_school.ui.add.student.AddStudentToSchoolFragment"
         android:label="AddStudentFragment"
         tools:layout="@layout/fragment_dailog_add">
         <argument

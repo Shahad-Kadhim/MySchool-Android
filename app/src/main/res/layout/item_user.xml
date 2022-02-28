@@ -19,8 +19,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/reg_rounded_stroke_24dp">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/imageView6"

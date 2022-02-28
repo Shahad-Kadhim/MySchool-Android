@@ -2,6 +2,7 @@ package com.shahad.app.my_school.ui.users.studnets
 
 import android.os.Bundle
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.shahad.app.my_school.R
 import com.shahad.app.my_school.databinding.FragmentUsersBinding
 import com.shahad.app.my_school.ui.base.BaseFragment
@@ -34,6 +35,9 @@ class StudentFragment: BaseFragment<FragmentUsersBinding>() {
                 viewDataBinding.root.goToFragment(
                     StudentFragmentDirections.actionSecondFragmentToAddStudentFragment(it)
                 )
+            }
+            clickBackEvent.observeEvent(this@StudentFragment){
+                findNavController().navigateUp()
             }
         }
     }

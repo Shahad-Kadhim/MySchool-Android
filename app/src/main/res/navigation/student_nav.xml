@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/student_nav"
     app:startDestination="@id/homeFragment">
 
@@ -8,17 +9,21 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.shahad.app.my_school.ui.profile.ProfileFragment"
-        android:label="ProfileFragment" />
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile"/>
     <fragment
         android:id="@+id/bookFragment"
         android:name="com.shahad.app.my_school.ui.book.BookFragment"
-        android:label="BookFragment" />
+        android:label="BookFragment"
+        tools:layout="@layout/fragment_book"/>
     <fragment
         android:id="@+id/secondFragment"
         android:name="com.shahad.app.my_school.ui.duty.DutyFragment"
-        android:label="DutyFragment" />
+        android:label="DutyFragment"
+        tools:layout="@layout/fragment_duty"/>
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.shahad.app.my_school.ui.student.home.HomeStudentFragment"
-        android:label="HomeStudentFragment" />
+        android:label="HomeStudentFragment"
+        tools:layout="@layout/fragment_student_home"/>
 </navigation>

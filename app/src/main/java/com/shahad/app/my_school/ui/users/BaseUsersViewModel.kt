@@ -23,4 +23,11 @@ abstract class BaseUsersViewModel(
     abstract val users: LiveData<State<BaseResponse<List<UserDto>>?>>
 
     abstract fun onClickAdd()
+
+    private val _clickBackEvent = MutableLiveData<Event<Boolean>>()
+    val clickBackEvent: LiveData<Event<Boolean>> = _clickBackEvent
+
+    fun onClickBack(){
+        _clickBackEvent.postValue(Event(true))
+    }
 }
