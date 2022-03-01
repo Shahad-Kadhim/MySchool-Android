@@ -29,7 +29,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/space_medium"
-                    android:layout_marginTop="@dimen/space_large"
+                    android:layout_marginTop="@dimen/space_medium"
                     android:fontFamily="@font/source_sans_pro_semi_bold"
                     android:text="My School"
                     android:textColor="#FFFFFF"

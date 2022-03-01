@@ -27,7 +27,7 @@
                 android:layout_height="48dp"
                 android:layout_margin="@dimen/space_medium"
                 android:layout_marginStart="32dp"
-                android:src="@drawable/profile_photo_test"
+                android:src="@drawable/ic_user"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
