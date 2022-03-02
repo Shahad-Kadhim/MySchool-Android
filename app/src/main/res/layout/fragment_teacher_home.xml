@@ -67,6 +67,7 @@
                     android:layout_marginTop="@dimen/space_large"
                     android:background="@drawable/reg_rounded_24dp"
                     android:paddingHorizontal="@dimen/space_medium"
+                    android:text="@={viewModel.search}"
                     android:paddingVertical="@dimen/space_small"
                     android:layout_marginBottom="@dimen/space_medium"
                     app:layout_constraintBottom_toBottomOf="parent"

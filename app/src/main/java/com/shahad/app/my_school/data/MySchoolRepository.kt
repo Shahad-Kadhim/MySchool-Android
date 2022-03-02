@@ -12,7 +12,7 @@ interface MySchoolRepository{
 
     fun loginUser(loginBody: JsonElement): Flow<State<BaseResponse<AuthenticationResponse>?>>
 
-    fun getTeacherClasses(): Flow<State<BaseResponse<List<ClassList>>?>>
+    fun getTeacherClasses(searchKey: String? = null): Flow<State<BaseResponse<List<ClassList>>?>>
     fun getTeacherSchools(): Flow<State<BaseResponse<List<SchoolDto>>?>>
 
     fun getMangerSchool(): Flow<State<BaseResponse<List<SchoolDto>>?>>
