@@ -7,7 +7,6 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
-import com.shahad.app.my_school.ui.login.UserType
 import com.shahad.app.my_school.ui.register.Role
 import com.shahad.app.my_school.util.Event
 import com.shahad.app.my_school.util.EventObserver

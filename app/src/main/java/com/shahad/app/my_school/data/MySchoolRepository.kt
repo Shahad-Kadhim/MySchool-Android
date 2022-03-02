@@ -25,8 +25,8 @@ interface MySchoolRepository{
     fun addStudentToSchool(requestBody: JsonElement): Flow<State<BaseResponse<String>?>>
     fun addTeacherToSchool(requestBody: JsonElement): Flow<State<BaseResponse<String>?>>
 
-    fun getSchoolStudents(schoolName: String): Flow<State<BaseResponse<List<UserDto>>?>>
+    fun getSchoolStudents(schoolName: String,searchKey: String? = null): Flow<State<BaseResponse<List<UserDto>>?>>
 
-    fun getSchoolTeachers(schoolName: String): Flow<State<BaseResponse<List<UserDto>>?>>
+    fun getSchoolTeachers(schoolName: String,searchKey: String? = null): Flow<State<BaseResponse<List<UserDto>>?>>
 
 }

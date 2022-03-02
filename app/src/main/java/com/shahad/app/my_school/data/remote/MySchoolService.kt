@@ -29,10 +29,16 @@ interface MySchoolService{
     suspend fun getMangerClasses(): Response<BaseResponse<List<ClassList>>>
 
     @GET("/school/students")
-    suspend fun getSchoolStudent(@Query("school_name") schoolName: String): Response<BaseResponse<List<UserDto>>>
+    suspend fun getSchoolStudent(
+        @Query("school_name") schoolName: String,
+        @Query("search" ) searchKey: String?
+    ): Response<BaseResponse<List<UserDto>>>
 
     @GET("/school/teachers")
-    suspend fun getSchoolTeachers(@Query("school_name") schoolName: String): Response<BaseResponse<List<UserDto>>>
+    suspend fun getSchoolTeachers(
+        @Query("school_name") schoolName: String,
+        @Query("search" ) searchKey: String?
+    ): Response<BaseResponse<List<UserDto>>>
 
     @POST("/school/new")
     suspend fun createSchool(@Query("name") schoolName: String): Response<BaseResponse<SchoolDto>>

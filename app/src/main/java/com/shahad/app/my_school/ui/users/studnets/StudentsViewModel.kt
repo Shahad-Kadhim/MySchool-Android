@@ -15,14 +15,23 @@ class StudentsViewModel @Inject constructor(
     repository: MySchoolRepository
 ): BaseUsersViewModel(repository){
 
-    private val _clickAddStudentEvent = MutableLiveData<Event<String>>()
-    val clickAddStudentEvent: LiveData<Event<String>> = _clickAddStudentEvent
-
-    override val users: LiveData<State<BaseResponse<List<UserDto>>?>> = Transformations.switchMap(schoolName){
-        it?.let {
-            repository.getSchoolStudents(it).asLiveData()
+    private val students= MediatorLiveData<LiveData<State<BaseResponse<List<UserDto>>?>>>().apply {
+        addSource(schoolName){
+            it?.let { schoolName ->
+                this.postValue(repository.getSchoolStudents(schoolName, search.value?.takeIf { it.isNotBlank() }).asLiveData())
+            }
+        }
+        addSource(search){ searchKey ->
+            schoolName.value?.let { schoolName ->
+                this.postValue(repository.getSchoolStudents(schoolName, searchKey?.takeIf { it.isNotBlank() }).asLiveData())
+            }
         }
     }
+
+    override val users: LiveData<State<BaseResponse<List<UserDto>>?>> = Transformations.switchMap(students) { it }
+
+    private val _clickAddStudentEvent = MutableLiveData<Event<String>>()
+    val clickAddStudentEvent: LiveData<Event<String>> = _clickAddStudentEvent
 
     override fun onClickAdd() {
         schoolName.value?.let {

@@ -39,10 +39,16 @@ class MySchoolFakeRepository @Inject constructor(): MySchoolRepository{
     override fun addTeacherToSchool(requestBody: JsonElement): Flow<State<BaseResponse<String>?>> =
         getFakeFlow(BaseResponse(200,""))
 
-    override fun getSchoolStudents(schoolName: String): Flow<State<BaseResponse<List<UserDto>>?>> =
+    override fun getSchoolStudents(
+        schoolName: String,
+        searchKey: String?
+    ): Flow<State<BaseResponse<List<UserDto>>?>> =
         getFakeFlow(BaseResponse(200, listOf()))
 
-    override fun getSchoolTeachers(schoolName: String): Flow<State<BaseResponse<List<UserDto>>?>> =
+    override fun getSchoolTeachers(
+        schoolName: String,
+        searchKey: String?
+    ): Flow<State<BaseResponse<List<UserDto>>?>> =
         getFakeFlow(BaseResponse(200, listOf()))
 
     private  fun <T> getFakeFlow(respond: T)=

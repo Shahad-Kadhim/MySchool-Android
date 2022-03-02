@@ -47,11 +47,17 @@ class MySchoolRepositoryImpl @Inject constructor(
     override fun addTeacherToSchool(requestBody: JsonElement): Flow<State<BaseResponse<String>?>> =
         wrapWithFlow { apiService.addTeacherToSchool(requestBody) }
 
-    override fun getSchoolStudents(schoolName: String): Flow<State<BaseResponse<List<UserDto>>?>> =
-        wrapWithFlow { apiService.getSchoolStudent(schoolName) }
+    override fun getSchoolStudents(
+        schoolName: String,
+        searchKey: String?
+    ): Flow<State<BaseResponse<List<UserDto>>?>> =
+        wrapWithFlow { apiService.getSchoolStudent(schoolName,searchKey) }
 
-    override fun getSchoolTeachers(schoolName: String): Flow<State<BaseResponse<List<UserDto>>?>> =
-        wrapWithFlow { apiService.getSchoolTeachers(schoolName) }
+    override fun getSchoolTeachers(
+        schoolName: String,
+        searchKey: String?
+    ): Flow<State<BaseResponse<List<UserDto>>?>> =
+        wrapWithFlow { apiService.getSchoolTeachers(schoolName,searchKey) }
 
     private fun <T> wrapWithFlow(function: suspend () -> Response<T>): Flow<State<T?>> {
         return flow {
