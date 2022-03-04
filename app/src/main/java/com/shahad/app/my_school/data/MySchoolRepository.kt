@@ -3,6 +3,7 @@ package com.shahad.app.my_school.data
 import com.google.gson.JsonElement
 import com.shahad.app.my_school.data.remote.AuthenticationResponse
 import com.shahad.app.my_school.data.remote.response.*
+import com.shahad.app.my_school.domain.mappers.UserSelected
 import com.shahad.app.my_school.util.State
 import kotlinx.coroutines.flow.Flow
 
@@ -29,4 +30,5 @@ interface MySchoolRepository{
 
     fun getSchoolTeachers(schoolName: String,searchKey: String? = null): Flow<State<BaseResponse<List<UserDto>>?>>
 
+    fun getStudentsNotInClass(classId: String): Flow<State<BaseResponse<List<UserSelected>>?>>
 }

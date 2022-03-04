@@ -1,14 +1,15 @@
 package com.shahad.app.my_school.ui.members
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.shahad.app.my_school.R
 import com.shahad.app.my_school.databinding.FragmentMemberBinding
 import com.shahad.app.my_school.ui.base.BaseFragment
-import com.shahad.app.my_school.ui.posts.PostViewModel
+import com.shahad.app.my_school.ui.classScreen.ClassScreenFragmentDirections
 import com.shahad.app.my_school.ui.register.Role
+import com.shahad.app.my_school.util.extension.goToFragment
+import com.shahad.app.my_school.util.extension.observeEvent
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,7 +29,9 @@ class MemberFragment: BaseFragment<FragmentMemberBinding>() {
 
     private fun observe() {
         with(viewModel){
-
+            clickAddStudentEvent.observeEvent(this@MemberFragment){
+                viewDataBinding.root.goToFragment(ClassScreenFragmentDirections.actionClassScreenFragmentToSelectStudentFragment(it))
+            }
         }
     }
 }

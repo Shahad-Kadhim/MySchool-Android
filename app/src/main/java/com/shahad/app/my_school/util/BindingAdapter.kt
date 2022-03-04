@@ -3,11 +3,10 @@ package com.shahad.app.my_school.util
 import android.view.View
 import android.widget.AdapterView
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Spinner
-import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.core.view.children
-import androidx.core.view.get
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.BindingAdapter
@@ -17,14 +16,12 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipDrawable
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.shahad.app.my_school.R
 import com.shahad.app.my_school.data.remote.response.SchoolDto
 import com.shahad.app.my_school.ui.base.BaseRecyclerAdapter
-import com.shahad.app.my_school.ui.classScreen.ClassPagerAdapter
 import com.shahad.app.my_school.ui.register.Role
 import com.shahad.app.my_school.util.extension.toRole
 
@@ -170,4 +167,10 @@ fun getCheckedChipSchool(view:ChipGroup): String? =
 @BindingAdapter(value = ["app:hide"])
 fun hideView(view: View, value: Boolean){
     view.isVisible= value
+}
+
+@BindingAdapter(value= ["isSelected"])
+fun setSelectionState(view: ImageView, isSelected: Boolean){
+    view.background = if(isSelected) ContextCompat.getDrawable(view.context,R.drawable.selected_shape) else
+        ContextCompat.getDrawable(view.context,R.drawable.ic_user)
 }

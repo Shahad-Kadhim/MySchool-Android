@@ -12,7 +12,7 @@ import javax.inject.Inject
 class ClassScreenViewModel @Inject constructor(
     repository: MySchoolRepository
 ): BaseViewModel(){
-    val _clickBackEvent = MutableLiveData<Event<Boolean>>()
+    private val _clickBackEvent = MutableLiveData<Event<Boolean>>()
     val clickBackEvent: LiveData<Event<Boolean>> = _clickBackEvent
     fun onClickBack(){
         _clickBackEvent.postValue(Event(true))

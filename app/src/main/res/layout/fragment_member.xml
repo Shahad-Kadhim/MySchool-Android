@@ -53,6 +53,7 @@
             android:backgroundTint="@color/brand_color"
             app:borderWidth="0dp"
             app:hide="@{isAuth}"
+            android:onClick="@{() -> viewModel.onClickAddStudent()}"
             app:elevation="6dp"
             app:fabSize="normal"
             app:layout_constraintBottom_toBottomOf="parent"

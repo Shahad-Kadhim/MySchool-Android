@@ -20,7 +20,7 @@ class ClassScreenFragment: BaseFragment<FragmentClassScreenBinding>() {
     override fun getLayoutId() = R.layout.fragment_class_screen
     override val viewModel: ClassScreenViewModel by viewModels()
 
-    val args: ClassScreenFragmentArgs by navArgs()
+    private val args: ClassScreenFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

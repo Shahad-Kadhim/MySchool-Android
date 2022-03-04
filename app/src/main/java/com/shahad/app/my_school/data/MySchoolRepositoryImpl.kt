@@ -5,6 +5,7 @@ import com.shahad.app.my_school.data.local.daos.MySchoolDao
 import com.shahad.app.my_school.data.remote.AuthenticationResponse
 import com.shahad.app.my_school.data.remote.MySchoolService
 import com.shahad.app.my_school.data.remote.response.*
+import com.shahad.app.my_school.domain.mappers.UserSelected
 import com.shahad.app.my_school.util.State
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -58,6 +59,9 @@ class MySchoolRepositoryImpl @Inject constructor(
         searchKey: String?
     ): Flow<State<BaseResponse<List<UserDto>>?>> =
         wrapWithFlow { apiService.getSchoolTeachers(schoolName,searchKey) }
+
+    override fun getStudentsNotInClass(classId: String): Flow<State<BaseResponse<List<UserSelected>>?>> =
+        wrapWithFlow { apiService.getStudentsInSchoolNotInClass(classId) }
 
     private fun <T> wrapWithFlow(function: suspend () -> Response<T>): Flow<State<T?>> {
         return flow {
