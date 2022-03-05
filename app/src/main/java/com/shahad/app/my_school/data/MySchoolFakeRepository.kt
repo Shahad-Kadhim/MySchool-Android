@@ -43,13 +43,13 @@ class MySchoolFakeRepository @Inject constructor(): MySchoolRepository{
     override fun getSchoolStudents(
         schoolName: String,
         searchKey: String?
-    ): Flow<State<BaseResponse<List<UserDto>>?>> =
+    ): Flow<State<BaseResponse<List<UserSelected>>?>> =
         getFakeFlow (listOf())
 
     override fun getSchoolTeachers(
         schoolName: String,
         searchKey: String?
-    ): Flow<State<BaseResponse<List<UserDto>>?>> =
+    ): Flow<State<BaseResponse<List<UserSelected>>?>> =
         getFakeFlow (listOf())
 
     override fun getStudentsNotInClass(classId: String): Flow<State<BaseResponse<List<UserSelected>>?>> =
@@ -57,6 +57,9 @@ class MySchoolFakeRepository @Inject constructor(): MySchoolRepository{
 
     override fun addStudentToClass(requestBody: JsonElement): Flow<State<BaseResponse<String>?>> =
         getFakeFlow("")
+
+    override fun getMemberClass(classId: String): Flow<State<BaseResponse<List<UserSelected>>?>> =
+        getFakeFlow(listOf())
 
     private  fun <T> getFakeFlow(respond: T)=
         flow{

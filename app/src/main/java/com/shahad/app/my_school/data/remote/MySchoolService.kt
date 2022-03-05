@@ -2,7 +2,6 @@ package com.shahad.app.my_school.data.remote
 
 import com.google.gson.JsonElement
 import com.shahad.app.my_school.data.remote.response.*
-import com.shahad.app.my_school.domain.mappers.UserSelected
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -54,9 +53,12 @@ interface MySchoolService{
     suspend fun addTeacherToSchool(@Body requestBody: JsonElement): Response<BaseResponse<String>>
 
     @GET("/studentSchool")
-    suspend fun getStudentsInSchoolNotInClass(@Query("classId") classId: String): Response<BaseResponse<List<UserSelected>>>
+    suspend fun getStudentsInSchoolNotInClass(@Query("classId") classId: String): Response<BaseResponse<List<UserDto>>>
 
     @POST("/class/addMember")
     suspend fun addStudentsToClass(@Body requestBody: JsonElement): Response<BaseResponse<String>>
+
+    @GET("/class/{classId}/members")
+    suspend fun getClassMember(@Path("classId") classId: String): Response<BaseResponse<List<UserDto>>>
 
 }

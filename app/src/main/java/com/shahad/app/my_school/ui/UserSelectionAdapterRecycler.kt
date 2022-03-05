@@ -1,16 +1,13 @@
-package com.shahad.app.my_school.ui.add.student
+package com.shahad.app.my_school.ui
 
-import android.util.Log
-import androidx.recyclerview.widget.DiffUtil
 import com.shahad.app.my_school.R
 import com.shahad.app.my_school.domain.mappers.UserSelected
 import com.shahad.app.my_school.ui.base.BaseInteractionListener
 import com.shahad.app.my_school.ui.base.BaseRecyclerAdapter
-import com.shahad.app.my_school.ui.base.MySchoolDiffUtil
 
-class StudentsSelectionAdapterRecycler(
+class UserSelectionAdapterRecycler(
     students: List<UserSelected>,
-    listener: StudentsSelectedInteractionListener
+    listener: UserSelectedInteractionListener
 ): BaseRecyclerAdapter<UserSelected>(students,listener) {
     override val layoutId: Int = R.layout.item_student_selection
 
@@ -30,6 +27,6 @@ class StudentsSelectionAdapterRecycler(
 
 }
 
-interface StudentsSelectedInteractionListener: BaseInteractionListener{
+interface UserSelectedInteractionListener: BaseInteractionListener{
     fun onClickSelect(id: String)
 }

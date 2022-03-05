@@ -8,4 +8,9 @@ sealed class State<out T> {
     object UnAuthorization: State<Nothing>()
 
     fun toData(): T? = if (this is Success) data else null
+
+
+}
+fun <U>State.Success<U>.setData(mData: U) {
+    this.data = mData
 }

@@ -10,7 +10,7 @@
 
         <variable
             name="listener"
-            type="com.shahad.app.my_school.ui.add.student.StudentsSelectedInteractionListener" />
+            type="com.shahad.app.my_school.ui.UserSelectedInteractionListener" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

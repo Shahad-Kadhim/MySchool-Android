@@ -38,6 +38,7 @@
             android:clipToPadding="false"
             android:orientation="vertical"
             android:layout_marginTop="8dp"
+            items="@{viewModel.students.toData().data}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

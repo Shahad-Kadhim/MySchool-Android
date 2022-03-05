@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.shahad.app.my_school.R
 import com.shahad.app.my_school.databinding.FragmentMemberBinding
+import com.shahad.app.my_school.ui.UserSelectionAdapterRecycler
 import com.shahad.app.my_school.ui.base.BaseFragment
 import com.shahad.app.my_school.ui.classScreen.ClassScreenFragmentDirections
 import com.shahad.app.my_school.ui.register.Role
@@ -25,6 +26,11 @@ class MemberFragment: BaseFragment<FragmentMemberBinding>() {
             viewModel.getMembers(it)
         }
         observe()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewDataBinding.studentRecycle.adapter =  UserSelectionAdapterRecycler(emptyList(), viewModel)
     }
 
     private fun observe() {

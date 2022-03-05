@@ -3,7 +3,7 @@ package com.shahad.app.my_school.ui.users.studnets
 import androidx.lifecycle.*
 import com.shahad.app.my_school.data.MySchoolRepository
 import com.shahad.app.my_school.data.remote.response.BaseResponse
-import com.shahad.app.my_school.data.remote.response.UserDto
+import com.shahad.app.my_school.domain.mappers.UserSelected
 import com.shahad.app.my_school.ui.users.BaseUsersViewModel
 import com.shahad.app.my_school.util.Event
 import com.shahad.app.my_school.util.State
@@ -15,7 +15,7 @@ class StudentsViewModel @Inject constructor(
     repository: MySchoolRepository
 ): BaseUsersViewModel(repository){
 
-    private val students= MediatorLiveData<LiveData<State<BaseResponse<List<UserDto>>?>>>().apply {
+    private val students= MediatorLiveData<LiveData<State<BaseResponse<List<UserSelected>>?>>>().apply {
         addSource(schoolName){
             it?.let { schoolName ->
                 this.postValue(repository.getSchoolStudents(schoolName, search.value?.takeIf { it.isNotBlank() }).asLiveData())
@@ -28,7 +28,7 @@ class StudentsViewModel @Inject constructor(
         }
     }
 
-    override val users: LiveData<State<BaseResponse<List<UserDto>>?>> = Transformations.switchMap(students) { it }
+    override val users: LiveData<State<BaseResponse<List<UserSelected>>?>> = Transformations.switchMap(students) { it }
 
     private val _clickAddStudentEvent = MutableLiveData<Event<String>>()
     val clickAddStudentEvent: LiveData<Event<String>> = _clickAddStudentEvent
@@ -38,4 +38,5 @@ class StudentsViewModel @Inject constructor(
             _clickAddStudentEvent.postValue(Event(it))
         }
     }
+
 }

@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.shahad.app.my_school.data.MySchoolRepository
 import com.shahad.app.my_school.data.remote.response.BaseResponse
 import com.shahad.app.my_school.domain.mappers.UserSelected
+import com.shahad.app.my_school.ui.UserSelectedInteractionListener
 import com.shahad.app.my_school.ui.base.BaseViewModel
 import com.shahad.app.my_school.util.DataClassParser
 import com.shahad.app.my_school.util.Event
@@ -18,7 +19,7 @@ class SelectionStudentsViewModel @Inject constructor(
     val repository: MySchoolRepository,
     savedStateHandle: SavedStateHandle,
     val dataClassParser: DataClassParser
-    ): BaseViewModel() , StudentsSelectedInteractionListener {
+    ): BaseViewModel() , UserSelectedInteractionListener {
 
     private val _students = MutableLiveData<State<BaseResponse<List<UserSelected>>?>>()
     val students: LiveData<State<BaseResponse<List<UserSelected>>?>> = _students

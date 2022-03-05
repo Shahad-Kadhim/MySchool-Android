@@ -5,8 +5,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.shahad.app.my_school.R
 import com.shahad.app.my_school.databinding.FragmentUsersBinding
+import com.shahad.app.my_school.ui.UserSelectionAdapterRecycler
 import com.shahad.app.my_school.ui.base.BaseFragment
-import com.shahad.app.my_school.ui.users.UsersAdapterRecycler
 import com.shahad.app.my_school.util.extension.goToFragment
 import com.shahad.app.my_school.util.extension.observeEvent
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,7 +24,7 @@ class TeachersFragment: BaseFragment<FragmentUsersBinding>() {
 
     override fun onStart() {
         super.onStart()
-        viewDataBinding.studentRecycle.adapter = UsersAdapterRecycler(listOf(),viewModel)
+        viewDataBinding.studentRecycle.adapter = UserSelectionAdapterRecycler(listOf(),viewModel)
         viewDataBinding.type = "Teachers"
     }
 
