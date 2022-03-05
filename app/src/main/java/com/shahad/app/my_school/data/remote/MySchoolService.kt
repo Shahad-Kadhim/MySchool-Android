@@ -56,4 +56,7 @@ interface MySchoolService{
     @GET("/studentSchool")
     suspend fun getStudentsInSchoolNotInClass(@Query("classId") classId: String): Response<BaseResponse<List<UserSelected>>>
 
+    @POST("/class/addMember")
+    suspend fun addStudentsToClass(@Body requestBody: JsonElement): Response<BaseResponse<String>>
+
 }

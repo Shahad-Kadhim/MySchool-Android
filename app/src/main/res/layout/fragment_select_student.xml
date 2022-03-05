@@ -44,6 +44,7 @@
             android:layout_height="0dp"
             android:id="@+id/add_button"
             android:text="ADD"
+            android:onClick="@{() -> viewModel.onClickAdd()}"
             android:fontFamily="@font/source_sans_pro_bold"
             android:textSize="24sp"
             android:layout_marginEnd="@dimen/space_medium"

@@ -1,6 +1,7 @@
 package com.shahad.app.my_school.ui.add.student
 
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.shahad.app.my_school.R
 import com.shahad.app.my_school.databinding.FragmentSelectStudentBinding
@@ -27,7 +28,14 @@ class SelectStudentFragment: BaseFragment<FragmentSelectStudentBinding>() {
 
     private fun observe() {
         with(viewModel){
-
+            onSuccessJoined.observeEvent(this@SelectStudentFragment){ ifSuccess ->
+                takeIf { ifSuccess }?.let {
+                    findNavController().navigateUp()
+                }
+            }
+            clickBackEvent.observeEvent(this@SelectStudentFragment){
+                findNavController().navigateUp()
+            }
         }
     }
 
