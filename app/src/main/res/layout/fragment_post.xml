@@ -11,6 +11,10 @@
         <variable
             name="isAuth"
             type="Boolean" />
+
+        <variable
+            name="classId"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -38,6 +42,7 @@
             android:backgroundTint="@color/brand_color"
             app:borderWidth="0dp"
             app:elevation="6dp"
+            android:onClick="@{() -> viewModel.onClickCreatePost(classId)}"
             app:hide="@{isAuth}"
             app:fabSize="normal"
             app:layout_constraintBottom_toBottomOf="parent"

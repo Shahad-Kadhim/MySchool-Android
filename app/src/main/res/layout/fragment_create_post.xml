@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.shahad.app.my_school.ui.add.post.CreatePostViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="23dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="@dimen/space_large"
+            android:layout_marginTop="@dimen/space_large"
+            android:onClick="@{() -> viewModel.onClickBack()}"
+            android:src="@drawable/ic_baseline_arrow_back_ios_24"
+            app:layout_constraintBottom_toTopOf="@id/guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/black" />
+
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="56dp" />
+
+        <Spinner
+            android:id="@+id/post_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:entries="@array/post_types"
+            app:layout_constraintStart_toStartOf="@+id/title_bar"
+            app:layout_constraintTop_toTopOf="@+id/guideline" />
+
+        <EditText
+            android:id="@+id/title_bar"
+            style="@style/Input"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginHorizontal="@dimen/space_medium"
+            android:background="@drawable/reg_rounded_24dp"
+            android:hint="Write Title"
+            android:layout_marginTop="@dimen/space_medium"
+            android:paddingHorizontal="@dimen/space_medium"
+            android:paddingVertical="@dimen/space_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/post_type" />
+
+
+        <EditText
+            android:id="@+id/content_bar"
+            style="@style/Input"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/space_medium"
+            android:background="@drawable/reg_rounded_stroke_24dp"
+            android:gravity="start"
+            android:hint="Write Title"
+            android:paddingHorizontal="@dimen/space_medium"
+            android:paddingVertical="@dimen/space_small"
+            app:layout_constraintBottom_toTopOf="@+id/appCompatButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_bar" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/appCompatButton"
+            android:layout_width="wrap_content"
+            android:layout_height="54dp"
+            android:layout_marginHorizontal="@dimen/space_large_2x"
+            android:background="@drawable/background_rounded"
+            android:backgroundTint="@color/brand_color"
+            android:fontFamily="@font/source_sans_pro_semi_bold"
+            android:gravity="center"
+            android:text="Post"
+            android:onClick="@{() -> viewModel.onClickPosted()}"
+            android:layout_margin="@dimen/space_medium"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/photo"
+            android:layout_width="50dp"
+            android:layout_height="54dp"
+            android:layout_margin="@dimen/space_medium"
+            android:paddingHorizontal="@dimen/space_tiny"
+            android:layout_marginHorizontal="@dimen/space_large_2x"
+            android:layout_marginBottom="@dimen/space_medium"
+            android:fontFamily="@font/source_sans_pro_semi_bold"
+            android:src="@drawable/profile_photo_test"
+            app:layout_constraintBottom_toBottomOf="@+id/content_bar"
+            app:layout_constraintStart_toStartOf="@+id/content_bar" />
+
+        <ImageView
+            android:id="@+id/attacment"
+            android:layout_width="50dp"
+            android:layout_height="54dp"
+            android:layout_margin="@dimen/space_medium"
+            android:layout_marginBottom="@dimen/space_medium"
+            android:fontFamily="@font/source_sans_pro_semi_bold"
+            android:paddingHorizontal="@dimen/space_tiny"
+            android:src="@drawable/ic_baseline_attachment_24"
+            app:layout_constraintBottom_toBottomOf="@+id/content_bar"
+            app:layout_constraintStart_toEndOf="@+id/photo" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

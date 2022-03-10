@@ -15,4 +15,8 @@
         <item>Student</item>
         <item>Manger</item>
     </array>
+    <array name="post_types">
+        <item>Lesson</item>
+        <item>Duty</item>
+    </array>
 </resources>

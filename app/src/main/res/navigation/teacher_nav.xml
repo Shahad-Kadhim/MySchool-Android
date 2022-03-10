@@ -66,6 +66,9 @@
         <action
             android:id="@+id/action_classScreenFragment_to_selectStudentFragment"
             app:destination="@id/selectStudentFragment" />
+        <action
+            android:id="@+id/action_classScreenFragment_to_createPostFragment"
+            app:destination="@id/createPostFragment" />
     </fragment>
     <fragment
         android:id="@+id/postFragment"
@@ -82,6 +85,15 @@
         android:name="com.shahad.app.my_school.ui.add.student.SelectStudentFragment"
         android:label="SelectStudentFragment"
         tools:layout="@layout/fragment_select_student">
+        <argument
+            android:name="classId"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/createPostFragment"
+        android:name="com.shahad.app.my_school.ui.add.post.CreatePostFragment"
+        android:label="CreatePostFragment"
+        tools:layout="@layout/fragment_create_post">
         <argument
             android:name="classId"
             app:argType="string" />
