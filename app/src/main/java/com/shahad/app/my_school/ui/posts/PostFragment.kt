@@ -21,7 +21,10 @@ class PostFragment: BaseFragment<FragmentPostBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewDataBinding.isAuth = (arguments?.getSerializable("ROLE") as Role) == Role.TEACHER
-        viewDataBinding.classId = arguments?.getString("ID") ?: ""
+        arguments?.getString("ID")?.let {
+            viewModel.getPosts(it)
+        }
+        viewDataBinding.postRecycler.adapter= PostsAdapterRecycler(emptyList(),viewModel)
         observe()
     }
 

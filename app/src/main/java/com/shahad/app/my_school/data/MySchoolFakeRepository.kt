@@ -64,6 +64,9 @@ class MySchoolFakeRepository @Inject constructor(): MySchoolRepository{
     override fun createPost(requestBody: JsonElement): Flow<State<BaseResponse<String>?>> =
         getFakeFlow("")
 
+    override fun getPostInClass(classId: String): Flow<State<BaseResponse<List<PostDto>>>> =
+        getFakeFlow(listOf())
+
     private  fun <T> getFakeFlow(respond: T)=
         flow{
             emit(State.Loading)

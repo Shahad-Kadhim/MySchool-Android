@@ -38,7 +38,7 @@
                 android:fontFamily="@font/source_sans_pro_bold"
                 android:maxLines="1"
                 android:paddingEnd="32dp"
-                android:text="@{item.authName}"
+                android:text="@{item.authorName}"
                 android:textColor="#2E3731"
                 android:textSize="14sp"
                 android:layout_marginStart="@dimen/space_small"

@@ -63,4 +63,7 @@ interface MySchoolService{
 
     @POST("post/create")
     suspend fun createPost(@Body requestBody: JsonElement): Response<BaseResponse<String>>
+
+    @GET("post/getPost")
+    suspend fun getPostsInClass(@Query("classId") classId: String): Response<BaseResponse<List<PostDto>>>
 }

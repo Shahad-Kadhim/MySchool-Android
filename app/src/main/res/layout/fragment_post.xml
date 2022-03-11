@@ -12,9 +12,6 @@
             name="isAuth"
             type="Boolean" />
 
-        <variable
-            name="classId"
-            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,11 +19,12 @@
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/classRecycler"
+            android:id="@+id/postRecycler"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:clipToPadding="false"
             android:orientation="vertical"
+            items="@{viewModel.students.toData().data}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -42,7 +40,7 @@
             android:backgroundTint="@color/brand_color"
             app:borderWidth="0dp"
             app:elevation="6dp"
-            android:onClick="@{() -> viewModel.onClickCreatePost(classId)}"
+            android:onClick="@{() -> viewModel.onClickCreatePost()}"
             app:hide="@{isAuth}"
             app:fabSize="normal"
             app:layout_constraintBottom_toBottomOf="parent"
