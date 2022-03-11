@@ -22,6 +22,11 @@ class CreatePostFragment: BaseFragment<FragmentCreatePostBinding>() {
 
     private fun observe() {
         with(viewModel){
+            onSuccessJoined.observeEvent(this@CreatePostFragment){ ifSuccess ->
+                takeIf { ifSuccess }?.let {
+                    findNavController().navigateUp()
+                }
+            }
             clickBackEvent.observeEvent(this@CreatePostFragment){
                 findNavController().navigateUp()
             }

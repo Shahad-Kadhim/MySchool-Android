@@ -35,4 +35,6 @@ interface MySchoolRepository{
     fun addStudentToClass(requestBody: JsonElement): Flow<State<BaseResponse<String>?>>
 
     fun getMemberClass(classId: String): Flow<State<BaseResponse<List<UserSelected>>?>>
+
+    fun createPost(requestBody: JsonElement): Flow<State<BaseResponse<String>?>>
 }

@@ -7,6 +7,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
+import com.shahad.app.my_school.ui.add.post.PostType
 import com.shahad.app.my_school.ui.register.Role
 import com.shahad.app.my_school.util.Event
 import com.shahad.app.my_school.util.EventObserver
@@ -20,6 +21,12 @@ fun String.toRole()=
         "TEACHER" -> Role.TEACHER
         "STUDENT" -> Role.STUDENT
         else -> Role.MANGER
+    }
+
+fun String.toPostType()=
+    when(this){
+        "LESSON" -> PostType.LESSON
+        else -> PostType.DUTY
     }
 
 fun Context.showToast(message: String){

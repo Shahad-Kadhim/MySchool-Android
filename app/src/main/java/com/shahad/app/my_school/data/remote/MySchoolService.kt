@@ -61,4 +61,6 @@ interface MySchoolService{
     @GET("/class/{classId}/members")
     suspend fun getClassMember(@Path("classId") classId: String): Response<BaseResponse<List<UserDto>>>
 
+    @POST("post/create")
+    suspend fun createPost(@Body requestBody: JsonElement): Response<BaseResponse<String>>
 }

@@ -42,6 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:entries="@array/post_types"
+            selectedItem="@={viewModel.postType}"
             app:layout_constraintStart_toStartOf="@+id/title_bar"
             app:layout_constraintTop_toTopOf="@+id/guideline" />
 
@@ -53,6 +54,7 @@
             android:layout_marginHorizontal="@dimen/space_medium"
             android:background="@drawable/reg_rounded_24dp"
             android:hint="Write Title"
+            android:text="@={viewModel.title}"
             android:layout_marginTop="@dimen/space_medium"
             android:paddingHorizontal="@dimen/space_medium"
             android:paddingVertical="@dimen/space_small"
@@ -70,6 +72,7 @@
             android:background="@drawable/reg_rounded_stroke_24dp"
             android:gravity="start"
             android:hint="Write Title"
+            android:text="@={viewModel.content}"
             android:paddingHorizontal="@dimen/space_medium"
             android:paddingVertical="@dimen/space_small"
             app:layout_constraintBottom_toTopOf="@+id/appCompatButton"

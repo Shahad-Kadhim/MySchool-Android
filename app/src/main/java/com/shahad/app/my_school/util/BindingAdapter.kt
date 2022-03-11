@@ -21,8 +21,10 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.shahad.app.my_school.R
 import com.shahad.app.my_school.data.remote.response.SchoolDto
+import com.shahad.app.my_school.ui.add.post.PostType
 import com.shahad.app.my_school.ui.base.BaseRecyclerAdapter
 import com.shahad.app.my_school.ui.register.Role
+import com.shahad.app.my_school.util.extension.toPostType
 import com.shahad.app.my_school.util.extension.toRole
 
 @BindingAdapter(value = ["app:setNumber"])
@@ -51,7 +53,7 @@ fun onEnterEvent(view: EditText, attChange: InverseBindingListener){
 @BindingAdapter(value = ["selectedItem"], requireAll = false)
 fun bindSpinnerData(
     spinner: Spinner,
-    newSelectedValue: Role?
+    newSelectedValue: PostType?
 ) {
     newSelectedValue?.let {
         val pos = spinner.selectedItemPosition
@@ -60,8 +62,8 @@ fun bindSpinnerData(
 }
 
 @InverseBindingAdapter(attribute = "selectedItem", event = "selectedItemAttrChanged")
-fun captureSelectedValue(spinner: Spinner): Role {
-    return spinner.selectedItem.toString().uppercase().toRole()
+fun captureSelectedValue(spinner: Spinner): PostType {
+    return spinner.selectedItem.toString().uppercase().toPostType()
 }
 
 @BindingAdapter("selectedItemAttrChanged")
