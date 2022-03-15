@@ -1,5 +1,6 @@
 package com.shahad.app.my_school.ui.add.post
 
+import android.graphics.Bitmap
 import android.util.Log
 import androidx.lifecycle.*
 import com.shahad.app.my_school.data.MySchoolRepository
@@ -11,6 +12,13 @@ import com.shahad.app.my_school.util.State
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,11 +31,17 @@ class CreatePostViewModel @Inject constructor(
     val postType = MutableLiveData<PostType>(PostType.LESSON)
     val title = MutableLiveData<String>()
     val content = MutableLiveData<String>()
+
     private val _clickBackEvent = MutableLiveData<Event<Boolean>>()
     val clickBackEvent: LiveData<Event<Boolean>> = _clickBackEvent
 
     val classId = savedStateHandle.get<String>("classId")
 
+    val imagePost= MutableLiveData<Bitmap?>()
+    val file= MutableLiveData<File?>()
+
+    private val _clickUploadImageEvent =MutableLiveData<Event<Boolean>>()
+    val clickUploadImageEvent: LiveData<Event<Boolean>> = _clickUploadImageEvent
 
     private val _addRequestStatus = MutableLiveData<State<BaseResponse<String>?>>()
 
@@ -48,10 +62,32 @@ class CreatePostViewModel @Inject constructor(
             postType.value?.name
         )?.let {
             viewModelScope.launch {
-                repository.createPost(dataClassParser.parseToJson(it)).collect {
+                val o= hashMapOf<String,RequestBody>(
+                    Pair("jsonRequest",dataClassParser.parseToJson (it).toString().toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull()))
+                ).apply {
+//                    file.value?.asRequestBody("*/*".toMediaTypeOrNull())?.let {
+//                        Log.i("TAG",file.value!!.name)
+//                        this["image"] = it
+//                    }
+                }
+
+
+
+                repository.createPost(
+                    o
+                ).collect {
+                    Log.i("TAG",it.toString())
                     _addRequestStatus.postValue(it)
                 }
             }
         }
+    }
+
+    fun onClickRemoveImage(){
+        imagePost.postValue(null)
+    }
+
+    fun onClickUploadImage(){
+        _clickUploadImageEvent.postValue(Event(true))
     }
 }

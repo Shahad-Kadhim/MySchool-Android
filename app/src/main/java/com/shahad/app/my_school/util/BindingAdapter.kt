@@ -1,5 +1,6 @@
 package com.shahad.app.my_school.util
 
+import android.graphics.Bitmap
 import android.view.View
 import android.widget.AdapterView
 import android.widget.EditText
@@ -25,7 +26,7 @@ import com.shahad.app.my_school.ui.add.post.PostType
 import com.shahad.app.my_school.ui.base.BaseRecyclerAdapter
 import com.shahad.app.my_school.ui.register.Role
 import com.shahad.app.my_school.util.extension.toPostType
-import com.shahad.app.my_school.util.extension.toRole
+
 
 @BindingAdapter(value = ["app:setNumber"])
 fun setNumber(view: EditText, number: Long?){
@@ -175,4 +176,16 @@ fun hideView(view: View, value: Boolean){
 fun setSelectionState(view: ImageView, isSelected: Boolean){
     view.background = if(isSelected) ContextCompat.getDrawable(view.context,R.drawable.selected_shape) else
         ContextCompat.getDrawable(view.context,R.drawable.ic_user)
+}
+
+@BindingAdapter(value = ["app:setImageByBitmap"])
+fun setImageByBitmap(view: ImageView, bitmap: Bitmap?){
+    bitmap?.let {
+        view.setImageBitmap(it)
+    }
+}
+
+@BindingAdapter(value = ["app:hideIfNull"])
+fun <T> hideView(view: View , value: T?){
+    view.visibility = if(value == null) View.GONE else View.VISIBLE
 }

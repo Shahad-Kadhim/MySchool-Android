@@ -7,6 +7,7 @@ import com.shahad.app.my_school.domain.mappers.UserSelected
 import com.shahad.app.my_school.util.State
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import okhttp3.RequestBody
 import javax.inject.Inject
 
 class MySchoolFakeRepository @Inject constructor(): MySchoolRepository{
@@ -61,7 +62,7 @@ class MySchoolFakeRepository @Inject constructor(): MySchoolRepository{
     override fun getMemberClass(classId: String): Flow<State<BaseResponse<List<UserSelected>>?>> =
         getFakeFlow(listOf())
 
-    override fun createPost(requestBody: JsonElement): Flow<State<BaseResponse<String>?>> =
+    override fun createPost(parts: HashMap<String,RequestBody>): Flow<State<BaseResponse<String>?>> =
         getFakeFlow("")
 
     override fun getPostInClass(classId: String): Flow<State<BaseResponse<List<PostDto>>>> =

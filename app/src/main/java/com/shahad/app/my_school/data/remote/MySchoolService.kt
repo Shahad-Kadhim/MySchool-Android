@@ -2,6 +2,8 @@ package com.shahad.app.my_school.data.remote
 
 import com.google.gson.JsonElement
 import com.shahad.app.my_school.data.remote.response.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -61,8 +63,13 @@ interface MySchoolService{
     @GET("/class/{classId}/members")
     suspend fun getClassMember(@Path("classId") classId: String): Response<BaseResponse<List<UserDto>>>
 
+    @Multipart
     @POST("post/create")
-    suspend fun createPost(@Body requestBody: JsonElement): Response<BaseResponse<String>>
+    suspend fun createPost(
+        @PartMap parts: HashMap<String,RequestBody>
+//        @Part("jsonRequest") requestBody: MultipartBody.Part                            ,
+//        @Part("image") file: MultipartBody.Part?
+    ): Response<BaseResponse<String>>
 
     @GET("post/getPost")
     suspend fun getPostsInClass(@Query("classId") classId: String): Response<BaseResponse<List<PostDto>>>

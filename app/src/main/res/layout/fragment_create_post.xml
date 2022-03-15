@@ -72,13 +72,14 @@
             android:background="@drawable/reg_rounded_stroke_24dp"
             android:gravity="start"
             android:hint="Write Title"
-            android:text="@={viewModel.content}"
             android:paddingHorizontal="@dimen/space_medium"
             android:paddingVertical="@dimen/space_small"
+            android:text="@={viewModel.content}"
             app:layout_constraintBottom_toTopOf="@+id/appCompatButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title_bar" />
+            app:layout_constraintTop_toBottomOf="@+id/title_bar"
+            app:layout_constraintVertical_bias="0.437" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/appCompatButton"
@@ -100,28 +101,39 @@
 
         <ImageView
             android:id="@+id/photo"
-            android:layout_width="50dp"
-            android:layout_height="54dp"
-            android:layout_margin="@dimen/space_medium"
-            android:paddingHorizontal="@dimen/space_tiny"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_marginVertical="@dimen/space_medium"
             android:layout_marginHorizontal="@dimen/space_large_2x"
-            android:layout_marginBottom="@dimen/space_medium"
-            android:fontFamily="@font/source_sans_pro_semi_bold"
+            app:hideIfNull="@{viewModel.imagePost}"
+            app:setImageByBitmap="@{viewModel.imagePost}"
             android:src="@drawable/profile_photo_test"
             app:layout_constraintBottom_toBottomOf="@+id/content_bar"
             app:layout_constraintStart_toStartOf="@+id/content_bar" />
 
         <ImageView
             android:id="@+id/attacment"
-            android:layout_width="50dp"
-            android:layout_height="54dp"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
             android:layout_margin="@dimen/space_medium"
             android:layout_marginBottom="@dimen/space_medium"
             android:fontFamily="@font/source_sans_pro_semi_bold"
             android:paddingHorizontal="@dimen/space_tiny"
+            android:onClick="@{() -> viewModel.onClickUploadImage()}"
             android:src="@drawable/ic_baseline_attachment_24"
             app:layout_constraintBottom_toBottomOf="@+id/content_bar"
             app:layout_constraintStart_toEndOf="@+id/photo" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_close_24"
+            android:layout_margin="4dp"
+            android:background="#4F7292CF"
+            app:hideIfNull="@{viewModel.imagePost}"
+            android:onClick="@{() -> viewModel.onClickRemoveImage()}"
+            app:layout_constraintTop_toTopOf="@id/photo"
+            app:layout_constraintEnd_toEndOf="@id/photo"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
