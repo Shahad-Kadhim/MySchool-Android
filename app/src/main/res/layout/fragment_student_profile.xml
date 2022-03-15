@@ -21,9 +21,23 @@
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/black" />
 
+         <ProgressBar
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             app:showOnLoading="@{viewModel.info}"
+             android:indeterminate="true"
+             android:elevation="16dp"
+             android:indeterminateTintMode="src_atop"
+             android:indeterminateTint="@color/brand_color"
+             app:layout_constraintBottom_toBottomOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            app:showOnSuccess="@{viewModel.info}"
             app:layout_constraintTop_toBottomOf="@id/back_button">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,6 +59,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/space_medium"
                     android:textSize="24sp"
+                    android:text="@{viewModel.info.toData().data.name}"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="@+id/imageView8"
@@ -76,6 +91,7 @@
                     android:layout_height="48dp"
                     tools:text="0781234566"
                     style="@style/Profile"
+                    android:text="@{viewModel.info.toData().data.phone + ``}"
                     android:background="@drawable/reg_rounded_stroke_8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -106,6 +122,7 @@
                     android:layout_height="48dp"
                     android:background="@drawable/reg_rounded_stroke_8dp"
                     style="@style/Profile"
+                    android:text="@{viewModel.info.toData().data.age+``}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/age_label" />
@@ -134,6 +151,7 @@
                     android:layout_width="0dp"
                     android:layout_height="48dp"
                     android:background="@drawable/reg_rounded_stroke_8dp"
+                    android:text="@{viewModel.info.toData().data.stage+``}"
                     style="@style/Profile"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -144,15 +162,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Schools"
+                    app:showOnSuccess="@{viewModel.schools}"
                     style="@style/LabelProfile"
                     android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/edit_stage" />
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/schools"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/space_tiny"
+                    app:showOnSuccess="@{viewModel.schools}"
+                    items="@{viewModel.schools.toData().data}"
                     app:layout_constraintTop_toBottomOf="@id/school_label"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     android:orientation="horizontal"

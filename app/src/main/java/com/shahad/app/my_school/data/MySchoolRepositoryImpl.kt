@@ -44,6 +44,9 @@ class MySchoolRepositoryImpl @Inject constructor(
     override fun getMangerSchool(): Flow<State<BaseResponse<List<SchoolDto>>?>> =
         wrapWithFlow { apiService.getMangerSchools() }
 
+    override fun getStudentSchools(): Flow<State<BaseResponse<List<SchoolDto>>?>> =
+        wrapWithFlow { apiService.getStudentSchools() }
+
     override fun getMangerClasses(): Flow<State<BaseResponse<List<ClassList>>?>> =
         wrapWithFlow { apiService.getMangerClasses() }
 
@@ -90,6 +93,8 @@ class MySchoolRepositoryImpl @Inject constructor(
     override fun getPostInClass(classId: String): Flow<State<BaseResponse<List<PostDto>>?>> =
         wrapWithFlow { apiService.getPostsInClass(classId) }
 
+    override fun getStudentInfo(id: String?): Flow<State<BaseResponse<StudentDto?>?>> =
+        wrapWithFlow { apiService.getStudentInfo(id) }
 
     private fun <T> wrapWithFlow(function: suspend () -> Response<T>): Flow<State<T?>> {
         return flow {

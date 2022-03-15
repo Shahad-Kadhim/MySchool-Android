@@ -14,4 +14,11 @@ class StudentProfileFragment: BaseFragment<FragmentStudentProfileBinding>() {
     override val viewModel: StudentProfileViewModel by viewModels()
 
 
+    override fun onStart() {
+        super.onStart()
+        viewDataBinding.schools.adapter = SchoolHAdapterRecycler(
+            viewModel.schools.value?.toData()?.data ?: emptyList(),
+            viewModel
+        )
+    }
 }

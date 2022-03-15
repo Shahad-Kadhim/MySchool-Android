@@ -26,6 +26,9 @@ class MySchoolFakeRepository @Inject constructor(): MySchoolRepository{
     override fun getMangerSchool(): Flow<State<BaseResponse<List<SchoolDto>>?>> =
         getFakeFlow(listOf())
 
+    override fun getStudentSchools(): Flow<State<BaseResponse<List<SchoolDto>>?>> =
+        getFakeFlow(listOf())
+
     override fun getMangerClasses(): Flow<State<BaseResponse<List<ClassList>>?>> =
         getFakeFlow (listOf())
 
@@ -67,6 +70,9 @@ class MySchoolFakeRepository @Inject constructor(): MySchoolRepository{
 
     override fun getPostInClass(classId: String): Flow<State<BaseResponse<List<PostDto>>>> =
         getFakeFlow(listOf())
+
+    override fun getStudentInfo(id: String?): Flow<State<BaseResponse<StudentDto?>?>> =
+        getFakeFlow(null)
 
     private  fun <T> getFakeFlow(respond: T)=
         flow{

@@ -19,6 +19,9 @@ interface MySchoolRepository{
     fun getTeacherSchools(): Flow<State<BaseResponse<List<SchoolDto>>?>>
 
     fun getMangerSchool(): Flow<State<BaseResponse<List<SchoolDto>>?>>
+
+    fun getStudentSchools(): Flow<State<BaseResponse<List<SchoolDto>>?>>
+
     fun getMangerClasses(): Flow<State<BaseResponse<List<ClassList>>?>>
 
     fun createSchool(schoolName: String): Flow<State<BaseResponse<SchoolDto>?>>
@@ -41,4 +44,7 @@ interface MySchoolRepository{
     fun createPost(parts: HashMap<String,RequestBody>): Flow<State<BaseResponse<String>?>>
 
     fun getPostInClass(classId: String): Flow<State<BaseResponse<List<PostDto>>?>>
+
+    fun getStudentInfo(id: String? = null): Flow<State<BaseResponse<StudentDto?>?>>
+
 }

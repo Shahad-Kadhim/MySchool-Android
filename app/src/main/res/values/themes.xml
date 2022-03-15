@@ -148,7 +148,6 @@
         <item name="android:paddingEnd">@dimen/space_medium</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:textSize">18sp</item>
-        <item name="android:textStyle">bold</item>
     </style>
     <style name="LabelProfile">
         <item name="android:layout_margin">@dimen/space_medium</item>
