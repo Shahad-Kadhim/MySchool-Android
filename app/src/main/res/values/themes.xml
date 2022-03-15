@@ -139,4 +139,20 @@
         <item name="tabTextColor">#59000000</item>
         <item name="textAllCaps">false</item>
     </style>
+
+    <style name="Profile">
+        <item name="android:layout_marginTop">@dimen/space_small</item>
+        <item name="android:layout_marginStart">@dimen/space_medium</item>
+        <item name="android:layout_marginEnd">@dimen/space_medium</item>
+        <item name="android:paddingStart">@dimen/space_medium</item>
+        <item name="android:paddingEnd">@dimen/space_medium</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="LabelProfile">
+        <item name="android:layout_margin">@dimen/space_medium</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 </resources>

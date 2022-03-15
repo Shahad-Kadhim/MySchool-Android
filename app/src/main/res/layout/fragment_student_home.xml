@@ -42,7 +42,7 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_marginEnd="@dimen/space_medium"
-                    android:src="@drawable/profile_photo_test"
+                    android:src="@drawable/ic_photo"
                     app:layout_constraintBottom_toBottomOf="@id/logo"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/logo"

@@ -8,9 +8,9 @@
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.shahad.app.my_school.ui.profile.ProfileFragment"
+        android:name="com.shahad.app.my_school.ui.profile.StudentProfileFragment"
         android:label="ProfileFragment"
-        tools:layout="@layout/fragment_profile"/>
+        tools:layout="@layout/fragment_student_profile"/>
     <fragment
         android:id="@+id/bookFragment"
         android:name="com.shahad.app.my_school.ui.book.BookFragment"
@@ -25,5 +25,9 @@
         android:id="@+id/homeFragment"
         android:name="com.shahad.app.my_school.ui.student.home.HomeStudentFragment"
         android:label="HomeStudentFragment"
-        tools:layout="@layout/fragment_student_home"/>
+        tools:layout="@layout/fragment_student_home">
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
 </navigation>
