@@ -10,9 +10,9 @@
         android:icon="@drawable/ic_student"
         android:title="Students" />
     <item
-        android:id="@+id/bookFragment"
-        android:icon="@drawable/ic_book"
-        android:title="Books" />
+        android:id="@+id/notificationFragment"
+        android:icon="@drawable/ic_notifaction"
+        android:title="Notification"/>
     <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/ic_profile"

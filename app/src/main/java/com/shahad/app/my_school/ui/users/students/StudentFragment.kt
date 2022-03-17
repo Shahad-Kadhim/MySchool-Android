@@ -1,4 +1,4 @@
-package com.shahad.app.my_school.ui.users.studnets
+package com.shahad.app.my_school.ui.users.students
 
 import android.os.Bundle
 import androidx.fragment.app.viewModels

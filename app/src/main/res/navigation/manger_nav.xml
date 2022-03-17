@@ -34,18 +34,20 @@
         <action
             android:id="@+id/action_homeFragment_to_teachersFragment"
             app:destination="@id/teachersFragment" />
+        <action
+            android:id="@+id/action_homeMangerFragment_to_notificationFragment2"
+            app:destination="@id/notificationFragment" />
+        <action
+            android:id="@+id/action_homeMangerFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.shahad.app.my_school.ui.profile.ProfileFragment"
         android:label="ProfileFragment" />
     <fragment
-        android:id="@+id/bookFragment"
-        android:name="com.shahad.app.my_school.ui.book.BookFragment"
-        android:label="BookFragment" />
-    <fragment
         android:id="@+id/usersFragment"
-        android:name="com.shahad.app.my_school.ui.users.studnets.StudentFragment"
+        android:name="com.shahad.app.my_school.ui.users.students.StudentFragment"
         android:label="StudentFragment"
         tools:layout="@layout/fragment_users">
         <action
@@ -115,4 +117,9 @@
             android:name="SchoolName"
             app:argType="string" />
     </dialog>
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.shahad.app.my_school.ui.notification.NotificationFragment"
+        android:label="NotificationFragment"
+        tools:layout="@layout/fragment_notification"/>
 </navigation>

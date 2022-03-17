@@ -57,6 +57,16 @@ class HomeMangerFragment: BaseFragment<FragmentMangerHomeBinding>() {
                 viewDataBinding.root.goToFragment(
                     HomeMangerFragmentDirections.actionHomeFragmentToClassScreenFragment2(pair.first,pair.second, Role.MANGER))
             }
+            clickNotificationEvent.observeEvent(this@HomeMangerFragment){
+                viewDataBinding.root.goToFragment(
+                    HomeMangerFragmentDirections.actionHomeMangerFragmentToNotificationFragment2()
+                )
+            }
+            clickProfileEvent.observeEvent(this@HomeMangerFragment){
+                viewDataBinding.root.goToFragment(
+                    HomeMangerFragmentDirections.actionHomeMangerFragmentToProfileFragment()
+                )
+            }
         }
     }
 

@@ -28,6 +28,12 @@ class HomeMangerViewModel @Inject constructor(
     private val _clickSchoolsEvent = MutableLiveData<Event<Boolean>>()
     val clickSchoolsEvent: LiveData<Event<Boolean>> = _clickSchoolsEvent
 
+    private val _clickNotificationEvent = MutableLiveData<Event<Boolean>>()
+    val clickNotificationEvent: LiveData<Event<Boolean>> = _clickNotificationEvent
+
+    private val _clickProfileEvent = MutableLiveData<Event<Boolean>>()
+    val clickProfileEvent: LiveData<Event<Boolean>> = _clickProfileEvent
+
     private val _clickClassesEvent = MutableLiveData<Event<Boolean>>()
     val clickClassesEvent: LiveData<Event<Boolean>> = _clickClassesEvent
 
@@ -66,6 +72,13 @@ class HomeMangerViewModel @Inject constructor(
     }
     fun onClickTeachers(){
         _clickTeachersEvent.postValue(Event(true))
+    }
+
+    fun onclickNotification(){
+        _clickNotificationEvent.postValue(Event(true))
+    }
+    fun onclickProfile(){
+        _clickProfileEvent.postValue(Event(true))
     }
 
     override fun onClickClass(classId: String, className: String) {
