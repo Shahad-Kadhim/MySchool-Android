@@ -25,7 +25,7 @@ class AddTeacherViewModel @Inject constructor(
     val onSuccessJoined = Transformations.map(joinRequestStatus){
         if(it is State.Success) Event(true) else Event(false)
     }
-    val schoolName =savedStateHandle.get<String>("SchoolName")
+    val schoolId =savedStateHandle.get<String>("SchoolId")
 
     override fun onClickAdd(){
         getRequestBody()?.let { body ->
@@ -38,11 +38,11 @@ class AddTeacherViewModel @Inject constructor(
     }
 
     private fun getRequestBody() =
-        takeIf { !(name.value.isNullOrBlank())&& !((schoolName).isNullOrBlank()) }?.let {
+        takeIf { !(name.value.isNullOrBlank())&& !((schoolId).isNullOrBlank()) }?.let {
             dataClassParser.parseToJson(
                 AddUserBody(
                     name.value!!,
-                    schoolName!!
+                    schoolId!!
                 )
             )
         }

@@ -25,7 +25,7 @@ class AddStudentToSchoolViewModel @Inject constructor(
         if(it is State.Success) Event(true) else Event(false)
     }
 
-    val schoolName =savedStateHandle.get<String>("SchoolName")
+    val schoolId =savedStateHandle.get<String>("SchoolId")
 
 
     override fun onClickAdd(){
@@ -39,11 +39,11 @@ class AddStudentToSchoolViewModel @Inject constructor(
     }
 
     private fun getRequestBody() =
-        takeIf { !(name.value.isNullOrBlank())&& !((schoolName).isNullOrBlank()) }?.let {
+        takeIf { !(name.value.isNullOrBlank())&& !((schoolId).isNullOrBlank()) }?.let {
             dataClassParser.parseToJson(
                 AddUserBody(
                     name.value!!,
-                    schoolName!!
+                    schoolId!!
                 )
             )
         }

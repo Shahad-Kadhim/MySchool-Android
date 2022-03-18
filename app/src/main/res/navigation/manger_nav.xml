@@ -80,7 +80,7 @@
         android:label="AddStudentFragment"
         tools:layout="@layout/fragment_dailog_add">
         <argument
-            android:name="SchoolName"
+            android:name="SchoolId"
             app:argType="string" />
     </dialog>
     <fragment
@@ -114,7 +114,7 @@
         android:label="AddTeacherFragment"
         tools:layout="@layout/fragment_dailog_add">
         <argument
-            android:name="SchoolName"
+            android:name="SchoolId"
             app:argType="string" />
     </dialog>
     <fragment

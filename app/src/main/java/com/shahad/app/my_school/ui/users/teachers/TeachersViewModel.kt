@@ -1,5 +1,6 @@
 package com.shahad.app.my_school.ui.users.teachers
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.shahad.app.my_school.data.MySchoolRepository
 import com.shahad.app.my_school.data.remote.response.BaseResponse
@@ -39,8 +40,9 @@ class TeachersViewModel @Inject constructor(
     val clickAddTeacherEvent: LiveData<Event<String>> = _clickAddTeacherEvent
 
     override fun onClickAdd() {
-        schoolName.value?.let {
-            _clickAddTeacherEvent.postValue(Event(it))
+        schools.value?.find { it.name == schoolName.value }?.id?.let { schoolId ->
+            Log.i("TAG",schoolId)
+            _clickAddTeacherEvent.postValue(Event(schoolId))
         }
     }
 }
