@@ -22,6 +22,10 @@ abstract class BaseUsersViewModel(
 
     val schoolName = MutableLiveData<String?>()
 
+    val schoolId = Transformations.map(schoolName){
+        schools.value?.find { it.name == schoolName.value }?.id
+    }
+
     abstract val users: LiveData<State<BaseResponse<List<UserSelected>>?>>
 
     val refreshState = MutableLiveData<Boolean>(false)
@@ -38,7 +42,7 @@ abstract class BaseUsersViewModel(
         request:  (String,String?) -> Flow<State<BaseResponse<List<UserSelected>>?>>,
     ) {
         if(isRefresh){
-            schoolName.value?.let { school ->
+            schoolId.value?.let { school ->
                 with(request(school, search.value)){
                     viewModelScope.launch {
                         this@with.collect {

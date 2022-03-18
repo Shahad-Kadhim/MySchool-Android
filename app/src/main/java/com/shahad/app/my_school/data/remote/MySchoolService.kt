@@ -35,13 +35,13 @@ interface MySchoolService{
 
     @GET("/school/students")
     suspend fun getSchoolStudent(
-        @Query("school_name") schoolName: String,
+        @Query("school_id") schoolId: String,
         @Query("search" ) searchKey: String?
     ): Response<BaseResponse<List<UserDto>>>
 
     @GET("/school/teachers")
     suspend fun getSchoolTeachers(
-        @Query("school_name") schoolName: String,
+        @Query("school_id") schoolId: String,
         @Query("search" ) searchKey: String?
     ): Response<BaseResponse<List<UserDto>>>
 

@@ -89,20 +89,20 @@ class MySchoolRepositoryImpl @Inject constructor(
         wrapWithFlow { apiService.addTeacherToSchool(requestBody) }
 
     override fun getSchoolStudents(
-        schoolName: String,
+        schoolId: String,
         searchKey: String?
     ): Flow<State<BaseResponse<List<UserSelected>>?>> =
         wrapper(
-            wrapWithFlow { apiService.getSchoolStudent(schoolName, searchKey) } ,
+            wrapWithFlow { apiService.getSchoolStudent(schoolId, searchKey) } ,
             domainMappers.userInfoMapper::map
         )
 
     @FlowPreview
     override fun getSchoolTeachers(
-        schoolName: String,
+        schoolId: String,
         searchKey: String?
     ): Flow<State<BaseResponse<List<UserSelected>>?>> =
-        wrapper(wrapWithFlow { apiService.getSchoolTeachers(schoolName, searchKey) },domainMappers.userInfoMapper::map)
+        wrapper(wrapWithFlow { apiService.getSchoolTeachers(schoolId, searchKey) },domainMappers.userInfoMapper::map)
 
     override fun getStudentsNotInClass(classId: String): Flow<State<BaseResponse<List<UserSelected>>?>> =
         wrapper(wrapWithFlow { apiService.getStudentsInSchoolNotInClass(classId) } ,domainMappers.userInfoMapper::map)

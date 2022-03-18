@@ -32,9 +32,9 @@ interface MySchoolRepository{
     fun addStudentToSchool(requestBody: JsonElement): Flow<State<BaseResponse<String>?>>
     fun addTeacherToSchool(requestBody: JsonElement): Flow<State<BaseResponse<String>?>>
 
-    fun getSchoolStudents(schoolName: String,searchKey: String? = null): Flow<State<BaseResponse<List<UserSelected>>?>>
+    fun getSchoolStudents(schoolId: String,searchKey: String? = null): Flow<State<BaseResponse<List<UserSelected>>?>>
 
-    fun getSchoolTeachers(schoolName: String,searchKey: String? = null): Flow<State<BaseResponse<List<UserSelected>>?>>
+    fun getSchoolTeachers(schoolId: String, searchKey: String? = null): Flow<State<BaseResponse<List<UserSelected>>?>>
 
     fun getStudentsNotInClass(classId: String): Flow<State<BaseResponse<List<UserSelected>>?>>
 

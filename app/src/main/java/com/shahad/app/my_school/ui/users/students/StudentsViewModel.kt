@@ -1,6 +1,5 @@
 package com.shahad.app.my_school.ui.users.students
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.shahad.app.my_school.data.MySchoolRepository
 import com.shahad.app.my_school.data.remote.response.BaseResponse
@@ -9,10 +8,6 @@ import com.shahad.app.my_school.ui.users.BaseUsersViewModel
 import com.shahad.app.my_school.util.Event
 import com.shahad.app.my_school.util.State
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,14 +16,14 @@ class StudentsViewModel @Inject constructor(
 ): BaseUsersViewModel(repository){
 
     private val students= MediatorLiveData<LiveData<State<BaseResponse<List<UserSelected>>?>>>().apply {
-        addSource(schoolName){
-            it?.let { schoolName ->
-                this.postValue(repository.getSchoolStudents(schoolName, search.value?.takeIf { it.isNotBlank() }).asLiveData())
+        addSource(schoolId){
+            it?.let { schoolId ->
+                this.postValue(repository.getSchoolStudents(schoolId, search.value?.takeIf { it.isNotBlank() }).asLiveData())
             }
         }
         addSource(search){ searchKey ->
-            schoolName.value?.let { schoolName ->
-                this.postValue(repository.getSchoolStudents(schoolName, searchKey?.takeIf { it.isNotBlank() }).asLiveData())
+            schoolId.value?.let { schoolId ->
+                this.postValue(repository.getSchoolStudents(schoolId, searchKey?.takeIf { it.isNotBlank() }).asLiveData())
             }
         }
         addSource(refreshState) {
@@ -44,8 +39,7 @@ class StudentsViewModel @Inject constructor(
     val clickAddStudentEvent: LiveData<Event<String>> = _clickAddStudentEvent
 
     override fun onClickAdd() {
-        schools.value?.find { it.name == schoolName.value }?.id?.let { schoolId ->
-            Log.i("TAG",schoolId)
+        schoolId.value?.let { schoolId ->
             _clickAddStudentEvent.postValue(Event(schoolId))
         }
     }

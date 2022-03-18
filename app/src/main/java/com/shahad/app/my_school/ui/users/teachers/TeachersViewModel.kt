@@ -19,14 +19,14 @@ class TeachersViewModel @Inject constructor(
 ): BaseUsersViewModel(repository){
 
     private val teachers= MediatorLiveData<LiveData<State<BaseResponse<List<UserSelected>>?>>>().apply {
-        addSource(schoolName){
-            it?.let { schoolName ->
-                this.postValue(repository.getSchoolTeachers(schoolName, search.value?.takeIf { it.isNotBlank() }).asLiveData())
+        addSource(schoolId){
+            it?.let { schoolId ->
+                this.postValue(repository.getSchoolTeachers(schoolId, search.value?.takeIf { it.isNotBlank() }).asLiveData())
             }
         }
         addSource(search){ searchKey ->
-            schoolName.value?.let { schoolName ->
-                this.postValue(repository.getSchoolTeachers(schoolName ,searchKey?.takeIf { it.isNotBlank() }).asLiveData())
+            schoolId.value?.let { schoolId ->
+                this.postValue(repository.getSchoolTeachers(schoolId ,searchKey?.takeIf { it.isNotBlank() }).asLiveData())
             }
         }
         addSource(refreshState) {
@@ -40,8 +40,7 @@ class TeachersViewModel @Inject constructor(
     val clickAddTeacherEvent: LiveData<Event<String>> = _clickAddTeacherEvent
 
     override fun onClickAdd() {
-        schools.value?.find { it.name == schoolName.value }?.id?.let { schoolId ->
-            Log.i("TAG",schoolId)
+        schoolId.value?.let { schoolId ->
             _clickAddTeacherEvent.postValue(Event(schoolId))
         }
     }
