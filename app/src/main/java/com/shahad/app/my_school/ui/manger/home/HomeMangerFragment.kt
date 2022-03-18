@@ -2,6 +2,7 @@ package com.shahad.app.my_school.ui.manger.home
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.fragment.app.viewModels
 import com.shahad.app.my_school.R
 import com.shahad.app.my_school.databinding.FragmentMangerHomeBinding
@@ -28,6 +29,7 @@ class HomeMangerFragment: BaseFragment<FragmentMangerHomeBinding>() {
         super.onStart()
         recycler()
     }
+
     private fun recycler() {
         viewDataBinding.schoolRecycler.adapter= SchoolAdapterRecycler(emptyList(),viewModel)
         viewDataBinding.classRecycler.adapter= ClassesAdapterRecycler(emptyList(),viewModel)

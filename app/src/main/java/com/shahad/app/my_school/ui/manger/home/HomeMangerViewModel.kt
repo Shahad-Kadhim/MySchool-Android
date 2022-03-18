@@ -1,19 +1,17 @@
 package com.shahad.app.my_school.ui.manger.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.asLiveData
+import androidx.lifecycle.*
 import com.shahad.app.my_school.data.MySchoolRepository
 import com.shahad.app.my_school.ui.base.BaseViewModel
 import com.shahad.app.my_school.util.Event
 import com.shahad.app.my_school.util.State
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeMangerViewModel @Inject constructor(
-    repository: MySchoolRepository
+    private val repository: MySchoolRepository
 ): BaseViewModel(),
    SchoolInteractionListener,
    ClassInteractionListener {
@@ -47,8 +45,13 @@ class HomeMangerViewModel @Inject constructor(
     val clickClassEvent: LiveData<Event<Pair<String,String>>> = _clickClassEvent
 
     val unAuthentication = MediatorLiveData<State.UnAuthorization?>().apply {
-        addSource(schools,::whenUnAuthorization)
         addSource(classes,::whenUnAuthorization)
+    }
+
+    init {
+        viewModelScope.launch {
+            repository.refreshMangerSchool()
+        }
     }
 
     private fun <T>whenUnAuthorization(state: State<T>){

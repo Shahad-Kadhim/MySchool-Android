@@ -1,20 +1,20 @@
 package com.shahad.app.my_school.ui.manger.home
 
 import com.shahad.app.my_school.R
-import com.shahad.app.my_school.data.remote.response.SchoolDto
+import com.shahad.app.my_school.domain.models.School
 import com.shahad.app.my_school.ui.base.BaseInteractionListener
 import com.shahad.app.my_school.ui.base.BaseRecyclerAdapter
 
 class SchoolAdapterRecycler(
-    items: List<SchoolDto>,
+    items: List<School>,
     listener: SchoolInteractionListener
-): BaseRecyclerAdapter<SchoolDto>(items,listener) {
+): BaseRecyclerAdapter<School>(items,listener) {
     override val layoutId: Int = R.layout.item_school
 
     override fun areItemsTheSame(
         oldItemPosition: Int,
         newItemPosition: Int,
-        newItems: List<SchoolDto>
+        newItems: List<School>
     ): Boolean =
         getItems()[oldItemPosition].id == newItems[newItemPosition].id
 

@@ -1,20 +1,20 @@
 package com.shahad.app.my_school.data
 
+import android.util.Log
 import com.google.gson.JsonElement
 import com.shahad.app.my_school.data.local.daos.MySchoolDao
 import com.shahad.app.my_school.data.remote.AuthenticationResponse
 import com.shahad.app.my_school.data.remote.MySchoolService
 import com.shahad.app.my_school.data.remote.response.*
 import com.shahad.app.my_school.domain.mappers.DomainMappers
+import com.shahad.app.my_school.domain.mappers.LocalMappers
 import com.shahad.app.my_school.domain.mappers.UserSelected
+import com.shahad.app.my_school.domain.models.School
 import com.shahad.app.my_school.util.State
-import com.shahad.app.my_school.util.setData
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flatMapMerge
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
-import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
 import java.lang.Exception
@@ -23,7 +23,8 @@ import javax.inject.Inject
 class MySchoolRepositoryImpl @Inject constructor(
     private val dao: MySchoolDao,
     private val apiService: MySchoolService,
-    private val domainMappers: DomainMappers
+    private val domainMappers: DomainMappers,
+    private val localMappers: LocalMappers
 ): MySchoolRepository {
 
     override fun addUser(
@@ -38,11 +39,36 @@ class MySchoolRepositoryImpl @Inject constructor(
     override fun getTeacherClasses(searchKey: String?): Flow<State<BaseResponse<List<ClassList>>?>> =
         wrapWithFlow { apiService.getTeacherClasses(searchKey) }
 
-    override fun getTeacherSchools(): Flow<State<BaseResponse<List<SchoolDto>>?>> =
-        wrapWithFlow { apiService.getTeacherSchools() }
+    override fun getTeacherSchools(): Flow<List<School>> =
+        wrapperClass(
+            dao.getSchools(),
+            domainMappers.schoolMapper::map
+        )
 
-    override fun getMangerSchool(): Flow<State<BaseResponse<List<SchoolDto>>?>> =
-        wrapWithFlow { apiService.getMangerSchools() }
+    override fun getMangerSchool(): Flow<List<School>> =
+        wrapperClass(
+            dao.getSchools(),
+            domainMappers.schoolMapper::map
+        )
+
+
+    override suspend fun refreshTeacherSchool() {
+        refreshWrapper(apiService::getTeacherSchools, dao::addSchool)
+        { body ->
+            body?.data?.map { schoolDto ->
+                localMappers.schoolEntityMapper.map(schoolDto)
+            }
+        }
+    }
+
+    override suspend fun refreshMangerSchool() {
+        refreshWrapper(apiService::getMangerSchools, dao::addSchool)
+        { body ->
+            body?.data?.map { schoolDto ->
+                localMappers.schoolEntityMapper.map(schoolDto)
+            }
+        }
+    }
 
     override fun getStudentSchools(): Flow<State<BaseResponse<List<SchoolDto>>?>> =
         wrapWithFlow { apiService.getStudentSchools() }
@@ -135,4 +161,34 @@ class MySchoolRepositoryImpl @Inject constructor(
                 }
             }
         }
+
+    private fun <T, U> wrapperClass(
+        data: Flow<List<T>>,
+        mapper: (T) -> U
+    ): Flow<List<U>> =
+        data.map { list ->
+            list.map { entity ->
+                mapper(entity)
+            }
+        }
+
+
+    private suspend fun <T, U> refreshWrapper(
+        request: suspend () -> Response<T>,
+        insertIntoDatabase: suspend (List<U>) -> Unit,
+        mapper: (T?) -> List<U>?,
+    ) {
+        try {
+            request().also {
+                if (it.isSuccessful) {
+                    mapper(it.body())?.let { list ->
+                        insertIntoDatabase(list)
+                    }
+                }
+            }
+        } catch (exception: Exception) {
+            Log.i("MY_SCHOOL", "no connection cant update data")
+        }
+    }
+
 }

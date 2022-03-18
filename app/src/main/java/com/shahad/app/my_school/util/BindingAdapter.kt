@@ -22,6 +22,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.shahad.app.my_school.R
 import com.shahad.app.my_school.data.remote.response.SchoolDto
+import com.shahad.app.my_school.domain.models.School
 import com.shahad.app.my_school.ui.add.post.PostType
 import com.shahad.app.my_school.ui.base.BaseRecyclerAdapter
 import com.shahad.app.my_school.ui.register.Role
@@ -148,7 +149,7 @@ fun setViewPager(tabLayout: TabLayout,viewPager: ViewPager2){
 }
 
 @BindingAdapter(value = ["app:chipItems"])
-fun setChipGroup(view: ChipGroup,items:List<SchoolDto>?){
+fun setChipGroup(view: ChipGroup,items:List<School>?){
     items?.forEach {
         view.addView(
             Chip(view.context).apply {

@@ -1,6 +1,5 @@
 package com.shahad.app.my_school.ui.add.school
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
@@ -14,6 +13,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 @HiltViewModel
 class CreateSchoolViewModel @Inject constructor(
     private val repository: MySchoolRepository
@@ -29,9 +29,16 @@ class CreateSchoolViewModel @Inject constructor(
         name.value?.takeIf { it.isNotBlank() }?.let {
             viewModelScope.launch {
                 repository.createSchool(it).collect {
+                    refreshSchool(it)
                     _createRequestStatus.postValue(it)
                 }
             }
+        }
+    }
+
+    private suspend fun<T>  refreshSchool(state: State<T>){
+        if(state is State.Success){
+            repository.refreshMangerSchool()
         }
     }
 

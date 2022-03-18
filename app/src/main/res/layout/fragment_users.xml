@@ -69,7 +69,7 @@
             android:layout_marginTop="@dimen/space_medium"
             android:orientation="horizontal"
             checkedChipSchool="@={viewModel.schoolName}"
-            app:chipItems="@{viewModel.schools.toData().data}"
+            app:chipItems="@{viewModel.schools}"
             android:layout_marginHorizontal="@dimen/space_large"
             app:layout_constraintTop_toBottomOf="@id/search_bar"
             app:singleSelection="true"/>

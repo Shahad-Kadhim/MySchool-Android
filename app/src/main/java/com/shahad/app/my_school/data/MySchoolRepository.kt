@@ -4,6 +4,7 @@ import com.google.gson.JsonElement
 import com.shahad.app.my_school.data.remote.AuthenticationResponse
 import com.shahad.app.my_school.data.remote.response.*
 import com.shahad.app.my_school.domain.mappers.UserSelected
+import com.shahad.app.my_school.domain.models.School
 import com.shahad.app.my_school.util.State
 import kotlinx.coroutines.flow.Flow
 import okhttp3.MultipartBody
@@ -16,9 +17,9 @@ interface MySchoolRepository{
     fun loginUser(loginBody: JsonElement): Flow<State<BaseResponse<AuthenticationResponse>?>>
 
     fun getTeacherClasses(searchKey: String? = null): Flow<State<BaseResponse<List<ClassList>>?>>
-    fun getTeacherSchools(): Flow<State<BaseResponse<List<SchoolDto>>?>>
+    fun getTeacherSchools(): Flow<List<School>>
 
-    fun getMangerSchool(): Flow<State<BaseResponse<List<SchoolDto>>?>>
+    fun getMangerSchool(): Flow<List<School>>
 
     fun getStudentSchools(): Flow<State<BaseResponse<List<SchoolDto>>?>>
 
@@ -47,4 +48,6 @@ interface MySchoolRepository{
 
     fun getStudentInfo(id: String? = null): Flow<State<BaseResponse<StudentDto?>?>>
 
+    suspend fun refreshMangerSchool()
+    suspend fun refreshTeacherSchool()
 }

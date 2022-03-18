@@ -79,7 +79,7 @@
                 android:clipToPadding="false"
                 android:orientation="vertical"
                 android:layout_marginTop="@dimen/space_small"
-                app:items="@{viewModel.schools.toData().data}"
+                app:items="@{viewModel.schools}"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:spanCount="2"
                 tools:listitem="@layout/item_school" />
