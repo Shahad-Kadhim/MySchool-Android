@@ -1,6 +1,7 @@
 package com.shahad.app.my_school.util
 
 import android.graphics.Bitmap
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.EditText
@@ -150,17 +151,20 @@ fun setViewPager(tabLayout: TabLayout,viewPager: ViewPager2){
 
 @BindingAdapter(value = ["app:chipItems"])
 fun setChipGroup(view: ChipGroup,items:List<School>?){
-    items?.forEach {
-        view.addView(
-            Chip(view.context).apply {
-                text = it.name
-                isClickable =true
-                chipBackgroundColor = ContextCompat.getColorStateList(view.context,R.color.chip_color)
-                setOnClickListener {
-                    view.check(this.id)
+    items.takeUnless { it.isNullOrEmpty() }?.let {
+        it.forEach {
+            view.addView(
+                Chip(view.context).apply {
+                    text = it.name
+                    isClickable =true
+                    chipBackgroundColor = ContextCompat.getColorStateList(view.context,R.color.chip_color)
+                    setOnClickListener {
+                        view.check(this.id)
+                    }
                 }
-            }
-        )
+            )
+        }
+        view.check(view.getChildAt(0).id)
     }
 }
 
