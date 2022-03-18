@@ -8,11 +8,15 @@ import com.shahad.app.my_school.ui.users.BaseUsersViewModel
 import com.shahad.app.my_school.util.Event
 import com.shahad.app.my_school.util.State
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class StudentsViewModel @Inject constructor(
-    repository: MySchoolRepository
+    private val repository: MySchoolRepository
 ): BaseUsersViewModel(repository){
 
     private val students= MediatorLiveData<LiveData<State<BaseResponse<List<UserSelected>>?>>>().apply {
@@ -26,7 +30,12 @@ class StudentsViewModel @Inject constructor(
                 this.postValue(repository.getSchoolStudents(schoolName, searchKey?.takeIf { it.isNotBlank() }).asLiveData())
             }
         }
+        addSource(refreshState) {
+            this.refresh(it,repository::getSchoolStudents)
+        }
+
     }
+
 
     override val users: LiveData<State<BaseResponse<List<UserSelected>>?>> = Transformations.switchMap(students) { it }
 

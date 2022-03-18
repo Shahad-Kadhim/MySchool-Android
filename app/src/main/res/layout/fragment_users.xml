@@ -12,93 +12,100 @@
             type="String" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:onRefresh="@={viewModel.refreshState}">
 
-
-        <ImageView
-            android:id="@+id/back_button"
-            android:layout_width="23dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="@dimen/space_large"
-            android:layout_marginTop="@dimen/space_large"
-            android:onClick="@{() -> viewModel.onClickBack()}"
-            android:src="@drawable/ic_baseline_arrow_back_ios_24"
-            app:layout_constraintBottom_toTopOf="@id/guideline"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/black" />
-
-        <TextView
-            android:id="@+id/categories_headline"
-            style="@style/TitleText"
-            tools:text="Students"
-            android:text="@{type}"
-            android:textColor="@color/black"
-            android:layout_marginStart="@dimen/space_small"
-            app:layout_constraintBottom_toBottomOf="@+id/back_button"
-            app:layout_constraintStart_toEndOf="@+id/back_button"
-            app:layout_constraintTop_toTopOf="@+id/back_button" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="56dp" />
-
-        <EditText
-            android:id="@+id/search_bar"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="44dp"
-            android:layout_marginHorizontal="@dimen/space_medium"
-            android:layout_marginTop="@dimen/space_medium"
-            android:background="@drawable/reg_rounded_24dp"
-            style="@style/SearchBar"
-            android:text="@={viewModel.search}"
-            android:paddingHorizontal="@dimen/space_medium"
-            android:paddingVertical="@dimen/space_small"
-            app:layout_constraintTop_toBottomOf="@+id/guideline"
-            tools:layout_editor_absoluteX="16dp" />
+            android:layout_height="match_parent">
 
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chipGroup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space_medium"
-            android:orientation="horizontal"
-            checkedChipSchool="@={viewModel.schoolName}"
-            app:chipItems="@{viewModel.schools}"
-            android:layout_marginHorizontal="@dimen/space_large"
-            app:layout_constraintTop_toBottomOf="@id/search_bar"
-            app:singleSelection="true"/>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/studentRecycle"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:clipToPadding="false"
-            android:orientation="vertical"
-            android:layout_marginTop="8dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:items="@{viewModel.users.toData().data}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chipGroup"
-            tools:listitem="@layout/item_user" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/space_medium"
-            android:src="@drawable/ic_baseline_add_24"
-            android:backgroundTint="@color/brand_color"
-            app:borderWidth="0dp"
-            app:elevation="6dp"
-            app:fabSize="normal"
-            android:onClick="@{() -> viewModel.onClickAdd()}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/back_button"
+                android:layout_width="23dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="@dimen/space_large"
+                android:layout_marginTop="@dimen/space_large"
+                android:onClick="@{() -> viewModel.onClickBack()}"
+                android:src="@drawable/ic_baseline_arrow_back_ios_24"
+                app:layout_constraintBottom_toTopOf="@id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/black" />
+
+            <TextView
+                android:id="@+id/categories_headline"
+                style="@style/TitleText"
+                tools:text="Students"
+                android:text="@{type}"
+                android:textColor="@color/black"
+                android:layout_marginStart="@dimen/space_small"
+                app:layout_constraintBottom_toBottomOf="@+id/back_button"
+                app:layout_constraintStart_toEndOf="@+id/back_button"
+                app:layout_constraintTop_toTopOf="@+id/back_button" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="56dp" />
+
+            <EditText
+                android:id="@+id/search_bar"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginHorizontal="@dimen/space_medium"
+                android:layout_marginTop="@dimen/space_medium"
+                android:background="@drawable/reg_rounded_24dp"
+                style="@style/SearchBar"
+                android:text="@={viewModel.search}"
+                android:paddingHorizontal="@dimen/space_medium"
+                android:paddingVertical="@dimen/space_small"
+                app:layout_constraintTop_toBottomOf="@+id/guideline"
+                tools:layout_editor_absoluteX="16dp" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_medium"
+                android:orientation="horizontal"
+                checkedChipSchool="@={viewModel.schoolName}"
+                app:chipItems="@{viewModel.schools}"
+                android:layout_marginHorizontal="@dimen/space_large"
+                app:layout_constraintTop_toBottomOf="@id/search_bar"
+                app:singleSelection="true"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/studentRecycle"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:clipToPadding="false"
+                android:orientation="vertical"
+                android:layout_marginTop="8dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:items="@{viewModel.users.toData().data}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chipGroup"
+                tools:listitem="@layout/item_user" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/space_medium"
+                android:src="@drawable/ic_baseline_add_24"
+                android:backgroundTint="@color/brand_color"
+                app:borderWidth="0dp"
+                app:elevation="6dp"
+                app:fabSize="normal"
+                android:onClick="@{() -> viewModel.onClickAdd()}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>

@@ -28,6 +28,9 @@ class TeachersViewModel @Inject constructor(
                 this.postValue(repository.getSchoolTeachers(schoolName ,searchKey?.takeIf { it.isNotBlank() }).asLiveData())
             }
         }
+        addSource(refreshState) {
+            this.refresh(it,repository::getSchoolTeachers)
+        }
     }
 
     override val users: LiveData<State<BaseResponse<List<UserSelected>>?>> = Transformations.switchMap(teachers) { it }

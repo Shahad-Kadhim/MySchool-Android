@@ -15,6 +15,7 @@ import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.chip.Chip
@@ -199,4 +200,24 @@ fun setImageByBitmap(view: ImageView, bitmap: Bitmap?){
 @BindingAdapter(value = ["app:hideIfNull"])
 fun <T> hideView(view: View , value: T?){
     view.visibility = if(value == null) View.GONE else View.VISIBLE
+}
+
+@BindingAdapter(value = ["app:onRefresh"])
+fun refresh(view: SwipeRefreshLayout,value: Boolean? ){
+    value?.let {
+        view.isRefreshing = value
+    }
+}
+
+@InverseBindingAdapter(attribute = "app:onRefresh", event = "onRefresh")
+fun getIfRefresh(view: SwipeRefreshLayout): Boolean?{
+    return view.isRefreshing
+}
+
+@BindingAdapter("onRefresh")
+fun onChangeChecked(view: SwipeRefreshLayout, attChange: InverseBindingListener) {
+    view.setOnRefreshListener {
+        attChange.onChange()
+        Log.i("TAG","is Refresh")
+    }
 }
