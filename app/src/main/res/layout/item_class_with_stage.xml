@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="item"
+            type="com.shahad.app.my_school.data.remote.response.ClassList" />
+        <variable
+            name="listener"
+            type="com.shahad.app.my_school.ui.manger.home.ClassInteractionListener" />
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="116dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="8dp"
+        style="@style/cardView"
+        app:cardCornerRadius="24dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:onClick="@{() -> listener.onClickClass(item.id,item.name)}">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/space_large"
+                android:ellipsize="end"
+                android:fontFamily="@font/source_sans_pro_bold"
+                tools:text="Math"
+                android:text="@{item.name}"
+                android:textColor="#2F3238"
+                android:textSize="28sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/source_sans_pro_bold"
+                tools:text="mr. Ahmed"
+                android:text="@{`Mr. `+item.teacherName}"
+                android:textColor="#DE2F3238"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/textView2"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="@dimen/space_large_2x"
+                app:layout_constraintHorizontal_bias="1"
+                android:layout_marginVertical="@dimen/space_medium"
+                tools:text="4"
+                android:textSize="64sp"
+                android:textStyle="bold"
+                android:text="@{item.stage+``}"
+                android:gravity="center"
+                android:textColor="@color/brand_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView2"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

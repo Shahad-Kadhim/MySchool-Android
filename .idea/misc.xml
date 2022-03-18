@@ -63,6 +63,7 @@
         <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/layout/fragment_teacher_home.xml" value="0.1" />
         <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/layout/fragment_users.xml" value="0.1837962962962963" />
         <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/layout/item_class.xml" value="0.25" />
+        <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/layout/item_class_with_stage.xml" value="0.25" />
         <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/layout/item_create_post.xml" value="0.20677083333333332" />
         <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/layout/item_post.xml" value="0.25" />
         <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/layout/item_school.xml" value="0.25" />
@@ -106,12 +107,5 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
-  </component>
-  <component name="VisualizationToolProject">
-    <option name="state">
-      <ProjectState>
-        <option name="scale" value="0.1" />
-      </ProjectState>
-    </option>
   </component>
 </project>

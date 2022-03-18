@@ -78,13 +78,13 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
 
-
         <TextView
             android:id="@+id/label_school"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/Subject"
             android:text="Schools"
+            app:showOnSuccess="@{viewModel.schools}"
             android:layout_marginStart="@dimen/space_medium"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/header" />
@@ -95,6 +95,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_small"
             android:orientation="horizontal"
+            app:showOnSuccess="@{viewModel.schools}"
             items="@{viewModel.schools.toData().data}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@+id/label_school"
@@ -161,6 +162,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Classes"
+            app:showOnSuccess="@{viewModel.classes}"
             style="@style/Subject"
             app:layout_constraintStart_toStartOf="@+id/label_school"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -171,6 +173,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:orientation="vertical"
+            app:showOnSuccess="@{viewModel.classes}"
             items="@{viewModel.classes.toData().data}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -178,7 +181,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView6"
             app:layout_constraintVertical_bias="0.0"
-            tools:listitem="@layout/item_class" />
+            tools:listitem="@layout/item_class_with_stage" />
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:showOnLoading="@{viewModel.classes}"
+            android:indeterminate="true"
+            android:elevation="16dp"
+            android:indeterminateTintMode="src_atop"
+            android:indeterminateTint="@color/brand_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -187,6 +202,7 @@
             android:backgroundTint="@color/brand_color"
             app:borderWidth="0dp"
             app:elevation="6dp"
+            app:tint="@android:color/white"
             android:onClick="@{() -> viewModel.onClickCreateSchool()}"
             app:fabSize="normal"
             app:layout_constraintBottom_toBottomOf="parent"

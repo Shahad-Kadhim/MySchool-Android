@@ -9,7 +9,7 @@ class ClassesAdapterRecycler(
     items: List<ClassList>,
     listener: ClassInteractionListener
 ): BaseRecyclerAdapter<ClassList>(items,listener) {
-    override val layoutId: Int = R.layout.item_class
+    override val layoutId: Int = R.layout.item_class_with_stage
 
     override fun areItemsTheSame(
         oldItemPosition: Int,
