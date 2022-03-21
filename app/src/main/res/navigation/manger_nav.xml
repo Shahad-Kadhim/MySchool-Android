@@ -43,8 +43,9 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.shahad.app.my_school.ui.profile.ProfileFragment"
-        android:label="ProfileFragment" />
+        android:name="com.shahad.app.my_school.ui.profile.MangerProfileFragment"
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_manger_profile"/>
     <fragment
         android:id="@+id/usersFragment"
         android:name="com.shahad.app.my_school.ui.users.students.StudentFragment"

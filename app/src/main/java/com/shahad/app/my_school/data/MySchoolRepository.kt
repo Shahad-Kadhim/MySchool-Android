@@ -48,6 +48,8 @@ interface MySchoolRepository{
 
     fun getStudentInfo(id: String? = null): Flow<State<BaseResponse<StudentDto?>?>>
 
+    fun getMangerInfo(): Flow<State<BaseResponse<MangerInfoDto?>?>>
+
     suspend fun refreshMangerSchool()
     suspend fun refreshTeacherSchool()
 }

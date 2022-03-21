@@ -1,5 +1,6 @@
 package com.shahad.app.my_school.ui.profile
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
@@ -11,17 +12,20 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class StudentProfileViewModel @Inject constructor(
+class MangerProfileViewModel @Inject constructor(
     repository: MySchoolRepository
 ): BaseViewModel() , SchoolInteractionListener{
 
-    val info = repository.getStudentInfo().asLiveData()
+    val info = repository.getMangerInfo().asLiveData()
 
-    val schools = repository.getStudentSchools().asLiveData()
-
+    val schools = repository.getMangerSchool().asLiveData()
 
     private val _clickBackEvent = MutableLiveData<Event<Boolean>>()
     val clickBackEvent: LiveData<Event<Boolean>> = _clickBackEvent
+
+    val onSwipe = fun(id: Int){
+        Log.i("TAG","THIS ITEM IS SWIPED : $id")
+    }
 
     fun onClickBack(){
         _clickBackEvent.postValue(Event(true))
