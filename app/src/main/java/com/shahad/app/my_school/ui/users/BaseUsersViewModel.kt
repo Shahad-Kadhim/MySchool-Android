@@ -6,6 +6,7 @@ import com.shahad.app.my_school.data.MySchoolRepository
 import com.shahad.app.my_school.data.remote.response.BaseResponse
 import com.shahad.app.my_school.domain.mappers.UserSelected
 import com.shahad.app.my_school.ui.UserSelectedInteractionListener
+import com.shahad.app.my_school.ui.add.student.MembersClassBody
 import com.shahad.app.my_school.ui.base.BaseViewModel
 import com.shahad.app.my_school.util.Event
 import com.shahad.app.my_school.util.State
@@ -36,7 +37,8 @@ abstract class BaseUsersViewModel(
     private val _clickBackEvent = MutableLiveData<Event<Boolean>>()
     val clickBackEvent: LiveData<Event<Boolean>> = _clickBackEvent
 
-
+    private val _clickDeleteEvent = MutableLiveData<Event<MembersClassBody>>()
+    val clickDeleteEvent: LiveData<Event<MembersClassBody>> = _clickDeleteEvent
 
     fun MediatorLiveData<LiveData<State<BaseResponse<List<UserSelected>>?>>>.refresh(
         isRefresh: Boolean,
@@ -62,12 +64,9 @@ abstract class BaseUsersViewModel(
         _clickBackEvent.postValue(Event(true))
     }
 
-    override fun onClickSelect(id: String) {
-//        TODO("Not yet implemented")
-    }
+    abstract fun onClickDelete()
 
-    val onSwipe =  fun (id: Int){
-        Log.i("TAG","SWIPE ID: $id")
-    }
+    protected fun getMemberClassBody(students: List<String>) = schoolId.value?.let { MembersClassBody(students,it) }
+
 
 }

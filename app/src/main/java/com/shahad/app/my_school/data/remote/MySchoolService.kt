@@ -85,4 +85,16 @@ interface MySchoolService{
     @GET("manger/info")
     suspend fun getMangerInfo(): Response<BaseResponse<MangerInfoDto?>>
 
+    @POST("class/removeMember")
+    suspend fun removeMemberFromClass(@Body requestBody: JsonElement): Response<BaseResponse<String>>
+
+    @POST("school/delete")
+    suspend fun deleteSchool(@Query("id") id: String): Response<BaseResponse<String>>
+
+    @POST("school/removeStudent")
+    suspend fun removeStudentFromSchool(@Body requestBody: JsonElement): Response<BaseResponse<String>>
+
+    @POST("school/removeTeacher")
+    suspend fun removeTeacherFromSchool(@Body requestBody: JsonElement): Response<BaseResponse<String>>
+
 }

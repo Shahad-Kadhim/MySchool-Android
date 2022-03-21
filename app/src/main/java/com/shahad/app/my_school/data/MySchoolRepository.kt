@@ -50,6 +50,14 @@ interface MySchoolRepository{
 
     fun getMangerInfo(): Flow<State<BaseResponse<MangerInfoDto?>?>>
 
+    fun removeStudentFromClass(requestBody: JsonElement): Flow<State<BaseResponse<String>?>>
+
+    fun removeStudentFromSchool(requestBody: JsonElement): Flow<State<BaseResponse<String>?>>
+
+    fun removeTeacherFromSchool(requestBody: JsonElement): Flow<State<BaseResponse<String>?>>
+
+    fun deleteSchool(schoolId: String): Flow<State<BaseResponse<String>?>>
+
     suspend fun refreshMangerSchool()
     suspend fun refreshTeacherSchool()
 }

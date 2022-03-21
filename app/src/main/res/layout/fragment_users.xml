@@ -46,6 +46,22 @@
                 app:layout_constraintStart_toEndOf="@+id/back_button"
                 app:layout_constraintTop_toTopOf="@+id/back_button" />
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/add_button"
+                android:src="@drawable/ic_baseline_delete_outline_24"
+                android:onClick="@{() -> viewModel.onClickDelete()}"
+                android:fontFamily="@font/source_sans_pro_bold"
+                android:textSize="24sp"
+                android:layout_marginEnd="@dimen/space_medium"
+                android:textColor="@color/brand_color"
+                android:layout_marginStart="@dimen/space_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/back_button"
+                app:layout_constraintTop_toTopOf="@+id/back_button"
+                app:tint="@color/brand_color" />
+
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline"
                 android:layout_width="wrap_content"
@@ -87,13 +103,11 @@
                 android:layout_marginTop="8dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:items="@{viewModel.users.toData().data}"
-                app:onSwipe="@{viewModel.onSwipe}"
-                app:ifSwipe="@{true}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/chipGroup"
-                tools:listitem="@layout/item_user" />
+                tools:listitem="@layout/item_student_selection" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:layout_width="wrap_content"

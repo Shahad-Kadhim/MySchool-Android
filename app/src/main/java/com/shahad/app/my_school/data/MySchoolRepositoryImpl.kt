@@ -125,6 +125,19 @@ class MySchoolRepositoryImpl @Inject constructor(
     override fun getMangerInfo(): Flow<State<BaseResponse<MangerInfoDto?>?>> =
         wrapWithFlow { apiService.getMangerInfo() }
 
+    override fun removeStudentFromClass(requestBody: JsonElement): Flow<State<BaseResponse<String>?>> =
+        wrapWithFlow { apiService.removeMemberFromClass(requestBody) }
+
+    override fun removeStudentFromSchool(requestBody: JsonElement): Flow<State<BaseResponse<String>?>>  =
+        wrapWithFlow { apiService.removeStudentFromSchool(requestBody) }
+
+    override fun removeTeacherFromSchool(requestBody: JsonElement): Flow<State<BaseResponse<String>?>>  =
+        wrapWithFlow { apiService.removeTeacherFromSchool(requestBody) }
+
+
+    override fun deleteSchool(schoolId: String): Flow<State<BaseResponse<String>?>> =
+        wrapWithFlow { apiService.deleteSchool(schoolId) }
+
     private fun <T> wrapWithFlow(function: suspend () -> Response<T>): Flow<State<T?>> {
         return flow {
             emit(State.Loading)
