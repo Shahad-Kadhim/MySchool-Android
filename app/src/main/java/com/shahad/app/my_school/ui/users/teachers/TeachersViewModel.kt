@@ -1,12 +1,9 @@
 package com.shahad.app.my_school.ui.users.teachers
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.shahad.app.my_school.data.MySchoolRepository
 import com.shahad.app.my_school.data.remote.response.BaseResponse
-import com.shahad.app.my_school.data.remote.response.UserDto
 import com.shahad.app.my_school.domain.mappers.UserSelected
-import com.shahad.app.my_school.ui.add.student.MembersClassBody
 import com.shahad.app.my_school.ui.users.BaseUsersViewModel
 import com.shahad.app.my_school.util.DataClassParser
 import com.shahad.app.my_school.util.Event

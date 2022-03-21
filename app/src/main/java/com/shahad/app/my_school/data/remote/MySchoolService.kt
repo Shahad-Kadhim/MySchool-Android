@@ -82,6 +82,12 @@ interface MySchoolService{
         @Query("id") id: String? =null
     ): Response<BaseResponse<StudentDto?>>
 
+
+    @GET("teacher/info")
+    suspend fun getTeacherInfo(
+        @Query("id") id: String? =null
+    ): Response<BaseResponse<TeacherDto?>>
+
     @GET("manger/info")
     suspend fun getMangerInfo(): Response<BaseResponse<MangerInfoDto?>>
 

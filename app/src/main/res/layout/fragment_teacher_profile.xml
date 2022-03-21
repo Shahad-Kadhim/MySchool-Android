@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.shahad.app.my_school.ui.profile.TeacherProfileViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/space_large"
+            android:onClick="@{() -> viewModel.onClickBack()}"
+            android:src="@drawable/ic_baseline_arrow_back_ios_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/black" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="16dp"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/brand_color"
+            android:indeterminateTintMode="src_atop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:showOnLoading="@{viewModel.info}" />
+
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/space_medium"
+            android:src="@drawable/ic_photo"
+            app:showOnSuccess="@{viewModel.info}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/back_button" />
+
+        <TextView
+            android:id="@+id/text_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:showOnSuccess="@{viewModel.info}"
+            android:layout_margin="@dimen/space_medium"
+            android:text="@{viewModel.info.toData().data.name}"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/imageView8"
+            app:layout_constraintStart_toStartOf="@+id/imageView8"
+            app:layout_constraintTop_toBottomOf="@+id/imageView8"
+            tools:text="Shahad Kadhim" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/space_tiny"
+            android:src="@drawable/ic_bx_edit_alt"
+            app:showOnSuccess="@{viewModel.info}"
+            app:layout_constraintBottom_toBottomOf="@+id/text_name"
+            app:layout_constraintStart_toEndOf="@+id/text_name"
+            app:layout_constraintTop_toTopOf="@id/text_name" />
+
+        <TextView
+            android:id="@+id/phone_label"
+            style="@style/LabelProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:showOnSuccess="@{viewModel.info}"
+            android:text="Phone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_name" />
+
+        <EditText
+            android:id="@+id/edit_phone"
+            style="@style/Profile"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:background="@drawable/reg_rounded_stroke_8dp"
+            app:showOnSuccess="@{viewModel.info}"
+            android:text="@{viewModel.info.toData().data.phone + ``}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/phone_label"
+            tools:text="0781234566" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/space_medium"
+            app:showOnSuccess="@{viewModel.info}"
+            android:src="@drawable/ic_bx_edit_alt"
+            app:layout_constraintBottom_toBottomOf="@+id/edit_phone"
+            app:layout_constraintEnd_toEndOf="@id/edit_phone"
+            app:layout_constraintTop_toTopOf="@id/edit_phone" />
+
+
+        <TextView
+            android:id="@+id/teach_label"
+            style="@style/LabelProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:showOnSuccess="@{viewModel.info}"
+            android:text="Teaching Specialization"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_phone" />
+
+        <EditText
+            android:id="@+id/edit_teach"
+            style="@style/Profile"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            app:showOnSuccess="@{viewModel.info}"
+            android:background="@drawable/reg_rounded_stroke_8dp"
+            android:text="@{viewModel.info.toData().data.teachingSpecialization}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/teach_label" />
+
+
+        <TextView
+            android:id="@+id/school_label"
+            style="@style/LabelProfile"
+            app:showOnSuccess="@{viewModel.info}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Schools"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_teach" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/schools"
+            items="@{viewModel.schools}"
+            android:layout_width="match_parent"
+            app:showOnSuccess="@{viewModel.info}"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/space_tiny"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/school_label"
+            tools:listitem="@layout/item_school" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

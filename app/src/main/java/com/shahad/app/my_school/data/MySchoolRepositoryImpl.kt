@@ -122,6 +122,9 @@ class MySchoolRepositoryImpl @Inject constructor(
     override fun getStudentInfo(id: String?): Flow<State<BaseResponse<StudentDto?>?>> =
         wrapWithFlow { apiService.getStudentInfo(id) }
 
+    override fun getTeacherInfo(id: String?): Flow<State<BaseResponse<TeacherDto?>?>> =
+        wrapWithFlow { apiService.getTeacherInfo(id) }
+
     override fun getMangerInfo(): Flow<State<BaseResponse<MangerInfoDto?>?>> =
         wrapWithFlow { apiService.getMangerInfo() }
 
