@@ -1,5 +1,6 @@
 package com.shahad.app.my_school.ui.users
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.shahad.app.my_school.data.MySchoolRepository
 import com.shahad.app.my_school.data.remote.response.BaseResponse
@@ -62,7 +63,11 @@ abstract class BaseUsersViewModel(
     }
 
     override fun onClickSelect(id: String) {
-        TODO("Not yet implemented")
+//        TODO("Not yet implemented")
+    }
+
+    val onSwipe =  fun (id: Int){
+        Log.i("TAG","SWIPE ID: $id")
     }
 
 }

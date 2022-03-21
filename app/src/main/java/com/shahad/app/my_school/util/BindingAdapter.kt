@@ -7,6 +7,7 @@ import android.widget.AdapterView
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Spinner
+import androidx.constraintlayout.motion.widget.OnSwipe
 import androidx.core.content.ContextCompat
 import androidx.core.view.children
 import androidx.core.view.isVisible
@@ -14,7 +15,9 @@ import androidx.core.widget.doOnTextChanged
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Index
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.card.MaterialCardView
@@ -219,5 +222,26 @@ fun onChangeChecked(view: SwipeRefreshLayout, attChange: InverseBindingListener)
     view.setOnRefreshListener {
         attChange.onChange()
         Log.i("TAG","is Refresh")
+    }
+}
+
+@BindingAdapter(value = ["app:onSwipe","app:ifSwipe"])
+fun onSwipe(view: RecyclerView, onSwipe: (o:Int) -> Unit,isSwipe: Boolean){
+    if(isSwipe){
+
+        ItemTouchHelper(object: ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT){
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                onSwipe(viewHolder.adapterPosition)
+            }
+
+        }).attachToRecyclerView(view)
     }
 }
