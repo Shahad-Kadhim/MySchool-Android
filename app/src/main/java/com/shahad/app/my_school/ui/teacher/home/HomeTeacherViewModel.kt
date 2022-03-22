@@ -1,31 +1,47 @@
 package com.shahad.app.my_school.ui.teacher.home
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.shahad.app.my_school.data.MySchoolRepository
 import com.shahad.app.my_school.data.remote.response.BaseResponse
-import com.shahad.app.my_school.data.remote.response.ClassDto
 import com.shahad.app.my_school.data.remote.response.ClassList
 import com.shahad.app.my_school.ui.base.BaseViewModel
 import com.shahad.app.my_school.ui.manger.home.ClassInteractionListener
 import com.shahad.app.my_school.util.Event
 import com.shahad.app.my_school.util.State
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeTeacherViewModel @Inject constructor(
-    repository: MySchoolRepository
+    private val repository: MySchoolRepository
 ): BaseViewModel(), ClassInteractionListener{
 
     val search = MutableLiveData<String?>(null)
 
-    val classes: LiveData<State<BaseResponse<List<ClassList>>?>> =
-        Transformations.switchMap(search){ searchKey ->
+    val refreshState = MutableLiveData<Boolean>(false)
+
+    val classes = Transformations.switchMap(search){ searchKey ->
             repository.getTeacherClasses(searchKey?.takeIf { it.isNotBlank() }).asLiveData()
         }
+
+
+
+//        MediatorLiveData<LiveData<List<ClassList>>>().apply {
+//            addSource(search){ searchKey ->
+//                this.postValue(repository.getTeacherClasses(searchKey?.takeIf { it.isNotBlank() }).asLiveData())
+//            }
+//            addSource(refreshState){
+//                if(it){
+//                    viewModelScope.launch {
+//                        repository.refreshTeacherClasses(search.value)
+//                        this@apply.postValue(repository.getTeacherClasses(search.value?.takeIf { it.isNotBlank() }).asLiveData())
+//                        refreshState.postValue(false)
+//                    }
+//                }
+//            }
+//        }
+
 
     private val _clickCreateClassEvent = MutableLiveData<Event<Boolean>>()
     val clickCreateClassEvent: LiveData<Event<Boolean>> = _clickCreateClassEvent
@@ -39,9 +55,21 @@ class HomeTeacherViewModel @Inject constructor(
     private val _clickProfileEvent = MutableLiveData<Event<Boolean>>()
     val clickProfileEvent: LiveData<Event<Boolean>> = _clickProfileEvent
 
+
+    init {
+        refreshClasses()
+    }
+
+    fun refreshClasses(){
+        viewModelScope.launch {
+            repository.refreshTeacherClasses(search.value)
+            refreshState.postValue(false)
+        }
+    }
+
     val unAuthentication = MediatorLiveData<State.UnAuthorization?>().apply {
         addSource(classes){
-            if(it is State.UnAuthorization) this.postValue(it)
+//            if(it is State.UnAuthorization) this.postValue(it)
         }
     }
 

@@ -55,6 +55,9 @@ class HomeTeacherFragment: BaseFragment<FragmentTeacherHomeBinding>() {
                     HomeTeacherFragmentDirections.actionHomeFragmentToProfileFragment2()
                 )
             }
+            refreshState.observe(this@HomeTeacherFragment){ ifRefresh ->
+                takeIf { ifRefresh==true }?.refreshClasses()
+            }
 
         }
     }

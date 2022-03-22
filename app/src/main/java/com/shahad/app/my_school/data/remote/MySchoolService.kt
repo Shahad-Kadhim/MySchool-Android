@@ -18,8 +18,9 @@ interface MySchoolService{
     @POST("/user/login")
     suspend fun loginUser(@Body loginBody: JsonElement):  Response<BaseResponse<AuthenticationResponse>>
 
+    //TODO LATER IN SERVER SIDE
     @GET("/teacher/classes")
-    suspend fun getTeacherClasses(@Query("search" ) searchKey: String?): Response<BaseResponse<List<ClassList>>>
+    suspend fun getTeacherClasses(@Query("search" ) searchKey: String? =null): Response<BaseResponse<List<ClassList>>>
 
     @GET("/teacher/schools")
     suspend fun getTeacherSchools(): Response<BaseResponse<List<SchoolDto>>>

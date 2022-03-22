@@ -36,14 +36,21 @@ class MySchoolRepositoryImpl @Inject constructor(
     override fun loginUser(loginBody: JsonElement): Flow<State<BaseResponse<AuthenticationResponse>?>> =
         wrapWithFlow { apiService.loginUser(loginBody) }
 
-    override fun getTeacherClasses(searchKey: String?): Flow<State<BaseResponse<List<ClassList>>?>> =
-        wrapWithFlow { apiService.getTeacherClasses(searchKey) }
+    override fun getTeacherClasses(searchKey: String?): Flow<List<ClassList>> =
+        wrapperClass(dao.getCLasses(searchKey ?: ""))
 
     override fun getTeacherSchools(): Flow<List<School>> =
         wrapperClass(
             dao.getSchools(),
             domainMappers.schoolMapper::map
         )
+
+    override suspend fun refreshTeacherClasses(searchKey: String?) {
+        refreshWrapper(apiService::getTeacherClasses, dao::addClasses)
+        { body ->
+            body?.data
+        }
+    }
 
     override fun getMangerSchool(): Flow<List<School>> =
         wrapperClass(
@@ -183,11 +190,13 @@ class MySchoolRepositoryImpl @Inject constructor(
 
     private fun <T, U> wrapperClass(
         data: Flow<List<T>>,
-        mapper: (T) -> U
+        mapper:( (T) -> U)? = null,
     ): Flow<List<U>> =
         data.map { list ->
             list.map { entity ->
-                mapper(entity)
+                mapper?.let {
+                    it(entity)
+                } ?: entity as U
             }
         }
 
@@ -209,5 +218,6 @@ class MySchoolRepositoryImpl @Inject constructor(
             Log.i("MY_SCHOOL", "no connection cant update data")
         }
     }
+
 
 }

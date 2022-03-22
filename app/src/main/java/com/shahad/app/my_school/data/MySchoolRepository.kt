@@ -16,7 +16,8 @@ interface MySchoolRepository{
 
     fun loginUser(loginBody: JsonElement): Flow<State<BaseResponse<AuthenticationResponse>?>>
 
-    fun getTeacherClasses(searchKey: String? = null): Flow<State<BaseResponse<List<ClassList>>?>>
+    fun getTeacherClasses(searchKey: String? = null): Flow<List<ClassList>>
+
     fun getTeacherSchools(): Flow<List<School>>
 
     fun getMangerSchool(): Flow<List<School>>
@@ -62,4 +63,5 @@ interface MySchoolRepository{
 
     suspend fun refreshMangerSchool()
     suspend fun refreshTeacherSchool()
+    suspend fun refreshTeacherClasses(searchKey: String?)
 }

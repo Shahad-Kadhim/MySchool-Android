@@ -154,4 +154,14 @@
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">16sp</item>
     </style>
+
+    <style name="FAB" parent="ShapeAppearanceOverlay.Material3.FloatingActionButton">
+        <item name="android:layout_margin">@dimen/space_medium</item>
+        <item name="android:src">@drawable/ic_baseline_add_24</item>
+        <item name="backgroundTint">@color/brand_color</item>
+        <item name="borderWidth">0dp</item>
+        <item name="elevation">6dp</item>
+        <item name="tint">@color/white</item>
+        <item name="fabSize">normal</item>
+    </style>
 </resources>
