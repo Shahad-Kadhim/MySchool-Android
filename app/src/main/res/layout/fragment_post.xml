@@ -24,6 +24,7 @@
             android:layout_height="0dp"
             android:clipToPadding="false"
             android:orientation="vertical"
+            android:paddingBottom="@dimen/space_large_5x"
             items="@{viewModel.students.toData().data}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
