@@ -1,8 +1,8 @@
-package com.shahad.app.my_school.ui.manger.schools
+package com.shahad.app.my_school.ui.schools
 
 import androidx.lifecycle.*
 import com.shahad.app.my_school.data.MySchoolRepository
-import com.shahad.app.my_school.ui.manger.home.SchoolInteractionListener
+import com.shahad.app.my_school.ui.SchoolInteractionListener
 import com.shahad.app.my_school.util.Event
 import com.shahad.app.my_school.util.State
 import dagger.hilt.android.lifecycle.HiltViewModel

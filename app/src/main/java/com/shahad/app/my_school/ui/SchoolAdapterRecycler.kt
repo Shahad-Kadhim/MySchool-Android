@@ -1,4 +1,4 @@
-package com.shahad.app.my_school.ui.manger.home
+package com.shahad.app.my_school.ui
 
 import com.shahad.app.my_school.R
 import com.shahad.app.my_school.domain.models.School

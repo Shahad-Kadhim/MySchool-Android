@@ -1,4 +1,4 @@
-package com.shahad.app.my_school.ui.manger.classes
+package com.shahad.app.my_school.ui.classes
 
 import android.os.Bundle
 import androidx.fragment.app.viewModels
@@ -7,7 +7,7 @@ import com.shahad.app.my_school.R
 import com.shahad.app.my_school.databinding.FragmentClassesMangerBinding
 import com.shahad.app.my_school.ui.base.BaseFragment
 import com.shahad.app.my_school.ui.main.MainActivity
-import com.shahad.app.my_school.ui.manger.home.ClassesAdapterRecycler
+import com.shahad.app.my_school.ui.ClassesAdapterRecycler
 import com.shahad.app.my_school.util.extension.observeEvent
 import dagger.hilt.android.AndroidEntryPoint
 

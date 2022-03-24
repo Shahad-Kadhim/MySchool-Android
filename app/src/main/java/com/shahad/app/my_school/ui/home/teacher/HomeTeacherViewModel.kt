@@ -1,9 +1,9 @@
-package com.shahad.app.my_school.ui.teacher.home
+package com.shahad.app.my_school.ui.home.teacher
 
 import androidx.lifecycle.*
 import com.shahad.app.my_school.data.MySchoolRepository
 import com.shahad.app.my_school.ui.base.BaseViewModel
-import com.shahad.app.my_school.ui.manger.home.ClassInteractionListener
+import com.shahad.app.my_school.ui.ClassInteractionListener
 import com.shahad.app.my_school.util.Event
 import com.shahad.app.my_school.util.State
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,7 +13,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeTeacherViewModel @Inject constructor(
     private val repository: MySchoolRepository
-): BaseViewModel(), ClassInteractionListener{
+): BaseViewModel(), ClassInteractionListener {
 
     val search = MutableLiveData<String?>(null)
 

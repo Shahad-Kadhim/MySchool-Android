@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeMangerFragment"
-        android:name="com.shahad.app.my_school.ui.manger.home.HomeMangerFragment"
+        android:name="com.shahad.app.my_school.ui.home.manger.HomeMangerFragment"
         android:label="HomeMangerFragment"
         tools:layout="@layout/fragment_manger_home">
         <action
@@ -62,7 +62,7 @@
         tools:layout="@layout/fragment_dailog_add"/>
     <fragment
         android:id="@+id/schoolFragment"
-        android:name="com.shahad.app.my_school.ui.manger.schools.SchoolMangerFragment"
+        android:name="com.shahad.app.my_school.ui.schools.SchoolMangerFragment"
         android:label="SchoolFragment"
         tools:layout="@layout/fragment_schools">
 
@@ -72,7 +72,7 @@
     </fragment>
     <fragment
         android:id="@+id/classesMangerFragment"
-        android:name="com.shahad.app.my_school.ui.manger.classes.ClassesMangerFragment"
+        android:name="com.shahad.app.my_school.ui.classes.ClassesMangerFragment"
         android:label="ClassesMangerFragment"
         tools:layout="@layout/fragment_classes_manger"/>
     <dialog

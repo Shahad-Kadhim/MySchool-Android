@@ -1,4 +1,4 @@
-package com.shahad.app.my_school.ui.teacher.newClass
+package com.shahad.app.my_school.ui.add.newClass
 
 import android.os.Bundle
 import androidx.fragment.app.viewModels

@@ -1,4 +1,4 @@
-package com.shahad.app.my_school.ui.teacher.home
+package com.shahad.app.my_school.ui.add.newClass
 
 data class CreateClassBody(
     var name: String,

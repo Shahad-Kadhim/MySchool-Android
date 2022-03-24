@@ -1,4 +1,4 @@
-package com.shahad.app.my_school.ui.manger.schools
+package com.shahad.app.my_school.ui.schools
 
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope

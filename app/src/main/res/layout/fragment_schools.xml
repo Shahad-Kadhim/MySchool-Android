@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.shahad.app.my_school.ui.manger.schools.SchoolBaseViewModel" />
+            type="com.shahad.app.my_school.ui.schools.SchoolBaseViewModel" />
         <variable
             name="isAuth"
             type="Boolean" />

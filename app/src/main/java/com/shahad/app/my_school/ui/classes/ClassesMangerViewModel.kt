@@ -1,10 +1,9 @@
-package com.shahad.app.my_school.ui.manger.classes
+package com.shahad.app.my_school.ui.classes
 
 import androidx.lifecycle.*
 import com.shahad.app.my_school.data.MySchoolRepository
 import com.shahad.app.my_school.ui.base.BaseViewModel
-import com.shahad.app.my_school.ui.manger.home.ClassInteractionListener
-import com.shahad.app.my_school.ui.manger.home.SchoolInteractionListener
+import com.shahad.app.my_school.ui.ClassInteractionListener
 import com.shahad.app.my_school.util.Event
 import com.shahad.app.my_school.util.State
 import dagger.hilt.android.lifecycle.HiltViewModel

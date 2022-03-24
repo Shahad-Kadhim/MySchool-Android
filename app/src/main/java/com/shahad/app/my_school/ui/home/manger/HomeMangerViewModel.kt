@@ -1,8 +1,10 @@
-package com.shahad.app.my_school.ui.manger.home
+package com.shahad.app.my_school.ui.home.manger
 
 import androidx.lifecycle.*
 import com.shahad.app.my_school.data.MySchoolRepository
 import com.shahad.app.my_school.ui.base.BaseViewModel
+import com.shahad.app.my_school.ui.ClassInteractionListener
+import com.shahad.app.my_school.ui.SchoolInteractionListener
 import com.shahad.app.my_school.util.Event
 import com.shahad.app.my_school.util.State
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,8 +15,8 @@ import javax.inject.Inject
 class HomeMangerViewModel @Inject constructor(
     private val repository: MySchoolRepository
 ): BaseViewModel(),
-   SchoolInteractionListener,
-   ClassInteractionListener {
+    SchoolInteractionListener,
+    ClassInteractionListener {
 
     val classes = repository.getMangerClasses().asLiveData()
 

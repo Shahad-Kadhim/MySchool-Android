@@ -9,7 +9,7 @@
             type="com.shahad.app.my_school.domain.models.School" />
         <variable
             name="listener"
-            type="com.shahad.app.my_school.ui.manger.home.SchoolInteractionListener" />
+            type="com.shahad.app.my_school.ui.SchoolInteractionListener" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

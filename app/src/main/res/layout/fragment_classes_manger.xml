@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.shahad.app.my_school.ui.manger.classes.ClassesMangerViewModel" />
+            type="com.shahad.app.my_school.ui.classes.ClassesMangerViewModel" />
 
     </data>
 

@@ -9,7 +9,7 @@
             type="com.shahad.app.my_school.domain.models.ClassM" />
         <variable
             name="listener"
-            type="com.shahad.app.my_school.ui.manger.home.ClassInteractionListener" />
+            type="com.shahad.app.my_school.ui.ClassInteractionListener" />
 
     </data>
 

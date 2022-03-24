@@ -1,4 +1,4 @@
-package com.shahad.app.my_school.ui.teacher.home
+package com.shahad.app.my_school.ui.home.teacher
 
 import android.os.Bundle
 import android.util.Log
@@ -7,8 +7,7 @@ import com.shahad.app.my_school.R
 import com.shahad.app.my_school.databinding.FragmentTeacherHomeBinding
 import com.shahad.app.my_school.ui.base.BaseFragment
 import com.shahad.app.my_school.ui.main.MainActivity
-import com.shahad.app.my_school.ui.manger.home.ClassesAdapterRecycler
-import com.shahad.app.my_school.ui.manger.home.HomeMangerFragmentDirections
+import com.shahad.app.my_school.ui.ClassesAdapterRecycler
 import com.shahad.app.my_school.ui.register.Role
 import com.shahad.app.my_school.util.extension.goToFragment
 import com.shahad.app.my_school.util.extension.observeEvent
@@ -47,7 +46,13 @@ class HomeTeacherFragment: BaseFragment<FragmentTeacherHomeBinding>() {
                 viewDataBinding.root.goToFragment(HomeTeacherFragmentDirections.actionHomeFragmentToTeacherSchoolsFragment())
             }
             clickClassEvent.observeEvent(this@HomeTeacherFragment){ pair ->
-                viewDataBinding.root.goToFragment(HomeTeacherFragmentDirections.actionHomeFragmentToClassScreenFragment(pair.first,pair.second,Role.TEACHER))
+                viewDataBinding.root.goToFragment(
+                    HomeTeacherFragmentDirections.actionHomeFragmentToClassScreenFragment(
+                        pair.first,
+                        pair.second,
+                        Role.TEACHER
+                    )
+                )
             }
 
             clickProfileEvent.observeEvent(this@HomeTeacherFragment){

@@ -5,7 +5,7 @@ import androidx.navigation.fragment.findNavController
 import com.shahad.app.my_school.R
 import com.shahad.app.my_school.databinding.FragmentStudentProfileBinding
 import com.shahad.app.my_school.ui.base.BaseFragment
-import com.shahad.app.my_school.ui.manger.home.SchoolAdapterRecycler
+import com.shahad.app.my_school.ui.SchoolAdapterRecycler
 import com.shahad.app.my_school.util.extension.observeEvent
 import dagger.hilt.android.AndroidEntryPoint
 
