@@ -160,7 +160,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Classes"
-            app:showOnSuccess="@{viewModel.classes}"
             style="@style/Subject"
             app:layout_constraintStart_toStartOf="@+id/label_school"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -171,8 +170,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:orientation="vertical"
-            app:showOnSuccess="@{viewModel.classes}"
-            items="@{viewModel.classes.toData().data}"
+            items="@{viewModel.classes}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -183,9 +181,9 @@
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:showOnLoading="@{viewModel.classes}"
             android:indeterminate="true"
             android:elevation="16dp"
+            android:visibility="invisible"
             android:indeterminateTintMode="src_atop"
             android:indeterminateTint="@color/brand_color"
             app:layout_constraintBottom_toBottomOf="parent"

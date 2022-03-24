@@ -4,10 +4,10 @@ import com.google.gson.JsonElement
 import com.shahad.app.my_school.data.remote.AuthenticationResponse
 import com.shahad.app.my_school.data.remote.response.*
 import com.shahad.app.my_school.domain.mappers.UserSelected
+import com.shahad.app.my_school.domain.models.ClassM
 import com.shahad.app.my_school.domain.models.School
 import com.shahad.app.my_school.util.State
 import kotlinx.coroutines.flow.Flow
-import okhttp3.MultipartBody
 import okhttp3.RequestBody
 
 interface MySchoolRepository{
@@ -16,19 +16,19 @@ interface MySchoolRepository{
 
     fun loginUser(loginBody: JsonElement): Flow<State<BaseResponse<AuthenticationResponse>?>>
 
-    fun getTeacherClasses(searchKey: String? = null): Flow<List<ClassList>>
+    fun getTeacherClasses(searchKey: String? = null): Flow<List<ClassM>>
 
     fun getTeacherSchools(): Flow<List<School>>
 
     fun getMangerSchool(): Flow<List<School>>
 
-    fun getStudentSchools(): Flow<State<BaseResponse<List<SchoolDto>>?>>
+    fun getStudentSchools(): Flow<List<School>>
 
-    fun getMangerClasses(): Flow<State<BaseResponse<List<ClassList>>?>>
+    fun getMangerClasses(): Flow<List<ClassM>>
 
     fun createSchool(schoolName: String): Flow<State<BaseResponse<SchoolDto>?>>
 
-    fun createClass(requestBody: JsonElement): Flow<State<BaseResponse<ClassDto>?>>
+    fun createClass(requestBody: JsonElement): Flow<State<BaseResponse<ClassDto2>?>>
 
     fun addStudentToSchool(requestBody: JsonElement): Flow<State<BaseResponse<String>?>>
     fun addTeacherToSchool(requestBody: JsonElement): Flow<State<BaseResponse<String>?>>
@@ -63,5 +63,7 @@ interface MySchoolRepository{
 
     suspend fun refreshMangerSchool()
     suspend fun refreshTeacherSchool()
+    suspend fun refreshStudentSchool()
     suspend fun refreshTeacherClasses(searchKey: String?)
+    suspend fun refreshMangerClasses()
 }

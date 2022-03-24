@@ -45,12 +45,13 @@ class HomeMangerViewModel @Inject constructor(
     val clickClassEvent: LiveData<Event<Pair<String,String>>> = _clickClassEvent
 
     val unAuthentication = MediatorLiveData<State.UnAuthorization?>().apply {
-        addSource(classes,::whenUnAuthorization)
+//        addSource(classes,::whenUnAuthorization)
     }
 
     init {
         viewModelScope.launch {
             repository.refreshMangerSchool()
+            repository.refreshMangerClasses()
         }
     }
 

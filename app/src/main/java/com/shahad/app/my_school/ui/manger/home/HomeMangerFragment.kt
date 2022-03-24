@@ -31,8 +31,17 @@ class HomeMangerFragment: BaseFragment<FragmentMangerHomeBinding>() {
     }
 
     private fun recycler() {
-        viewDataBinding.schoolRecycler.adapter= SchoolAdapterRecycler(emptyList(),viewModel)
-        viewDataBinding.classRecycler.adapter= ClassesAdapterRecycler(emptyList(),viewModel)
+        viewDataBinding.schoolRecycler.adapter=
+            SchoolAdapterRecycler(
+                items = viewModel.schools.value ?: emptyList(),
+                listener = viewModel
+            )
+
+        viewDataBinding.classRecycler.adapter= ClassesAdapterRecycler(
+            items = viewModel.classes.value ?: emptyList(),
+            listener = viewModel
+        )
+
     }
 
     private fun observe() {

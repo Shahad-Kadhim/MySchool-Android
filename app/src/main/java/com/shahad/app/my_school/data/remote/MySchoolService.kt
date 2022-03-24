@@ -2,7 +2,6 @@ package com.shahad.app.my_school.data.remote
 
 import com.google.gson.JsonElement
 import com.shahad.app.my_school.data.remote.response.*
-import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -20,7 +19,7 @@ interface MySchoolService{
 
     //TODO LATER IN SERVER SIDE
     @GET("/teacher/classes")
-    suspend fun getTeacherClasses(@Query("search" ) searchKey: String? =null): Response<BaseResponse<List<ClassList>>>
+    suspend fun getTeacherClasses(@Query("search" ) searchKey: String? =null): Response<BaseResponse<List<ClassDto>>>
 
     @GET("/teacher/schools")
     suspend fun getTeacherSchools(): Response<BaseResponse<List<SchoolDto>>>
@@ -32,7 +31,7 @@ interface MySchoolService{
     suspend fun getStudentSchools(): Response<BaseResponse<List<SchoolDto>>>
 
     @GET("/manger/classes")
-    suspend fun getMangerClasses(): Response<BaseResponse<List<ClassList>>>
+    suspend fun getMangerClasses(): Response<BaseResponse<List<ClassDto>>>
 
     @GET("/school/students")
     suspend fun getSchoolStudent(
@@ -50,7 +49,7 @@ interface MySchoolService{
     suspend fun createSchool(@Query("name") schoolName: String): Response<BaseResponse<SchoolDto>>
 
     @POST("/class/new")
-    suspend fun createClass(@Body requestBody: JsonElement): Response<BaseResponse<ClassDto>>
+    suspend fun createClass(@Body requestBody: JsonElement): Response<BaseResponse<ClassDto2>>
 
     @POST("/student/joinSchool")
     suspend fun addStudentToSchool(@Body requestBody: JsonElement): Response<BaseResponse<String>>

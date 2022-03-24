@@ -76,9 +76,9 @@
                 android:clipToPadding="false"
                 android:orientation="vertical"
                 android:layout_marginTop="@dimen/space_small"
-                app:items="@{viewModel.classes.toData().data}"
+                app:items="@{viewModel.classes}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_class" />
+                tools:listitem="@layout/item_class_with_stage" />
 
         </com.google.android.material.card.MaterialCardView>
 

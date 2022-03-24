@@ -7,9 +7,10 @@ import com.shahad.app.my_school.ui.base.BaseRecyclerAdapter
 
 class SchoolAdapterRecycler(
     items: List<School>,
-    listener: SchoolInteractionListener
+    listener: SchoolInteractionListener,
+    itemLayout: Int =  R.layout.item_school
 ): BaseRecyclerAdapter<School>(items,listener) {
-    override val layoutId: Int = R.layout.item_school
+    override val layoutId: Int = itemLayout
 
     override fun areItemsTheSame(
         oldItemPosition: Int,

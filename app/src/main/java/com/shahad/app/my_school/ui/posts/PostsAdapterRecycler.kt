@@ -1,7 +1,6 @@
 package com.shahad.app.my_school.ui.posts
 
 import com.shahad.app.my_school.R
-import com.shahad.app.my_school.data.remote.response.ClassList
 import com.shahad.app.my_school.data.remote.response.PostDto
 import com.shahad.app.my_school.ui.base.BaseInteractionListener
 import com.shahad.app.my_school.ui.base.BaseRecyclerAdapter

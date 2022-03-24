@@ -6,7 +6,7 @@
     <data>
         <variable
             name="item"
-            type="com.shahad.app.my_school.data.remote.response.ClassList" />
+            type="com.shahad.app.my_school.domain.models.ClassM" />
         <variable
             name="listener"
             type="com.shahad.app.my_school.ui.manger.home.ClassInteractionListener" />

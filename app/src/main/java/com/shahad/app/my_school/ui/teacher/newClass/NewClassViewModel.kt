@@ -1,12 +1,11 @@
 package com.shahad.app.my_school.ui.teacher.newClass
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
 import com.shahad.app.my_school.data.MySchoolRepository
 import com.shahad.app.my_school.data.remote.response.BaseResponse
-import com.shahad.app.my_school.data.remote.response.ClassDto
+import com.shahad.app.my_school.data.remote.response.ClassDto2
 import com.shahad.app.my_school.ui.base.BaseViewModel
 import com.shahad.app.my_school.ui.teacher.home.CreateClassBody
 import com.shahad.app.my_school.util.DataClassParser
@@ -26,7 +25,7 @@ class NewClassViewModel @Inject constructor(
     val className = MutableLiveData<String>()
     val stage = MutableLiveData<String>()
 
-    private val _createRequestStatus = MutableLiveData<State<BaseResponse<ClassDto>?>>()
+    private val _createRequestStatus = MutableLiveData<State<BaseResponse<ClassDto2>?>>()
 
     val onSuccessCreated = Transformations.map(_createRequestStatus){
         if(it is State.Success) Event(true) else Event(false)

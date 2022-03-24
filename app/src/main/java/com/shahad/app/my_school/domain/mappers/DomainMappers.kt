@@ -4,5 +4,6 @@ import javax.inject.Inject
 
 class DomainMappers @Inject constructor(
     val userInfoMapper: UserInfoMapper,
-    val schoolMapper: SchoolMapper
+    val schoolMapper: SchoolMapper,
+    val classMapper: ClassMapper,
 )

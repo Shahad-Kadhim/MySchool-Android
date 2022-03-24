@@ -2,8 +2,6 @@ package com.shahad.app.my_school.ui.teacher.home
 
 import androidx.lifecycle.*
 import com.shahad.app.my_school.data.MySchoolRepository
-import com.shahad.app.my_school.data.remote.response.BaseResponse
-import com.shahad.app.my_school.data.remote.response.ClassList
 import com.shahad.app.my_school.ui.base.BaseViewModel
 import com.shahad.app.my_school.ui.manger.home.ClassInteractionListener
 import com.shahad.app.my_school.util.Event

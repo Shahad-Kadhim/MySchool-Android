@@ -9,6 +9,7 @@ import com.shahad.app.my_school.data.remote.response.*
 import com.shahad.app.my_school.domain.mappers.DomainMappers
 import com.shahad.app.my_school.domain.mappers.LocalMappers
 import com.shahad.app.my_school.domain.mappers.UserSelected
+import com.shahad.app.my_school.domain.models.ClassM
 import com.shahad.app.my_school.domain.models.School
 import com.shahad.app.my_school.util.State
 import kotlinx.coroutines.FlowPreview
@@ -36,8 +37,11 @@ class MySchoolRepositoryImpl @Inject constructor(
     override fun loginUser(loginBody: JsonElement): Flow<State<BaseResponse<AuthenticationResponse>?>> =
         wrapWithFlow { apiService.loginUser(loginBody) }
 
-    override fun getTeacherClasses(searchKey: String?): Flow<List<ClassList>> =
-        wrapperClass(dao.getCLasses(searchKey ?: ""))
+    override fun getTeacherClasses(searchKey: String?): Flow<List<ClassM>> =
+        wrapperClass(
+            dao.getCLasses(searchKey ?: ""),
+            domainMappers.classMapper::map
+        )
 
     override fun getTeacherSchools(): Flow<List<School>> =
         wrapperClass(
@@ -48,7 +52,9 @@ class MySchoolRepositoryImpl @Inject constructor(
     override suspend fun refreshTeacherClasses(searchKey: String?) {
         refreshWrapper(apiService::getTeacherClasses, dao::addClasses)
         { body ->
-            body?.data
+            body?.data?.map { classDto ->
+                localMappers.classEntityMapper.map(classDto)
+            }
         }
     }
 
@@ -58,6 +64,12 @@ class MySchoolRepositoryImpl @Inject constructor(
             domainMappers.schoolMapper::map
         )
 
+
+    override fun getStudentSchools(): Flow<List<School>> =
+        wrapperClass(
+            dao.getSchools(),
+            domainMappers.schoolMapper::map
+        )
 
     override suspend fun refreshTeacherSchool() {
         refreshWrapper(apiService::getTeacherSchools, dao::addSchool)
@@ -77,16 +89,34 @@ class MySchoolRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getStudentSchools(): Flow<State<BaseResponse<List<SchoolDto>>?>> =
-        wrapWithFlow { apiService.getStudentSchools() }
+    override suspend fun refreshStudentSchool() {
+        refreshWrapper(apiService::getStudentSchools, dao::addSchool)
+        { body ->
+            body?.data?.map { schoolDto ->
+                localMappers.schoolEntityMapper.map(schoolDto)
+            }
+        }
+    }
 
-    override fun getMangerClasses(): Flow<State<BaseResponse<List<ClassList>>?>> =
-        wrapWithFlow { apiService.getMangerClasses() }
+    override fun getMangerClasses(): Flow<List<ClassM>> =
+        wrapperClass(
+            dao.getCLasses(),
+            domainMappers.classMapper::map
+        )
+
+    override suspend fun refreshMangerClasses() {
+        refreshWrapper(apiService::getMangerClasses, dao::addClasses)
+        { body ->
+            body?.data?.map { classDto ->
+                localMappers.classEntityMapper.map(classDto)
+            }
+        }
+    }
 
     override fun createSchool(schoolName: String): Flow<State<BaseResponse<SchoolDto>?>> =
         wrapWithFlow { apiService.createSchool(schoolName) }
 
-    override fun createClass(requestBody: JsonElement): Flow<State<BaseResponse<ClassDto>?>> =
+    override fun createClass(requestBody: JsonElement): Flow<State<BaseResponse<ClassDto2>?>> =
         wrapWithFlow { apiService.createClass(requestBody) }
 
     override fun addStudentToSchool(requestBody: JsonElement): Flow<State<BaseResponse<String>?>> =
@@ -95,6 +125,7 @@ class MySchoolRepositoryImpl @Inject constructor(
     override fun addTeacherToSchool(requestBody: JsonElement): Flow<State<BaseResponse<String>?>> =
         wrapWithFlow { apiService.addTeacherToSchool(requestBody) }
 
+    @FlowPreview
     override fun getSchoolStudents(
         schoolId: String,
         searchKey: String?
@@ -111,6 +142,7 @@ class MySchoolRepositoryImpl @Inject constructor(
     ): Flow<State<BaseResponse<List<UserSelected>>?>> =
         wrapper(wrapWithFlow { apiService.getSchoolTeachers(schoolId, searchKey) },domainMappers.userInfoMapper::map)
 
+    @FlowPreview
     override fun getStudentsNotInClass(classId: String): Flow<State<BaseResponse<List<UserSelected>>?>> =
         wrapper(wrapWithFlow { apiService.getStudentsInSchoolNotInClass(classId) } ,domainMappers.userInfoMapper::map)
 
@@ -190,13 +222,11 @@ class MySchoolRepositoryImpl @Inject constructor(
 
     private fun <T, U> wrapperClass(
         data: Flow<List<T>>,
-        mapper:( (T) -> U)? = null,
+        mapper:( (T) -> U),
     ): Flow<List<U>> =
         data.map { list ->
             list.map { entity ->
-                mapper?.let {
-                    it(entity)
-                } ?: entity as U
+                mapper(entity)
             }
         }
 
