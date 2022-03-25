@@ -7,9 +7,6 @@
         <variable
             name="item"
             type="com.shahad.app.my_school.data.remote.response.PostDto" />
-        <variable
-            name="listener"
-            type="com.shahad.app.my_school.ui.posts.PostInteractionListener" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -23,43 +20,32 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="@{() -> listener.onClickPost(item.id)}"
             android:background="@drawable/reg_rounded_24dp"
             android:backgroundTint="@color/white">
 
             <ImageView
                 android:id="@+id/imageView6"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_margin="@dimen/space_large"
                 android:src="@drawable/profile_photo_test"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_eva_attach_outline"
-                app:hide="@{item.payload != null }"
-                android:layout_marginVertical="@dimen/space_medium"
-                app:layout_constraintTop_toBottomOf="@id/imageView6"
-                app:layout_constraintStart_toStartOf="@id/imageView6"
-                app:layout_constraintEnd_toEndOf="@id/imageView6"
-                app:layout_constraintBottom_toBottomOf="parent"/>
             <TextView
                 android:id="@+id/teacher_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_medium"
+                android:layout_marginEnd="@dimen/space_large"
                 android:ellipsize="end"
                 android:fontFamily="@font/source_sans_pro_semi_bold"
                 android:maxLines="1"
                 android:paddingEnd="32dp"
-                android:layout_marginTop="@dimen/space_tiny"
                 android:text="@{item.authorName}"
                 android:textColor="#AD000000"
                 android:textSize="14sp"
-                android:layout_marginStart="@dimen/space_medium"
-                android:layout_marginEnd="@dimen/space_large"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView6"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView6"
                 app:layout_constraintTop_toTopOf="@+id/imageView6"
@@ -69,36 +55,19 @@
                 android:id="@+id/textView7"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_tiny"
+                android:layout_marginTop="@dimen/space_small"
+                android:layout_marginBottom="@dimen/space_medium"
                 android:ellipsize="end"
-                android:maxLines="1"
+                android:fontFamily="@font/source_sans_pro_bold"
                 android:text="@{item.title}"
                 android:textColor="@color/black"
-                android:textSize="20sp"
-                android:fontFamily="@font/source_sans_pro_bold"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/teacher_name"
                 app:layout_constraintStart_toStartOf="@id/teacher_name"
                 app:layout_constraintTop_toBottomOf="@id/teacher_name"
-                tools:text="Title of this Post  " />
+                tools:text="Title of this Comment  Title of this Comment  Title of this Comment  Title of this Comment  Title of this Comment  " />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_small"
-                android:layout_marginBottom="@dimen/space_large"
-                android:ellipsize="end"
-                android:fontFamily="@font/source_sans_pro_regular"
-                android:paddingHorizontal="@dimen/space_tiny"
-                android:paddingVertical="@dimen/space_small"
-                android:text="@{item.content}"
-                android:textColor="#DE000000"
-                android:textSize="12sp"
-                android:maxLines="2"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/teacher_name"
-                app:layout_constraintTop_toBottomOf="@+id/imageView6"
-                app:layout_constraintEnd_toEndOf="@id/teacher_name"
-                tools:text="Hi student i wish to get nice holidayHi student i wish to get ....." />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>

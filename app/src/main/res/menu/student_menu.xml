@@ -10,10 +10,6 @@
         android:icon="@drawable/ic_duty"
         android:title="Duty" />
     <item
-        android:id="@+id/bookFragment"
-        android:icon="@drawable/ic_book"
-        android:title="Books" />
-    <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/ic_profile"
         android:title="Profile" />

@@ -30,7 +30,7 @@
             app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_homeFragment_to_classScreenFragment2"
-            app:destination="@id/classScreenFragment2" />
+            app:destination="@id/classScreenFragment" />
         <action
             android:id="@+id/action_homeFragment_to_teachersFragment"
             app:destination="@id/teachersFragment" />
@@ -85,7 +85,7 @@
             app:argType="string" />
     </dialog>
     <fragment
-        android:id="@+id/classScreenFragment2"
+        android:id="@+id/classScreenFragment"
         android:name="com.shahad.app.my_school.ui.classScreen.ClassScreenFragment"
         android:label="ClassScreenFragment"
         tools:layout="@layout/fragment_class_screen">
@@ -98,6 +98,16 @@
         <argument
             android:name="isAuth"
             app:argType="com.shahad.app.my_school.ui.register.Role" />
+        <action
+            android:id="@+id/action_classScreenFragment2_to_postFragment2"
+            app:destination="@id/postFragment2" />
+
+        <action
+            android:id="@+id/action_classScreenFragment2_to_memberFragment2"
+            app:destination="@id/memberFragment2" />
+        <action
+            android:id="@+id/action_classScreenFragment_to_postDetailsFragment"
+            app:destination="@id/postDetailsFragment" />
 
     </fragment>
     <fragment
@@ -123,4 +133,24 @@
         android:name="com.shahad.app.my_school.ui.notification.NotificationFragment"
         android:label="NotificationFragment"
         tools:layout="@layout/fragment_notification"/>
+
+    <fragment
+        android:id="@+id/postFragment2"
+        android:name="com.shahad.app.my_school.ui.posts.PostFragment"
+        android:label="PostFragment"
+        tools:layout="@layout/fragment_post"/>
+    <fragment
+        android:id="@+id/memberFragment2"
+        android:name="com.shahad.app.my_school.ui.members.MemberFragment"
+        android:label="MemberFragment"
+        tools:layout="@layout/fragment_member"/>
+    <fragment
+        android:id="@+id/postDetailsFragment"
+        android:name="com.shahad.app.my_school.ui.postDetails.PostDetailsFragment"
+        android:label="PostDetailsFragment"
+        tools:layout="@layout/fragment_post_details">
+        <argument
+            android:name="postId"
+            app:argType="string" />
+    </fragment>
 </navigation>

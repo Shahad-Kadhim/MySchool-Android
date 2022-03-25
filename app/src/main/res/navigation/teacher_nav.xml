@@ -70,6 +70,9 @@
         <action
             android:id="@+id/action_classScreenFragment_to_createPostFragment"
             app:destination="@id/createPostFragment" />
+        <action
+            android:id="@+id/action_classScreenFragment_to_postDetailsFragment"
+            app:destination="@id/postDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/postFragment"
@@ -104,4 +107,13 @@
         android:name="com.shahad.app.my_school.ui.notification.NotificationFragment"
         android:label="NotificationFragment"
         tools:layout="@layout/fragment_notification"/>
+    <fragment
+        android:id="@+id/postDetailsFragment"
+        android:name="com.shahad.app.my_school.ui.postDetails.PostDetailsFragment"
+        android:label="PostDetailsFragment"
+        tools:layout="@layout/fragment_post_details">
+        <argument
+            android:name="postId"
+            app:argType="string" />
+    </fragment>
 </navigation>

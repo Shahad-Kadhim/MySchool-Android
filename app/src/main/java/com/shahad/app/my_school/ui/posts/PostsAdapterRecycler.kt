@@ -21,4 +21,5 @@ class PostsAdapterRecycler(
 }
 
 interface PostInteractionListener: BaseInteractionListener{
+    fun onClickPost(postId: String)
 }
