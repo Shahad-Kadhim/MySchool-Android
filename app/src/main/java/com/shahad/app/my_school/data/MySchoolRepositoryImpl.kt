@@ -1,6 +1,7 @@
 package com.shahad.app.my_school.data
 
 import android.util.Log
+import com.example.models.PostDetailsDto
 import com.google.gson.JsonElement
 import com.shahad.app.my_school.data.local.daos.MySchoolDao
 import com.shahad.app.my_school.data.remote.AuthenticationResponse
@@ -179,6 +180,9 @@ class MySchoolRepositoryImpl @Inject constructor(
 
     override fun deleteSchool(schoolId: String): Flow<State<BaseResponse<String>?>> =
         wrapWithFlow { apiService.deleteSchool(schoolId) }
+
+    override fun getPostDetails(postId: String): Flow<State<BaseResponse<PostDetailsDto>?>> =
+        wrapWithFlow { apiService.getPostDetails(postId) }
 
     private fun <T> wrapWithFlow(function: suspend () -> Response<T>): Flow<State<T?>> {
         return flow {

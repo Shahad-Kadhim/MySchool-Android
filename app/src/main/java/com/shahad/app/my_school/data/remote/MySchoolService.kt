@@ -1,5 +1,6 @@
 package com.shahad.app.my_school.data.remote
 
+import com.example.models.PostDetailsDto
 import com.google.gson.JsonElement
 import com.shahad.app.my_school.data.remote.response.*
 import okhttp3.RequestBody
@@ -103,4 +104,6 @@ interface MySchoolService{
     @POST("school/removeTeacher")
     suspend fun removeTeacherFromSchool(@Body requestBody: JsonElement): Response<BaseResponse<String>>
 
+    @GET("post/{postId}")
+    suspend fun getPostDetails(@Path("postId") postId: String): Response<BaseResponse<PostDetailsDto>>
 }

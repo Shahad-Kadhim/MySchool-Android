@@ -1,5 +1,6 @@
 package com.shahad.app.my_school.data
 
+import com.example.models.PostDetailsDto
 import com.google.gson.JsonElement
 import com.shahad.app.my_school.data.remote.AuthenticationResponse
 import com.shahad.app.my_school.data.remote.response.*
@@ -60,6 +61,8 @@ interface MySchoolRepository{
     fun removeTeacherFromSchool(requestBody: JsonElement): Flow<State<BaseResponse<String>?>>
 
     fun deleteSchool(schoolId: String): Flow<State<BaseResponse<String>?>>
+
+    fun getPostDetails(postId: String): Flow<State<BaseResponse<PostDetailsDto>?>>
 
     suspend fun refreshMangerSchool()
     suspend fun refreshTeacherSchool()
