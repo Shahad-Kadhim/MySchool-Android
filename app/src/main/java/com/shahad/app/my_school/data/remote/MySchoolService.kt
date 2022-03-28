@@ -106,4 +106,15 @@ interface MySchoolService{
 
     @GET("post/{postId}")
     suspend fun getPostDetails(@Path("postId") postId: String): Response<BaseResponse<PostDetailsDto>>
+
+    @POST("comment/create")
+    suspend fun createComment(
+        @Query("postId") postId: String,
+        @Query("content") content: String
+    ): Response<BaseResponse<String>>
+
+    @GET("{postId}/comment")
+    suspend fun getCommentInPost(
+        @Path("postId") postId: String
+    ): Response<BaseResponse<List<CommentDto>>>
 }

@@ -1,8 +1,10 @@
 package com.shahad.app.my_school.util
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.EditText
 import android.widget.ImageView
@@ -15,6 +17,7 @@ import androidx.core.widget.doOnTextChanged
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Index
@@ -243,5 +246,13 @@ fun onSwipe(view: RecyclerView, onSwipe: (o:Int) -> Unit,isSwipe: Boolean){
             }
 
         }).attachToRecyclerView(view)
+    }
+}
+
+@BindingAdapter(value = ["app:focus"])
+fun setFocus(view: EditText, value: String?){
+    if(value == null) {
+        (view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
+            .hideSoftInputFromWindow(view.windowToken, 0)
     }
 }

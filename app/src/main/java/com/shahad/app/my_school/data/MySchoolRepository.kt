@@ -64,6 +64,8 @@ interface MySchoolRepository{
 
     fun getPostDetails(postId: String): Flow<State<BaseResponse<PostDetailsDto>?>>
 
+    fun createComment(postId: String, content: String): Flow<State<BaseResponse<String>?>>
+
     suspend fun refreshMangerSchool()
     suspend fun refreshTeacherSchool()
     suspend fun refreshStudentSchool()

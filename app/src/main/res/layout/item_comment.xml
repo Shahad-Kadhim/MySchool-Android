@@ -6,16 +6,14 @@
     <data>
         <variable
             name="item"
-            type="com.shahad.app.my_school.data.remote.response.PostDto" />
+            type="com.shahad.app.my_school.data.remote.response.CommentDto" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="@dimen/space_large"
-        app:cardElevation="@dimen/space_small"
-        android:layout_marginVertical="@dimen/space_small"
-        android:layout_marginHorizontal="@dimen/space_medium">
+        app:cardElevation="2dp"
+        android:layout_marginBottom="@dimen/space_small">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -25,8 +23,8 @@
 
             <ImageView
                 android:id="@+id/imageView6"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:layout_margin="@dimen/space_large"
                 android:src="@drawable/profile_photo_test"
                 app:layout_constraintStart_toStartOf="parent"
@@ -59,7 +57,7 @@
                 android:layout_marginBottom="@dimen/space_medium"
                 android:ellipsize="end"
                 android:fontFamily="@font/source_sans_pro_bold"
-                android:text="@{item.title}"
+                android:text="@{item.content}"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
