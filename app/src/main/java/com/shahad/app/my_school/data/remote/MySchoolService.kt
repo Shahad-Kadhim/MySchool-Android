@@ -117,4 +117,10 @@ interface MySchoolService{
     suspend fun getCommentInPost(
         @Path("postId") postId: String
     ): Response<BaseResponse<List<CommentDto>>>
+
+    @GET("student/classes")
+    suspend fun getStudentClasses(
+        @Query("id") studentId: String?= null,
+        @Query("search" ) searchKey: String?= null
+    ): Response<BaseResponse<List<ClassDto>>>
 }

@@ -21,8 +21,27 @@ class HomeStudentFragment: BaseFragment<FragmentStudentHomeBinding>() {
         observe()
     }
 
+    override fun onStart() {
+        super.onStart()
+        viewDataBinding.classRecycler.adapter = HomeStudentAdapterRecycler(
+            mutableListOf<HomeItem>(
+                HomeItem.DutyItem(23,6)
+            ).apply {
+                viewModel.classes.value?.let {
+                    add(HomeItem.ClassItem(it))
+                }
+            }
+            ,
+            viewModel,
+            viewModel
+        )
+    }
+
     private fun observe() {
         with(viewModel){
+            classes.observe(this@HomeStudentFragment){
+                (viewDataBinding.classRecycler.adapter as HomeStudentAdapterRecycler).addItem(HomeItem.ClassItem(it))
+            }
             unAuthentication.observe(this@HomeStudentFragment){
                 (requireActivity() as MainActivity).navToIdentity()
             }

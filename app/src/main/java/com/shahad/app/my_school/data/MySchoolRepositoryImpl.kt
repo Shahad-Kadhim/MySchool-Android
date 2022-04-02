@@ -105,8 +105,27 @@ class MySchoolRepositoryImpl @Inject constructor(
             domainMappers.classMapper::map
         )
 
+    override fun getStudentClasses(searchKey: String?): Flow<List<ClassM>> =
+        wrapperClass(
+            dao.getCLasses(searchKey ?: ""),
+            domainMappers.classMapper::map
+        )
+
     override suspend fun refreshMangerClasses() {
         refreshWrapper(apiService::getMangerClasses, dao::addClasses)
+        { body ->
+            body?.data?.map { classDto ->
+                localMappers.classEntityMapper.map(classDto)
+            }
+        }
+    }
+
+    override suspend fun refreshStudentClasses() {
+        refreshCLass(apiService::getStudentClasses)
+    }
+
+    private suspend  fun refreshCLass(request: suspend () -> Response<BaseResponse<List<ClassDto>>>){
+        refreshWrapper(request, dao::addClasses)
         { body ->
             body?.data?.map { classDto ->
                 localMappers.classEntityMapper.map(classDto)

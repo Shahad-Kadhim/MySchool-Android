@@ -9,7 +9,7 @@
             type="com.shahad.app.my_school.domain.models.ClassM" />
         <variable
             name="listener"
-            type="com.shahad.app.my_school.ui.ClassInteractionListener" />
+            type="com.shahad.app.my_school.ui.home.student.HomeStudentInteractionListener" />
 
     </data>
 
@@ -35,8 +35,8 @@
                 android:fontFamily="@font/source_sans_pro_bold"
                 tools:text="Math"
                 android:text="@{item.name}"
-                android:textColor="@color/text_primary_color"
-                android:textSize="30sp"
+                android:textColor="#2F3238"
+                android:textSize="28sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,9 +46,9 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/source_sans_pro_bold"
                 tools:text="mr. Ahmed"
-                android:text="@{item.teacherName}"
-                android:textColor="@color/text_secondary_color"
-                android:textSize="14sp"
+                android:text="@{`Mr. `+item.teacherName}"
+                android:textColor="#DE2F3238"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/textView2"
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
 

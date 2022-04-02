@@ -19,6 +19,8 @@ interface MySchoolRepository{
 
     fun getTeacherClasses(searchKey: String? = null): Flow<List<ClassM>>
 
+    fun getStudentClasses(searchKey: String? = null): Flow<List<ClassM>>
+
     fun getTeacherSchools(): Flow<List<School>>
 
     fun getMangerSchool(): Flow<List<School>>
@@ -71,4 +73,5 @@ interface MySchoolRepository{
     suspend fun refreshStudentSchool()
     suspend fun refreshTeacherClasses(searchKey: String?)
     suspend fun refreshMangerClasses()
+    suspend fun refreshStudentClasses()
 }
