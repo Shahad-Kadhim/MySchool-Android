@@ -1,11 +1,10 @@
 package com.shahad.app.my_school.ui.home.student
 
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.shahad.app.my_school.data.MySchoolRepository
 import com.shahad.app.my_school.ui.ClassInteractionListener
 import com.shahad.app.my_school.ui.base.BaseViewModel
+import com.shahad.app.my_school.util.Event
 import com.shahad.app.my_school.util.State
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -13,10 +12,19 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeStudentViewModel @Inject constructor(
-    repository: MySchoolRepository
+    private val repository: MySchoolRepository
 ): BaseViewModel(), HomeStudentInteractionListener,ClassInteractionListener{
 
-    val classes = repository.getStudentClasses().asLiveData()
+    val search = MutableLiveData<String?>(null)
+
+    val classes = Transformations.switchMap(search){ searchKey ->
+        repository.getStudentClasses(searchKey?.takeIf { it.isNotBlank() }).asLiveData()
+    }
+
+    val refreshState = MutableLiveData<Boolean>(false)
+
+    private val _clickProfileEvent = MutableLiveData<Event<Boolean>>()
+    val clickProfileEvent: LiveData<Event<Boolean>> = _clickProfileEvent
 
     val unAuthentication = MediatorLiveData<State.UnAuthorization?>().apply {
 //        addSource(classes){
@@ -25,10 +33,20 @@ class HomeStudentViewModel @Inject constructor(
     }
 
     init {
+        refreshClasses()
+    }
+
+    fun refreshClasses(){
         viewModelScope.launch {
-            repository.refreshStudentClasses()
+            repository.refreshStudentClasses(search.value)
+            refreshState.postValue(false)
         }
     }
+
+    fun onclickProfile(){
+        _clickProfileEvent.postValue(Event(true))
+    }
+
     override fun onClickClass(classId: String, className: String) {
 
     }

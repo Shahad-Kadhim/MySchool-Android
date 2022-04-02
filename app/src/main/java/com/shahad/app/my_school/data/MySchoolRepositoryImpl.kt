@@ -120,7 +120,7 @@ class MySchoolRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun refreshStudentClasses() {
+    override suspend fun refreshStudentClasses(searchKey: String?) {
         refreshCLass(apiService::getStudentClasses)
     }
 

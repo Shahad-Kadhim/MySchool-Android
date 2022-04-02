@@ -7,6 +7,8 @@ import com.shahad.app.my_school.R
 import com.shahad.app.my_school.databinding.FragmentStudentHomeBinding
 import com.shahad.app.my_school.ui.base.BaseFragment
 import com.shahad.app.my_school.ui.main.MainActivity
+import com.shahad.app.my_school.util.extension.goToFragment
+import com.shahad.app.my_school.util.extension.observeEvent
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,13 +27,9 @@ class HomeStudentFragment: BaseFragment<FragmentStudentHomeBinding>() {
         super.onStart()
         viewDataBinding.classRecycler.adapter = HomeStudentAdapterRecycler(
             mutableListOf<HomeItem>(
-                HomeItem.DutyItem(23,6)
-            ).apply {
-                viewModel.classes.value?.let {
-                    add(HomeItem.ClassItem(it))
-                }
-            }
-            ,
+                HomeItem.DutyItem(23,6) ,
+                HomeItem.ClassItem(viewModel.classes.value ?: emptyList())
+            ),
             viewModel,
             viewModel
         )
@@ -40,10 +38,19 @@ class HomeStudentFragment: BaseFragment<FragmentStudentHomeBinding>() {
     private fun observe() {
         with(viewModel){
             classes.observe(this@HomeStudentFragment){
-                (viewDataBinding.classRecycler.adapter as HomeStudentAdapterRecycler).addItem(HomeItem.ClassItem(it))
+                Log.i("YYYY",it.toString())
+                (viewDataBinding.classRecycler.adapter as HomeStudentAdapterRecycler).editClassItem(HomeItem.ClassItem(it))
             }
             unAuthentication.observe(this@HomeStudentFragment){
                 (requireActivity() as MainActivity).navToIdentity()
+            }
+            refreshState.observe(this@HomeStudentFragment){ ifRefresh ->
+                takeIf { ifRefresh==true }?.refreshClasses()
+            }
+            clickProfileEvent.observeEvent(this@HomeStudentFragment){
+                viewDataBinding.root.goToFragment(
+                    HomeStudentFragmentDirections.actionHomeFragmentToProfileFragment()
+                )
             }
         }
     }

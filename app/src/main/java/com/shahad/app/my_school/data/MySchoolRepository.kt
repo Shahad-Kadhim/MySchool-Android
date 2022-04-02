@@ -73,5 +73,5 @@ interface MySchoolRepository{
     suspend fun refreshStudentSchool()
     suspend fun refreshTeacherClasses(searchKey: String?)
     suspend fun refreshMangerClasses()
-    suspend fun refreshStudentClasses()
+    suspend fun refreshStudentClasses(searchKey: String?)
 }

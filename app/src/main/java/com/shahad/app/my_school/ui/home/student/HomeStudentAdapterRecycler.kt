@@ -19,9 +19,9 @@ class HomeStudentAdapterRecycler(
     override var layoutId: Int = 0
 
 
-    fun addItem(newItems: HomeItem) {
+    fun editClassItem(newItems: HomeItem.ClassItem) {
         val newItemsList = itemsH.apply {
-            add(newItems)
+            (this[1] as HomeItem.ClassItem).classes = newItems.classes
         }
         val diffResult = DiffUtil.calculateDiff(MySchoolDiffUtil(itemsH,
             newItemsList,
@@ -37,6 +37,13 @@ class HomeStudentAdapterRecycler(
     ): Boolean =
         true
 
+    override fun areContentSame(
+        oldPosition: Int,
+        newPosition: Int,
+        newList: List<HomeItem>
+    ): Boolean {
+        return false
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         layoutId = getLayout(viewType)

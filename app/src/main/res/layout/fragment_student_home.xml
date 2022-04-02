@@ -12,7 +12,8 @@
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="false">
+        android:fitsSystemWindows="false"
+        app:onRefresh="@={viewModel.refreshState}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -58,6 +59,7 @@
                         android:layout_width="32dp"
                         android:layout_height="32dp"
                         android:layout_marginEnd="@dimen/space_medium"
+                        android:onClick="@{() -> viewModel.onclickProfile()}"
                         android:src="@drawable/profile_photo_test"
                         app:layout_constraintBottom_toBottomOf="@id/logo"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -74,6 +76,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:layout_marginTop="@dimen/space_large"
+                android:text="@={viewModel.search}"
                 android:background="@drawable/reg_rounded_24dp"
                 android:paddingHorizontal="@dimen/space_medium"
                 android:paddingVertical="@dimen/space_small"

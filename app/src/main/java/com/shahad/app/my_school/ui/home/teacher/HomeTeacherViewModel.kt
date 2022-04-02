@@ -23,24 +23,6 @@ class HomeTeacherViewModel @Inject constructor(
             repository.getTeacherClasses(searchKey?.takeIf { it.isNotBlank() }).asLiveData()
         }
 
-
-
-//        MediatorLiveData<LiveData<List<ClassList>>>().apply {
-//            addSource(search){ searchKey ->
-//                this.postValue(repository.getTeacherClasses(searchKey?.takeIf { it.isNotBlank() }).asLiveData())
-//            }
-//            addSource(refreshState){
-//                if(it){
-//                    viewModelScope.launch {
-//                        repository.refreshTeacherClasses(search.value)
-//                        this@apply.postValue(repository.getTeacherClasses(search.value?.takeIf { it.isNotBlank() }).asLiveData())
-//                        refreshState.postValue(false)
-//                    }
-//                }
-//            }
-//        }
-
-
     private val _clickCreateClassEvent = MutableLiveData<Event<Boolean>>()
     val clickCreateClassEvent: LiveData<Event<Boolean>> = _clickCreateClassEvent
 
