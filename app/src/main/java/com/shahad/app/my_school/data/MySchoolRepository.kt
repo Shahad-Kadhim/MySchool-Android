@@ -9,6 +9,7 @@ import com.shahad.app.my_school.domain.models.ClassM
 import com.shahad.app.my_school.domain.models.School
 import com.shahad.app.my_school.util.State
 import kotlinx.coroutines.flow.Flow
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 
 interface MySchoolRepository{
@@ -46,7 +47,7 @@ interface MySchoolRepository{
 
     fun getMemberClass(classId: String): Flow<State<BaseResponse<List<UserSelected>>?>>
 
-    fun createPost(parts: HashMap<String,RequestBody>): Flow<State<BaseResponse<String>?>>
+    fun createPost(parts: RequestBody, file: MultipartBody.Part? =null ): Flow<State<BaseResponse<String>?>>
 
     fun getPostInClass(classId: String): Flow<State<BaseResponse<List<PostDto>>?>>
 

@@ -3,6 +3,7 @@ package com.shahad.app.my_school.data.remote
 import com.example.models.PostDetailsDto
 import com.google.gson.JsonElement
 import com.shahad.app.my_school.data.remote.response.*
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -70,9 +71,8 @@ interface MySchoolService{
     @Multipart
     @POST("post/create")
     suspend fun createPost(
-        @PartMap parts: HashMap<String,RequestBody>
-//        @Part("jsonRequest") requestBody: MultipartBody.Part                            ,
-//        @Part("image") file: MultipartBody.Part?
+        @Part("jsonRequest") jsonRequest: RequestBody,
+        @Part image: MultipartBody.Part? =null
     ): Response<BaseResponse<String>>
 
     @GET("post/getPost")

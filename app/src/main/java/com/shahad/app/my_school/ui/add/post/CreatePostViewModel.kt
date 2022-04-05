@@ -12,10 +12,8 @@ import com.shahad.app.my_school.util.State
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
@@ -62,19 +60,9 @@ class CreatePostViewModel @Inject constructor(
             postType.value?.name
         )?.let {
             viewModelScope.launch {
-                val o= hashMapOf<String,RequestBody>(
-                    Pair("jsonRequest",dataClassParser.parseToJson (it).toString().toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull()))
-                ).apply {
-//                    file.value?.asRequestBody("*/*".toMediaTypeOrNull())?.let {
-//                        Log.i("TAG",file.value!!.name)
-//                        this["image"] = it
-//                    }
-                }
-
-
-
                 repository.createPost(
-                    o
+                    getJsonRequestBody(it),
+                    getImage()
                 ).collect {
                     Log.i("TAG",it.toString())
                     _addRequestStatus.postValue(it)
@@ -83,8 +71,26 @@ class CreatePostViewModel @Inject constructor(
         }
     }
 
+    private fun getJsonRequestBody(createPostBody: CreatePostBody) =
+        dataClassParser
+            .parseToJson (createPostBody).toString()
+            .toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
+
+    private fun getImage()=
+        file.value
+            ?.asRequestBody("image/png".toMediaTypeOrNull())
+            ?.let {
+                MultipartBody.Part
+                    .createFormData(
+                        "image",
+                        this@CreatePostViewModel.file.value?.name,
+                        it
+                    )
+            }
+
     fun onClickRemoveImage(){
         imagePost.postValue(null)
+        file.postValue(null)
     }
 
     fun onClickUploadImage(){

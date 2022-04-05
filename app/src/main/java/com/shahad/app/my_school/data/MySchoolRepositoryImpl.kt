@@ -17,6 +17,7 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
 import java.lang.Exception
@@ -172,8 +173,8 @@ class MySchoolRepositoryImpl @Inject constructor(
     override fun getMemberClass(classId: String): Flow<State<BaseResponse<List<UserSelected>>?>> =
         wrapper(wrapWithFlow { apiService.getClassMember(classId) } ,domainMappers.userInfoMapper::map)
 
-    override fun createPost(parts: HashMap<String,RequestBody>): Flow<State<BaseResponse<String>?>> =
-        wrapWithFlow { apiService.createPost(parts) }
+    override fun createPost(parts: RequestBody,file: MultipartBody.Part?): Flow<State<BaseResponse<String>?>> =
+        wrapWithFlow { apiService.createPost(parts,file) }
 
     override fun getPostInClass(classId: String): Flow<State<BaseResponse<List<PostDto>>?>> =
         wrapWithFlow { apiService.getPostsInClass(classId) }

@@ -17,7 +17,12 @@ import com.shahad.app.my_school.databinding.FragmentCreatePostBinding
 import com.shahad.app.my_school.ui.base.BaseFragment
 import com.shahad.app.my_school.util.extension.observeEvent
 import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class CreatePostFragment: BaseFragment<FragmentCreatePostBinding>() {
@@ -25,6 +30,9 @@ class CreatePostFragment: BaseFragment<FragmentCreatePostBinding>() {
     override fun getLayoutId(): Int = R.layout.fragment_create_post
 
     override val viewModel: CreatePostViewModel by viewModels()
+
+    @Inject
+    lateinit var realPathUtil: RealPathUtil
 
     override fun onStart() {
         super.onStart()
@@ -59,7 +67,9 @@ class CreatePostFragment: BaseFragment<FragmentCreatePostBinding>() {
             if (result.resultCode == Activity.RESULT_OK) {
                 result.data?.data?.let {
                     viewModel.imagePost.postValue(getBitmapFromURI(it))
-                    viewModel.file.postValue(File(it.path))
+                    realPathUtil.getRealPath(this.requireContext(),it)?.let{ path ->
+                        viewModel.file.postValue(File(path))
+                    }
                 }
             }else{
                 Toast.makeText(requireContext(),"fail to upload Image",Toast.LENGTH_SHORT).show()
