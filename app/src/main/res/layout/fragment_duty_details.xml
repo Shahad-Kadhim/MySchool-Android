@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.shahad.app.my_school.ui.postDetails.PostDetailsViewModel" />
+            type="com.shahad.app.my_school.ui.postDetails.DutyDetailsViewModel" />
     </data>
 
     <androidx.constraintlayout.motion.widget.MotionLayout
@@ -163,10 +163,9 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/duty_section"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:backgroundTint="@color/black"
+            android:layout_height="82dp"
+            android:backgroundTint="#F2F2F2"
             app:cardElevation="@dimen/space_medium"
-            app:hideIfLesson="@{viewModel.postDetails.toData().data.type}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay_card_custom_corners">
 
@@ -184,52 +183,74 @@
                     android:ellipsize="end"
                     android:fontFamily="@font/source_sans_pro_bold"
                     android:maxLines="1"
-                    android:text="Add Solution"
-                    android:textColor="@color/white"
+                    android:text="Upload Solution"
+                    android:textColor="@color/black"
                     android:textSize="25sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/photo"
-                    android:layout_width="72dp"
-                    android:layout_height="72dp"
-                    android:layout_marginVertical="@dimen/space_medium"
-                    android:src="@drawable/profile_photo_test"
-                    app:layout_constraintBottom_toTopOf="@+id/appCompatButton"
-                    app:layout_constraintStart_toStartOf="@id/add_solution"
+                <TextView
+                    android:id="@+id/descrption_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/space_large"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/source_sans_pro_semi_bold"
+                    android:maxLines="1"
+                    android:layout_marginTop="@dimen/space_small"
+                    android:text="Upload your work below"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/add_solution" />
 
-                <ImageView
-                    android:id="@+id/attacment"
-                    android:layout_width="72dp"
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/photo"
+                    android:layout_width="190dp"
                     android:layout_height="72dp"
-                    android:layout_margin="@dimen/space_medium"
-                    android:fontFamily="@font/source_sans_pro_semi_bold"
-                    android:paddingHorizontal="@dimen/space_tiny"
-                    android:src="@drawable/ic_baseline_attachment_24"
+                    android:layout_marginTop="@dimen/space_medium"
+                    android:layout_marginBottom="@dimen/space_large_2x"
+                    android:background="@drawable/photo"
+                    app:shapeAppearanceOverlay="@style/Image.ImageCorner8dp"
+                    app:layout_constraintBottom_toTopOf="@+id/appCompatButton"
+                    app:layout_constraintStart_toStartOf="@id/descrption_label"
+                    app:layout_constraintTop_toBottomOf="@+id/descrption_label" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/attacment"
+                    android:layout_width="82dp"
+                    android:layout_height="72dp"
+                    android:layout_marginStart="@dimen/space_medium"
+                    android:layout_marginVertical="@dimen/space_medium"
+                    android:background="@color/black"
+                    android:src="@drawable/ic_file_upload"
+                    app:shapeAppearanceOverlay="@style/Image"
                     app:layout_constraintBottom_toTopOf="@+id/appCompatButton"
                     app:layout_constraintStart_toEndOf="@+id/photo"
-                    app:layout_constraintTop_toBottomOf="@+id/add_solution"
-                    app:tint="#8BFFFFFF" />
+                    app:layout_constraintTop_toBottomOf="@+id/descrption_label"/>
 
-                <ImageView
+
+
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/imageView9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:background="#4F7292CF"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_margin="@dimen/space_small"
+                    app:shapeAppearanceOverlay="@style/Image.ImageCorner4dp"
+                    android:background="#4FFFFFFF"
                     android:src="@drawable/ic_baseline_close_24"
                     app:layout_constraintEnd_toEndOf="@id/photo"
                     app:layout_constraintTop_toTopOf="@id/photo" />
 
+
+
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/appCompatButton"
-                    android:layout_width="wrap_content"
+                    android:layout_width="152dp"
                     android:layout_height="54dp"
                     android:layout_margin="@dimen/space_medium"
                     android:layout_marginHorizontal="@dimen/space_large_2x"
-                    android:background="@drawable/background_rounded"
+                    android:background="@drawable/reg_rounded"
                     android:backgroundTint="@color/brand_color"
                     android:fontFamily="@font/source_sans_pro_semi_bold"
                     android:gravity="center"

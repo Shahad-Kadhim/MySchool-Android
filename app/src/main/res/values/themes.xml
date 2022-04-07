@@ -55,6 +55,14 @@
         <item name="cornerSize">25%</item>
     </style>
 
+    <style name="Image.ImageCorner8dp" parent="">
+        <item name="cornerSize">8dp</item>
+    </style>
+
+    <style name="Image.ImageCorner4dp" parent="">
+        <item name="cornerSize">4dp</item>
+    </style>
+
     <style name="ShapeAppearanceOverlay_card_custom_corners_top" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSizeBottomRight">@dimen/space_large_2x</item>
