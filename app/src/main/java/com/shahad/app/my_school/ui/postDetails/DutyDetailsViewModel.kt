@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PostDetailsViewModel @Inject constructor(
+class DutyDetailsViewModel @Inject constructor(
     private val repository: MySchoolRepository,
     private val savedStateHandle: SavedStateHandle
 ): BasePostViewModel(repository, savedStateHandle){

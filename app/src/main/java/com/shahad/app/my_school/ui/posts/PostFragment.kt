@@ -33,8 +33,11 @@ class PostFragment: BaseFragment<FragmentPostBinding>() {
             clickCreatePostEvent.observeEvent(this@PostFragment){
                 viewDataBinding.root.goToFragment(ClassScreenFragmentDirections.actionClassScreenFragmentToCreatePostFragment(it))
             }
-            clickPostEvent.observeEvent(this@PostFragment){
+            clickLessonEvent.observeEvent(this@PostFragment){
                 viewDataBinding.root.goToFragment(ClassScreenFragmentDirections.actionClassScreenFragmentToPostDetailsFragment(it))
+            }
+            clickDutyEvent.observeEvent(this@PostFragment){
+                viewDataBinding.root.goToFragment(ClassScreenFragmentDirections.actionClassScreenFragmentToDutyDetailsFragment(it))
             }
         }
     }

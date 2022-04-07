@@ -25,8 +25,11 @@ class PostViewModel @Inject constructor(
     private val _clickCreatePostEvent = MutableLiveData<Event<String>>()
     val clickCreatePostEvent: LiveData<Event<String>> = _clickCreatePostEvent
 
-    private val _clickPostEvent = MutableLiveData<Event<String>>()
-    val clickPostEvent: LiveData<Event<String>> = _clickPostEvent
+    private val _clickLessonEvent = MutableLiveData<Event<String>>()
+    val clickLessonEvent: LiveData<Event<String>> = _clickLessonEvent
+
+    private val _clickDutyEvent = MutableLiveData<Event<String>>()
+    val clickDutyEvent: LiveData<Event<String>> = _clickDutyEvent
 
     private lateinit var classId: String
 
@@ -43,8 +46,12 @@ class PostViewModel @Inject constructor(
         _clickCreatePostEvent.postValue(Event(classId))
     }
 
-    override fun onClickPost(postId: String) {
-        _clickPostEvent.postValue(Event(postId))
+    override fun onClickLesson(lessonId: String) {
+        _clickLessonEvent.postValue(Event(lessonId))
+    }
+
+    override fun onClickDuty(dutyId: String) {
+        _clickDutyEvent.postValue(Event(dutyId))
     }
 
 }

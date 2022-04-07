@@ -16,14 +16,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="@dimen/space_large"
-        app:cardElevation="2dp"
-        android:layout_marginVertical="@dimen/space_tiny"
+        app:cardElevation="@dimen/space_small"
+        android:layout_marginVertical="@dimen/space_small"
         android:layout_marginHorizontal="@dimen/space_medium">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="@{() -> listener.onClickLesson(item.id)}"
+            android:onClick="@{() -> listener.onClickDuty(item.id)}"
             android:background="@drawable/reg_rounded_24dp"
             android:backgroundTint="@color/white">
 
@@ -31,24 +31,13 @@
                 android:id="@+id/imageView6"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                app:shapeAppearanceOverlay="@style/Image"
                 android:layout_marginTop="@dimen/space_medium"
-                android:layout_marginStart="@dimen/space_large"                android:background="@drawable/photo"
+                android:layout_marginStart="@dimen/space_large"
+                app:shapeAppearanceOverlay="@style/Image"
+                android:background="@drawable/photo"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/imageView10"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginTop="@dimen/space_small"
-                android:layout_marginBottom="@dimen/space_medium"
-                android:src="@drawable/ic_eva_attach_outline"
-                app:hide="@{item.payload != null }"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@id/imageView6"
-                app:layout_constraintStart_toStartOf="@id/imageView6"
-                app:layout_constraintTop_toBottomOf="@id/imageView6" />
             <TextView
                 android:id="@+id/teacher_name"
                 android:layout_width="0dp"
@@ -72,19 +61,20 @@
                 android:id="@+id/textView7"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_small"
+                android:layout_marginBottom="@dimen/space_large"
                 android:ellipsize="end"
-                android:fontFamily="@font/source_sans_pro_bold"
                 android:maxLines="1"
                 android:text="@{item.title}"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView10"
+                android:fontFamily="@font/source_sans_pro_bold"
                 app:layout_constraintEnd_toEndOf="@id/teacher_name"
                 app:layout_constraintStart_toStartOf="@id/teacher_name"
-                app:layout_constraintTop_toTopOf="@+id/imageView10"
+                app:layout_constraintTop_toBottomOf="@id/teacher_name"
+                app:layout_constraintBottom_toBottomOf="parent"
                 tools:text="solve example in page 40 and 60  " />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
-
 </layout>

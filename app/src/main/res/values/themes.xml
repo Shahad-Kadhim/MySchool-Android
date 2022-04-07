@@ -50,6 +50,11 @@
         <item name="cornerSizeTopLeft">@dimen/space_large_2x</item>
     </style>
 
+    <style name="Image" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">25%</item>
+    </style>
+
     <style name="ShapeAppearanceOverlay_card_custom_corners_top" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSizeBottomRight">@dimen/space_large_2x</item>

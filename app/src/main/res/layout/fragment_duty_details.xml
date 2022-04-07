@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.shahad.app.my_school.ui.postDetails.PostDetailsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/motion_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutDescription="@xml/fragment_duty_details_scene">
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/space_small"
+            android:layout_margin="@dimen/space_medium"
+            android:onClick="@{() -> viewModel.onClickBack()}"
+            android:src="@drawable/ic_baseline_arrow_back_ios_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/black" />
+
+        <ImageView
+            android:id="@+id/more_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/space_medium"
+            android:padding="@dimen/space_small"
+            android:src="@drawable/ic_baseline_more_vert_24"
+            app:layout_constraintBottom_toBottomOf="@+id/back_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/back_button"
+            app:tint="@color/black" />
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/back_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:onRefresh="@={viewModel.refreshState}">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/space_large"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/source_sans_pro_bold"
+                    android:maxLines="1"
+                    android:text="@{viewModel.postDetails.toData().data.title}"
+                    android:textColor="@color/black"
+                    android:textSize="29sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Title of this Post  " />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/space_large"
+                    android:layout_marginTop="@dimen/space_medium"
+                    android:fontFamily="@font/source_sans_pro_regular"
+                    android:paddingHorizontal="@dimen/space_tiny"
+                    android:paddingVertical="@dimen/space_small"
+                    android:text="@{viewModel.postDetails.toData().data.content}"
+                    android:textColor="#DE000000"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/title"
+                    tools:text="Hi student i wish to get nice holidayHi student i wish to get .....Hi student i wish to get nice holidayHi student i wish to get .....Hi student i wish to get nice holidayHi student i wish to get ....." />
+
+                <ImageView
+                    android:id="@+id/attachment"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="@dimen/space_small"
+                    android:background="@drawable/reg_rounded_24dp"
+                    app:hideIfNull="@{viewModel.postDetails.toData().data.payload}"
+                    app:layout_constraintEnd_toEndOf="@+id/comments_label"
+                    app:layout_constraintStart_toStartOf="@+id/textView8"
+                    app:layout_constraintTop_toBottomOf="@+id/textView8"
+                    tools:scaleType="fitXY"
+                    tools:src="@drawable/photo" />
+
+                <TextView
+                    android:id="@+id/comments_label"
+                    style="@style/LabelProfile"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_medium"
+                    android:text="Comments"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/attachment" />
+
+
+                <View
+                    android:id="@+id/add_comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/background_card_top"
+                    android:backgroundTint="@color/white"
+                    app:layout_constraintTop_toBottomOf="@id/comments_label"/>
+
+                <EditText
+                    android:id="@+id/editText"
+                    style="@style/EditTextStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="@dimen/space_medium"
+                    android:layout_marginVertical="@dimen/space_small"
+                    android:backgroundTint="#20838080"
+                    android:hint="write comment"
+                    android:text="@={viewModel.content}"
+                    app:focus="@{viewModel.content}"
+                    app:layout_constraintBottom_toBottomOf="@+id/add_comment"
+                    app:layout_constraintEnd_toStartOf="@id/send_button"
+                    app:layout_constraintStart_toStartOf="@+id/add_comment"
+                    app:layout_constraintTop_toBottomOf="@+id/comments_label" />
+
+                <ImageView
+                    android:id="@+id/send_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="@dimen/space_medium"
+                    android:onClick="@{() -> viewModel.onClickSend()}"
+                    android:padding="@dimen/space_medium"
+                    android:src="@drawable/ic_baseline_send_24"
+                    app:layout_constraintEnd_toEndOf="@+id/add_comment"
+                    app:layout_constraintTop_toTopOf="@+id/add_comment"
+                    app:layout_constraintBottom_toBottomOf="@id/add_comment"
+                    app:tint="#CC000000" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/comments"
+                    items="@{viewModel.postDetails.toData().data.comments}"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:clipToPadding="false"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/space_tiny"
+                    android:paddingBottom="@dimen/space_medium"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/add_comment"
+                    tools:listitem="@layout/item_comment" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/duty_section"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:backgroundTint="@color/black"
+            app:cardElevation="@dimen/space_medium"
+            app:hideIfLesson="@{viewModel.postDetails.toData().data.type}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay_card_custom_corners">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/duty_c"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingVertical="@dimen/space_medium">
+
+                <TextView
+                    android:id="@+id/add_solution"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/space_large"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/source_sans_pro_bold"
+                    android:maxLines="1"
+                    android:text="Add Solution"
+                    android:textColor="@color/white"
+                    android:textSize="25sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/photo"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:layout_marginVertical="@dimen/space_medium"
+                    android:src="@drawable/profile_photo_test"
+                    app:layout_constraintBottom_toTopOf="@+id/appCompatButton"
+                    app:layout_constraintStart_toStartOf="@id/add_solution"
+                    app:layout_constraintTop_toBottomOf="@+id/add_solution" />
+
+                <ImageView
+                    android:id="@+id/attacment"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:layout_margin="@dimen/space_medium"
+                    android:fontFamily="@font/source_sans_pro_semi_bold"
+                    android:paddingHorizontal="@dimen/space_tiny"
+                    android:src="@drawable/ic_baseline_attachment_24"
+                    app:layout_constraintBottom_toTopOf="@+id/appCompatButton"
+                    app:layout_constraintStart_toEndOf="@+id/photo"
+                    app:layout_constraintTop_toBottomOf="@+id/add_solution"
+                    app:tint="#8BFFFFFF" />
+
+                <ImageView
+                    android:id="@+id/imageView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:background="#4F7292CF"
+                    android:src="@drawable/ic_baseline_close_24"
+                    app:layout_constraintEnd_toEndOf="@id/photo"
+                    app:layout_constraintTop_toTopOf="@id/photo" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/appCompatButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="54dp"
+                    android:layout_margin="@dimen/space_medium"
+                    android:layout_marginHorizontal="@dimen/space_large_2x"
+                    android:background="@drawable/background_rounded"
+                    android:backgroundTint="@color/brand_color"
+                    android:fontFamily="@font/source_sans_pro_semi_bold"
+                    android:gravity="center"
+                    android:text="Sumbith"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/photo" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+</layout>

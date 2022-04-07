@@ -187,7 +187,7 @@ fun getCheckedChipSchool(view:ChipGroup): String? =
 
 @BindingAdapter(value = ["app:hide"])
 fun hideView(view: View, value: Boolean){
-    view.isVisible= value
+    view.visibility= if(value) View.VISIBLE else View.INVISIBLE
 }
 
 @BindingAdapter(value= ["isSelected"])
@@ -206,6 +206,14 @@ fun setImageByBitmap(view: ImageView, bitmap: Bitmap?){
 @BindingAdapter(value = ["app:hideIfNull"])
 fun <T> hideView(view: View , value: T?){
     view.visibility = if(value == null) View.GONE else View.VISIBLE
+}
+
+@BindingAdapter(value = ["app:hideIfLesson"])
+fun  hideView(view: View , type: PostType?){
+    view.visibility = when(type){
+        PostType.DUTY -> View.VISIBLE
+        else -> View.GONE
+    }
 }
 
 @BindingAdapter(value = ["app:onRefresh"])
