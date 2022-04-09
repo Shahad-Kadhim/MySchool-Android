@@ -6,7 +6,9 @@ import androidx.fragment.app.viewModels
 import com.shahad.app.my_school.R
 import com.shahad.app.my_school.databinding.FragmentStudentHomeBinding
 import com.shahad.app.my_school.ui.base.BaseFragment
+import com.shahad.app.my_school.ui.home.teacher.HomeTeacherFragmentDirections
 import com.shahad.app.my_school.ui.main.MainActivity
+import com.shahad.app.my_school.ui.register.Role
 import com.shahad.app.my_school.util.extension.goToFragment
 import com.shahad.app.my_school.util.extension.observeEvent
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,6 +52,15 @@ class HomeStudentFragment: BaseFragment<FragmentStudentHomeBinding>() {
             clickProfileEvent.observeEvent(this@HomeStudentFragment){
                 viewDataBinding.root.goToFragment(
                     HomeStudentFragmentDirections.actionHomeFragmentToProfileFragment()
+                )
+            }
+            clickClassEvent.observeEvent(this@HomeStudentFragment){ pair ->
+                viewDataBinding.root.goToFragment(
+                    HomeStudentFragmentDirections.actionHomeFragmentToClassScreen(
+                        pair.first,
+                        pair.second,
+                        Role.STUDENT
+                    )
                 )
             }
         }
