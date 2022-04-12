@@ -1,6 +1,7 @@
 package com.shahad.app.my_school.data
 
 import android.util.Log
+import com.example.models.DutySubmit
 import com.example.models.PostDetailsDto
 import com.google.gson.JsonElement
 import com.shahad.app.my_school.data.local.daos.MySchoolDao
@@ -206,6 +207,18 @@ class MySchoolRepositoryImpl @Inject constructor(
 
     override fun createComment(postId: String, content: String): Flow<State<BaseResponse<String>?>> =
         wrapWithFlow { apiService.createComment(postId,content) }
+
+    override fun addSolution(
+        dutyId: String,
+        solution: MultipartBody.Part
+    ): Flow<State<BaseResponse<String>?>> =
+        wrapWithFlow { apiService.addSolution(dutyId,solution)}
+
+    override fun getSolution(
+        dutyId: String,
+        studentId: String?
+    ): Flow<State<BaseResponse<DutySubmit?>?>> =
+        wrapWithFlow { apiService.getSolution(dutyId,studentId) }
 
     private fun <T> wrapWithFlow(function: suspend () -> Response<T>): Flow<State<T?>> {
         return flow {

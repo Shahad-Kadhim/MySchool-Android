@@ -1,12 +1,14 @@
 package com.shahad.app.my_school.ui.postDetails
 
 import android.graphics.Bitmap
+import android.util.Log
 import androidx.lifecycle.*
 import com.shahad.app.my_school.data.MySchoolRepository
 import com.shahad.app.my_school.data.remote.response.BaseResponse
 import com.shahad.app.my_school.util.Event
 import com.shahad.app.my_school.util.State
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -17,9 +19,10 @@ import javax.inject.Inject
 @HiltViewModel
 class DutyDetailsViewModel @Inject constructor(
     private val repository: MySchoolRepository,
-    private val savedStateHandle: SavedStateHandle
+    private val savedStateHandle: SavedStateHandle,
 ): BasePostViewModel(repository, savedStateHandle){
 
+    val solution = repository.getSolution(postId).asLiveData()
 
     val imagePost= MutableLiveData<Bitmap?>()
     val file= MutableLiveData<File?>()
@@ -28,21 +31,20 @@ class DutyDetailsViewModel @Inject constructor(
     val clickUploadImageEvent: LiveData<Event<Boolean>> = _clickUploadImageEvent
 
     private val _addRequestStatus = MutableLiveData<State<BaseResponse<String>?>>()
-    val onSuccessJoined = Transformations.map(_addRequestStatus){
-        if(it is State.Success) Event(true) else Event(false)
-    }
-
 
     fun onClickSubmit() {
         viewModelScope.launch {
-//                repository.createPost(
-//                    getJsonRequestBody(it),
-//                    getImage()
-//                ).collect {
-//                    Log.i("TAG",it.toString())
-//                    _addRequestStatus.postValue(it)
+            getImage()?.let { solution ->
+                repository.addSolution(
+                    postId,
+                    solution
+                ).collect {
+                    Log.i("TAG POSTTT", it.toString())
+                    _addRequestStatus.postValue(it)
+                }
             }
         }
+    }
 
     private fun getImage()=
         file.value

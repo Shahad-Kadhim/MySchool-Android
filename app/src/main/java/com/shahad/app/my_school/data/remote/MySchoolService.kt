@@ -1,5 +1,6 @@
 package com.shahad.app.my_school.data.remote
 
+import com.example.models.DutySubmit
 import com.example.models.PostDetailsDto
 import com.google.gson.JsonElement
 import com.shahad.app.my_school.data.remote.response.*
@@ -123,4 +124,17 @@ interface MySchoolService{
         @Query("id") studentId: String?= null,
         @Query("search" ) searchKey: String?= null
     ): Response<BaseResponse<List<ClassDto>>>
+
+    @Multipart
+    @POST("duty/{dutyId}/addSolution")
+    suspend fun addSolution(
+        @Path("dutyId") dutyId: String,
+        @Part solutionImage: MultipartBody.Part? =null
+    ): Response<BaseResponse<String>>
+
+    @GET("duty/getSolution")
+    suspend fun getSolution(
+        @Query("dutyId") dutyId: String,
+        @Query("studentId") studentId: String? =null
+    ): Response<BaseResponse<DutySubmit?>>
 }
