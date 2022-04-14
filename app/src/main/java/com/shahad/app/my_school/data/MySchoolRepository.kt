@@ -1,7 +1,7 @@
 package com.shahad.app.my_school.data
 
 import com.example.models.DutySubmit
-import com.example.models.PostDetailsDto
+import com.shahad.app.my_school.data.remote.response.PostDetailsDto
 import com.google.gson.JsonElement
 import com.shahad.app.my_school.data.remote.AuthenticationResponse
 import com.shahad.app.my_school.data.remote.response.*

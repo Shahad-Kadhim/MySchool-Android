@@ -1,7 +1,7 @@
 package com.shahad.app.my_school.ui.postDetails
 
 import androidx.lifecycle.*
-import com.example.models.PostDetailsDto
+import com.shahad.app.my_school.data.remote.response.PostDetailsDto
 import com.shahad.app.my_school.data.MySchoolRepository
 import com.shahad.app.my_school.data.remote.response.BaseResponse
 import com.shahad.app.my_school.ui.base.BaseViewModel

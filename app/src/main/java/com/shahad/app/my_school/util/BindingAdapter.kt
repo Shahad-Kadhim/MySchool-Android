@@ -5,10 +5,7 @@ import android.graphics.Bitmap
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.AdapterView
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Spinner
+import android.widget.*
 import androidx.constraintlayout.motion.widget.OnSwipe
 import androidx.core.content.ContextCompat
 import androidx.core.view.children
@@ -23,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Index
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager2.widget.ViewPager2
+import coil.load
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -35,6 +33,8 @@ import com.shahad.app.my_school.ui.add.post.PostType
 import com.shahad.app.my_school.ui.base.BaseRecyclerAdapter
 import com.shahad.app.my_school.ui.register.Role
 import com.shahad.app.my_school.util.extension.toPostType
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 @BindingAdapter(value = ["app:setNumber"])
@@ -208,6 +208,11 @@ fun <T> hideView(view: View , value: T?){
     view.visibility = if(value == null) View.GONE else View.VISIBLE
 }
 
+@BindingAdapter(value = ["app:showIfNull"])
+fun <T> showIfNull(view: View , value: T?){
+    view.visibility = if(value != null) View.GONE else View.VISIBLE
+}
+
 @BindingAdapter(value = ["app:hideIfLesson"])
 fun  hideView(view: View , type: PostType?){
     view.visibility = when(type){
@@ -262,5 +267,18 @@ fun setFocus(view: EditText, value: String?){
     if(value == null) {
         (view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
             .hideSoftInputFromWindow(view.windowToken, 0)
+    }
+}
+
+@BindingAdapter(value =["app:imageFromUrl"])
+fun loadImage(view: ImageView, url: String?){
+    view.load(url)
+}
+
+@BindingAdapter(value = ["app:date"])
+fun convertLongToTime(view: TextView,time: Long?){
+    time?.let{
+        val format = SimpleDateFormat("yyyy.MM.dd HH:mm", Locale.ENGLISH)
+        view.text= format.format(Date(it))
     }
 }

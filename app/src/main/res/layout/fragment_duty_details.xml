@@ -183,6 +183,7 @@
                     android:ellipsize="end"
                     android:fontFamily="@font/source_sans_pro_bold"
                     android:maxLines="1"
+                    app:showIfNull="@{viewModel.solution.toData().data}"
                     android:text="Upload Solution"
                     android:textColor="@color/black"
                     android:textSize="25sp"
@@ -197,6 +198,7 @@
                     android:ellipsize="end"
                     android:fontFamily="@font/source_sans_pro_semi_bold"
                     android:maxLines="1"
+                    app:showIfNull="@{viewModel.solution.toData().data}"
                     android:layout_marginTop="@dimen/space_small"
                     android:text="Upload your work below"
                     android:textColor="@color/black"
@@ -210,8 +212,9 @@
                     android:layout_height="72dp"
                     android:layout_marginTop="@dimen/space_medium"
                     android:layout_marginBottom="@dimen/space_large_2x"
-                    tools:background="@drawable/photo"
                     app:hideIfNull="@{viewModel.imagePost}"
+                    app:showIfNull="@{viewModel.solution.toData().data}"
+                    tools:background="@drawable/photo"
                     app:setImageByBitmap="@{viewModel.imagePost}"
                     app:shapeAppearanceOverlay="@style/Image.ImageCorner8dp"
                     app:layout_constraintBottom_toTopOf="@+id/appCompatButton"
@@ -226,12 +229,11 @@
                     android:background="@color/black"
                     android:src="@drawable/ic_file_upload"
                     app:shapeAppearanceOverlay="@style/Image"
+                    app:showIfNull="@{viewModel.solution.toData().data}"
                     android:onClick="@{() -> viewModel.onClickUploadImage()}"
                     app:layout_constraintBottom_toTopOf="@+id/appCompatButton"
                     app:layout_constraintStart_toEndOf="@+id/photo"
                     app:layout_constraintTop_toBottomOf="@+id/descrption_label"/>
-
-
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/imageView9"
@@ -240,13 +242,12 @@
                     android:layout_margin="@dimen/space_small"
                     app:shapeAppearanceOverlay="@style/Image.ImageCorner4dp"
                     android:background="#4FFFFFFF"
+                    app:showIfNull="@{viewModel.solution.toData().data}"
                     app:hideIfNull="@{viewModel.imagePost}"
                     android:onClick="@{() -> viewModel.onClickRemoveImage()}"
                     android:src="@drawable/ic_baseline_close_24"
                     app:layout_constraintEnd_toEndOf="@id/photo"
                     app:layout_constraintTop_toTopOf="@id/photo" />
-
-
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/appCompatButton"
@@ -255,6 +256,7 @@
                     android:layout_margin="@dimen/space_medium"
                     android:layout_marginHorizontal="@dimen/space_large_2x"
                     android:background="@drawable/reg_rounded"
+                    app:showIfNull="@{viewModel.solution.toData().data}"
                     android:backgroundTint="@color/brand_color"
                     android:fontFamily="@font/source_sans_pro_semi_bold"
                     android:gravity="center"
@@ -264,6 +266,70 @@
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/photo" />
+
+                <TextView
+                    android:id="@+id/your_solution_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/space_large"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/source_sans_pro_bold"
+                    android:maxLines="1"
+                    android:text="Your Solution"
+                    app:hideIfNull="@{viewModel.solution.toData().data}"
+                    android:textColor="@color/black"
+                    android:textSize="25sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/uploaded_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/space_large"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/source_sans_pro_regular"
+                    android:maxLines="1"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:date="@{viewModel.solution.toData().data.submitDate}"
+                    app:hideIfNull="@{viewModel.solution.toData().data}"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/your_solution_label"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/uploade_solution_photo"
+                    android:layout_width="0dp"
+                    android:layout_height="72dp"
+                    app:layout_constraintDimensionRatio="2:1"
+                    android:layout_marginTop="@dimen/space_medium"
+                    android:layout_marginBottom="@dimen/space_large_2x"
+                    tools:background="@drawable/photo"
+                    app:imageFromUrl="@{viewModel.solution.toData().data.solutionLink}"
+                    app:hideIfNull="@{viewModel.solution.toData().data}"
+                    app:shapeAppearanceOverlay="@style/Image.ImageCorner8dp"
+                    app:layout_constraintBottom_toTopOf="@+id/appCompatButton"
+                    app:layout_constraintStart_toStartOf="@id/your_solution_label"
+                    app:layout_constraintTop_toBottomOf="@+id/your_solution_label" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/un_sumbit_button"
+                    android:layout_width="152dp"
+                    android:layout_height="54dp"
+                    android:layout_margin="@dimen/space_medium"
+                    android:layout_marginHorizontal="@dimen/space_large_2x"
+                    android:background="@drawable/reg_rounded"
+                    android:backgroundTint="@color/brand_color"
+                    android:fontFamily="@font/source_sans_pro_semi_bold"
+                    android:gravity="center"
+                    android:text="UnSumbit"
+                    android:textColor="@color/white"
+                    app:hideIfNull="@{viewModel.solution.toData().data}"
+                    android:onClick="@{() -> viewModel.onClickSubmit()}"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/uploade_solution_photo" />
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
 

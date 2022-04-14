@@ -1,6 +1,5 @@
-package com.example.models
+package com.shahad.app.my_school.data.remote.response
 
-import com.shahad.app.my_school.data.remote.response.CommentDto
 import com.shahad.app.my_school.ui.add.post.PostType
 
 
