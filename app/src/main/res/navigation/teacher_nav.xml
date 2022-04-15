@@ -74,8 +74,8 @@
             android:id="@+id/action_classScreenFragment_to_postDetailsFragment"
             app:destination="@id/postDetailsFragment" />
         <action
-            android:id="@+id/action_classScreenFragment_to_dutyDetailsFragment"
-            app:destination="@id/dutyDetailsFragment" />
+            android:id="@+id/action_classScreenFragment_to_dutyDetailsFragment2"
+            app:destination="@id/postDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/postFragment"
@@ -118,14 +118,20 @@
         <argument
             android:name="postId"
             app:argType="string" />
+        <argument
+            android:name="role"
+            app:argType="com.shahad.app.my_school.ui.register.Role" />
+        <action
+            android:id="@+id/action_postDetailsFragment_to_solutionFragment"
+            app:destination="@id/solutionFragment" />
     </fragment>
     <fragment
-        android:id="@+id/dutyDetailsFragment"
-        android:name="com.shahad.app.my_school.ui.postDetails.DutyDetailsFragment"
-        android:label="DutyDetailsFragment"
-        tools:layout="@layout/fragment_duty_details">
+        android:id="@+id/solutionFragment"
+        android:name="com.shahad.app.my_school.ui.solution.SolutionFragment"
+        android:label="SolutionFragment"
+        tools:layout="@layout/fragment_solutions">
         <argument
-            android:name="postId"
+            android:name="dutyId"
             app:argType="string" />
     </fragment>
 </navigation>

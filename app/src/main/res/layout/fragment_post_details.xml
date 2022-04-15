@@ -7,6 +7,9 @@
         <variable
             name="viewModel"
             type="com.shahad.app.my_school.ui.postDetails.PostDetailsViewModel" />
+        <variable
+            name="role"
+            type="com.shahad.app.my_school.ui.register.Role" />
     </data>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,6 +33,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/space_medium"
                 android:padding="@dimen/space_small"
+                app:showIfTeacher="@{role}"
+                app:hideIfLesson="@{viewModel.postDetails.toData().data.type}"
+                android:onClick="@{() -> viewModel.onClickSolution()}"
                 android:src="@drawable/ic_baseline_more_vert_24"
                 app:layout_constraintBottom_toBottomOf="@+id/back_button"
                 app:layout_constraintEnd_toEndOf="parent"

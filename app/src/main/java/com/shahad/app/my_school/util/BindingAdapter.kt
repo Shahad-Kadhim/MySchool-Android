@@ -213,12 +213,19 @@ fun <T> showIfNull(view: View , value: T?){
     view.visibility = if(value != null) View.GONE else View.VISIBLE
 }
 
-@BindingAdapter(value = ["app:hideIfLesson"])
-fun  hideView(view: View , type: PostType?){
-    view.visibility = when(type){
-        PostType.DUTY -> View.VISIBLE
-        else -> View.GONE
-    }
+@BindingAdapter(value = ["app:showIfStudent"])
+fun <T> showIfStudent(view: View , role: Role?){
+    view.visibility = role.takeIf { it == Role.STUDENT }?.let { View.VISIBLE } ?: View.GONE
+}
+
+@BindingAdapter(value = ["app:hideIfLesson","app:showIfTeacher"])
+fun  hideView(view: View , type: PostType?, role: Role?){
+    view.visibility = role.takeIf { it == Role.TEACHER }?.let {
+        when(type){
+            PostType.DUTY -> View.VISIBLE
+            else -> View.GONE
+        }
+    } ?: View.GONE
 }
 
 @BindingAdapter(value = ["app:onRefresh"])

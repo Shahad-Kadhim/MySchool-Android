@@ -33,11 +33,23 @@ class PostFragment: BaseFragment<FragmentPostBinding>() {
             clickCreatePostEvent.observeEvent(this@PostFragment){
                 viewDataBinding.root.goToFragment(ClassScreenFragmentDirections.actionClassScreenFragmentToCreatePostFragment(it))
             }
-            clickLessonEvent.observeEvent(this@PostFragment){
-                viewDataBinding.root.goToFragment(ClassScreenFragmentDirections.actionClassScreenFragmentToPostDetailsFragment(it))
+            clickLessonEvent.observeEvent(this@PostFragment){ lessonId ->
+                viewDataBinding.root.goToFragment(
+                    ClassScreenFragmentDirections
+                        .actionClassScreenFragmentToPostDetailsFragment(
+                            lessonId,
+                            arguments?.getSerializable("ROLE") as Role
+                        )
+                )
             }
-            clickDutyEvent.observeEvent(this@PostFragment){
-                viewDataBinding.root.goToFragment(ClassScreenFragmentDirections.actionClassScreenFragmentToDutyDetailsFragment(it))
+            clickDutyEvent.observeEvent(this@PostFragment){ postId ->
+                viewDataBinding.root.goToFragment(
+                    ClassScreenFragmentDirections
+                        .actionClassScreenFragmentToDutyDetailsFragment2(
+                            postId,
+                            arguments?.getSerializable("ROLE") as Role
+                        )
+                )
             }
         }
     }
