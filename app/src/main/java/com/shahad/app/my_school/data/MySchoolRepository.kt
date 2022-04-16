@@ -1,6 +1,6 @@
 package com.shahad.app.my_school.data
 
-import com.example.models.DutySubmit
+import com.shahad.app.my_school.data.remote.response.DutySubmit
 import com.shahad.app.my_school.data.remote.response.PostDetailsDto
 import com.google.gson.JsonElement
 import com.shahad.app.my_school.data.remote.AuthenticationResponse
@@ -73,6 +73,8 @@ interface MySchoolRepository{
     fun addSolution(dutyId: String, solution: MultipartBody.Part): Flow<State<BaseResponse<String>?>>
 
     fun getSolution(dutyId: String, studentId: String? =null): Flow<State<BaseResponse<DutySubmit?>?>>
+
+    fun getSolutionsForDuty(dutyId: String): Flow<State<BaseResponse<List<DutySubmit>>?>>
 
     suspend fun refreshMangerSchool()
     suspend fun refreshTeacherSchool()

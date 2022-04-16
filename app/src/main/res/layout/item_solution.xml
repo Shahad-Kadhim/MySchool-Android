@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="item"
+            type="com.shahad.app.my_school.data.remote.response.DutySubmit" />
+        <variable
+            name="listener"
+            type="com.shahad.app.my_school.ui.solution.SolutionInteractionListener" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/space_large"
+
+        style="@style/cardView"
+        android:layout_marginVertical="@dimen/space_small"
+        android:layout_marginHorizontal="@dimen/space_medium">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/reg_rounded_24dp"
+            android:backgroundTint="@color/white">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageView6"
+                android:layout_width="144dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="@dimen/space_large"
+                android:layout_marginVertical="@dimen/space_small"
+                android:background="@drawable/photo"
+                app:imageFromUrl="@{item.solutionLink}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/Image.ImageCorner4dp" />
+
+            <TextView
+                android:id="@+id/student_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/space_large"
+                android:ellipsize="end"
+                android:fontFamily="@font/source_sans_pro_bold"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:paddingEnd="32dp"
+                android:textSize="16sp"
+                android:text="@{item.studentId}"
+                app:layout_constraintEnd_toStartOf="@+id/imageView6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Shahad Kadhim" />
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_small"
+                android:layout_marginBottom="@dimen/space_large"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="#AD000000"
+                android:textSize="18sp"
+                app:date="@{item.submitDate}"
+                android:fontFamily="@font/source_sans_pro_semi_bold"
+                app:layout_constraintEnd_toEndOf="@id/student_name"
+                app:layout_constraintStart_toStartOf="@id/student_name"
+                app:layout_constraintTop_toBottomOf="@id/student_name"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:text="Date : 30 Dec 2020 " />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

@@ -1,4 +1,4 @@
-package com.example.models
+package com.shahad.app.my_school.data.remote.response
 
 data class DutySubmit(
     val studentId: String,

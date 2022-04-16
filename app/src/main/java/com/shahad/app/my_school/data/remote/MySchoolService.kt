@@ -1,6 +1,6 @@
 package com.shahad.app.my_school.data.remote
 
-import com.example.models.DutySubmit
+import com.shahad.app.my_school.data.remote.response.DutySubmit
 import com.shahad.app.my_school.data.remote.response.PostDetailsDto
 import com.google.gson.JsonElement
 import com.shahad.app.my_school.data.remote.response.*
@@ -137,4 +137,9 @@ interface MySchoolService{
         @Query("dutyId") dutyId: String,
         @Query("studentId") studentId: String? =null
     ): Response<BaseResponse<DutySubmit?>>
+
+    @GET("duty/getSolutions")
+    suspend fun getSolutionsForDuty(
+        @Query("dutyId") dutyId: String,
+    ): Response<BaseResponse<List<DutySubmit>>>
 }
