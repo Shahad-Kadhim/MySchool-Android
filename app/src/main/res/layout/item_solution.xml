@@ -15,7 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="@dimen/space_large"
-
         style="@style/cardView"
         android:layout_marginVertical="@dimen/space_small"
         android:layout_marginHorizontal="@dimen/space_medium">
@@ -50,7 +49,7 @@
                 android:textColor="@color/black"
                 android:paddingEnd="32dp"
                 android:textSize="16sp"
-                android:text="@{item.studentId}"
+                android:text="@{item.studentName}"
                 app:layout_constraintEnd_toStartOf="@+id/imageView6"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
