@@ -144,7 +144,10 @@ interface MySchoolService{
     ): Response<BaseResponse<List<DutySubmit>>>
 
     @GET("teacher/getDuties")
-    suspend fun getDutiesForTeacher(
+    suspend fun getAssignmentForTeacher(
         @Query("teacherId") teacherId: String?= null ,
-    ): Response<BaseResponse<List<DutyDto>>>
+    ): Response<BaseResponse<List<AssignmentDto>>>
+
+    @GET("/student/assignments")
+    suspend fun getAssignmentForStudent(): Response<BaseResponse<List<AssignmentDto>>>
 }

@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.shahad.app.my_school.ui.duty.DutyViewModel" />
+            type="com.shahad.app.my_school.ui.duty.BaseAssignmentViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -60,7 +60,7 @@
                     android:layout_marginTop="@dimen/space_medium"
                     android:clipToPadding="false"
                     android:orientation="vertical"
-                    app:items="@{viewModel.duties.toData().data}"
+                    app:items="@{viewModel.assignments.toData().data}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

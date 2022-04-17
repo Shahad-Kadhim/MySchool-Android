@@ -3,7 +3,7 @@ package com.shahad.app.my_school.ui.duty
 import androidx.lifecycle.*
 import com.shahad.app.my_school.data.MySchoolRepository
 import com.shahad.app.my_school.data.remote.response.BaseResponse
-import com.shahad.app.my_school.data.remote.response.DutyDto
+import com.shahad.app.my_school.data.remote.response.AssignmentDto
 import com.shahad.app.my_school.ui.base.BaseViewModel
 import com.shahad.app.my_school.util.Event
 import com.shahad.app.my_school.util.State
@@ -13,20 +13,11 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@HiltViewModel
-class DutyViewModel @Inject constructor(
-    repository: MySchoolRepository
-): BaseViewModel(), AssignmentInteractionListener{
+abstract class BaseAssignmentViewModel: BaseViewModel(), AssignmentInteractionListener{
+
     val refreshState = MutableLiveData<Boolean>(false)
 
-    val duties =
-        MediatorLiveData<LiveData<State<BaseResponse<List<DutyDto>>?>>>().apply {
-            this.postValue(repository.getDutiesForTeacher().asLiveData())
-            addSource(refreshState) {
-                this.refresh(it,repository::getDutiesForTeacher)
-            }
-        }
-
+    abstract val assignments: MediatorLiveData<LiveData<State<BaseResponse<List<AssignmentDto>>?>>>
 
     private val _clickBackEvent = MutableLiveData<Event<Boolean>>()
     val clickBackEvent: LiveData<Event<Boolean>> = _clickBackEvent
@@ -40,9 +31,9 @@ class DutyViewModel @Inject constructor(
     }
 
 
-    fun MediatorLiveData<LiveData<State<BaseResponse<List<DutyDto>>?>>>.refresh(
+    fun MediatorLiveData<LiveData<State<BaseResponse<List<AssignmentDto>>?>>>.refresh(
         isRefresh: Boolean,
-        request:  () -> Flow<State<BaseResponse<List<DutyDto>>?>>,
+        request:  () -> Flow<State<BaseResponse<List<AssignmentDto>>?>>,
     ) {
         if(isRefresh){
             with(request()){
@@ -61,4 +52,5 @@ class DutyViewModel @Inject constructor(
     override fun onClickDuty(dutyId: String) {
         _clickDutyEvent.postValue(Event(dutyId))
     }
+
 }

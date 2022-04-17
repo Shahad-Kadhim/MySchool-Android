@@ -1,6 +1,6 @@
 package com.shahad.app.my_school.data.remote.response
 
-data class DutyDto(
+data class AssignmentDto(
     val id: String,
     var title: String,
     var content: String,

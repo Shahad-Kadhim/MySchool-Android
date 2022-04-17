@@ -6,7 +6,7 @@
     <data>
         <variable
             name="item"
-            type="com.shahad.app.my_school.data.remote.response.DutyDto" />
+            type="com.shahad.app.my_school.data.remote.response.AssignmentDto" />
         <variable
             name="listener"
             type="com.shahad.app.my_school.ui.duty.AssignmentInteractionListener" />

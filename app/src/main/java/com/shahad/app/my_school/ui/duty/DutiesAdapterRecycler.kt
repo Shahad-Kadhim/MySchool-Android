@@ -1,20 +1,20 @@
 package com.shahad.app.my_school.ui.duty
 
 import com.shahad.app.my_school.R
-import com.shahad.app.my_school.data.remote.response.DutyDto
+import com.shahad.app.my_school.data.remote.response.AssignmentDto
 import com.shahad.app.my_school.ui.base.BaseInteractionListener
 import com.shahad.app.my_school.ui.base.BaseRecyclerAdapter
 
-class DutiesAdapterRecycler(
-    items: List<DutyDto>,
+class AssignmentAdapterRecycler(
+    items: List<AssignmentDto>,
     listener: AssignmentInteractionListener,
-): BaseRecyclerAdapter<DutyDto>(items,listener) {
+): BaseRecyclerAdapter<AssignmentDto>(items,listener) {
     override val layoutId: Int = R.layout.item_assignment
 
     override fun areItemsTheSame(
         oldItemPosition: Int,
         newItemPosition: Int,
-        newItems: List<DutyDto>
+        newItems: List<AssignmentDto>
     ): Boolean =
         getItems()[oldItemPosition].id == newItems[newItemPosition].id
 }
