@@ -225,6 +225,11 @@ class MySchoolRepositoryImpl @Inject constructor(
     ): Flow<State<BaseResponse<List<DutySubmit>>?>> =
         wrapWithFlow { apiService.getSolutionsForDuty(dutyId) }
 
+    override fun getDutiesForTeacher(
+        teacherId: String?,
+    ): Flow<State<BaseResponse<List<DutyDto>>?>> =
+        wrapWithFlow { apiService.getDutiesForTeacher() }
+
     private fun <T> wrapWithFlow(function: suspend () -> Response<T>): Flow<State<T?>> {
         return flow {
             emit(State.Loading)

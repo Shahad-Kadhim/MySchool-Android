@@ -32,7 +32,11 @@
         android:id="@+id/assignmentFragment"
         android:name="com.shahad.app.my_school.ui.duty.DutyFragment"
         android:label="AssignmentFragment"
-        tools:layout="@layout/fragment_duty"/>
+        tools:layout="@layout/fragment_duty">
+        <action
+            android:id="@+id/action_assignmentFragment_to_postDetailsFragment"
+            app:destination="@id/postDetailsFragment" />
+    </fragment>
     <dialog
         android:id="@+id/newClassFragment"
         android:name="com.shahad.app.my_school.ui.add.newClass.NewClassFragment"

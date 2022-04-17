@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="item"
+            type="com.shahad.app.my_school.data.remote.response.DutyDto" />
+        <variable
+            name="listener"
+            type="com.shahad.app.my_school.ui.duty.AssignmentInteractionListener" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/space_small"
+        style="@style/cardView"
+        android:layout_marginVertical="@dimen/space_tiny"
+        android:layout_marginHorizontal="@dimen/space_medium">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> listener.onClickDuty(item.id)}"
+            android:background="@drawable/reg_rounded_24dp"
+            android:backgroundTint="@color/white">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/space_large"
+                android:layout_marginTop="@dimen/space_medium"
+                android:ellipsize="end"
+                android:fontFamily="@font/source_sans_pro_semi_bold"
+                android:maxLines="1"
+                android:gravity="left"
+                android:paddingEnd="32dp"
+                android:text="@{item.title}"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toStartOf="@+id/date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Example 3" />
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/space_medium"
+                android:ellipsize="end"
+                android:fontFamily="@font/source_sans_pro_semi_bold"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:date="@{item.datePosted}"
+                app:layout_constraintBaseline_toBaselineOf="@+id/title"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="22 Dec 2020" />
+
+            <TextView
+                android:id="@+id/content"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_small"
+                android:layout_marginBottom="@dimen/space_medium"
+                android:ellipsize="end"
+                android:fontFamily="@font/source_sans_pro_semi_bold"
+                android:maxLines="1"
+                android:gravity="left"
+                android:paddingEnd="32dp"
+                android:text="@{item.content}"
+                android:textColor="#AD000000"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/date"
+                app:layout_constraintStart_toStartOf="@id/title"
+                app:layout_constraintTop_toBottomOf="@id/title"
+                tools:text="solve example in page 40 and 60  " />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

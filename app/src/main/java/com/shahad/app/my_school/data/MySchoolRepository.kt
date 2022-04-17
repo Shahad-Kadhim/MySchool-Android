@@ -76,6 +76,7 @@ interface MySchoolRepository{
 
     fun getSolutionsForDuty(dutyId: String): Flow<State<BaseResponse<List<DutySubmit>>?>>
 
+    fun getDutiesForTeacher(teacherId: String?= null): Flow<State<BaseResponse<List<DutyDto>>?>>
     suspend fun refreshMangerSchool()
     suspend fun refreshTeacherSchool()
     suspend fun refreshStudentSchool()

@@ -142,4 +142,9 @@ interface MySchoolService{
     suspend fun getSolutionsForDuty(
         @Query("dutyId") dutyId: String,
     ): Response<BaseResponse<List<DutySubmit>>>
+
+    @GET("teacher/getDuties")
+    suspend fun getDutiesForTeacher(
+        @Query("teacherId") teacherId: String?= null ,
+    ): Response<BaseResponse<List<DutyDto>>>
 }
