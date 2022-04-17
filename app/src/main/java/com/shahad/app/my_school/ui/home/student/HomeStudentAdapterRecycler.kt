@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import com.shahad.app.my_school.BR
 import com.shahad.app.my_school.R
+import com.shahad.app.my_school.domain.models.ClassM
 import com.shahad.app.my_school.ui.ClassInteractionListener
 import com.shahad.app.my_school.ui.ClassesAdapterRecycler
 import com.shahad.app.my_school.ui.base.BaseInteractionListener
@@ -14,15 +15,19 @@ import com.shahad.app.my_school.ui.base.MySchoolDiffUtil
 class HomeStudentAdapterRecycler(
     private val itemsH: MutableList<HomeItem>,
     private val listener: HomeStudentInteractionListener,
-    private val classListener: ClassInteractionListener
 ): BaseRecyclerAdapter<HomeItem>(itemsH,listener) {
     override var layoutId: Int = 0
 
 
-    fun editClassItem(newItems: HomeItem.ClassItem) {
+    fun editClassItem(newItems: List<HomeItem.ClassItem>) {
         val newItemsList = itemsH.apply {
-            (this[1] as HomeItem.ClassItem).classes = newItems.classes
+            this.addAll(
+                newItems.filter { newItem  ->
+                    this.filterIsInstance<HomeItem.ClassItem>().find { it.classI.id ==newItem.classI.id } == null
+                }
+            )
         }
+
         val diffResult = DiffUtil.calculateDiff(MySchoolDiffUtil(itemsH,
             newItemsList,
             ::areItemsTheSame,
@@ -53,7 +58,8 @@ class HomeStudentAdapterRecycler(
     private fun getLayout(viewType: Int): Int =
         when (viewType) {
             TYPE_DUTY -> R.layout.item_duties
-            else -> R.layout.item_classes
+            TYPE_CLASSES_LABEL -> R.layout.item_classes
+            else -> R.layout.item_class
         }
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
@@ -64,7 +70,8 @@ class HomeStudentAdapterRecycler(
         when (val currentItem = itemsH[position]) {
             is HomeItem.ClassItem ->{
                 Log.i("TAG_CLASS","$position")
-                holder.binding.setVariable(BR.adapter,ClassesAdapterRecycler(currentItem.classes,classListener,R.layout.item_class))
+                holder.binding.setVariable(BR.item,currentItem.classI)
+                holder.binding.setVariable(BR.listener,listener)
             }
             is HomeItem.DutyItem -> {
                 holder.binding.setVariable(BR.numberOfDuty,"${currentItem.numberOfDuty}")
@@ -81,11 +88,14 @@ class HomeStudentAdapterRecycler(
         when (itemsH[position]) {
             is HomeItem.ClassItem -> TYPE_CLASS
             is HomeItem.DutyItem -> TYPE_DUTY
+            HomeItem.ClassesLabelItem -> TYPE_CLASSES_LABEL
         }
 
     companion object {
         const val TYPE_CLASS = 2
         const val TYPE_DUTY = 1
+        const val TYPE_CLASSES_LABEL = 3
+
     }
 
 }

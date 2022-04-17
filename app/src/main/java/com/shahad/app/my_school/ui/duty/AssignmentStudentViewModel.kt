@@ -15,7 +15,7 @@ class AssignmentStudentViewModel @Inject constructor(
 
     override val assignments =
         MediatorLiveData<LiveData<State<BaseResponse<List<AssignmentDto>>?>>>().apply {
-            this.postValue(repository.getAssignmentForTeacher().asLiveData())
+            this.postValue(repository.getAssignmentForStudent().asLiveData())
             addSource(refreshState) {
                 this.refresh(it,repository::getAssignmentForStudent)
             }

@@ -9,93 +9,98 @@
             type="com.shahad.app.my_school.ui.home.student.HomeStudentViewModel" />
     </data>
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="false"
-        app:onRefresh="@={viewModel.refreshState}">
+        android:fitsSystemWindows="false">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/header"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/header"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/brand_color"
+            app:layout_constraintTop_toTopOf="parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/brand_color"
-                app:layout_constraintTop_toTopOf="parent">
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:id="@+id/logo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/space_medium"
-                        android:layout_marginTop="@dimen/space_medium"
-                        android:layout_marginBottom="@dimen/space_medium"
-                        android:fontFamily="@font/source_sans_pro_semi_bold"
-                        android:text="My School"
-                        android:textColor="#FFFFFF"
-                        android:textSize="34sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_medium"
+                    android:layout_marginTop="@dimen/space_medium"
+                    android:layout_marginBottom="@dimen/space_medium"
+                    android:fontFamily="@font/source_sans_pro_semi_bold"
+                    android:text="My School"
+                    android:textColor="#FFFFFF"
+                    android:textSize="34sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/space_medium"
-                        android:src="@drawable/ic_school_svgrepo_com_1"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="@+id/logo"
-                        app:layout_constraintEnd_toStartOf="@+id/shapeableImageView"
-                        app:layout_constraintTop_toTopOf="@+id/logo"
-                        app:tint="@color/white" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/space_medium"
+                    android:src="@drawable/ic_school_svgrepo_com_1"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/logo"
+                    app:layout_constraintEnd_toStartOf="@+id/shapeableImageView"
+                    app:layout_constraintTop_toTopOf="@+id/logo"
+                    app:tint="@color/white" />
 
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/shapeableImageView"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:layout_marginEnd="@dimen/space_medium"
-                        android:onClick="@{() -> viewModel.onclickProfile()}"
-                        android:src="@drawable/profile_photo_test"
-                        app:layout_constraintBottom_toBottomOf="@id/logo"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/logo"
-                        app:shapeAppearanceOverlay="@style/imageCorner50" />
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/shapeableImageView"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="@dimen/space_medium"
+                    android:onClick="@{() -> viewModel.onclickProfile()}"
+                    android:src="@drawable/profile_photo_test"
+                    app:layout_constraintBottom_toBottomOf="@id/logo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/logo"
+                    app:shapeAppearanceOverlay="@style/imageCorner50" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </com.google.android.material.card.MaterialCardView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-
-            <EditText
-                android:id="@+id/search_bar"
-                style="@style/SearchBar"
-                android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:layout_marginTop="@dimen/space_large"
-                android:text="@={viewModel.search}"
-                android:background="@drawable/reg_rounded_24dp"
-                android:paddingHorizontal="@dimen/space_medium"
-                android:paddingVertical="@dimen/space_small"
-                android:layout_marginBottom="@dimen/space_medium"
-                app:layout_constraintTop_toBottomOf="@+id/header" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/classRecycler"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:clipToPadding="false"
-            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/header"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:listitem="@layout/item_class"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@+id/search_bar" />
+            app:onRefresh="@={viewModel.refreshState}">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <EditText
+                    android:id="@+id/search_bar"
+                    style="@style/SearchBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:layout_marginTop="@dimen/space_medium"
+                    android:text="@={viewModel.search}"
+                    android:background="@drawable/reg_rounded_24dp"
+                    android:paddingHorizontal="@dimen/space_medium"
+                    android:paddingVertical="@dimen/space_small"
+                    android:layout_marginBottom="@dimen/space_medium"
+                    app:layout_constraintTop_toTopOf="parent"/>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/classRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:clipToPadding="false"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:listitem="@layout/item_class"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@+id/search_bar" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
