@@ -7,4 +7,5 @@ data class StudentRegisterBody (
     var note: String,
     var age: Int,
     var stage: Int,
+    val firebaseToken: String
 )

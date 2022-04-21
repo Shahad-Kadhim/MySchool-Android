@@ -1,6 +1,8 @@
 package com.shahad.app.my_school.ui.register
 
 import androidx.lifecycle.*
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.JsonElement
 import com.shahad.app.my_school.data.MySchoolRepository
 import com.shahad.app.my_school.data.remote.AuthenticationResponse
@@ -71,18 +73,30 @@ class RegisterViewModel @Inject constructor(
     val clickNavLoginEvent: StateFlow<Event<Boolean>?> = _clickNavLoginEvent
 
     fun onClickSignUp(){
-        takeIf { validateField() }?.let{
-            role.value?.let { currentRole ->
-                signUpUser(currentRole,getRequestBody(currentRole))
+        onGetFirebaseToken { firebaseToken ->
+            takeIf { validateField() }?.let{
+                role.value?.let { currentRole ->
+                    signUpUser(currentRole,getRequestBody(currentRole,firebaseToken))
+                }
             }
         }
     }
 
-    private fun getRequestBody(role: Role) =
+
+    private fun onGetFirebaseToken(registerRequest:(String)->Unit){
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                return@OnCompleteListener
+            }
+            registerRequest(task.result)
+        })
+    }
+
+    private fun getRequestBody(role: Role,firebaseToken: String) =
         when(role){
-            Role.TEACHER -> getTeacherRequestBody()
-            Role.STUDENT -> getStudentRequestBody()
-            Role.MANGER -> getMangerRequestBody()
+            Role.TEACHER -> getTeacherRequestBody(firebaseToken)
+            Role.STUDENT -> getStudentRequestBody(firebaseToken)
+            Role.MANGER -> getMangerRequestBody(firebaseToken)
         }
 
 
@@ -94,17 +108,18 @@ class RegisterViewModel @Inject constructor(
         }
     }
 
-    private fun getMangerRequestBody() =
+    private fun getMangerRequestBody(firebaseToken: String) =
         dataClassParser.parseToJson(
             MangerRegisterBody(
                 name.value!!,
                 password.value!!,
-                phone.value!!
+                phone.value!!,
+                firebaseToken
             )
         )
 
 
-    private fun getStudentRequestBody() =
+    private fun getStudentRequestBody(firebaseToken: String) =
         dataClassParser.parseToJson(
             StudentRegisterBody(
                 name.value!!,
@@ -112,18 +127,20 @@ class RegisterViewModel @Inject constructor(
                 phone.value!!,
                 note.value ?: "",
                 age.value!!,
-                stage.value!!
+                stage.value!!,
+                firebaseToken
             )
         )
 
 
-    private fun getTeacherRequestBody() =
+    private fun getTeacherRequestBody(firebaseToken: String) =
         dataClassParser.parseToJson(
             TeacherRegisterBody(
                 name.value!!,
                 password.value!!,
                 teachingSpecialization.value!!,
-                phone.value!!
+                phone.value!!,
+                firebaseToken
             )
         )
 

@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import com.shahad.app.my_school.data.MySchoolRepository
 import com.shahad.app.my_school.data.remote.AuthenticationResponse
 import com.shahad.app.my_school.data.remote.response.BaseResponse
@@ -43,20 +45,31 @@ class LoginViewModel @Inject constructor(
         }
 
     fun onClickLogin(){
-        dataClassParser.parseToJson(
-            LoginBody(
-                name.value,
-                password.value
-            )
-        ).also{
-            viewModelScope.launch {
-                repository.loginUser(it).collect {
-                    _loginState.postValue(it)
+        onGetFirebaseToken { firebaseToken ->
+            dataClassParser.parseToJson(
+                LoginBody(
+                    name.value,
+                    password.value,
+                    firebaseToken
+                )
+            ).also{
+                viewModelScope.launch {
+                    repository.loginUser(it).collect {
+                        _loginState.postValue(it)
+                    }
                 }
             }
         }
     }
 
+    private fun onGetFirebaseToken(loginRequest:(String)->Unit){
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                return@OnCompleteListener
+            }
+            loginRequest(task.result)
+        })
+    }
 
     fun onClickNavSignUp(){
         _clickNavSignUpEvent.tryEmit(Event(true))
