@@ -80,6 +80,8 @@ interface MySchoolRepository{
 
     fun getAssignmentForStudent(): Flow<State<BaseResponse<List<AssignmentDto>>?>>
 
+    fun getNotification(): Flow<State<BaseResponse<List<NotificationDto>>?>>
+
     suspend fun refreshMangerSchool()
     suspend fun refreshTeacherSchool()
     suspend fun refreshStudentSchool()

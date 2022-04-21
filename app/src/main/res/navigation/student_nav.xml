@@ -118,4 +118,9 @@
             android:name="classId"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.shahad.app.my_school.ui.notification.NotificationFragment"
+        android:label="NotificationFragment"
+        tools:layout="@layout/fragment_notification"/>
 </navigation>

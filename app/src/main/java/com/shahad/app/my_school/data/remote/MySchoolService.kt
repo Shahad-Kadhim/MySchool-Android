@@ -150,4 +150,7 @@ interface MySchoolService{
 
     @GET("/student/assignments")
     suspend fun getAssignmentForStudent(): Response<BaseResponse<List<AssignmentDto>>>
+
+    @GET("/notification")
+    suspend fun getNotification(): Response<BaseResponse<List<NotificationDto>>>
 }

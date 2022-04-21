@@ -10,6 +10,10 @@
         android:icon="@drawable/ic_duty"
         android:title="Assignment" />
     <item
+        android:id="@+id/notificationFragment"
+        android:icon="@drawable/ic_notifaction"
+        android:title="Notification"/>
+    <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/ic_profile"
         android:title="Profile" />

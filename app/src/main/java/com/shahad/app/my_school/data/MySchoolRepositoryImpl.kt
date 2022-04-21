@@ -233,6 +233,9 @@ class MySchoolRepositoryImpl @Inject constructor(
     override fun getAssignmentForStudent(): Flow<State<BaseResponse<List<AssignmentDto>>?>> =
         wrapWithFlow { apiService.getAssignmentForStudent() }
 
+    override fun getNotification(): Flow<State<BaseResponse<List<NotificationDto>>?>> =
+        wrapWithFlow { apiService.getNotification() }
+
     private fun <T> wrapWithFlow(function: suspend () -> Response<T>): Flow<State<T?>> {
         return flow {
             emit(State.Loading)
