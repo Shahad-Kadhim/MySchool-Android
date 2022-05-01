@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_homeFragment_to_classScreen"
             app:destination="@id/classScreenFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_assignmentStudentFragment"
+            app:destination="@id/assignmentStudentFragment" />
     </fragment>
     <fragment
         android:id="@+id/memberFragment2"

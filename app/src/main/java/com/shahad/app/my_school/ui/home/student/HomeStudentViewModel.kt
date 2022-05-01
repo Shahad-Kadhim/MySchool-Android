@@ -18,6 +18,8 @@ class HomeStudentViewModel @Inject constructor(
 
     val search = MutableLiveData<String?>(null)
 
+    val dutiesStatistic = repository.getDutiesStatistic().asLiveData()
+
     //TODO LATER SEARCH NOT WORKING :(
     val classes = Transformations.switchMap(search){ searchKey ->
         repository.getStudentClasses(searchKey?.takeIf { it.isNotBlank() }).asLiveData()
@@ -30,6 +32,9 @@ class HomeStudentViewModel @Inject constructor(
 
     private val _clickClassEvent = MutableLiveData<Event<Pair<String,String>>>()
     val clickClassEvent: LiveData<Event<Pair<String,String>>> = _clickClassEvent
+
+    private val _clickDutiesEvent = MutableLiveData<Event<Boolean>>()
+    val clickDutiesEvent: LiveData<Event<Boolean>> = _clickDutiesEvent
 
     private val _unAuthentication = MutableLiveData<State.UnAuthorization>()
     val unAuthentication: LiveData<State.UnAuthorization> = _unAuthentication
@@ -59,5 +64,9 @@ class HomeStudentViewModel @Inject constructor(
 
     override fun onClickClass(classId: String, className: String) {
         _clickClassEvent.postValue(Event(Pair(classId,className)))
+    }
+
+    override fun onClickDuties() {
+        _clickDutiesEvent.postValue(Event(true))
     }
 }

@@ -1,6 +1,7 @@
 package com.shahad.app.my_school.ui.home.student
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.viewModels
 import com.shahad.app.my_school.R
 import com.shahad.app.my_school.databinding.FragmentStudentHomeBinding
@@ -12,6 +13,7 @@ import com.shahad.app.my_school.util.extension.observeEvent
 import com.shahad.app.my_school.util.extension.showToast
 import com.shahad.app.my_school.util.extension.toHomeItems
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 @AndroidEntryPoint
 class HomeStudentFragment: BaseFragment<FragmentStudentHomeBinding>() {
@@ -43,17 +45,24 @@ class HomeStudentFragment: BaseFragment<FragmentStudentHomeBinding>() {
                 (viewDataBinding.classRecycler.adapter as HomeStudentAdapterRecycler)
                     .editClassItem(it.toHomeItems())
             }
+
+            dutiesStatistic.observe(this@HomeStudentFragment){
+
+            }
+
             unAuthentication.observe(this@HomeStudentFragment){
                 (requireActivity() as MainActivity).navToIdentity()
             }
             refreshState.observe(this@HomeStudentFragment){ ifRefresh ->
                 takeIf { ifRefresh==true }?.refreshClasses()
             }
+
             clickProfileEvent.observeEvent(this@HomeStudentFragment){
                 viewDataBinding.root.goToFragment(
                     HomeStudentFragmentDirections.actionHomeFragmentToProfileFragment()
                 )
             }
+
             clickClassEvent.observeEvent(this@HomeStudentFragment){ pair ->
                 viewDataBinding.root.goToFragment(
                     HomeStudentFragmentDirections.actionHomeFragmentToClassScreen(
@@ -63,6 +72,11 @@ class HomeStudentFragment: BaseFragment<FragmentStudentHomeBinding>() {
                     )
                 )
             }
+
+            clickDutiesEvent.observeEvent(this@HomeStudentFragment){
+                viewDataBinding.root.goToFragment(HomeStudentFragmentDirections.actionHomeFragmentToAssignmentStudentFragment())
+            }
+
             message.observe(this@HomeStudentFragment){
                 this@HomeStudentFragment.requireContext().showToast(it)
             }

@@ -82,6 +82,8 @@ interface MySchoolRepository{
 
     fun getNotification(): Flow<State<BaseResponse<List<NotificationDto>>?>>
 
+    fun getDutiesStatistic(): Flow<State<BaseResponse<String>?>>
+
     suspend fun refreshMangerSchool(): Flow<State<BaseResponse<List<SchoolDto>>?>>
     suspend fun refreshTeacherSchool(): Flow<State<BaseResponse<List<SchoolDto>>?>>
     suspend fun refreshStudentSchool(): Flow<State<BaseResponse<List<SchoolDto>>?>>

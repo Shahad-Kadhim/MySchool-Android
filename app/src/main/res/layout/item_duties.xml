@@ -26,7 +26,8 @@
         app:cardCornerRadius="@dimen/space_large">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:onClick="@{() -> listener.onClickDuties()}">
 
             <TextView
                 android:id="@+id/textView4"

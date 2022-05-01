@@ -153,4 +153,9 @@ interface MySchoolService{
 
     @GET("/notification")
     suspend fun getNotification(): Response<BaseResponse<List<NotificationDto>>>
+
+
+    @GET("/student/dutiesStatistic")
+    suspend fun getDutiesStatistic(): Response<BaseResponse<String>>
+
 }

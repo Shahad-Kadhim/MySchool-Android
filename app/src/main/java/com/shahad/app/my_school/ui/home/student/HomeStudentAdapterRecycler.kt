@@ -18,7 +18,6 @@ class HomeStudentAdapterRecycler(
 ): BaseRecyclerAdapter<HomeItem>(itemsH,listener) {
     override var layoutId: Int = 0
 
-
     fun editClassItem(newItems: List<HomeItem.ClassItem>) {
         val newItemsList = itemsH.apply {
             this.addAll(
@@ -40,7 +39,9 @@ class HomeStudentAdapterRecycler(
         newItemPosition: Int,
         newItems: List<HomeItem>
     ): Boolean =
-        true
+        if(newItems[newItemPosition] is HomeItem.ClassItem && getItems()[oldItemPosition] is HomeItem.ClassItem)
+           (newItems[newItemPosition] as HomeItem.ClassItem).classI.id ==  (getItems()[oldItemPosition] as HomeItem.ClassItem).classI.id
+        else false
 
     override fun areContentSame(
         oldPosition: Int,
@@ -102,4 +103,5 @@ class HomeStudentAdapterRecycler(
 
 interface HomeStudentInteractionListener: BaseInteractionListener{
     fun onClickClass(classId: String,className: String)
+    fun onClickDuties()
 }
