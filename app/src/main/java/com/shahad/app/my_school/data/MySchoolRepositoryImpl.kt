@@ -74,14 +74,14 @@ class MySchoolRepositoryImpl @Inject constructor(
             domainMappers.schoolMapper::map
         )
 
-    override suspend fun refreshTeacherSchool() {
+    override suspend fun refreshTeacherSchool() =
         refreshWrapper(apiService::getTeacherSchools, dao::addSchool)
         { body ->
             body?.data?.map { schoolDto ->
                 localMappers.schoolEntityMapper.map(schoolDto)
             }
         }
-    }
+
 
     override suspend fun refreshMangerSchool() =
         refreshWrapper(apiService::getMangerSchools, dao::addSchool)
