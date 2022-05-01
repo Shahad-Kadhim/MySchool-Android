@@ -14,6 +14,8 @@ import androidx.core.widget.doOnTextChanged
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
+import androidx.lifecycle.findViewTreeLifecycleOwner
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -32,7 +34,12 @@ import com.shahad.app.my_school.domain.models.School
 import com.shahad.app.my_school.ui.add.post.PostType
 import com.shahad.app.my_school.ui.base.BaseRecyclerAdapter
 import com.shahad.app.my_school.ui.register.Role
+import com.shahad.app.my_school.util.extension.hide
+import com.shahad.app.my_school.util.extension.show
+import com.shahad.app.my_school.util.extension.showToast
 import com.shahad.app.my_school.util.extension.toPostType
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -91,6 +98,35 @@ fun onChange(spinner: Spinner, attChange: InverseBindingListener){
 @BindingAdapter(value = ["app:showOnLoading"])
 fun <T>showOnLoading(view: View, state: State<T>?){
     view.visibility = if(state is State.Loading) View.VISIBLE else View.GONE
+}
+
+
+
+@BindingAdapter(value = ["app:showOnConnectionError"])
+fun <T>showOnConnectionError(view: View, state: State<T>?){
+    if(state is State.ConnectionError) {
+        view.show()
+        view.findViewTreeLifecycleOwner()?.lifecycleScope?.launch {
+            delay(1500)
+            view.hide()
+        }
+        view.context.showToast("ckeck your connection ")
+    } else {
+        view.hide()
+    }
+}
+
+@BindingAdapter(value = ["app:showOnNotFound"])
+fun <T>showOnNotFound(view: View, state: State<T>?){
+    if(state is State.Error) {
+        view.show()
+        view.findViewTreeLifecycleOwner()?.lifecycleScope?.launch {
+            delay(1500)
+            view.hide()
+        }
+    } else {
+        view.hide()
+    }
 }
 
 

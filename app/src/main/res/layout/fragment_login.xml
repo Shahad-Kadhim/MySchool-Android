@@ -15,6 +15,21 @@
         app:disableOnLoading="@{viewModel.loginState}"
         android:background="@drawable/background">
 
+        <include
+            android:id="@+id/login_error"
+            layout="@layout/error"
+            app:showOnNotFound="@{viewModel.loginState}" />
+
+        <include
+            android:id="@+id/connectionError"
+            layout="@layout/error_connection"
+            app:showOnConnectionError="@{viewModel.loginState}" />
+
+        <include
+            android:id="@+id/loading"
+            layout="@layout/loading"
+            app:showOnLoading="@{viewModel.loginState}" />
+
         <ImageView
             android:id="@+id/imageView5"
             android:layout_width="wrap_content"
@@ -160,18 +175,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:showOnLoading="@{viewModel.loginState}"
-            android:indeterminate="true"
-            android:elevation="16dp"
-            android:indeterminateTintMode="src_atop"
-            android:indeterminateTint="@color/brand_color"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

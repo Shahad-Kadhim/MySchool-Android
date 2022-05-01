@@ -20,7 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
-    val repository: MySchoolRepository,
+    private val repository: MySchoolRepository,
     private val dataClassParser: DataClassParser
 ): BaseViewModel(){
 

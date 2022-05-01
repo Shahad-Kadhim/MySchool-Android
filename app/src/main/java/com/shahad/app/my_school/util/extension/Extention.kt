@@ -43,3 +43,11 @@ fun <T> LiveData<Event<T>>.observeEvent(owner: LifecycleOwner, function:(T) ->Un
         function(it)
     })
 }
+
+fun View.hide(){
+    this.visibility =View.GONE
+}
+
+fun View.show(){
+    this.visibility =View.VISIBLE
+}

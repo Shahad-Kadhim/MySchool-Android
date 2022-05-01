@@ -242,7 +242,7 @@ class MySchoolRepositoryImpl @Inject constructor(
             try {
                 emit(checkIsSuccessful(function()))
             } catch (e: Exception) {
-                emit(State.Error(e.message.toString()))
+                emit(State.ConnectionError)
             }
         }
     }
@@ -267,7 +267,7 @@ class MySchoolRepositoryImpl @Inject constructor(
     ): Flow<State<BaseResponse<List<U>>?>> =
         data.map {
             when (it) {
-                is State.Error, State.UnAuthorization, State.Loading -> it as State<BaseResponse<List<U>>?>
+                is State.Error, State.UnAuthorization, State.Loading, State.ConnectionError -> it as State<BaseResponse<List<U>>?>
                 is State.Success -> {
                     State.Success(
                         BaseResponse(it.data!!.statusCode, it.data!!.data.map { mapper(it) })
