@@ -82,10 +82,10 @@ interface MySchoolRepository{
 
     fun getNotification(): Flow<State<BaseResponse<List<NotificationDto>>?>>
 
-    suspend fun refreshMangerSchool()
+    suspend fun refreshMangerSchool(): Flow<State<BaseResponse<List<SchoolDto>>?>>
     suspend fun refreshTeacherSchool()
-    suspend fun refreshStudentSchool()
-    suspend fun refreshTeacherClasses(searchKey: String?)
-    suspend fun refreshMangerClasses()
-    suspend fun refreshStudentClasses(searchKey: String?)
+    suspend fun refreshStudentSchool(): Flow<State<BaseResponse<List<SchoolDto>>?>>
+    suspend fun refreshTeacherClasses(searchKey: String?): Flow<State<BaseResponse<List<ClassDto>>?>>
+    suspend fun refreshMangerClasses(): Flow<State<BaseResponse<List<ClassDto>>?>>
+    suspend fun refreshStudentClasses(searchKey: String?): Flow<State<BaseResponse<List<ClassDto>>?>>
 }

@@ -9,6 +9,7 @@ import com.shahad.app.my_school.ui.main.MainActivity
 import com.shahad.app.my_school.ui.register.Role
 import com.shahad.app.my_school.util.extension.goToFragment
 import com.shahad.app.my_school.util.extension.observeEvent
+import com.shahad.app.my_school.util.extension.showToast
 import com.shahad.app.my_school.util.extension.toHomeItems
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -61,6 +62,9 @@ class HomeStudentFragment: BaseFragment<FragmentStudentHomeBinding>() {
                         Role.STUDENT
                     )
                 )
+            }
+            message.observe(this@HomeStudentFragment){
+                this@HomeStudentFragment.requireContext().showToast(it)
             }
         }
     }

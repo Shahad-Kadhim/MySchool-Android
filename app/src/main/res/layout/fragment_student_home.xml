@@ -99,6 +99,12 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toBottomOf="@+id/search_bar" />
 
+                <include
+                    android:id="@+id/no_result"
+                    layout="@layout/no_result"
+                    app:showOnNoResult="@{viewModel.classes}"
+                    />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

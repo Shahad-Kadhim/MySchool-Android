@@ -52,14 +52,14 @@ class MySchoolRepositoryImpl @Inject constructor(
             domainMappers.schoolMapper::map
         )
 
-    override suspend fun refreshTeacherClasses(searchKey: String?) {
+    override suspend fun refreshTeacherClasses(searchKey: String?) =
         refreshWrapper(apiService::getTeacherClasses, dao::addClasses)
         { body ->
             body?.data?.map { classDto ->
                 localMappers.classEntityMapper.map(classDto)
             }
         }
-    }
+
 
     override fun getMangerSchool(): Flow<List<School>> =
         wrapperClass(
@@ -83,23 +83,23 @@ class MySchoolRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun refreshMangerSchool() {
+    override suspend fun refreshMangerSchool() =
         refreshWrapper(apiService::getMangerSchools, dao::addSchool)
         { body ->
             body?.data?.map { schoolDto ->
                 localMappers.schoolEntityMapper.map(schoolDto)
             }
         }
-    }
 
-    override suspend fun refreshStudentSchool() {
+
+    override suspend fun refreshStudentSchool() =
         refreshWrapper(apiService::getStudentSchools, dao::addSchool)
         { body ->
             body?.data?.map { schoolDto ->
                 localMappers.schoolEntityMapper.map(schoolDto)
             }
         }
-    }
+
 
     override fun getMangerClasses(): Flow<List<ClassM>> =
         wrapperClass(
@@ -113,27 +113,27 @@ class MySchoolRepositoryImpl @Inject constructor(
             domainMappers.classMapper::map
         )
 
-    override suspend fun refreshMangerClasses() {
+    override suspend fun refreshMangerClasses() =
         refreshWrapper(apiService::getMangerClasses, dao::addClasses)
         { body ->
             body?.data?.map { classDto ->
                 localMappers.classEntityMapper.map(classDto)
             }
         }
-    }
 
-    override suspend fun refreshStudentClasses(searchKey: String?) {
+
+    override suspend fun refreshStudentClasses(searchKey: String?) =
         refreshCLass(apiService::getStudentClasses)
-    }
 
-    private suspend  fun refreshCLass(request: suspend () -> Response<BaseResponse<List<ClassDto>>>){
+
+    private suspend  fun refreshCLass(request: suspend () -> Response<BaseResponse<List<ClassDto>>>) =
         refreshWrapper(request, dao::addClasses)
         { body ->
             body?.data?.map { classDto ->
                 localMappers.classEntityMapper.map(classDto)
             }
         }
-    }
+
 
     override fun createSchool(schoolName: String): Flow<State<BaseResponse<SchoolDto>?>> =
         wrapWithFlow { apiService.createSchool(schoolName) }
@@ -171,6 +171,7 @@ class MySchoolRepositoryImpl @Inject constructor(
     override fun addStudentToClass(requestBody: JsonElement): Flow<State<BaseResponse<String>?>> =
         wrapWithFlow { apiService.addStudentsToClass(requestBody) }
 
+    @FlowPreview
     override fun getMemberClass(classId: String): Flow<State<BaseResponse<List<UserSelected>>?>> =
         wrapper(wrapWithFlow { apiService.getClassMember(classId) } ,domainMappers.userInfoMapper::map)
 
@@ -291,19 +292,23 @@ class MySchoolRepositoryImpl @Inject constructor(
         request: suspend () -> Response<T>,
         insertIntoDatabase: suspend (List<U>) -> Unit,
         mapper: (T?) -> List<U>?,
-    ) {
-        try {
-            request().also {
-                if (it.isSuccessful) {
-                    mapper(it.body())?.let { list ->
-                        insertIntoDatabase(list)
+    ) =
+        flow {
+            try {
+                request().also {
+                    if (it.isSuccessful) {
+                        mapper(it.body())?.let { list ->
+                            insertIntoDatabase(list)
+                        }
+                        emit(checkIsSuccessful(it))
                     }
                 }
+            } catch (exception: Exception) {
+                emit(State.ConnectionError)
+                Log.i("MY_SCHOOL", "no connection cant update data")
             }
-        } catch (exception: Exception) {
-            Log.i("MY_SCHOOL", "no connection cant update data")
         }
-    }
+
 
 
 }

@@ -101,6 +101,12 @@ fun <T>showOnLoading(view: View, state: State<T>?){
 }
 
 
+@BindingAdapter(value = ["app:showOnNoResult"])
+fun <T>showOnNoResult(view: View, result: List<T>?){
+    view.visibility = if(result.isNullOrEmpty()) View.VISIBLE else View.GONE
+}
+
+
 
 @BindingAdapter(value = ["app:showOnConnectionError"])
 fun <T>showOnConnectionError(view: View, state: State<T>?){

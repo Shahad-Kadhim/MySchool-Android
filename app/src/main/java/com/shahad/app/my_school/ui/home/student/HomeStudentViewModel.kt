@@ -7,6 +7,7 @@ import com.shahad.app.my_school.ui.base.BaseViewModel
 import com.shahad.app.my_school.util.Event
 import com.shahad.app.my_school.util.State
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -30,11 +31,10 @@ class HomeStudentViewModel @Inject constructor(
     private val _clickClassEvent = MutableLiveData<Event<Pair<String,String>>>()
     val clickClassEvent: LiveData<Event<Pair<String,String>>> = _clickClassEvent
 
-    val unAuthentication = MediatorLiveData<State.UnAuthorization?>().apply {
-//        addSource(classes){
-//            if(it is State.UnAuthorization) this.postValue(it)
-//        }
-    }
+    private val _unAuthentication = MutableLiveData<State.UnAuthorization>()
+    val unAuthentication: LiveData<State.UnAuthorization> = _unAuthentication
+    private val _message = MutableLiveData<String>()
+    val message: LiveData<String> = _message
 
     init {
         refreshClasses()
@@ -42,7 +42,13 @@ class HomeStudentViewModel @Inject constructor(
 
     fun refreshClasses(){
         viewModelScope.launch {
-            repository.refreshStudentClasses(search.value)
+            repository.refreshStudentClasses(search.value).collect {
+                when(it){
+                    State.ConnectionError,is State.Error -> _message.postValue("no connection")
+                    is State.Success -> _message.postValue("Update")
+                    State.UnAuthorization -> _unAuthentication.postValue(State.UnAuthorization)
+                }
+            }
             refreshState.postValue(false)
         }
     }
