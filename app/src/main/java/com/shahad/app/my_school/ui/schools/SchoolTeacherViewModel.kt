@@ -4,6 +4,7 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.shahad.app.my_school.data.MySchoolRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -16,7 +17,9 @@ class SchoolTeacherViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            repository.refreshTeacherSchool()
+            repository.refreshTeacherSchool().collect {
+
+            }
         }
     }
     override fun onClickAddSchool() {

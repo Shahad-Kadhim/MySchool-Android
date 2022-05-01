@@ -7,6 +7,7 @@ import com.shahad.app.my_school.ui.ClassInteractionListener
 import com.shahad.app.my_school.util.Event
 import com.shahad.app.my_school.util.State
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -42,7 +43,9 @@ class HomeTeacherViewModel @Inject constructor(
 
     fun refreshClasses(){
         viewModelScope.launch {
-            repository.refreshTeacherClasses(search.value)
+            repository.refreshTeacherClasses(search.value).collect {
+
+            }
             refreshState.postValue(false)
         }
     }

@@ -19,4 +19,14 @@
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/no_result" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="No Result"
+        android:textColor="@color/brand_color"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/error" />
 </androidx.constraintlayout.widget.ConstraintLayout>

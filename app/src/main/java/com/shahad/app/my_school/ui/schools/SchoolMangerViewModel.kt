@@ -6,6 +6,7 @@ import com.shahad.app.my_school.ui.SchoolInteractionListener
 import com.shahad.app.my_school.util.Event
 import com.shahad.app.my_school.util.State
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -31,7 +32,9 @@ class SchoolMangerViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            repository.refreshMangerSchool()
+            repository.refreshMangerSchool().collect {
+                // TODO LATER SHOW MESSAGE FOR EXAMPLE
+            }
         }
     }
     override fun onClickAddSchool(){

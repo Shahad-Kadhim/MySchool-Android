@@ -83,6 +83,7 @@
                     android:background="@drawable/reg_rounded_24dp"
                     android:paddingHorizontal="@dimen/space_medium"
                     android:paddingVertical="@dimen/space_small"
+                    android:visibility="gone"
                     android:layout_marginBottom="@dimen/space_medium"
                     app:layout_constraintTop_toTopOf="parent"/>
 
