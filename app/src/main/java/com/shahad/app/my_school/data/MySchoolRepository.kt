@@ -84,10 +84,10 @@ interface MySchoolRepository{
 
     fun getDutiesStatistic(): Flow<State<BaseResponse<String>?>>
 
-    suspend fun refreshMangerSchool(): Flow<State<BaseResponse<List<SchoolDto>>?>>
-    suspend fun refreshTeacherSchool(): Flow<State<BaseResponse<List<SchoolDto>>?>>
-    suspend fun refreshStudentSchool(): Flow<State<BaseResponse<List<SchoolDto>>?>>
-    suspend fun refreshTeacherClasses(searchKey: String?): Flow<State<BaseResponse<List<ClassDto>>?>>
-    suspend fun refreshMangerClasses(): Flow<State<BaseResponse<List<ClassDto>>?>>
-    suspend fun refreshStudentClasses(searchKey: String?): Flow<State<BaseResponse<List<ClassDto>>?>>
+    fun refreshMangerSchool(): Flow<State<BaseResponse<List<SchoolDto>>?>>
+    fun refreshTeacherSchool(): Flow<State<BaseResponse<List<SchoolDto>>?>>
+    fun refreshStudentSchool(): Flow<State<BaseResponse<List<SchoolDto>>?>>
+    fun refreshTeacherClasses(searchKey: String?): Flow<State<BaseResponse<List<ClassDto>>?>>
+    fun refreshMangerClasses(): Flow<State<BaseResponse<List<ClassDto>>?>>
+    fun refreshStudentClasses(searchKey: String?): Flow<State<BaseResponse<List<ClassDto>>?>>
 }

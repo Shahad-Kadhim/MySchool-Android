@@ -52,7 +52,7 @@ class MySchoolRepositoryImpl @Inject constructor(
             domainMappers.schoolMapper::map
         )
 
-    override suspend fun refreshTeacherClasses(searchKey: String?) =
+    override fun refreshTeacherClasses(searchKey: String?) =
         refreshWrapper(apiService::getTeacherClasses, dao::addClasses)
         { body ->
             body?.data?.map { classDto ->
@@ -74,7 +74,7 @@ class MySchoolRepositoryImpl @Inject constructor(
             domainMappers.schoolMapper::map
         )
 
-    override suspend fun refreshTeacherSchool() =
+    override fun refreshTeacherSchool() =
         refreshWrapper(apiService::getTeacherSchools, dao::addSchool)
         { body ->
             body?.data?.map { schoolDto ->
@@ -83,7 +83,7 @@ class MySchoolRepositoryImpl @Inject constructor(
         }
 
 
-    override suspend fun refreshMangerSchool() =
+    override fun refreshMangerSchool() =
         refreshWrapper(apiService::getMangerSchools, dao::addSchool)
         { body ->
             body?.data?.map { schoolDto ->
@@ -92,7 +92,7 @@ class MySchoolRepositoryImpl @Inject constructor(
         }
 
 
-    override suspend fun refreshStudentSchool() =
+    override fun refreshStudentSchool() =
         refreshWrapper(apiService::getStudentSchools, dao::addSchool)
         { body ->
             body?.data?.map { schoolDto ->
@@ -113,7 +113,7 @@ class MySchoolRepositoryImpl @Inject constructor(
             domainMappers.classMapper::map
         )
 
-    override suspend fun refreshMangerClasses() =
+    override fun refreshMangerClasses() =
         refreshWrapper(apiService::getMangerClasses, dao::addClasses)
         { body ->
             body?.data?.map { classDto ->
@@ -122,11 +122,11 @@ class MySchoolRepositoryImpl @Inject constructor(
         }
 
 
-    override suspend fun refreshStudentClasses(searchKey: String?) =
+    override fun refreshStudentClasses(searchKey: String?) =
         refreshCLass(apiService::getStudentClasses)
 
 
-    private suspend  fun refreshCLass(request: suspend () -> Response<BaseResponse<List<ClassDto>>>) =
+    private  fun refreshCLass(request: suspend () -> Response<BaseResponse<List<ClassDto>>>) =
         refreshWrapper(request, dao::addClasses)
         { body ->
             body?.data?.map { classDto ->
@@ -291,7 +291,7 @@ class MySchoolRepositoryImpl @Inject constructor(
         }
 
 
-    private suspend fun <T, U> refreshWrapper(
+    private  fun <T, U> refreshWrapper(
         request: suspend () -> Response<T>,
         insertIntoDatabase: suspend (List<U>) -> Unit,
         mapper: (T?) -> List<U>?,

@@ -8,6 +8,7 @@ import com.shahad.app.my_school.databinding.FragmentStudentHomeBinding
 import com.shahad.app.my_school.ui.base.BaseFragment
 import com.shahad.app.my_school.ui.main.MainActivity
 import com.shahad.app.my_school.ui.register.Role
+import com.shahad.app.my_school.util.State
 import com.shahad.app.my_school.util.extension.goToFragment
 import com.shahad.app.my_school.util.extension.observeEvent
 import com.shahad.app.my_school.util.extension.showToast
@@ -29,11 +30,15 @@ class HomeStudentFragment: BaseFragment<FragmentStudentHomeBinding>() {
     override fun onStart() {
         super.onStart()
         viewDataBinding.classRecycler.adapter = HomeStudentAdapterRecycler(
-            mutableListOf(
-                HomeItem.DutyItem(23,6),
-                HomeItem.ClassesLabelItem
-            ).apply {
-                addAll(viewModel.classes.value?.toHomeItems() ?: emptyList())
+            mutableListOf<HomeItem>().apply {
+                viewModel.dutiesStatistic.value?.toData()?.data?.apply {
+                    add(HomeItem.DutyItem(this))
+                }
+                add(HomeItem.ClassesLabelItem)
+                viewModel.classes.value?.toHomeItems()?.let {
+                    addAll(it)
+                }
+
             },
             viewModel,
         )
@@ -47,11 +52,18 @@ class HomeStudentFragment: BaseFragment<FragmentStudentHomeBinding>() {
             }
 
             dutiesStatistic.observe(this@HomeStudentFragment){
-
+                if(it is State.Success){
+                    it.data?.data?.let { statistic ->
+                        (viewDataBinding.classRecycler.adapter as HomeStudentAdapterRecycler)
+                            .addDutyStatistic(statistic)
+                    }
+                }
             }
 
             unAuthentication.observe(this@HomeStudentFragment){
-                (requireActivity() as MainActivity).navToIdentity()
+                it?.let{
+                    (requireActivity() as MainActivity).navToIdentity()
+                }
             }
             refreshState.observe(this@HomeStudentFragment){ ifRefresh ->
                 takeIf { ifRefresh==true }?.refreshClasses()

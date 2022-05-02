@@ -1,7 +1,10 @@
 package com.shahad.app.my_school.ui.home.student
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.shahad.app.my_school.data.MySchoolRepository
+import com.shahad.app.my_school.data.remote.response.BaseResponse
+import com.shahad.app.my_school.data.remote.response.ClassDto
 import com.shahad.app.my_school.ui.ClassInteractionListener
 import com.shahad.app.my_school.ui.base.BaseViewModel
 import com.shahad.app.my_school.util.Event
@@ -36,8 +39,11 @@ class HomeStudentViewModel @Inject constructor(
     private val _clickDutiesEvent = MutableLiveData<Event<Boolean>>()
     val clickDutiesEvent: LiveData<Event<Boolean>> = _clickDutiesEvent
 
-    private val _unAuthentication = MutableLiveData<State.UnAuthorization>()
-    val unAuthentication: LiveData<State.UnAuthorization> = _unAuthentication
+    val unAuthentication = MediatorLiveData<State.UnAuthorization>().apply{
+        addSource(dutiesStatistic){
+            if(it is State.UnAuthorization) this.postValue(it)
+        }
+    }
     private val _message = MutableLiveData<String>()
     val message: LiveData<String> = _message
 
@@ -51,7 +57,7 @@ class HomeStudentViewModel @Inject constructor(
                 when(it){
                     State.ConnectionError,is State.Error -> _message.postValue("no connection")
                     is State.Success -> _message.postValue("Update")
-                    State.UnAuthorization -> _unAuthentication.postValue(State.UnAuthorization)
+                    State.UnAuthorization -> unAuthentication.postValue(State.UnAuthorization)
                 }
             }
             refreshState.postValue(false)

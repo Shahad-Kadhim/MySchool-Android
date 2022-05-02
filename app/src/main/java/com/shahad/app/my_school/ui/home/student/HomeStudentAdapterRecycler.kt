@@ -26,7 +26,6 @@ class HomeStudentAdapterRecycler(
                 }
             )
         }
-
         val diffResult = DiffUtil.calculateDiff(MySchoolDiffUtil(itemsH,
             newItemsList,
             ::areItemsTheSame,
@@ -34,6 +33,17 @@ class HomeStudentAdapterRecycler(
         diffResult.dispatchUpdatesTo(this)
     }
 
+    fun addDutyStatistic(statistic: String){
+        val newItemsList = itemsH.apply {
+            this.add(HomeItem.DutyItem(statistic))
+        }
+        val diffResult = DiffUtil.calculateDiff(MySchoolDiffUtil(itemsH,
+            newItemsList,
+            ::areItemsTheSame,
+            ::areContentSame))
+        diffResult.dispatchUpdatesTo(this)
+        itemsH.sortBy { it.rank }
+    }
     override fun areItemsTheSame(
         oldItemPosition: Int,
         newItemPosition: Int,
@@ -75,11 +85,9 @@ class HomeStudentAdapterRecycler(
                 holder.binding.setVariable(BR.listener,listener)
             }
             is HomeItem.DutyItem -> {
-                holder.binding.setVariable(BR.numberOfDuty,"${currentItem.numberOfDuty}")
-                holder.binding.setVariable(BR.dutyFinished,"${currentItem.dutyComplete}")
+                holder.binding.setVariable(BR.statistic, currentItem.statistics)
                 holder.binding.setVariable(BR.listener,listener)
                 Log.i("TAG_DUTY","$position")
-
             }
         }
     }
