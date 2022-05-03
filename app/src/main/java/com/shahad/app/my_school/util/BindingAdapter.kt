@@ -101,9 +101,19 @@ fun <T>showOnLoading(view: View, state: State<T>?){
 }
 
 
-@BindingAdapter(value = ["app:showOnNoResult"])
-fun <T>showOnNoResult(view: View, result: List<T>?){
-    view.visibility = if(result.isNullOrEmpty()) View.VISIBLE else View.GONE
+@BindingAdapter(value = ["app:showOnNoResult","app:Success"],requireAll = false)
+fun <T>showOnNoResult(view: View, result: List<T>?, state: State<T>?){
+    view.visibility = if(result.isNullOrEmpty() && state is State.Success) View.VISIBLE else View.GONE
+    Log.i("TAGL","NO_RESULT")
+}
+
+
+
+
+@BindingAdapter(value = ["app:showOnError"])
+fun <T>showOnError(view: View, state: State<T>?){
+    view.visibility = if(state is State.ConnectionError) View.VISIBLE else View.GONE
+    Log.i("TAGL","ERRORLLLLLLLLLLLL")
 }
 
 
@@ -116,11 +126,13 @@ fun <T>showOnConnectionError(view: View, state: State<T>?){
             delay(1500)
             view.hide()
         }
+        Log.i("TAGL","ERROR_CONNECTION")
         view.context.showToast("ckeck your connection ")
     } else {
         view.hide()
     }
 }
+
 
 @BindingAdapter(value = ["app:showOnNotFound"])
 fun <T>showOnNotFound(view: View, state: State<T>?){

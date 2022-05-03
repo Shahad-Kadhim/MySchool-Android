@@ -43,6 +43,50 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_begin="56dp" />
 
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/error"
+            android:layout_width="172dp"
+            android:layout_height="172dp"
+            android:layout_margin="64dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:showOnError="@{viewModel.assignments}"
+            app:lottie_rawRes="@raw/error_connection" />
+
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="172dp"
+            android:layout_height="172dp"
+            android:layout_margin="64dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:showOnLoading="@{viewModel.assignments}"
+            app:lottie_rawRes="@raw/loading" />
+
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="172dp"
+            android:layout_height="172dp"
+            android:layout_margin="64dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:Success="@{viewModel.assignments}"
+            app:showOnNoResult="@{viewModel.assignments.toData().data}"
+            app:lottie_rawRes="@raw/no_result" />
+
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -60,6 +104,7 @@
                     android:layout_marginTop="@dimen/space_medium"
                     android:clipToPadding="false"
                     android:orientation="vertical"
+                    app:showOnSuccess="@{viewModel.assignments}"
                     app:items="@{viewModel.assignments.toData().data}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="parent"
