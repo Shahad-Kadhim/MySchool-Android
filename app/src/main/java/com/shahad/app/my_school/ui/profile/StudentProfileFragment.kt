@@ -20,8 +20,7 @@ class StudentProfileFragment: BaseFragment<FragmentStudentProfileBinding>() {
         super.onStart()
         viewDataBinding.schools.adapter = SchoolAdapterRecycler(
             viewModel.schools.value ?: emptyList(),
-            viewModel,
-            R.layout.item_school_h
+            viewModel
         )
         observe()
     }

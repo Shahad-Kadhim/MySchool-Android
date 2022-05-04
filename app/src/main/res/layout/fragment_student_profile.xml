@@ -22,19 +22,18 @@
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/black" />
 
-         <ProgressBar
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             app:showOnLoading="@{viewModel.info}"
-             android:indeterminate="true"
-             android:elevation="16dp"
-             android:indeterminateTintMode="src_atop"
-             android:indeterminateTint="@color/brand_color"
+         <com.airbnb.lottie.LottieAnimationView
+             android:layout_width="172dp"
+             android:layout_height="172dp"
+             android:layout_margin="64dp"
              app:layout_constraintBottom_toBottomOf="parent"
              app:layout_constraintEnd_toEndOf="parent"
              app:layout_constraintStart_toStartOf="parent"
-             app:layout_constraintTop_toTopOf="parent" />
-
+             app:layout_constraintTop_toTopOf="parent"
+             app:lottie_autoPlay="true"
+             app:lottie_loop="true"
+             app:showOnLoading="@{viewModel.info}"
+             app:lottie_rawRes="@raw/loading" />
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -44,35 +43,41 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <ImageView
-                    android:id="@+id/imageView8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/photo_profile"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:layout_margin="@dimen/space_medium"
-                    android:src="@drawable/ic_photo"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile_photo"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearanceOverlay="@style/imageCorner50" />
 
                 <TextView
                     android:id="@+id/text_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/space_medium"
-                    android:textSize="24sp"
                     android:text="@{viewModel.info.toData().data.name}"
                     android:textColor="@color/black"
+                    android:textSize="24sp"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="@+id/imageView8"
-                    app:layout_constraintStart_toStartOf="@+id/imageView8"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView8"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintBottom_toBottomOf="@id/photo_profile"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/photo_profile"
+                    app:layout_constraintTop_toTopOf="@id/photo_profile"
                     tools:text="Shahad Kadhim" />
 
                 <ImageView
+                    android:id="@+id/edit_name_option"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_bx_edit_alt"
                     android:layout_margin="@dimen/space_tiny"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@+id/text_name"
                     app:layout_constraintStart_toEndOf="@+id/text_name"
                     app:layout_constraintTop_toTopOf="@id/text_name" />
@@ -84,7 +89,7 @@
                     android:text="Phone"
                     style="@style/LabelProfile"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_name" />
+                    app:layout_constraintTop_toBottomOf="@+id/photo_profile" />
 
                 <EditText
                     android:id="@+id/edit_phone"
@@ -92,6 +97,7 @@
                     android:layout_height="48dp"
                     tools:text="0781234566"
                     style="@style/Profile"
+                    android:clickable="false"
                     android:text="@{viewModel.info.toData().data.phone + ``}"
                     android:background="@drawable/reg_rounded_stroke_8dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -99,10 +105,12 @@
                     app:layout_constraintTop_toBottomOf="@+id/phone_label" />
 
                 <ImageView
+                    android:id="@+id/edit_phone_option"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_bx_edit_alt"
                     android:layout_marginEnd="@dimen/space_medium"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@+id/edit_phone"
                     app:layout_constraintEnd_toEndOf="@id/edit_phone"
                     app:layout_constraintTop_toTopOf="@id/edit_phone" />
@@ -123,16 +131,19 @@
                     android:layout_height="48dp"
                     android:background="@drawable/reg_rounded_stroke_8dp"
                     style="@style/Profile"
+                    android:clickable="false"
                     android:text="@{viewModel.info.toData().data.age+``}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/age_label" />
 
                 <ImageView
+                    android:id="@+id/edit_age_option"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_bx_edit_alt"
                     android:layout_marginEnd="@dimen/space_medium"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@+id/edit_age"
                     app:layout_constraintEnd_toEndOf="@id/edit_age"
                     app:layout_constraintTop_toTopOf="@id/edit_age" />
@@ -154,6 +165,7 @@
                     android:background="@drawable/reg_rounded_stroke_8dp"
                     android:text="@{viewModel.info.toData().data.stage+``}"
                     style="@style/Profile"
+                    android:clickable="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/stage_label" />
@@ -168,6 +180,18 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/edit_stage" />
 
+                <com.airbnb.lottie.LottieAnimationView
+                    android:layout_width="172dp"
+                    android:layout_height="172dp"
+                    android:layout_margin="64dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/school_label"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/no_result"
+                    app:showOnNoResult="@{viewModel.schools}" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/schools"
                     android:layout_width="match_parent"
@@ -176,8 +200,8 @@
                     items="@{viewModel.schools}"
                     app:layout_constraintTop_toBottomOf="@id/school_label"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    android:orientation="horizontal"
-                    tools:listitem="@layout/item_school_h"/>
+                    android:orientation="vertical"
+                    tools:listitem="@layout/item_school"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
