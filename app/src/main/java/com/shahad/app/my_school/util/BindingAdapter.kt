@@ -107,6 +107,12 @@ fun <T>showOnNoResult(view: View, result: List<T>?, state: State<T>?){
     Log.i("TAGL","NO_RESULT")
 }
 
+@BindingAdapter(value = ["app:showOnEmpty"])
+fun <T>showOnEmpty(view: View, result: List<T>?){
+    view.visibility = if(result.isNullOrEmpty()) View.VISIBLE else View.GONE
+    Log.i("TAGL","NO_RESULT")
+}
+
 
 
 

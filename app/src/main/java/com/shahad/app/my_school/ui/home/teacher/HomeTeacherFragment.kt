@@ -11,6 +11,7 @@ import com.shahad.app.my_school.ui.ClassesAdapterRecycler
 import com.shahad.app.my_school.ui.register.Role
 import com.shahad.app.my_school.util.extension.goToFragment
 import com.shahad.app.my_school.util.extension.observeEvent
+import com.shahad.app.my_school.util.extension.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -63,7 +64,9 @@ class HomeTeacherFragment: BaseFragment<FragmentTeacherHomeBinding>() {
             refreshState.observe(this@HomeTeacherFragment){ ifRefresh ->
                 takeIf { ifRefresh==true }?.refreshClasses()
             }
-
+            message.observe(this@HomeTeacherFragment){
+                this@HomeTeacherFragment.requireContext().showToast(it)
+            }
         }
     }
 

@@ -36,6 +36,12 @@ class HomeTeacherViewModel @Inject constructor(
     private val _clickProfileEvent = MutableLiveData<Event<Boolean>>()
     val clickProfileEvent: LiveData<Event<Boolean>> = _clickProfileEvent
 
+    private val _message = MutableLiveData<String>()
+    val message: LiveData<String> = _message
+
+    private val _unAuthentication = MutableLiveData<State.UnAuthorization?>()
+    val unAuthentication: LiveData<State.UnAuthorization?> = _unAuthentication
+
 
     init {
         refreshClasses()
@@ -44,17 +50,16 @@ class HomeTeacherViewModel @Inject constructor(
     fun refreshClasses(){
         viewModelScope.launch {
             repository.refreshTeacherClasses(search.value).collect {
-
+                when(it){
+                    State.ConnectionError,is State.Error -> _message.postValue("no connection")
+                    is State.Success -> _message.postValue("Update")
+                    State.UnAuthorization -> _unAuthentication.postValue(State.UnAuthorization)
+                }
             }
             refreshState.postValue(false)
         }
     }
 
-    val unAuthentication = MediatorLiveData<State.UnAuthorization?>().apply {
-        addSource(classes){
-//            if(it is State.UnAuthorization) this.postValue(it)
-        }
-    }
 
     fun onClickCreateClass(){
         _clickCreateClassEvent.postValue(Event(true))
