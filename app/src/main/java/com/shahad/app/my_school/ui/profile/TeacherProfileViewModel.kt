@@ -9,6 +9,7 @@ import com.shahad.app.my_school.ui.base.BaseViewModel
 import com.shahad.app.my_school.ui.SchoolInteractionListener
 import com.shahad.app.my_school.util.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,7 +27,9 @@ class TeacherProfileViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            repository.refreshTeacherSchool()
+            repository.refreshTeacherSchool().collect {
+
+            }
         }
     }
 

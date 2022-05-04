@@ -2,7 +2,6 @@ package com.shahad.app.my_school.ui.notification
 
 import androidx.lifecycle.*
 import com.shahad.app.my_school.data.MySchoolRepository
-import com.shahad.app.my_school.data.remote.response.AssignmentDto
 import com.shahad.app.my_school.data.remote.response.BaseResponse
 import com.shahad.app.my_school.data.remote.response.NotificationDto
 import com.shahad.app.my_school.ui.base.BaseViewModel
@@ -44,7 +43,7 @@ class NotificationViewModel @Inject constructor(
             with(request()){
                 viewModelScope.launch {
                     this@with.collect {
-                        if(it is State.Success){
+                        if(it == State.ConnectionError || it is State.Error || it is State.Success || it == State.UnAuthorization){
                             refreshState.postValue(false)
                         }
                     }
