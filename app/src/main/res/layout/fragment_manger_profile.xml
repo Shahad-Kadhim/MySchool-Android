@@ -97,8 +97,7 @@
                     android:src="@drawable/ic_bx_edit_alt"
                     app:layout_constraintBottom_toBottomOf="@+id/text_name"
                     app:layout_constraintStart_toEndOf="@+id/text_name"
-                    app:layout_constraintTop_toTopOf="@id/text_name"
-                    app:showOnSuccess="@{viewModel.info}" />
+                    app:layout_constraintTop_toTopOf="@id/text_name" />
 
                 <TextView
                     android:id="@+id/phone_label"
@@ -107,8 +106,7 @@
                     android:layout_height="wrap_content"
                     android:text="Phone"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/photo_profile"
-                    app:showOnSuccess="@{viewModel.info}" />
+                    app:layout_constraintTop_toBottomOf="@id/photo_profile"/>
 
                 <EditText
                     android:id="@+id/edit_phone"
@@ -120,7 +118,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/phone_label"
-                    app:showOnSuccess="@{viewModel.info}"
                     tools:text="0781234566" />
 
                 <ImageView
@@ -131,8 +128,7 @@
                     android:src="@drawable/ic_bx_edit_alt"
                     app:layout_constraintBottom_toBottomOf="@+id/edit_phone"
                     app:layout_constraintEnd_toEndOf="@id/edit_phone"
-                    app:layout_constraintTop_toTopOf="@id/edit_phone"
-                    app:showOnSuccess="@{viewModel.info}" />
+                    app:layout_constraintTop_toTopOf="@id/edit_phone"/>
 
 
                 <TextView
@@ -143,8 +139,7 @@
                     android:text="Schools"
                     android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/edit_phone"
-                    app:showOnSuccess="@{viewModel.info}" />
+                    app:layout_constraintTop_toBottomOf="@+id/edit_phone"/>
 
                 <com.airbnb.lottie.LottieAnimationView
                     android:layout_width="172dp"
@@ -171,7 +166,6 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/school_label"
                     app:onSwipe="@{viewModel.onSwipe}"
-                    app:showOnSuccess="@{viewModel.info}"
                     tools:listitem="@layout/item_school" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
