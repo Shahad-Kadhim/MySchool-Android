@@ -78,106 +78,28 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <TextView
-            android:id="@+id/label_school"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/Subject"
-            android:text="Schools"
-            android:layout_marginStart="@dimen/space_medium"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/header" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/schoolRecycler"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space_small"
-            android:orientation="horizontal"
-            items="@{viewModel.schools}"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@+id/label_school"
-            tools:listitem="@layout/item_school" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="83dp"
-            android:layout_height="83dp"
-            android:layout_marginTop="@dimen/space_large"
-            android:src="@drawable/ic_student"
-            android:padding="@dimen/space_medium"
-            android:onClick="@{() -> viewModel.onClickStudent()}"
-            android:background="@drawable/reg_rounded_24dp"
-            app:layout_constraintEnd_toStartOf="@+id/imageView2"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/schoolRecycler" />
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="83dp"
-            android:layout_height="83dp"
-            android:layout_marginTop="@dimen/space_large"
-            android:src="@drawable/ic_teacher_2"
-            android:padding="@dimen/space_medium"
-            android:onClick="@{() -> viewModel.onClickTeachers()}"
-            android:background="@drawable/reg_rounded_24dp"
-            app:layout_constraintEnd_toStartOf="@+id/imageView3"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/schoolRecycler" />
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="83dp"
-            android:layout_height="83dp"
-            android:layout_marginTop="@dimen/space_large"
-            android:src="@drawable/ic_school_2"
-            android:background="@drawable/reg_rounded_24dp"
-            android:onClick="@{() -> viewModel.onClickSchools()}"
-            android:padding="@dimen/space_medium"
-            app:layout_constraintEnd_toStartOf="@+id/imageView4"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/imageView2"
-            app:layout_constraintTop_toBottomOf="@+id/schoolRecycler" />
-
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="83dp"
-            android:layout_height="83dp"
-            android:layout_marginTop="@dimen/space_large"
-            android:padding="@dimen/space_medium"
-            android:src="@drawable/ic_class"
-            android:onClick="@{() -> viewModel.onClickClasses()}"
-            android:background="@drawable/reg_rounded_24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/imageView3"
-            app:layout_constraintTop_toBottomOf="@+id/schoolRecycler" />
-
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Classes"
-            style="@style/Subject"
-            app:layout_constraintStart_toStartOf="@+id/label_school"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:onRefresh="@={viewModel.refreshState}">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/classRecycler"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            items="@{viewModel.classes}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView6"
             app:layout_constraintVertical_bias="0.0"
             tools:listitem="@layout/item_class_with_stage" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -189,7 +111,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+            app:layout_constraintTop_toTopOf="parent"/>
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

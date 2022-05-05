@@ -30,16 +30,15 @@ class HomeMangerFragment: BaseFragment<FragmentMangerHomeBinding>() {
     }
 
     private fun recycler() {
-        viewDataBinding.schoolRecycler.adapter=
-            SchoolAdapterRecycler(
-                items = viewModel.schools.value ?: emptyList(),
-                listener = viewModel
+        viewDataBinding.classRecycler.adapter=
+            HomeMangerAdapterRecycler(
+                mutableListOf(
+                    HomeMangerItem.SchoolsItems(viewModel.schools.value ?: emptyList()),
+                    HomeMangerItem.Nav,
+                    HomeMangerItem.Classes(viewModel.classes.value ?: emptyList())
+                ),
+                viewModel,viewModel,viewModel
             )
-
-        viewDataBinding.classRecycler.adapter= ClassesAdapterRecycler(
-            items = viewModel.classes.value ?: emptyList(),
-            listener = viewModel
-        )
 
     }
 
@@ -81,6 +80,18 @@ class HomeMangerFragment: BaseFragment<FragmentMangerHomeBinding>() {
                 viewDataBinding.root.goToFragment(
                     HomeMangerFragmentDirections.actionHomeMangerFragmentToProfileFragment()
                 )
+            }
+            refreshState.observe(this@HomeMangerFragment){ ifRefresh ->
+                takeIf { ifRefresh==true }?.let {
+                    refreshClasses()
+                    refreshSchools()
+                }
+            }
+            classes.observe(this@HomeMangerFragment){
+                (viewDataBinding.classRecycler.adapter as HomeMangerAdapterRecycler).editItems(HomeMangerItem.Classes(it))
+            }
+            schools.observe(this@HomeMangerFragment){
+                (viewDataBinding.classRecycler.adapter as HomeMangerAdapterRecycler).editItems(HomeMangerItem.SchoolsItems(it))
             }
         }
     }

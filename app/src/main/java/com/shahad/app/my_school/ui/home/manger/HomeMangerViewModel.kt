@@ -8,6 +8,7 @@ import com.shahad.app.my_school.ui.SchoolInteractionListener
 import com.shahad.app.my_school.util.Event
 import com.shahad.app.my_school.util.State
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -16,11 +17,13 @@ class HomeMangerViewModel @Inject constructor(
     private val repository: MySchoolRepository
 ): BaseViewModel(),
     SchoolInteractionListener,
-    ClassInteractionListener {
+    ClassInteractionListener, HomeMangerInteractionListener{
 
     val classes = repository.getMangerClasses().asLiveData()
 
     val schools = repository.getMangerSchool().asLiveData()
+
+    val refreshState = MutableLiveData<Boolean>(false)
 
     private val _clickCreateSchoolEvent = MutableLiveData<Event<Boolean>>()
     val clickCreateSchoolEvent: LiveData<Event<Boolean>> = _clickCreateSchoolEvent
@@ -46,37 +49,56 @@ class HomeMangerViewModel @Inject constructor(
     private val _clickClassEvent = MutableLiveData<Event<Pair<String,String>>>()
     val clickClassEvent: LiveData<Event<Pair<String,String>>> = _clickClassEvent
 
-    val unAuthentication = MediatorLiveData<State.UnAuthorization?>().apply {
-//        addSource(classes,::whenUnAuthorization)
-    }
+    private val _message = MutableLiveData<String>()
+    val message: LiveData<String> = _message
+
+    private val _unAuthentication = MutableLiveData<State.UnAuthorization?>()
+    val unAuthentication: LiveData<State.UnAuthorization?> = _unAuthentication
 
     init {
-        viewModelScope.launch {
-            repository.refreshMangerSchool()
-            repository.refreshMangerClasses()
-        }
+        refreshClasses()
+        refreshSchools()
     }
 
-    private fun <T>whenUnAuthorization(state: State<T>){
-        if(state is State.UnAuthorization) unAuthentication.postValue(state)
+    fun refreshSchools(){
+        viewModelScope.launch {
+            repository.refreshMangerSchool().collect {
+                if(it is State.UnAuthorization)
+                    _unAuthentication.postValue(it)
+
+            }
+        }
+    }
+    fun refreshClasses(){
+        viewModelScope.launch {
+            repository.refreshMangerClasses().collect {
+                if(it is State.UnAuthorization){
+                    _unAuthentication.postValue(it)
+                    refreshState.postValue(false)
+                }
+                if(it == State.ConnectionError || it is State.Error || it is State.Success || it == State.UnAuthorization){
+                    refreshState.postValue(false)
+                }
+            }
+        }
     }
 
     fun onClickCreateSchool(){
         _clickCreateSchoolEvent.postValue(Event(true))
     }
 
-    fun onClickSchools(){
+    override fun onClickSchools(){
         _clickSchoolsEvent.postValue(Event(true))
     }
 
-    fun onClickClasses(){
+    override fun onClickClasses(){
         _clickClassesEvent.postValue(Event(true))
     }
 
-    fun onClickStudent(){
+    override fun onClickStudent(){
         _clickStudentEvent.postValue(Event(true))
     }
-    fun onClickTeachers(){
+    override fun onClickTeachers(){
         _clickTeachersEvent.postValue(Event(true))
     }
 

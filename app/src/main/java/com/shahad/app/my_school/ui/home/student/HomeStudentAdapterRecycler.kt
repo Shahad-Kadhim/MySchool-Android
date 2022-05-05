@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import com.shahad.app.my_school.BR
 import com.shahad.app.my_school.R
-import com.shahad.app.my_school.domain.models.ClassM
 import com.shahad.app.my_school.ui.ClassInteractionListener
 import com.shahad.app.my_school.ui.ClassesAdapterRecycler
 import com.shahad.app.my_school.ui.base.BaseInteractionListener
