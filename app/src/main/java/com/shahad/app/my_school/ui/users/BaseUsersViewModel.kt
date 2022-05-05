@@ -49,7 +49,7 @@ abstract class BaseUsersViewModel(
                 with(request(school, search.value)){
                     viewModelScope.launch {
                         this@with.collect {
-                            if(it is State.Success){
+                            if(it == State.ConnectionError || it is State.Error || it is State.Success || it == State.UnAuthorization){
                                 refreshState.postValue(false)
                             }
                         }

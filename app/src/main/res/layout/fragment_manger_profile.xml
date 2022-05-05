@@ -25,113 +25,155 @@
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/black" />
 
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:elevation="16dp"
-            android:indeterminate="true"
-            android:indeterminateTint="@color/brand_color"
-            android:indeterminateTintMode="src_atop"
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="172dp"
+            android:layout_height="172dp"
+            android:layout_margin="64dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/loading"
             app:showOnLoading="@{viewModel.info}" />
 
-        <ImageView
-            android:id="@+id/imageView8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/space_medium"
-            app:showOnSuccess="@{viewModel.info}"
-            android:src="@drawable/ic_photo"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/back_button" />
-
-        <TextView
-            android:id="@+id/text_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/space_medium"
-            android:text="@{viewModel.info.toData().data.name}"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/imageView8"
-            app:layout_constraintStart_toStartOf="@+id/imageView8"
-            app:layout_constraintTop_toBottomOf="@+id/imageView8"
-            app:showOnSuccess="@{viewModel.info}"
-            tools:text="Shahad Kadhim" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/space_tiny"
-            android:src="@drawable/ic_bx_edit_alt"
-            app:layout_constraintBottom_toBottomOf="@+id/text_name"
-            app:layout_constraintStart_toEndOf="@+id/text_name"
-            app:layout_constraintTop_toTopOf="@id/text_name"
-            app:showOnSuccess="@{viewModel.info}" />
-
-        <TextView
-            android:id="@+id/phone_label"
-            style="@style/LabelProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Phone"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_name"
-            app:showOnSuccess="@{viewModel.info}" />
-
-        <EditText
-            android:id="@+id/edit_phone"
-            style="@style/Profile"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:background="@drawable/reg_rounded_stroke_8dp"
-            android:text="@{viewModel.info.toData().data.phone + ``}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/phone_label"
-            app:showOnSuccess="@{viewModel.info}"
-            tools:text="0781234566" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/space_medium"
-            android:src="@drawable/ic_bx_edit_alt"
-            app:layout_constraintBottom_toBottomOf="@+id/edit_phone"
-            app:layout_constraintEnd_toEndOf="@id/edit_phone"
-            app:layout_constraintTop_toTopOf="@id/edit_phone"
-            app:showOnSuccess="@{viewModel.info}" />
-
-
-        <TextView
-            android:id="@+id/school_label"
-            style="@style/LabelProfile"
-            android:layout_width="wrap_content"
-            app:showOnSuccess="@{viewModel.info}"
-            android:layout_height="wrap_content"
-            android:text="Schools"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edit_phone" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/schools"
-            items="@{viewModel.schools}"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:showOnSuccess="@{viewModel.info}"
-            android:layout_marginTop="@dimen/space_tiny"
-            android:orientation="vertical"
-            app:ifSwipe="@{true}"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/error"
+            android:layout_width="172dp"
+            android:layout_height="172dp"
+            android:layout_margin="64dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/school_label"
-            app:onSwipe="@{viewModel.onSwipe}"
-            tools:listitem="@layout/item_school" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/error_connection"
+            app:showOnError="@{viewModel.info}" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/back_button"
+            app:showOnSuccess="@{viewModel.info}">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/photo_profile"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="@dimen/space_medium"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile_photo"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearanceOverlay="@style/imageCorner50" />
+
+                <TextView
+                    android:id="@+id/text_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/space_medium"
+                    android:text="@{viewModel.info.toData().data.name}"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/photo_profile"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toEndOf="@id/photo_profile"
+                    app:layout_constraintTop_toTopOf="@id/photo_profile"
+                    tools:text="Shahad Kadhim" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/space_tiny"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_bx_edit_alt"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_name"
+                    app:layout_constraintStart_toEndOf="@+id/text_name"
+                    app:layout_constraintTop_toTopOf="@id/text_name"
+                    app:showOnSuccess="@{viewModel.info}" />
+
+                <TextView
+                    android:id="@+id/phone_label"
+                    style="@style/LabelProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Phone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/photo_profile"
+                    app:showOnSuccess="@{viewModel.info}" />
+
+                <EditText
+                    android:id="@+id/edit_phone"
+                    style="@style/Profile"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/reg_rounded_stroke_8dp"
+                    android:text="@{viewModel.info.toData().data.phone + ``}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/phone_label"
+                    app:showOnSuccess="@{viewModel.info}"
+                    tools:text="0781234566" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/space_medium"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_bx_edit_alt"
+                    app:layout_constraintBottom_toBottomOf="@+id/edit_phone"
+                    app:layout_constraintEnd_toEndOf="@id/edit_phone"
+                    app:layout_constraintTop_toTopOf="@id/edit_phone"
+                    app:showOnSuccess="@{viewModel.info}" />
+
+
+                <TextView
+                    android:id="@+id/school_label"
+                    style="@style/LabelProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Schools"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edit_phone"
+                    app:showOnSuccess="@{viewModel.info}" />
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:layout_width="172dp"
+                    android:layout_height="172dp"
+                    android:layout_margin="64dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/school_label"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/no_result"
+                    app:showOnNoResult="@{viewModel.schools}" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/schools"
+                    items="@{viewModel.schools}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_tiny"
+                    android:paddingBottom="@dimen/space_large_4x"
+                    android:orientation="vertical"
+                    app:ifSwipe="@{true}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/school_label"
+                    app:onSwipe="@{viewModel.onSwipe}"
+                    app:showOnSuccess="@{viewModel.info}"
+                    tools:listitem="@layout/item_school" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

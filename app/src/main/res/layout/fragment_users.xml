@@ -100,6 +100,50 @@
                     app:layout_constraintTop_toBottomOf="@id/search_bar"
                     app:singleSelection="true" />
 
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/error"
+                    android:layout_width="172dp"
+                    android:layout_height="172dp"
+                    android:layout_margin="64dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:showOnError="@{viewModel.users}"
+                    app:lottie_rawRes="@raw/error_connection" />
+
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:layout_width="172dp"
+                    android:layout_height="172dp"
+                    android:layout_margin="64dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:showOnLoading="@{viewModel.users}"
+                    app:lottie_rawRes="@raw/loading" />
+
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:layout_width="172dp"
+                    android:layout_height="172dp"
+                    android:layout_margin="64dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:Success="@{viewModel.users}"
+                    app:showOnNoResult="@{viewModel.users.toData().data}"
+                    app:lottie_rawRes="@raw/no_result" />
+
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/studentRecycle"
                     android:layout_width="match_parent"
