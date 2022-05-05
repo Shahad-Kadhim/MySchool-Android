@@ -8,6 +8,9 @@
             name="adapter"
             type="com.shahad.app.my_school.ui.ClassesAdapterRecycler" />
 
+        <variable
+            name="isEmpty"
+            type="Boolean" />
     </data>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,6 +27,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/error"
+                android:layout_width="172dp"
+                android:layout_height="172dp"
+                android:layout_margin="64dp"
+                app:layout_constraintVertical_bias="0"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:hide="@{isEmpty}"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/no_result" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/classRecycler"

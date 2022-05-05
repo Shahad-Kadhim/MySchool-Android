@@ -1,6 +1,5 @@
 package com.shahad.app.my_school.ui.home.manger
 
-import android.util.Log
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import com.shahad.app.my_school.BR
@@ -95,6 +94,7 @@ class HomeMangerAdapterRecycler(
                         listener = classListener
                     )
                 )
+                holder.binding.setVariable(BR.isEmpty,currentItem.list.isEmpty())
             }
 
             HomeMangerItem.Nav -> {
@@ -109,6 +109,7 @@ class HomeMangerAdapterRecycler(
                         listener = schoolListener
                     )
                 )
+                holder.binding.setVariable(BR.isEmpty,currentItem.list.isEmpty())
             }
 
         }

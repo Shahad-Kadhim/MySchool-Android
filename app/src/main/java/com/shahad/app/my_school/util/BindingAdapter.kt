@@ -6,20 +6,16 @@ import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
-import androidx.constraintlayout.motion.widget.OnSwipe
 import androidx.core.content.ContextCompat
 import androidx.core.view.children
-import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
 import androidx.lifecycle.findViewTreeLifecycleOwner
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.Index
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager2.widget.ViewPager2
 import coil.load
@@ -29,7 +25,6 @@ import com.google.android.material.chip.ChipGroup
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.shahad.app.my_school.R
-import com.shahad.app.my_school.data.remote.response.SchoolDto
 import com.shahad.app.my_school.domain.models.School
 import com.shahad.app.my_school.ui.add.post.PostType
 import com.shahad.app.my_school.ui.base.BaseRecyclerAdapter
@@ -247,7 +242,7 @@ fun getCheckedChipSchool(view:ChipGroup): String? =
 
 @BindingAdapter(value = ["app:hide"])
 fun hideView(view: View, value: Boolean){
-    view.visibility= if(value) View.VISIBLE else View.INVISIBLE
+    view.visibility= if(value) View.VISIBLE else View.GONE
 }
 
 @BindingAdapter(value= ["isSelected"])

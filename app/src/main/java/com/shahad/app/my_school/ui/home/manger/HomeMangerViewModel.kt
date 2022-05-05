@@ -62,27 +62,28 @@ class HomeMangerViewModel @Inject constructor(
 
     fun refreshSchools(){
         viewModelScope.launch {
-            repository.refreshMangerSchool().collect {
-                if(it is State.UnAuthorization)
-                    _unAuthentication.postValue(it)
-
-            }
+            repository.refreshMangerSchool().collect(::checkState)
         }
     }
     fun refreshClasses(){
         viewModelScope.launch {
-            repository.refreshMangerClasses().collect {
-                if(it is State.UnAuthorization){
-                    _unAuthentication.postValue(it)
-                    refreshState.postValue(false)
-                }
-                if(it == State.ConnectionError || it is State.Error || it is State.Success || it == State.UnAuthorization){
-                    refreshState.postValue(false)
-                }
-            }
+            repository.refreshMangerClasses().collect(::checkState)
         }
     }
 
+    private fun <T>checkState(state: State<T?>){
+        if(state is State.UnAuthorization){
+            _unAuthentication.postValue(state)
+            refreshState.postValue(false)
+        }
+        if(state == State.ConnectionError || state is State.Error || state is State.Success || state == State.UnAuthorization){
+            refreshState.postValue(false)
+        }
+        if(state == State.ConnectionError || state is State.Error){
+            _message.postValue("fail update")
+        }
+
+    }
     fun onClickCreateSchool(){
         _clickCreateSchoolEvent.postValue(Event(true))
     }

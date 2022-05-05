@@ -11,6 +11,7 @@ import com.shahad.app.my_school.ui.SchoolAdapterRecycler
 import com.shahad.app.my_school.ui.register.Role
 import com.shahad.app.my_school.util.extension.goToFragment
 import com.shahad.app.my_school.util.extension.observeEvent
+import com.shahad.app.my_school.util.extension.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -92,6 +93,9 @@ class HomeMangerFragment: BaseFragment<FragmentMangerHomeBinding>() {
             }
             schools.observe(this@HomeMangerFragment){
                 (viewDataBinding.classRecycler.adapter as HomeMangerAdapterRecycler).editItems(HomeMangerItem.SchoolsItems(it))
+            }
+            message.observe(this@HomeMangerFragment){
+                this@HomeMangerFragment.requireContext().showToast(it)
             }
         }
     }
