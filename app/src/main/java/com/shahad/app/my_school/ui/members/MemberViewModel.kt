@@ -21,6 +21,8 @@ class MemberViewModel @Inject constructor(
     val repository: MySchoolRepository,
 ): BaseViewModel(), UserSelectedInteractionListener{
 
+    val refreshState = MutableLiveData<Boolean>(false)
+
     private val _clickAddStudentEvent = MutableLiveData<Event<String>>()
     val clickAddStudentEvent: LiveData<Event<String>> = _clickAddStudentEvent
 
@@ -28,10 +30,20 @@ class MemberViewModel @Inject constructor(
 
     val students =MutableLiveData<State<BaseResponse<List<UserSelected>>?>>()
 
+    private val _unAuthentication = MutableLiveData<State.UnAuthorization?>()
+    val unAuthentication: LiveData<State.UnAuthorization?> = _unAuthentication
+
     fun getMembers(classId: String){
         this.classId = classId
         viewModelScope.launch {
             repository.getMemberClass(classId).collect {
+                if (it is State.UnAuthorization) {
+                    _unAuthentication.postValue(it)
+                    refreshState.postValue(false)
+                }
+                if (it == State.ConnectionError || it is State.Error || it is State.Success || it == State.UnAuthorization) {
+                    refreshState.postValue(false)
+                }
                 students.postValue(it)
             }
         }

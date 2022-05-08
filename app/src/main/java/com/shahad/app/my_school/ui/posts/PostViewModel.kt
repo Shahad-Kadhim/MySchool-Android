@@ -19,8 +19,10 @@ class PostViewModel @Inject constructor(
     private val repository: MySchoolRepository
 ): BaseViewModel() , PostInteractionListener{
 
-    private val _students =MutableLiveData<State<BaseResponse<List<PostDto>>?>>()
-    val students: LiveData<State<BaseResponse<List<PostDto>>?>> = _students
+    val refreshState = MutableLiveData<Boolean>(false)
+
+    private val _posts =MutableLiveData<State<BaseResponse<List<PostDto>>?>>()
+    val posts: LiveData<State<BaseResponse<List<PostDto>>?>> = _posts
 
     private val _clickCreatePostEvent = MutableLiveData<Event<String>>()
     val clickCreatePostEvent: LiveData<Event<String>> = _clickCreatePostEvent
@@ -33,11 +35,21 @@ class PostViewModel @Inject constructor(
 
     private lateinit var classId: String
 
+    private val _unAuthentication = MutableLiveData<State.UnAuthorization?>()
+    val unAuthentication: LiveData<State.UnAuthorization?> = _unAuthentication
+
     fun getPosts(classId: String){
         this.classId = classId
         viewModelScope.launch {
             repository.getPostInClass(classId).collect {
-                _students.postValue(it)
+                if (it is State.UnAuthorization) {
+                    _unAuthentication.postValue(it)
+                    refreshState.postValue(false)
+                }
+                if (it == State.ConnectionError || it is State.Error || it is State.Success || it == State.UnAuthorization) {
+                    refreshState.postValue(false)
+                }
+                _posts.postValue(it)
             }
         }
     }

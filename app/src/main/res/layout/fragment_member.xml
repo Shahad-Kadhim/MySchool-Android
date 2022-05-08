@@ -13,53 +13,102 @@
             type="Boolean" />
 
     </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/guideline"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:onRefresh="@={viewModel.refreshState}">
 
-        <EditText
-            android:id="@+id/search_bar"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="44dp"
-            android:layout_marginHorizontal="@dimen/space_medium"
-            android:layout_marginTop="@dimen/space_medium"
-            android:background="@drawable/reg_rounded_24dp"
-            style="@style/SearchBar"
-            android:paddingHorizontal="@dimen/space_medium"
-            android:paddingVertical="@dimen/space_small"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="16dp" />
+            android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/studentRecycle"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:clipToPadding="false"
-            android:orientation="vertical"
-            android:layout_marginTop="8dp"
-            items="@{viewModel.students.toData().data}"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/search_bar"
-            tools:listitem="@layout/item_user" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/space_medium"
-            android:src="@drawable/ic_baseline_add_24"
-            android:backgroundTint="@color/brand_color"
-            app:borderWidth="0dp"
-            app:hide="@{isAuth}"
-            android:onClick="@{() -> viewModel.onClickAddStudent()}"
-            app:elevation="6dp"
-            app:fabSize="normal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/error"
+                android:layout_width="172dp"
+                android:layout_height="172dp"
+                android:layout_margin="64dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:showOnError="@{viewModel.students}"
+                app:lottie_rawRes="@raw/error_connection" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="172dp"
+                android:layout_height="172dp"
+                android:layout_margin="64dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:showOnLoading="@{viewModel.students}"
+                app:lottie_rawRes="@raw/loading" />
+
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="172dp"
+                android:layout_height="172dp"
+                android:layout_margin="64dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:Success="@{viewModel.students}"
+                app:showOnNoResult="@{viewModel.students.toData().data}"
+                app:lottie_rawRes="@raw/no_result" />
+            <EditText
+                android:id="@+id/search_bar"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginHorizontal="@dimen/space_medium"
+                android:layout_marginTop="@dimen/space_medium"
+                android:background="@drawable/reg_rounded_24dp"
+                style="@style/SearchBar"
+                android:paddingHorizontal="@dimen/space_medium"
+                android:paddingVertical="@dimen/space_small"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="16dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/studentRecycle"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:clipToPadding="false"
+                android:orientation="vertical"
+                android:layout_marginTop="8dp"
+                items="@{viewModel.students.toData().data}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/search_bar"
+                tools:listitem="@layout/item_user" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/space_medium"
+                android:src="@drawable/ic_baseline_add_24"
+                android:backgroundTint="@color/brand_color"
+                app:borderWidth="0dp"
+                app:hide="@{isAuth}"
+                android:onClick="@{() -> viewModel.onClickAddStudent()}"
+                app:elevation="6dp"
+                app:fabSize="normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>

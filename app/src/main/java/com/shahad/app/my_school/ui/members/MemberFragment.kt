@@ -8,6 +8,7 @@ import com.shahad.app.my_school.databinding.FragmentMemberBinding
 import com.shahad.app.my_school.ui.UserSelectionAdapterRecycler
 import com.shahad.app.my_school.ui.base.BaseFragment
 import com.shahad.app.my_school.ui.classScreen.ClassScreenFragmentDirections
+import com.shahad.app.my_school.ui.main.MainActivity
 import com.shahad.app.my_school.ui.register.Role
 import com.shahad.app.my_school.util.extension.goToFragment
 import com.shahad.app.my_school.util.extension.observeEvent
@@ -37,6 +38,14 @@ class MemberFragment: BaseFragment<FragmentMemberBinding>() {
         with(viewModel){
             clickAddStudentEvent.observeEvent(this@MemberFragment){
                 viewDataBinding.root.goToFragment(ClassScreenFragmentDirections.actionClassScreenFragmentToSelectStudentFragment(it))
+            }
+            refreshState.observe(this@MemberFragment){ ifRefresh ->
+                arguments?.getString("ID")?.let {
+                    takeIf { ifRefresh == true }?.getMembers(it)
+                }
+            }
+            unAuthentication.observe(this@MemberFragment){
+                (requireActivity() as MainActivity).navToIdentity()
             }
         }
     }

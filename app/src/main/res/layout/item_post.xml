@@ -15,8 +15,8 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="@dimen/space_large"
-        app:cardElevation="2dp"
+        style="@style/cardView"
+        app:cardCornerRadius="@dimen/space_medium"
         android:layout_marginVertical="@dimen/space_tiny"
         android:layout_marginHorizontal="@dimen/space_medium">
 
@@ -33,7 +33,8 @@
                 android:layout_height="32dp"
                 app:shapeAppearanceOverlay="@style/Image"
                 android:layout_marginTop="@dimen/space_medium"
-                android:layout_marginStart="@dimen/space_large"                android:background="@drawable/photo"
+                android:layout_marginStart="@dimen/space_large"
+                android:background="@drawable/photo"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,10 +43,8 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginTop="@dimen/space_small"
-                android:layout_marginBottom="@dimen/space_medium"
                 android:src="@drawable/ic_eva_attach_outline"
                 app:hide="@{item.payload != null }"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/imageView6"
                 app:layout_constraintStart_toStartOf="@id/imageView6"
                 app:layout_constraintTop_toBottomOf="@id/imageView6" />
@@ -78,7 +77,9 @@
                 android:text="@{item.title}"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView10"
+                android:layout_marginBottom="@dimen/space_medium"
+                app:layout_constraintVertical_bias="0"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/teacher_name"
                 app:layout_constraintStart_toStartOf="@id/teacher_name"
                 app:layout_constraintTop_toTopOf="@+id/imageView10"

@@ -7,6 +7,7 @@ import com.shahad.app.my_school.R
 import com.shahad.app.my_school.databinding.FragmentPostBinding
 import com.shahad.app.my_school.ui.base.BaseFragment
 import com.shahad.app.my_school.ui.classScreen.ClassScreenFragmentDirections
+import com.shahad.app.my_school.ui.main.MainActivity
 import com.shahad.app.my_school.ui.register.Role
 import com.shahad.app.my_school.util.extension.goToFragment
 import com.shahad.app.my_school.util.extension.observeEvent
@@ -51,7 +52,16 @@ class PostFragment: BaseFragment<FragmentPostBinding>() {
                         )
                 )
             }
+            refreshState.observe(this@PostFragment){ ifRefresh ->
+                arguments?.getString("ID")?.let {
+                    takeIf { ifRefresh == true }?.getPosts(it)
+                }
+            }
+            unAuthentication.observe(this@PostFragment){
+                (requireActivity() as MainActivity).navToIdentity()
+            }
         }
+
     }
 
 }
