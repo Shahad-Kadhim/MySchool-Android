@@ -5,6 +5,7 @@ import androidx.navigation.fragment.findNavController
 import com.shahad.app.my_school.R
 import com.shahad.app.my_school.databinding.FragmentNotificationBinding
 import com.shahad.app.my_school.ui.base.BaseFragment
+import com.shahad.app.my_school.ui.main.MainActivity
 import com.shahad.app.my_school.util.extension.observeEvent
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,6 +26,9 @@ class NotificationFragment: BaseFragment<FragmentNotificationBinding>() {
         with(viewModel){
             clickBackEvent.observeEvent(this@NotificationFragment){
                 findNavController().navigateUp()
+            }
+            unAuthentication.observe(this@NotificationFragment){
+                (requireActivity() as MainActivity).navToIdentity()
             }
         }
     }

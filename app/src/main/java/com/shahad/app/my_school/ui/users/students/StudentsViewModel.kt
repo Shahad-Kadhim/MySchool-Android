@@ -1,6 +1,5 @@
 package com.shahad.app.my_school.ui.users.students
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.shahad.app.my_school.data.MySchoolRepository
 import com.shahad.app.my_school.data.remote.response.BaseResponse
@@ -9,6 +8,8 @@ import com.shahad.app.my_school.ui.users.BaseUsersViewModel
 import com.shahad.app.my_school.util.DataClassParser
 import com.shahad.app.my_school.util.Event
 import com.shahad.app.my_school.util.State
+import com.shahad.app.my_school.util.extension.handle
+import com.shahad.app.my_school.util.extension.refresh
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -20,25 +21,31 @@ class StudentsViewModel @Inject constructor(
     private val dataClassParser: DataClassParser
 ): BaseUsersViewModel(repository){
 
-    private val students= MediatorLiveData<LiveData<State<BaseResponse<List<UserSelected>>?>>>().apply {
+    private val students= MediatorLiveData<State<BaseResponse<List<UserSelected>>?>>().apply {
         addSource(schoolId){
             it?.let { schoolId ->
-                this.postValue(repository.getSchoolStudents(schoolId, search.value?.takeIf { it.isNotBlank() }).asLiveData())
+                viewModelScope.launch {
+                    handle(repository.getSchoolStudents(schoolId, search.value?.takeIf { it.isNotBlank() }),_unAuthentication,refreshState)
+                }
             }
         }
         addSource(search){ searchKey ->
             schoolId.value?.let { schoolId ->
-                this.postValue(repository.getSchoolStudents(schoolId, searchKey?.takeIf { it.isNotBlank() }).asLiveData())
+                viewModelScope.launch {
+                    handle(repository.getSchoolStudents(schoolId, searchKey?.takeIf { it.isNotBlank() }),_unAuthentication,refreshState)
+                }
             }
         }
         addSource(refreshState) {
-            this.refresh(it,repository::getSchoolStudents)
+            viewModelScope.launch {
+                this@apply.refresh(it,repository::getSchoolStudents,_unAuthentication,refreshState,schoolId.value ?: "",search.value)
+            }
         }
 
     }
 
 
-    override val users: LiveData<State<BaseResponse<List<UserSelected>>?>> = Transformations.switchMap(students) { it }
+    override val users: LiveData<State<BaseResponse<List<UserSelected>>?>> = students
 
     private val _clickAddStudentEvent = MutableLiveData<Event<String>>()
     val clickAddStudentEvent: LiveData<Event<String>> = _clickAddStudentEvent
@@ -50,7 +57,7 @@ class StudentsViewModel @Inject constructor(
     }
 
     override fun onClickDelete() {
-        students.value?.value?.toData()?.data
+        students.value?.toData()?.data
             ?.filter { it.isSelected }
             ?.takeIf { it.isNotEmpty() }
             ?.map{it.id}
@@ -70,14 +77,14 @@ class StudentsViewModel @Inject constructor(
             }    }
 
     override fun onClickSelect(id: String) {
-        val list = students.value?.value?.toData()?.data?.map {
+        val list = students.value?.toData()?.data?.map {
             UserSelected(
                 it.id,
                 it.name,
                 if(it.id == id) !it.isSelected else it.isSelected
             )
         }
-        students.postValue(MutableLiveData(State.Success(BaseResponse(200,list ?: emptyList()))))
+        students.postValue(State.Success(BaseResponse(200,list ?: emptyList())))
 
     }
 

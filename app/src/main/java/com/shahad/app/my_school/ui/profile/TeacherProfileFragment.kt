@@ -6,6 +6,8 @@ import com.shahad.app.my_school.R
 import com.shahad.app.my_school.databinding.FragmentTeacherProfileBinding
 import com.shahad.app.my_school.ui.base.BaseFragment
 import com.shahad.app.my_school.ui.SchoolAdapterRecycler
+import com.shahad.app.my_school.ui.main.MainActivity
+import com.shahad.app.my_school.util.State
 import com.shahad.app.my_school.util.extension.observeEvent
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,6 +31,11 @@ class TeacherProfileFragment: BaseFragment<FragmentTeacherProfileBinding>() {
             clickBackEvent.observeEvent(this@TeacherProfileFragment){
                 findNavController().navigateUp()
             }
+            info.observe(this@TeacherProfileFragment){
+                if(it is State.UnAuthorization)
+                    (requireActivity() as MainActivity).navToIdentity()
+            }
+
         }
     }
 

@@ -1,6 +1,5 @@
 package com.shahad.app.my_school.ui.users
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.shahad.app.my_school.data.MySchoolRepository
 import com.shahad.app.my_school.data.remote.response.BaseResponse
@@ -10,9 +9,6 @@ import com.shahad.app.my_school.ui.add.student.MembersClassBody
 import com.shahad.app.my_school.ui.base.BaseViewModel
 import com.shahad.app.my_school.util.Event
 import com.shahad.app.my_school.util.State
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 abstract class BaseUsersViewModel(
     repository: MySchoolRepository
@@ -40,25 +36,8 @@ abstract class BaseUsersViewModel(
     private val _clickDeleteEvent = MutableLiveData<Event<MembersClassBody>>()
     val clickDeleteEvent: LiveData<Event<MembersClassBody>> = _clickDeleteEvent
 
-    fun MediatorLiveData<LiveData<State<BaseResponse<List<UserSelected>>?>>>.refresh(
-        isRefresh: Boolean,
-        request:  (String,String?) -> Flow<State<BaseResponse<List<UserSelected>>?>>,
-    ) {
-        if(isRefresh){
-            schoolId.value?.let { school ->
-                with(request(school, search.value)){
-                    viewModelScope.launch {
-                        this@with.collect {
-                            if(it == State.ConnectionError || it is State.Error || it is State.Success || it == State.UnAuthorization){
-                                refreshState.postValue(false)
-                            }
-                        }
-                    }
-                    this@refresh.postValue(this.asLiveData())
-                }
-            }
-        }
-    }
+    protected val _unAuthentication = MutableLiveData<State.UnAuthorization?>()
+    val unAuthentication: LiveData<State.UnAuthorization?> = _unAuthentication
 
     fun onClickBack(){
         _clickBackEvent.postValue(Event(true))

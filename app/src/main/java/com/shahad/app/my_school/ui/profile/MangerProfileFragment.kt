@@ -6,6 +6,8 @@ import com.shahad.app.my_school.R
 import com.shahad.app.my_school.databinding.FragmentMangerProfileBinding
 import com.shahad.app.my_school.ui.base.BaseFragment
 import com.shahad.app.my_school.ui.SchoolAdapterRecycler
+import com.shahad.app.my_school.ui.main.MainActivity
+import com.shahad.app.my_school.util.State
 import com.shahad.app.my_school.util.extension.observeEvent
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,6 +32,10 @@ class MangerProfileFragment: BaseFragment<FragmentMangerProfileBinding>() {
         with(viewModel){
             clickBackEvent.observeEvent(this@MangerProfileFragment){
                 findNavController().navigateUp()
+            }
+            info.observe(this@MangerProfileFragment){
+                if(it is State.UnAuthorization)
+                    (requireActivity() as MainActivity).navToIdentity()
             }
         }
     }

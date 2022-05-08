@@ -7,6 +7,7 @@ import com.shahad.app.my_school.R
 import com.shahad.app.my_school.databinding.FragmentUsersBinding
 import com.shahad.app.my_school.ui.UserSelectionAdapterRecycler
 import com.shahad.app.my_school.ui.base.BaseFragment
+import com.shahad.app.my_school.ui.main.MainActivity
 import com.shahad.app.my_school.util.extension.goToFragment
 import com.shahad.app.my_school.util.extension.observeEvent
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,6 +39,9 @@ class TeachersFragment: BaseFragment<FragmentUsersBinding>() {
             }
             clickBackEvent.observeEvent(this@TeachersFragment){
                 findNavController().navigateUp()
+            }
+            unAuthentication.observe(this@TeachersFragment){
+                (requireActivity() as MainActivity).navToIdentity()
             }
         }
     }

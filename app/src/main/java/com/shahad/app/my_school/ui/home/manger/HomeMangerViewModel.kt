@@ -72,17 +72,20 @@ class HomeMangerViewModel @Inject constructor(
     }
 
     private fun <T>checkState(state: State<T?>){
-        if(state is State.UnAuthorization){
-            _unAuthentication.postValue(state)
-            refreshState.postValue(false)
+        when(state){
+            State.ConnectionError,is State.Error -> {
+                _message.postValue("no connection")
+                refreshState.postValue(false)
+            }
+            is State.Success -> {
+                _message.postValue("Update")
+                refreshState.postValue(false)
+            }
+            State.UnAuthorization -> {
+                _unAuthentication.postValue(State.UnAuthorization)
+                refreshState.postValue(false)
+            }
         }
-        if(state == State.ConnectionError || state is State.Error || state is State.Success || state == State.UnAuthorization){
-            refreshState.postValue(false)
-        }
-        if(state == State.ConnectionError || state is State.Error){
-            _message.postValue("fail update")
-        }
-
     }
     fun onClickCreateSchool(){
         _clickCreateSchoolEvent.postValue(Event(true))
