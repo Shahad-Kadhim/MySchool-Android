@@ -12,29 +12,19 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardElevation="2dp"
+        app:cardElevation="1dp"
         android:layout_marginBottom="@dimen/space_small">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/reg_rounded_24dp"
-            android:backgroundTint="@color/white">
-
-            <ImageView
-                android:id="@+id/imageView6"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_margin="@dimen/space_large"
-                android:src="@drawable/profile_photo_test"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/teacher_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/space_medium"
+                android:layout_marginTop="@dimen/space_medium"
+                android:layout_marginStart="@dimen/space_large"
                 android:layout_marginEnd="@dimen/space_large"
                 android:ellipsize="end"
                 android:fontFamily="@font/source_sans_pro_semi_bold"
@@ -42,11 +32,10 @@
                 android:paddingEnd="32dp"
                 android:text="@{item.authorName}"
                 android:textColor="#AD000000"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView6"
+                android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView6"
-                app:layout_constraintTop_toTopOf="@+id/imageView6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text="Mr. Ahmed" />
 
             <TextView
@@ -56,10 +45,10 @@
                 android:layout_marginTop="@dimen/space_small"
                 android:layout_marginBottom="@dimen/space_medium"
                 android:ellipsize="end"
-                android:fontFamily="@font/source_sans_pro_bold"
+                android:fontFamily="@font/source_sans_pro_semi_bold"
                 android:text="@{item.content}"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/teacher_name"
                 app:layout_constraintStart_toStartOf="@id/teacher_name"

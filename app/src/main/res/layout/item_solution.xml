@@ -14,24 +14,22 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="@dimen/space_large"
+        app:cardCornerRadius="@dimen/space_small"
         style="@style/cardView"
-        android:layout_marginVertical="@dimen/space_small"
+        android:layout_marginVertical="@dimen/space_tiny"
         android:layout_marginHorizontal="@dimen/space_medium">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@drawable/reg_rounded_24dp"
-            android:backgroundTint="@color/white">
+            android:layout_height="100dp">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imageView6"
-                android:layout_width="144dp"
+                android:layout_width="132dp"
                 android:layout_height="0dp"
                 android:layout_marginEnd="@dimen/space_large"
                 android:layout_marginVertical="@dimen/space_small"
-                android:background="@drawable/photo"
+                tools:background="@drawable/photo"
                 app:imageFromUrl="@{item.solutionLink}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

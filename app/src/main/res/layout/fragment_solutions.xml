@@ -37,7 +37,6 @@
             app:layout_constraintStart_toEndOf="@+id/back_button"
             app:layout_constraintTop_toTopOf="@+id/back_button" />
 
-
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
             android:layout_width="wrap_content"
@@ -55,6 +54,49 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/error"
+                    android:layout_width="172dp"
+                    android:layout_height="172dp"
+                    android:layout_margin="64dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:showOnError="@{viewModel.solutions}"
+                    app:lottie_rawRes="@raw/error_connection" />
+
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:layout_width="172dp"
+                    android:layout_height="172dp"
+                    android:layout_margin="64dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:showOnLoading="@{viewModel.solutions}"
+                    app:lottie_rawRes="@raw/loading" />
+
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:layout_width="172dp"
+                    android:layout_height="172dp"
+                    android:layout_margin="64dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:Success="@{viewModel.solutions}"
+                    app:showOnNoResult="@{viewModel.solutions.toData().data}"
+                    app:lottie_rawRes="@raw/no_result" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/solution_recycle"
                     android:layout_width="match_parent"

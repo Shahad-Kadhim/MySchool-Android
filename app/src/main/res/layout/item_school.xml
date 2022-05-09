@@ -15,8 +15,8 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="24dp"
-        android:layout_margin="8dp"
+        app:cardCornerRadius="@dimen/space_small"
+        android:layout_margin="@dimen/space_small"
         style="@style/cardView">
 
         <androidx.constraintlayout.widget.ConstraintLayout
