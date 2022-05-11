@@ -12,13 +12,13 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_myschool"
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher_myschool_round"
         android:supportsRtl="true"
         android:name=".MySchoolApplication"
-        android:theme="@style/Theme.MySchool">
+        android:theme="@style/SplashScreenTheme">
         <activity
             android:name=".ui.identity.IdentityActivity"/>
 

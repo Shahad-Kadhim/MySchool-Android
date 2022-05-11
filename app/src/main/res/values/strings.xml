@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My-School</string>
+    <string name="app_name">My School</string>
     <string name="sign_up">Hello ! \nSign Up to get \nstarted ...</string>
     <string name="name">Name</string>
     <string name="password">Password</string>

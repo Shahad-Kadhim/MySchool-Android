@@ -38,11 +38,11 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
                         android:layout_marginEnd="@dimen/space_medium"
                         android:onClick="@{() -> viewModel.onClickSchools()}"
-                        android:src="@drawable/ic_school_svgrepo_com_1"
+                        android:src="@drawable/ic_school"
                         app:layout_constraintBottom_toBottomOf="@+id/logo"
                         app:layout_constraintEnd_toStartOf="@+id/shapeableImageView"
                         app:layout_constraintTop_toTopOf="@+id/logo"
@@ -54,7 +54,8 @@
                         android:layout_height="32dp"
                         android:layout_marginEnd="@dimen/space_medium"
                         android:onClick="@{() -> viewModel.onclickProfile()}"
-                        android:src="@drawable/profile_photo_test"
+                        android:src="@drawable/profile_photo"
+                        android:scaleType="centerCrop"
                         app:layout_constraintBottom_toBottomOf="@id/logo"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@id/logo"

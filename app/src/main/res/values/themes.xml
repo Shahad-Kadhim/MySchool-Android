@@ -177,4 +177,8 @@
         <item name="tint">@color/white</item>
         <item name="fabSize">normal</item>
     </style>
+
+    <style name="SplashScreenTheme" parent="Theme.MySchool">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+    </style>
 </resources>

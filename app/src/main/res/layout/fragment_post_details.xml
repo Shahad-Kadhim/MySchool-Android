@@ -36,7 +36,7 @@
                 app:showIfTeacher="@{role}"
                 app:hideIfLesson="@{viewModel.postDetails.toData().data.type}"
                 android:onClick="@{() -> viewModel.onClickSolution()}"
-                android:src="@drawable/ic_baseline_more_vert_24"
+                android:src="@drawable/ic_papers__1_"
                 app:layout_constraintBottom_toBottomOf="@+id/back_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/back_button"

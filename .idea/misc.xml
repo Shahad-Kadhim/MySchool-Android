@@ -6,6 +6,7 @@
         <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/drawable-v24/background_card.xml" value="0.19814814814814816" />
         <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/drawable-v24/background_card_top.xml" value="0.19814814814814816" />
         <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1925925925925926" />
+        <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/drawable-xxxhdpi/splash_screen.xml" value="0.1470790378006873" />
         <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/drawable/background.xml" value="0.19814814814814816" />
         <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/drawable/background_rounded.xml" value="0.19814814814814816" />
         <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/drawable/botom_sheat.xml" value="0.1954337899543379" />
@@ -19,8 +20,13 @@
         <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/drawable/ic_class.xml" value="0.19814814814814816" />
         <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/drawable/ic_correct.xml" value="0.1" />
         <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/drawable/ic_create_post.xml" value="0.19814814814814816" />
+        <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/drawable/ic_frame_2608173.xml" value="0.1470790378006873" />
+        <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/drawable/ic_frame_2608245.xml" value="0.1470790378006873" />
+        <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/drawable/ic_home.xml" value="0.1470790378006873" />
         <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/drawable/ic_launcher_background.xml" value="0.19814814814814816" />
+        <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/drawable/ic_launcher_my_school_background.xml" value="0.1470790378006873" />
         <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/drawable/ic_notifaction.xml" value="0.19814814814814816" />
+        <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/drawable/ic_profile.xml" value="0.1470790378006873" />
         <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/drawable/ic_school.xml" value="0.19814814814814816" />
         <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/drawable/ic_school_2.xml" value="0.19814814814814816" />
         <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/drawable/ic_search.xml" value="0.19814814814814816" />
@@ -37,6 +43,7 @@
         <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/drawable/tab_selected.xml" value="0.19814814814814816" />
         <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/drawable/tab_shape.xml" value="0.21" />
         <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/drawable/tab_unselected.xml" value="0.19814814814814816" />
+        <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/layout/activity_identity.xml" value="0.13784722222222223" />
         <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/layout/activity_main.xml" value="0.1837962962962963" />
         <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/layout/back_button.xml" value="0.25" />
         <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/layout/error.xml" value="0.11944444444444445" />
@@ -68,10 +75,10 @@
         <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/layout/fragment_select_student.xml" value="0.2" />
         <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/layout/fragment_select_students.xml" value="0.1837962962962963" />
         <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/layout/fragment_solutions.xml" value="0.1" />
-        <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/layout/fragment_student_home.xml" value="0.1" />
+        <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/layout/fragment_student_home.xml" value="0.15" />
         <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/layout/fragment_student_profile.xml" value="0.16" />
         <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/layout/fragment_students.xml" value="0.22" />
-        <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/layout/fragment_teacher_home.xml" value="0.1" />
+        <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/layout/fragment_teacher_home.xml" value="0.15" />
         <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/layout/fragment_teacher_profile.xml" value="0.12" />
         <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/layout/fragment_users.xml" value="0.16" />
         <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/layout/item_assignment.xml" value="0.25" />
@@ -101,6 +108,12 @@
         <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/menu/manger_menu.xml" value="0.1" />
         <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/menu/student_menu.xml" value="0.1837962962962963" />
         <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/menu/teacher_menu.xml" value="0.1837962962962963" />
+        <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1470790378006873" />
+        <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_my_school.xml" value="0.1470790378006873" />
+        <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_my_school_round.xml" value="0.1470790378006873" />
+        <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_myschool.xml" value="0.14" />
+        <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_myschool_round.xml" value="0.1470790378006873" />
+        <entry key="..\:/Users/MJ/Desktop/android project/MySchool-Android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1470790378006873" />
         <entry key="..\:/Users/MJ/MySchool/app/src/main/res/drawable/ic_create_post.xml" value="0.19814814814814816" />
         <entry key="..\:/Users/MJ/MySchool/app/src/main/res/drawable/ic_home.xml" value="0.2194871794871795" />
         <entry key="..\:/Users/MJ/MySchool/app/src/main/res/drawable/ic_notification.xml" value="0.2194871794871795" />

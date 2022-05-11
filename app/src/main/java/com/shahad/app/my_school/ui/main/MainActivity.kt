@@ -24,6 +24,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     override val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Theme_MySchool)
         super.onCreate(savedInstanceState)
         determineStartDestination()
     }
