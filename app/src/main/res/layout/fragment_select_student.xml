@@ -60,19 +60,72 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_begin="56dp" />
-       <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/studentRecycle"
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:clipToPadding="false"
-            android:orientation="vertical"
-            android:layout_marginTop="8dp"
-           items="@{viewModel.students.toData().data}"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/guideline"
-            tools:listitem="@layout/item_student_selection" />
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/error"
+                    android:layout_width="172dp"
+                    android:layout_height="172dp"
+                    android:layout_margin="64dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:showOnError="@{viewModel.students}"
+                    app:lottie_rawRes="@raw/error_connection" />
+
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:layout_width="172dp"
+                    android:layout_height="172dp"
+                    android:layout_margin="64dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:showOnLoading="@{viewModel.students}"
+                    app:lottie_rawRes="@raw/loading" />
+
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:layout_width="172dp"
+                    android:layout_height="172dp"
+                    android:layout_margin="64dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:Success="@{viewModel.students}"
+                    app:showOnNoResult="@{viewModel.students.toData().data}"
+                    app:lottie_rawRes="@raw/no_result" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/studentRecycle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false"
+                    android:orientation="vertical"
+                    android:layout_marginTop="8dp"
+                    items="@{viewModel.students.toData().data}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:listitem="@layout/item_student_selection" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

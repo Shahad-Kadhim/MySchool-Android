@@ -96,9 +96,15 @@ fun <T>showOnLoading(view: View, state: State<T>?){
 }
 
 
-@BindingAdapter(value = ["app:showOnNoResult","app:Success"],requireAll = false)
-fun <T>showOnNoResult(view: View, result: List<T>?, state: State<T>?){
-    view.visibility = if(result.isNullOrEmpty() && state is State.Success) View.VISIBLE else View.GONE
+@BindingAdapter(value = ["app:showOnNoResult","app:Success","isAuth"],requireAll = false)
+fun <T>showOnNoResult(view: View, result: List<T>?, state: State<T>?, isAuth: Boolean){
+    view.visibility = if(result.isNullOrEmpty() && state is State.Success&& !isAuth) View.VISIBLE else View.GONE
+    Log.i("TAGL","NO_RESULT")
+}
+
+@BindingAdapter(value = ["app:showOnNoResultForTeacher","app:SuccessF","isAuthT"],requireAll = false)
+fun <T>showOnNoResultForTeahcer(view: View, result: List<T>?, state: State<T>?, isAuth: Boolean){
+    view.visibility = if(result.isNullOrEmpty() && state is State.Success&& isAuth) View.VISIBLE else View.GONE
     Log.i("TAGL","NO_RESULT")
 }
 
