@@ -130,6 +130,11 @@ dependencies {
 
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
+
+    //compose navigation
+    def nav_compose_version = "2.5.0"
+    implementation "androidx.navigation:navigation-compose:$nav_compose_version"
+
     //firebase
     implementation platform('com.google.firebase:firebase-bom:29.3.1')
     implementation 'com.google.firebase:firebase-analytics-ktx'
