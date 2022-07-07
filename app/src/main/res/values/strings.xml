@@ -10,6 +10,10 @@
     <string name="login">Hello Again !\nWelcom \nBack</string>
     <string name="login_button">Login</string>
     <string name="sign_up_nav">I don\'t have account</string>
+    <string name="home">home</string>
+    <string name="assignment">assignment</string>
+    <string name="notification">notifictaion</string>
+    <string name="profile">profile</string>
     <array name="user_types">
         <item>Teacher</item>
         <item>Student</item>

@@ -4,15 +4,29 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.Button
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.asLiveData
+import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.shahad.app.my_school.R
 import com.shahad.app.my_school.ui.main.MainViewModel
+import com.shahad.app.my_school.ui.register.Role
+import com.shahad.app.my_school.util.extension.toRole
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,29 +37,138 @@ class MainActivity: ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            
+            val role = viewModel.role.asLiveData().observeAsState()
             val navController = rememberNavController()
-            NavHost(navController = navController, startDestination = "home"){
-                composable("home"){
-                    Column(modifier = Modifier.fillMaxSize()) {
-                        Text(text = "home")
-                        Button(onClick = { navController.navigate("profile"){
-                            popUpTo("home")
-                        } }) {
-                            Text(text = "GO TO Profile")
-                        }
-                    }
-                }
-                composable("profile"){
-                    Text(text = "profile")
-                }
-                composable("search"){
-                    Text(text = "search")
-                }
-            }
-
-
+            Screen(role,navController)
         }
     }
 
+    @Composable
+    fun Screen(role: State<String?>, navController: NavHostController){
+        when(role.value?.toRole()){
+            Role.TEACHER -> TeacherScreens(navController = navController)
+            Role.STUDENT -> StudentScreens(navController = navController)
+            Role.MANGER -> MangerScreens(navController = navController)
+            null -> {}
+        }
+    }
+    @Composable
+    fun StudentScreens(navController: NavHostController){
+        BasicScreen(
+            screens = listOf(Screen.Home, Screen.Assignment, Screen.Notification, Screen.Profile),
+            navController = navController
+        ) {
+            composable(
+                route = Screen.Home.route,
+                content = { HomeScreen(navController = navController) }
+            )
+            composable(
+                route = Screen.Assignment.route,
+                content = { AssignmentScreen(navController = navController) }
+            )
+            composable(
+                route = Screen.Notification.route,
+                content = { NotificationScreen(navController = navController) }
+            )
+            composable(
+                route = Screen.Profile.route,
+                content = { ProfileScreen(navController = navController) }
+            )
+        }
+    }
+    @Composable
+    fun MangerScreens(navController: NavHostController){
+        BasicScreen(
+            screens = listOf(Screen.Home, Screen.Assignment, Screen.Notification, Screen.Profile),
+            navController = navController
+        ) {
+            composable(
+                route = Screen.Home.route,
+                content = { HomeScreen(navController = navController) }
+            )
+            composable(
+                route = Screen.Assignment.route,
+                content = { AssignmentScreen(navController = navController) }
+            )
+            composable(
+                route = Screen.Notification.route,
+                content = { NotificationScreen(navController = navController) }
+            )
+            composable(
+                route = Screen.Profile.route,
+                content = { ProfileScreen(navController = navController) }
+            )
+        }
+    }
+    @Composable
+    fun TeacherScreens(navController: NavHostController){
+        BasicScreen(
+            screens = listOf(Screen.Home, Screen.Assignment, Screen.Notification, Screen.Profile),
+            navController = navController
+        ) {
+            composable(
+                route = Screen.Home.route,
+                content = { HomeScreen(navController = navController) }
+            )
+            composable(
+                route = Screen.Assignment.route,
+                content = { AssignmentScreen(navController = navController) }
+            )
+            composable(
+                route = Screen.Notification.route,
+                content = { NotificationScreen(navController = navController) }
+            )
+            composable(
+                route = Screen.Profile.route,
+                content = { ProfileScreen(navController = navController) }
+            )
+        }
+    }
+
+    @Composable
+    fun BasicScreen(
+        screens: List<Screen>,
+        navController: NavHostController,
+        screenContent: NavGraphBuilder.() -> Unit
+    ){
+        Scaffold(
+            bottomBar = {
+                BottomNavigation(
+                    contentColor = colorResource(id = R.color.brand_color),
+                    backgroundColor = colorResource(id = R.color.background_color)
+                ) {
+                    val navBackStackEntry by navController.currentBackStackEntryAsState()
+                    val currentDestination = navBackStackEntry?.destination
+                    screens.forEach { screen ->
+                        BottomNavigationItem(
+                            icon = {
+                                Icon(
+                                    painter = painterResource(screen.icon),
+                                    contentDescription = null // decorative element
+                                ) },
+                            label = { Text(stringResource(screen.resourceId)) },
+                            selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
+                            onClick = {
+                                navController.navigate(screen.route) {
+                                    popUpTo(navController.graph.findStartDestination().id) {
+                                        saveState = true
+                                    }
+                                    launchSingleTop = true
+                                    restoreState = true
+                                }
+                            }
+                        )
+                    }
+                }
+            }
+        ) { innerPadding ->
+            NavHost(
+                navController,
+                startDestination = Screen.Home.route,
+                Modifier.padding(innerPadding),
+                builder = screenContent
+            )
+        }
+    }
+    
 }
