@@ -11,4 +11,8 @@
     <string name="sign_up_button">sign Up</string>
     <string name="nav_login">I already have account</string>
     <string name="login_button">Login</string>
+    <string name="home">home</string>
+    <string name="assignment">assignment</string>
+    <string name="notification">notification</string>
+    <string name="profile">profile</string>
 </resources>
