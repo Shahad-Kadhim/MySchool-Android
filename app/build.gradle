@@ -132,7 +132,7 @@ dependencies {
 
 
     //compose navigation
-    def nav_compose_version = "2.5.0"
+    def nav_compose_version = "2.4.2"
     implementation "androidx.navigation:navigation-compose:$nav_compose_version"
 
     //firebase
