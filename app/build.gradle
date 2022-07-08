@@ -46,6 +46,10 @@ android {
         dataBinding  true
         compose true
     }
+
+    packagingOptions {
+        resources.excludes.add("META-INF/*")
+    }
 }
 
 dependencies {
