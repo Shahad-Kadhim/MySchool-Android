@@ -4,7 +4,7 @@ import android.util.Log
 import com.shahad.app.my_school.data.remote.response.DutySubmit
 import com.shahad.app.my_school.data.remote.response.PostDetailsDto
 import com.google.gson.JsonElement
-import com.shahad.app.my_school.data.local.daos.MySchoolDao
+import com.shahad.app.my_school.data.local.MySchoolDao
 import com.shahad.app.my_school.data.remote.AuthenticationResponse
 import com.shahad.app.my_school.data.remote.MySchoolService
 import com.shahad.app.my_school.data.remote.response.*

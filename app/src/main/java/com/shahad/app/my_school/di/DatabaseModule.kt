@@ -3,7 +3,7 @@ package com.shahad.app.my_school.di
 import android.content.Context
 import androidx.room.Room
 import com.shahad.app.my_school.data.local.MySchoolDatabase
-import com.shahad.app.my_school.data.local.daos.MySchoolDao
+import com.shahad.app.my_school.data.local.MySchoolDao
 import dagger.*
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext

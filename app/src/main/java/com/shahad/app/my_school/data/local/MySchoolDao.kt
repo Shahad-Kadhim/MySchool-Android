@@ -1,4 +1,4 @@
-package com.shahad.app.my_school.data.local.daos
+package com.shahad.app.my_school.data.local
 
 import androidx.room.Dao
 import androidx.room.Insert

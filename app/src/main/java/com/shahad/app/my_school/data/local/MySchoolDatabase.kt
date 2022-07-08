@@ -1,7 +1,6 @@
 package com.shahad.app.my_school.data.local
 
 import androidx.room.*
-import com.shahad.app.my_school.data.local.daos.MySchoolDao
 import com.shahad.app.my_school.data.local.entities.ClassEntity
 import com.shahad.app.my_school.data.local.entities.SchoolsEntity
 
