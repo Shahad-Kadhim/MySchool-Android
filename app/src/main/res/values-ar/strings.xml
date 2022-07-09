@@ -15,4 +15,5 @@
     <string name="assignment">assignment</string>
     <string name="notification">notification</string>
     <string name="profile">profile</string>
+    <string name="student">student</string>
 </resources>

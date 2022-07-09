@@ -1,5 +1,6 @@
 package com.shahad.app.my_school.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -7,7 +8,6 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
@@ -24,6 +24,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.shahad.app.my_school.R
+import com.shahad.app.my_school.ui.identity.IdentityActivity
 import com.shahad.app.my_school.ui.main.MainViewModel
 import com.shahad.app.my_school.ui.register.Role
 import com.shahad.app.my_school.util.extension.toRole
@@ -39,19 +40,28 @@ class MainActivity: ComponentActivity() {
         setContent {
             val role = viewModel.role.asLiveData().observeAsState()
             val navController = rememberNavController()
-            Screen(role,navController)
+            Screen(
+                (intent.getStringExtra("ROLE") ?: role.value ),
+                navController
+            )
         }
     }
 
+    private fun navToIdentity() {
+        startActivity(Intent(this, IdentityActivity::class.java))
+        finish()
+    }
+
     @Composable
-    fun Screen(role: State<String?>, navController: NavHostController){
-        when(role.value?.toRole()){
+    fun Screen(role: String?, navController: NavHostController){
+        when(role?.toRole()){
             Role.TEACHER -> TeacherScreens(navController = navController)
             Role.STUDENT -> StudentScreens(navController = navController)
             Role.MANGER -> MangerScreens(navController = navController)
             null -> {}
         }
     }
+
     @Composable
     fun StudentScreens(navController: NavHostController){
         BasicScreen(
@@ -60,11 +70,11 @@ class MainActivity: ComponentActivity() {
         ) {
             composable(
                 route = Screen.Home.route,
-                content = { HomeScreen(navController = navController) }
+                content = { HomeScreen(navController = navController, role = Role.STUDENT) }
             )
             composable(
                 route = Screen.Assignment.route,
-                content = { AssignmentScreen(navController = navController) }
+                content = { AssignmentScreen(navController = navController,role = Role.STUDENT) }
             )
             composable(
                 route = Screen.Notification.route,
@@ -72,23 +82,24 @@ class MainActivity: ComponentActivity() {
             )
             composable(
                 route = Screen.Profile.route,
-                content = { ProfileScreen(navController = navController) }
+                content = { ProfileScreen(navController = navController , role = Role.STUDENT) }
             )
         }
     }
+
     @Composable
     fun MangerScreens(navController: NavHostController){
         BasicScreen(
-            screens = listOf(Screen.Home, Screen.Assignment, Screen.Notification, Screen.Profile),
+            screens = listOf(Screen.Home, Screen.UsersScreen(R.string.student), Screen.Notification, Screen.Profile),
             navController = navController
         ) {
             composable(
                 route = Screen.Home.route,
-                content = { HomeScreen(navController = navController) }
+                content = { HomeScreen(navController = navController,role = Role.MANGER) }
             )
             composable(
-                route = Screen.Assignment.route,
-                content = { AssignmentScreen(navController = navController) }
+                route = Screen.UsersScreen(R.string.student).route,
+                content = { UsersScreen(navController = navController, usersType = Role.STUDENT) }
             )
             composable(
                 route = Screen.Notification.route,
@@ -96,10 +107,11 @@ class MainActivity: ComponentActivity() {
             )
             composable(
                 route = Screen.Profile.route,
-                content = { ProfileScreen(navController = navController) }
+                content = { ProfileScreen(navController = navController,role = Role.MANGER) }
             )
         }
     }
+
     @Composable
     fun TeacherScreens(navController: NavHostController){
         BasicScreen(
@@ -108,11 +120,11 @@ class MainActivity: ComponentActivity() {
         ) {
             composable(
                 route = Screen.Home.route,
-                content = { HomeScreen(navController = navController) }
+                content = { HomeScreen(navController = navController, role = Role.TEACHER) }
             )
             composable(
                 route = Screen.Assignment.route,
-                content = { AssignmentScreen(navController = navController) }
+                content = { AssignmentScreen(navController = navController,role = Role.TEACHER) }
             )
             composable(
                 route = Screen.Notification.route,
@@ -120,7 +132,7 @@ class MainActivity: ComponentActivity() {
             )
             composable(
                 route = Screen.Profile.route,
-                content = { ProfileScreen(navController = navController) }
+                content = { ProfileScreen(navController = navController , role =Role.TEACHER) }
             )
         }
     }
