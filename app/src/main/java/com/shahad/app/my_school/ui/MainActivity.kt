@@ -24,6 +24,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.shahad.app.my_school.R
+import com.shahad.app.my_school.ui.home.manger.HomeMangerViewModel
+import com.shahad.app.my_school.ui.home.student.HomeStudentViewModel
+import com.shahad.app.my_school.ui.home.teacher.HomeTeacherViewModel
 import com.shahad.app.my_school.ui.identity.IdentityActivity
 import com.shahad.app.my_school.ui.main.MainViewModel
 import com.shahad.app.my_school.ui.register.Role
@@ -70,7 +73,10 @@ class MainActivity: ComponentActivity() {
         ) {
             composable(
                 route = Screen.Home.route,
-                content = { HomeScreen(navController = navController, role = Role.STUDENT) }
+                content = {
+                    val viewModel: HomeStudentViewModel by viewModels()
+                    HomeScreen(navController = navController, role = Role.STUDENT, viewModel = viewModel)
+                }
             )
             composable(
                 route = Screen.Assignment.route,
@@ -95,7 +101,10 @@ class MainActivity: ComponentActivity() {
         ) {
             composable(
                 route = Screen.Home.route,
-                content = { HomeScreen(navController = navController,role = Role.MANGER) }
+                content = {
+                    val viewModel: HomeMangerViewModel by viewModels()
+                    HomeScreen(navController = navController,role = Role.MANGER, viewModel = viewModel)
+                }
             )
             composable(
                 route = Screen.UsersScreen(R.string.student).route,
@@ -120,7 +129,10 @@ class MainActivity: ComponentActivity() {
         ) {
             composable(
                 route = Screen.Home.route,
-                content = { HomeScreen(navController = navController, role = Role.TEACHER) }
+                content = {
+                    val viewModel: HomeTeacherViewModel by viewModels()
+                    HomeScreen(navController = navController, role = Role.TEACHER, viewModel = viewModel)
+                }
             )
             composable(
                 route = Screen.Assignment.route,
