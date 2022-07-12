@@ -343,6 +343,7 @@ fun loadImage(view: ImageView, url: String?){
     view.load(url)
 }
 
+//TODO CONVERT TO EXTENSION FUNCTION
 @BindingAdapter(value = ["app:date"])
 fun convertLongToTime(view: TextView,time: Long?){
     time?.let{

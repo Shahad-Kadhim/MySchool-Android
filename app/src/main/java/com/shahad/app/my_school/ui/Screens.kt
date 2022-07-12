@@ -1,13 +1,13 @@
 package com.shahad.app.my_school.ui
 
-import android.annotation.SuppressLint
-import android.widget.Toast
+import androidx.annotation.RawRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,7 +21,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -30,7 +29,6 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
@@ -38,9 +36,11 @@ import com.airbnb.lottie.compose.rememberLottieComposition
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.shahad.app.my_school.R
+import com.shahad.app.my_school.data.remote.response.AssignmentDto
 import com.shahad.app.my_school.data.remote.response.BaseResponse
 import com.shahad.app.my_school.domain.models.ClassM
 import com.shahad.app.my_school.ui.base.BaseViewModel
+import com.shahad.app.my_school.ui.duty.BaseAssignmentViewModel
 import com.shahad.app.my_school.ui.home.student.HomeStudentViewModel
 import com.shahad.app.my_school.ui.register.Role
 import com.shahad.app.my_school.util.State
@@ -118,28 +118,10 @@ fun StudentHome(navController: NavController, viewModel: HomeStudentViewModel){
                         ClassItem(it)
                     }
                 } ?: item {
-                    val noResult by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.no_result))
-                    Column(
-                        Modifier.fillMaxWidth(),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ){
-                        LottieAnimation(
-                            composition = noResult,
-                            isPlaying = true,
-                            iterations = LottieConstants.IterateForever,
-                            modifier = Modifier
-                                .padding(0.dp, 64.dp, 0.dp, 0.dp)
-                                .width(172.dp)
-                                .height(172.dp)
-                        )
-                        Text(
-                            "No Classes Here",
-                            style = TextStyle(
-                                fontSize = 18.sp,
-                                fontFamily = FontFamily(Font(R.font.source_sans_pro_regular)),
-                            ),
-                        )
-                    }
+                    NoResultAnimation(
+                        Modifier.fillMaxWidth().padding(0.dp, 64.dp, 0.dp, 0.dp),
+                        "No Classes Here",
+                    )
                 }
             }
         }
@@ -201,21 +183,69 @@ fun Duties(navController: NavController, state: State<BaseResponse<String>?>?) {
 }
 
 @Composable
+fun BasicLottie(
+    @RawRes lottieId: Int,
+    modifier: Modifier =Modifier
+){
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ){
+        val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(lottieId))
+        LottieAnimation(
+            composition = composition,
+            isPlaying = true,
+            iterations = LottieConstants.IterateForever,
+            modifier = modifier
+                .width(172.dp)
+                .height(172.dp),
+        )
+    }
+}
+
+@Composable
+fun NoResultAnimation(
+    modifier: Modifier,
+    label: String,
+) {
+    Column(
+        modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        BasicLottie(
+            lottieId = R.raw.no_result,
+            modifier = modifier
+        )
+        Text(
+            text = label,
+            style = TextStyle(
+                fontSize = 18.sp,
+                fontFamily = FontFamily(Font(R.font.source_sans_pro_regular)),
+            ),
+        )
+    }
+}
+@Composable
+fun LoadingAnimation(){
+    BasicLottie(lottieId = R.raw.loading)
+}
+
+@Composable
+fun ErrorConnectionAnimation(){
+    BasicLottie(lottieId = R.raw.error_connection)
+}
+
+@Composable
+fun ErrorAnimation(){
+    BasicLottie(lottieId = R.raw.error)
+}
+
+@Composable
 fun ClassItem(classM: ClassM) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
-            .padding(16.dp, 4.dp)
-            .border(
-                1.dp,
-                color = colorResource(id = R.color.stroke_color),
-                shape = RoundedCornerShape(24f)
-            )
-            .clickable {
-                //TODO LATER nav to Class Screen
-            },
-        shape = RoundedCornerShape(24f)
+    StrokedCard(
+        onClick = {
+            //TODO LATER
+        }
     ) {
         Column(
             Modifier
@@ -245,13 +275,16 @@ fun ClassItem(classM: ClassM) {
 }
 
 @Composable
-fun AppBar(title: String){
+fun AppBar(
+    title: String,
+    onClickBack: () -> Unit,
+){
     TopAppBar(
         title = {
                 Text(
                     text = title,
                     style = TextStyle(
-                        fontSize = 28.sp,
+                        fontSize = 22.sp,
                         fontFamily = FontFamily(Font(R.font.source_sans_pro_semi_bold)),
                     ),
                 )
@@ -259,23 +292,47 @@ fun AppBar(title: String){
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
+            .padding(16.dp, 16.dp, 0.dp, 0.dp)
         ,
-        backgroundColor = colorResource(id = R.color.brand_color),
-        contentColor = Color.White,
-        actions = {
-            Image(
-                painter = painterResource(R.drawable.profile_photo),
-                contentDescription = "avatar",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .size(32.dp)
-                    .clip(CircleShape),
-            )
-        }
-
+        contentColor = colorResource(id = R.color.black),
+        navigationIcon = {
+            IconButton(onClick = {onClickBack()}){
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_baseline_arrow_back_ios_24),
+                    contentDescription = "",
+                    modifier = Modifier
+                        .padding(8.dp)
+                        .width(24.dp)
+                )
+            }
+        },
+        backgroundColor = Color.Transparent,
+        elevation =0.dp
     )
 }
 
+@Composable
+fun StrokedCard(
+    onClick: () -> Unit,
+    content: @Composable () -> Unit
+){
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .padding(16.dp, 4.dp)
+            .border(
+                1.dp,
+                color = colorResource(id = R.color.stroke_color),
+                shape = RoundedCornerShape(24f)
+            )
+            .clickable {
+                onClick()
+            },
+        shape = RoundedCornerShape(24f),
+        content = content
+    )
+}
 
 @Composable
 fun TeacherHome(navController: NavController) {
@@ -288,9 +345,105 @@ fun MangerHome(navController: NavController) {
 }
 
 @Composable
-fun AssignmentScreen(navController: NavController, role: Role) {
+fun AssignmentScreen(navController: NavController, role: Role, viewModel: BaseAssignmentViewModel) {
+    Scaffold(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(colorResource(id = R.color.background_color)),
+        topBar = {
+            AppBar(title = "Assignment") {
+                navController.navigateUp()
+            }
+        }
+    ){
+        val oo = viewModel.assignments.value
+        oo?.let {
+            val assignment by oo.observeAsState()
+            assignment?.let {
+                SwiperLayout(
+                    onRefresh = { viewModel.refreshState.postValue(true) },
+                    modifier = Modifier.fillMaxSize(),
+                    state = it
+                ){
+                    it.toData()?.data.takeUnless { it.isNullOrEmpty() }?.let {
+                        items(it){
+                            AssignmentItem(it)
+                        }
+                    } ?: item {
+                            NoResultAnimation(modifier = Modifier.fillMaxSize(),"No Assignment Yet")
+                        }
 
-    AppBar("Assignment")
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun<T> SwiperLayout(
+    onRefresh: () -> Unit,
+    state: State<T>,
+    modifier: Modifier =Modifier,
+    content: LazyListScope.() -> Unit,
+){
+    SwipeRefresh(
+        state = rememberSwipeRefreshState(isRefreshing = false ),
+        onRefresh = {
+            onRefresh()
+        },
+        modifier =modifier
+    ){
+        when(state){
+            State.ConnectionError -> ErrorConnectionAnimation()
+            is State.Error -> ErrorAnimation()
+            State.Loading -> LoadingAnimation()
+            is State.Success -> {
+                LazyColumn(
+                    content = content,
+                )
+            }
+            State.UnAuthorization -> {}
+        }
+    }
+}
+
+@Composable
+fun AssignmentItem(assignment: AssignmentDto) {
+    StrokedCard(
+        onClick = { /*TODO*/ }
+    ) {
+        Column(
+            Modifier
+                .padding(24.dp, 16.dp)
+                .fillMaxSize()){
+            Row{
+                Text(
+                    text = assignment.title,
+                    style = TextStyle(
+                        color = colorResource(id = R.color.black),
+                        fontSize = 20.sp,
+                        fontFamily = FontFamily(Font(R.font.source_sans_pro_semi_bold))
+                    )                )
+                Spacer(modifier = Modifier.weight(1f))
+                Text(
+                    text = assignment.datePosted.toString(),
+                    style = TextStyle(
+                        color = colorResource(id = R.color.black),
+                        fontSize = 16.sp,
+                        fontFamily = FontFamily(Font(R.font.source_sans_pro_semi_bold))
+                    )
+                )
+            }
+            Text(
+                text = assignment.content,
+                style = TextStyle(
+                    color = colorResource(id = R.color.secondery_color),
+                    fontSize = 16.sp,
+                    fontFamily = FontFamily(Font(R.font.source_sans_pro_semi_bold))
+                )
+            )
+        }
+    }
 }
 @Composable
 fun UsersScreen(navController: NavController, usersType: Role) {

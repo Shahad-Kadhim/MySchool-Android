@@ -24,6 +24,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.shahad.app.my_school.R
+import com.shahad.app.my_school.ui.duty.AssignmentStudentViewModel
+import com.shahad.app.my_school.ui.duty.AssignmentTeacherViewModel
 import com.shahad.app.my_school.ui.home.manger.HomeMangerViewModel
 import com.shahad.app.my_school.ui.home.student.HomeStudentViewModel
 import com.shahad.app.my_school.ui.home.teacher.HomeTeacherViewModel
@@ -80,7 +82,10 @@ class MainActivity: ComponentActivity() {
             )
             composable(
                 route = Screen.Assignment.route,
-                content = { AssignmentScreen(navController = navController,role = Role.STUDENT) }
+                content = {
+                    val viewModel: AssignmentStudentViewModel by viewModels()
+                    AssignmentScreen(navController = navController,role = Role.STUDENT, viewModel)
+                }
             )
             composable(
                 route = Screen.Notification.route,
@@ -136,7 +141,10 @@ class MainActivity: ComponentActivity() {
             )
             composable(
                 route = Screen.Assignment.route,
-                content = { AssignmentScreen(navController = navController,role = Role.TEACHER) }
+                content = {
+                    val viewModel: AssignmentTeacherViewModel by viewModels()
+                    AssignmentScreen(navController = navController, role = Role.TEACHER, viewModel)
+                }
             )
             composable(
                 route = Screen.Notification.route,
