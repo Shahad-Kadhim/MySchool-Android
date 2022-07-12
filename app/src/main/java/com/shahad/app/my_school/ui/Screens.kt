@@ -1,5 +1,7 @@
 package com.shahad.app.my_school.ui
 
+import android.annotation.SuppressLint
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -11,6 +13,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
@@ -18,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -31,6 +35,8 @@ import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.shahad.app.my_school.R
 import com.shahad.app.my_school.data.remote.response.BaseResponse
 import com.shahad.app.my_school.domain.models.ClassM
@@ -87,42 +93,53 @@ fun StudentHome(navController: NavController, viewModel: HomeStudentViewModel){
     ){
         val duty by viewModel.dutiesStatistic.observeAsState()
         val classes by viewModel.classes.observeAsState()
-        LazyColumn {
-            item {
-                Duties(navController,duty)
-                Text(
-                    text = "Classes",
-                    style = TextStyle(
-                        color = colorResource(id = R.color.text),
-                        fontSize = 24.sp,
-                        fontFamily = FontFamily(Font(R.font.source_sans_pro_regular))
-                    ),
-                    modifier = Modifier.padding(16.dp,0.dp,0.dp,0.dp)
-                )
+        val isRefreshing by viewModel.refreshState.collectAsState()
+        SwipeRefresh(
+            state = rememberSwipeRefreshState(isRefreshing = isRefreshing ),
+            onRefresh = {
+                viewModel.refreshClasses()
             }
-            classes?.takeIf { it.isNotEmpty() }?.let{ classesList ->
-                items(classesList){
-                    ClassItem(it)
-                }
-            } ?: item {
-                val noResult by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.no_result))
-                Column(
-                    Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ){
-                    LottieAnimation(
-                        composition = noResult,
-                        isPlaying = true,
-                        iterations = LottieConstants.IterateForever,
-                        modifier = Modifier.padding(0.dp,64.dp,0.dp,0.dp).width(172.dp).height(172.dp)
-                    )
+        ) {
+            LazyColumn {
+                item {
+                    Duties(navController,duty)
                     Text(
-                        "No Classes Here",
+                        text = "Classes",
                         style = TextStyle(
-                            fontSize = 18.sp,
-                            fontFamily = FontFamily(Font(R.font.source_sans_pro_regular)),
+                            color = colorResource(id = R.color.text),
+                            fontSize = 24.sp,
+                            fontFamily = FontFamily(Font(R.font.source_sans_pro_regular))
                         ),
+                        modifier = Modifier.padding(16.dp,0.dp,0.dp,0.dp)
                     )
+                }
+                classes?.takeIf { it.isNotEmpty() }?.let{ classesList ->
+                    items(classesList){
+                        ClassItem(it)
+                    }
+                } ?: item {
+                    val noResult by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.no_result))
+                    Column(
+                        Modifier.fillMaxWidth(),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ){
+                        LottieAnimation(
+                            composition = noResult,
+                            isPlaying = true,
+                            iterations = LottieConstants.IterateForever,
+                            modifier = Modifier
+                                .padding(0.dp, 64.dp, 0.dp, 0.dp)
+                                .width(172.dp)
+                                .height(172.dp)
+                        )
+                        Text(
+                            "No Classes Here",
+                            style = TextStyle(
+                                fontSize = 18.sp,
+                                fontFamily = FontFamily(Font(R.font.source_sans_pro_regular)),
+                            ),
+                        )
+                    }
                 }
             }
         }
@@ -258,6 +275,8 @@ fun AppBar(title: String){
 
     )
 }
+
+
 @Composable
 fun TeacherHome(navController: NavController) {
 

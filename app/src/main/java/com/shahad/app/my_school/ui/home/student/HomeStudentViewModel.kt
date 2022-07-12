@@ -10,6 +10,7 @@ import com.shahad.app.my_school.ui.base.BaseViewModel
 import com.shahad.app.my_school.util.Event
 import com.shahad.app.my_school.util.State
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -28,7 +29,7 @@ class HomeStudentViewModel @Inject constructor(
         repository.getStudentClasses(searchKey?.takeIf { it.isNotBlank() }).asLiveData()
     }
 
-    val refreshState = MutableLiveData<Boolean>(false)
+    val refreshState = MutableStateFlow<Boolean>(false)
 
     private val _clickProfileEvent = MutableLiveData<Event<Boolean>>()
     val clickProfileEvent: LiveData<Event<Boolean>> = _clickProfileEvent
@@ -53,6 +54,7 @@ class HomeStudentViewModel @Inject constructor(
 
     fun refreshClasses(){
         viewModelScope.launch {
+            refreshState.emit(true)
             repository.refreshStudentClasses(search.value).collect {
                 when(it){
                     State.ConnectionError,is State.Error -> _message.postValue("no connection")
@@ -60,7 +62,7 @@ class HomeStudentViewModel @Inject constructor(
                     State.UnAuthorization -> unAuthentication.postValue(State.UnAuthorization)
                 }
             }
-            refreshState.postValue(false)
+            refreshState.emit(false)
         }
     }
 
