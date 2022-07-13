@@ -31,6 +31,7 @@ import com.shahad.app.my_school.ui.home.student.HomeStudentViewModel
 import com.shahad.app.my_school.ui.home.teacher.HomeTeacherViewModel
 import com.shahad.app.my_school.ui.identity.IdentityActivity
 import com.shahad.app.my_school.ui.main.MainViewModel
+import com.shahad.app.my_school.ui.notification.NotificationViewModel
 import com.shahad.app.my_school.ui.register.Role
 import com.shahad.app.my_school.util.extension.toRole
 import dagger.hilt.android.AndroidEntryPoint
@@ -89,7 +90,10 @@ class MainActivity: ComponentActivity() {
             )
             composable(
                 route = Screen.Notification.route,
-                content = { NotificationScreen(navController = navController) }
+                content = {
+                    val viewModel: NotificationViewModel by viewModels()
+                    NotificationScreen(navController = navController,viewModel)
+                }
             )
             composable(
                 route = Screen.Profile.route,
@@ -117,7 +121,10 @@ class MainActivity: ComponentActivity() {
             )
             composable(
                 route = Screen.Notification.route,
-                content = { NotificationScreen(navController = navController) }
+                content = {
+                    val viewModel: NotificationViewModel by viewModels()
+                    NotificationScreen(navController = navController, viewModel)
+                }
             )
             composable(
                 route = Screen.Profile.route,
@@ -148,7 +155,10 @@ class MainActivity: ComponentActivity() {
             )
             composable(
                 route = Screen.Notification.route,
-                content = { NotificationScreen(navController = navController) }
+                content = {
+                    val viewModel: NotificationViewModel by viewModels()
+                    NotificationScreen(navController = navController,viewModel)
+                }
             )
             composable(
                 route = Screen.Profile.route,

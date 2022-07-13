@@ -38,10 +38,12 @@ import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.shahad.app.my_school.R
 import com.shahad.app.my_school.data.remote.response.AssignmentDto
 import com.shahad.app.my_school.data.remote.response.BaseResponse
+import com.shahad.app.my_school.data.remote.response.NotificationDto
 import com.shahad.app.my_school.domain.models.ClassM
 import com.shahad.app.my_school.ui.base.BaseViewModel
 import com.shahad.app.my_school.ui.duty.BaseAssignmentViewModel
 import com.shahad.app.my_school.ui.home.student.HomeStudentViewModel
+import com.shahad.app.my_school.ui.notification.NotificationViewModel
 import com.shahad.app.my_school.ui.register.Role
 import com.shahad.app.my_school.util.State
 
@@ -119,7 +121,9 @@ fun StudentHome(navController: NavController, viewModel: HomeStudentViewModel){
                     }
                 } ?: item {
                     NoResultAnimation(
-                        Modifier.fillMaxWidth().padding(0.dp, 64.dp, 0.dp, 0.dp),
+                        Modifier
+                            .fillMaxWidth()
+                            .padding(0.dp, 64.dp, 0.dp, 0.dp),
                         "No Classes Here",
                     )
                 }
@@ -127,6 +131,7 @@ fun StudentHome(navController: NavController, viewModel: HomeStudentViewModel){
         }
     }
 }
+
 @Composable
 fun Duties(navController: NavController, state: State<BaseResponse<String>?>?) {
     if(state is State.Success){
@@ -225,6 +230,7 @@ fun NoResultAnimation(
         )
     }
 }
+
 @Composable
 fun LoadingAnimation(){
     BasicLottie(lottieId = R.raw.loading)
@@ -292,7 +298,7 @@ fun AppBar(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .padding(16.dp, 16.dp, 0.dp, 0.dp)
+            .padding(8.dp, 8.dp, 0.dp, 0.dp)
         ,
         contentColor = colorResource(id = R.color.black),
         navigationIcon = {
@@ -423,7 +429,8 @@ fun AssignmentItem(assignment: AssignmentDto) {
                         color = colorResource(id = R.color.black),
                         fontSize = 20.sp,
                         fontFamily = FontFamily(Font(R.font.source_sans_pro_semi_bold))
-                    )                )
+                    )
+                )
                 Spacer(modifier = Modifier.weight(1f))
                 Text(
                     text = assignment.datePosted.toString(),
@@ -445,6 +452,7 @@ fun AssignmentItem(assignment: AssignmentDto) {
         }
     }
 }
+
 @Composable
 fun UsersScreen(navController: NavController, usersType: Role) {
     Column(modifier = Modifier.fillMaxSize()) {
@@ -459,17 +467,68 @@ fun UsersScreen(navController: NavController, usersType: Role) {
 }
 
 @Composable
-fun NotificationScreen(navController: NavController) {
-    Column(modifier = Modifier.fillMaxSize()) {
-        Text(text = "notification")
-        Button(onClick = { navController.navigate("profile"){
-            popUpTo("home")
-        } }) {
-            Text(text = "GO TO Profile")
+fun NotificationScreen(navController: NavController, viewModel: NotificationViewModel) {
+    Scaffold(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(colorResource(id = R.color.background_color)),
+        topBar = {
+            AppBar(title = "Notification") {
+                navController.navigateUp()
+            }
         }
+    ){
+        val notification by viewModel.notification.observeAsState()
+        notification?.let { state ->
+            SwiperLayout(
+                onRefresh = {
+                    viewModel.refreshState.postValue(true)
+                },
+                state = state,
+            ){
+                state.toData()?.data?.let{ notifications ->
+                    items(notifications){
+                        NotificationItem(it)
+                    }
+                }
+            }
+        }
+
     }
 
 }
+
+@Composable
+fun NotificationItem(notification: NotificationDto) {
+    StrokedCard(
+        onClick = {  }
+    ) {
+        Column (
+            modifier = Modifier
+                .padding(24.dp, 16.dp)
+                .fillMaxSize()
+        ) {
+            Text(
+                text = notification.title,
+                style = TextStyle(
+                    color = colorResource(id = R.color.shade_primary_color),
+                    fontSize = 20.sp,
+                    fontFamily = FontFamily(Font(R.font.source_sans_pro_semi_bold))
+                )
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = notification.content,
+                style = TextStyle(
+                    color = colorResource(id = R.color.shade_secondary_color),
+                    fontSize = 16.sp,
+                    fontFamily = FontFamily(Font(R.font.source_sans_pro_semi_bold))
+                )
+            )
+        }
+    }
+}
+
 @Composable
 fun ProfileScreen(navController: NavController, role: Role) {
     Column(modifier = Modifier.fillMaxSize()) {
