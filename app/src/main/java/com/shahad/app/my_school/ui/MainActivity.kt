@@ -24,15 +24,23 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.shahad.app.my_school.R
+import com.shahad.app.my_school.ui.duty.AssignmentScreen
 import com.shahad.app.my_school.ui.duty.AssignmentStudentViewModel
 import com.shahad.app.my_school.ui.duty.AssignmentTeacherViewModel
+import com.shahad.app.my_school.ui.home.HomeScreen
 import com.shahad.app.my_school.ui.home.manger.HomeMangerViewModel
 import com.shahad.app.my_school.ui.home.student.HomeStudentViewModel
 import com.shahad.app.my_school.ui.home.teacher.HomeTeacherViewModel
 import com.shahad.app.my_school.ui.identity.IdentityActivity
 import com.shahad.app.my_school.ui.main.MainViewModel
+import com.shahad.app.my_school.ui.notification.NotificationScreen
 import com.shahad.app.my_school.ui.notification.NotificationViewModel
+import com.shahad.app.my_school.ui.profile.MangerProfileViewModel
+import com.shahad.app.my_school.ui.profile.ProfileScreen
+import com.shahad.app.my_school.ui.profile.StudentProfileViewModel
+import com.shahad.app.my_school.ui.profile.TeacherProfileViewModel
 import com.shahad.app.my_school.ui.register.Role
+import com.shahad.app.my_school.ui.users.UsersScreen
 import com.shahad.app.my_school.util.extension.toRole
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -97,7 +105,10 @@ class MainActivity: ComponentActivity() {
             )
             composable(
                 route = Screen.Profile.route,
-                content = { ProfileScreen(navController = navController , role = Role.STUDENT) }
+                content = {
+                    val viewModel: StudentProfileViewModel by viewModels()
+                    ProfileScreen(navController = navController , viewModel,Role.STUDENT)
+                }
             )
         }
     }
@@ -128,7 +139,10 @@ class MainActivity: ComponentActivity() {
             )
             composable(
                 route = Screen.Profile.route,
-                content = { ProfileScreen(navController = navController,role = Role.MANGER) }
+                content = {
+                    val viewModel: MangerProfileViewModel by viewModels()
+                    ProfileScreen(navController = navController, viewModel, Role.MANGER)
+                }
             )
         }
     }
@@ -162,7 +176,10 @@ class MainActivity: ComponentActivity() {
             )
             composable(
                 route = Screen.Profile.route,
-                content = { ProfileScreen(navController = navController , role =Role.TEACHER) }
+                content = {
+                    val viewModel: TeacherProfileViewModel by viewModels()
+                    ProfileScreen(navController = navController, viewModel, Role.TEACHER)
+                }
             )
         }
     }
