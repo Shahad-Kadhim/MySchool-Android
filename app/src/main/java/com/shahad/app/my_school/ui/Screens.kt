@@ -244,14 +244,14 @@ fun SchoolItem(school: School){
     ) {
         Column(
             modifier = Modifier
-                .padding(24.dp, 24.dp, 0.dp, 0.dp)
+                .padding(24.dp, 24.dp, 24.dp, 16.dp)
                 .fillMaxWidth()
         ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_school),
                 contentDescription = "school icon",
             )
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = school.name,
                 style = TextStyle(

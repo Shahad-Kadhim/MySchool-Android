@@ -11,6 +11,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -171,6 +173,15 @@ fun TeacherHome(navController: NavController, viewModel: HomeTeacherViewModel) {
                 )
             }
         },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = { /*TODO*/ },
+                backgroundColor = colorResource(id = R.color.brand_color),
+                contentColor = Color.White
+            ) {
+                Icon(Icons.Filled.Add,"add class")
+            }
+        }
     ){
         val classes by viewModel.classes.observeAsState()
         val isRefreshing by viewModel.refreshState.collectAsState()
