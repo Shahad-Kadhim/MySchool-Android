@@ -19,6 +19,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.airbnb.lottie.compose.LottieAnimation
@@ -94,35 +95,54 @@ fun ErrorAnimation(){
 }
 
 @Composable
-fun ClassItem(classM: ClassM) {
+fun ClassItem(
+    classM: ClassM,
+    showStage: Boolean = false
+) {
     StrokedCard(
         onClick = {
             //TODO LATER
         }
     ) {
-        Column(
+        Row(
             Modifier
                 .fillMaxWidth()
-                .padding(24.dp, 16.dp)
                 .wrapContentHeight(Alignment.CenterVertically),
-            horizontalAlignment = Alignment.Start
-        ) {
-            Text(
-                text = classM.name,
-                style = TextStyle(
-                    color = colorResource(id = R.color.class_text),
-                    fontSize = 28.sp,
-                    fontFamily = FontFamily(Font(R.font.source_sans_pro_bold))
+        ){
+            Column(
+                modifier = Modifier.padding(24.dp,16.dp,0.dp,16.dp),
+                horizontalAlignment = Alignment.Start
+            ) {
+                Text(
+                    text = classM.name,
+                    style = TextStyle(
+                        color = colorResource(id = R.color.class_text),
+                        fontSize = 28.sp,
+                        fontFamily = FontFamily(Font(R.font.source_sans_pro_bold))
+                    )
                 )
-            )
-            Text(
-                text = " by Mr. ${classM.teacherName}",
-                style = TextStyle(
-                    color = colorResource(id = R.color.secondery_color),
-                    fontSize = 18.sp,
-                    fontFamily = FontFamily(Font(R.font.source_sans_pro_bold))
+                Text(
+                    text = " by Mr. ${classM.teacherName}",
+                    style = TextStyle(
+                        color = colorResource(id = R.color.secondery_color),
+                        fontSize = 18.sp,
+                        fontFamily = FontFamily(Font(R.font.source_sans_pro_bold))
+                    )
                 )
-            )
+            }
+            Spacer(modifier = Modifier.weight(1f))
+            showStage.takeIf { it }?.let {
+                Text(
+                    text = classM.stage.toString(),
+                    style = TextStyle(
+                        color = colorResource(id = R.color.brand_color),
+                        fontSize = 64.sp,
+                        fontFamily = FontFamily(Font(R.font.source_sans_pro_bold))
+                    ),
+                    textAlign = TextAlign.End,
+                    modifier = Modifier.fillMaxSize().padding(32.dp,0.dp).align(Alignment.CenterVertically)
+                )
+            }
         }
     }
 }
@@ -223,7 +243,8 @@ fun SchoolItem(school: School){
         onClick = { /*TODO*/ }
     ) {
         Column(
-            modifier = Modifier.padding(24.dp,24.dp,0.dp,0.dp)
+            modifier = Modifier
+                .padding(24.dp, 24.dp, 0.dp, 0.dp)
                 .fillMaxWidth()
         ) {
             Image(

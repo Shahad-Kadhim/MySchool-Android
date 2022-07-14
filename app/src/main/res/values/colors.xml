@@ -25,4 +25,5 @@
     <color name="tool_bar_color">#EDF7FC</color>
     <color name="class_text">#2F3238</color>
     <color name="secondery_color">#DE2F3238</color>
+    <color name="search_background">#F5F6FC</color>
 </resources>

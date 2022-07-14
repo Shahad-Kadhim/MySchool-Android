@@ -7,6 +7,7 @@ import com.shahad.app.my_school.ui.ClassInteractionListener
 import com.shahad.app.my_school.util.Event
 import com.shahad.app.my_school.util.State
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -18,7 +19,7 @@ class HomeTeacherViewModel @Inject constructor(
 
     val search = MutableLiveData<String?>(null)
 
-    val refreshState = MutableLiveData<Boolean>(false)
+    val refreshState = MutableStateFlow(false)
 
     val classes = Transformations.switchMap(search){ searchKey ->
             repository.getTeacherClasses(searchKey?.takeIf { it.isNotBlank() }).asLiveData()
@@ -56,7 +57,7 @@ class HomeTeacherViewModel @Inject constructor(
                     State.UnAuthorization -> _unAuthentication.postValue(State.UnAuthorization)
                 }
             }
-            refreshState.postValue(false)
+            refreshState.emit(false)
         }
     }
 

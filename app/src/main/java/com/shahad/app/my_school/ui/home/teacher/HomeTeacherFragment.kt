@@ -3,6 +3,7 @@ package com.shahad.app.my_school.ui.home.teacher
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.asLiveData
 import com.shahad.app.my_school.R
 import com.shahad.app.my_school.databinding.FragmentTeacherHomeBinding
 import com.shahad.app.my_school.ui.base.BaseFragment
@@ -13,6 +14,7 @@ import com.shahad.app.my_school.util.extension.goToFragment
 import com.shahad.app.my_school.util.extension.observeEvent
 import com.shahad.app.my_school.util.extension.showToast
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class HomeTeacherFragment: BaseFragment<FragmentTeacherHomeBinding>() {
@@ -61,7 +63,7 @@ class HomeTeacherFragment: BaseFragment<FragmentTeacherHomeBinding>() {
                     HomeTeacherFragmentDirections.actionHomeFragmentToProfileFragment2()
                 )
             }
-            refreshState.observe(this@HomeTeacherFragment){ ifRefresh ->
+            refreshState.asLiveData().observe(this@HomeTeacherFragment){ ifRefresh ->
                 takeIf { ifRefresh==true }?.refreshClasses()
             }
             message.observe(this@HomeTeacherFragment){
