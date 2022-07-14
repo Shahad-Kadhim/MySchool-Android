@@ -7,7 +7,7 @@ import com.shahad.app.my_school.R
 sealed class Screen(val route: String,@StringRes val resourceId: Int,@DrawableRes val icon: Int){
 
     object Home: Screen("home", R.string.home,R.drawable.ic_home)
-    class UsersScreen(@StringRes val type: Int): Screen("user", type,R.drawable.ic_student)
+    class UsersScreen(@StringRes val type: Int, route: String): Screen(route, type,R.drawable.ic_student)
     object Assignment: Screen("assignment", R.string.assignment,R.drawable.ic_duty)
     object Notification: Screen("notification", R.string.notification,R.drawable.ic_notifaction)
     object Profile: Screen("profile", R.string.profile,R.drawable.ic_profile)

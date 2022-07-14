@@ -102,7 +102,11 @@ fun ClassItem(
     StrokedCard(
         onClick = {
             //TODO LATER
-        }
+        },
+        modifier =Modifier
+            .fillMaxWidth()
+        .wrapContentHeight()
+        .padding(16.dp, 4.dp)
     ) {
         Row(
             Modifier
@@ -187,13 +191,11 @@ fun AppBar(
 @Composable
 fun StrokedCard(
     onClick: () -> Unit,
-    content: @Composable () -> Unit
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit,
 ){
     Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
-            .padding(16.dp, 4.dp)
+        modifier = modifier
             .border(
                 1.dp,
                 color = colorResource(id = R.color.stroke_color),
@@ -238,9 +240,10 @@ fun<T> SwiperLayout(
 
 
 @Composable
-fun SchoolItem(school: School){
+fun SchoolItem(school: School, modifier: Modifier){
     StrokedCard(
-        onClick = { /*TODO*/ }
+        onClick = { /*TODO*/ },
+        modifier = modifier
     ) {
         Column(
             modifier = Modifier
@@ -258,7 +261,8 @@ fun SchoolItem(school: School){
                     color = colorResource(id = R.color.shade_primary_color),
                     fontSize = 25.sp,
                     fontFamily = FontFamily(Font(R.font.source_sans_pro_bold))
-                )
+                ),
+                maxLines = 1
             )
         }
     }
@@ -273,6 +277,7 @@ fun SectionTitle(title: String){
             fontSize = 24.sp,
             fontFamily = FontFamily(Font(R.font.source_sans_pro_regular))
         ),
-        modifier = Modifier.padding(16.dp,8.dp,0.dp,0.dp)
+        modifier = Modifier.padding(16.dp,8.dp,0.dp,0.dp),
     )
+
 }

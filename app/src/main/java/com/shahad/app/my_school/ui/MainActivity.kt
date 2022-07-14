@@ -76,6 +76,7 @@ class MainActivity: ComponentActivity() {
         }
     }
 
+
     @Composable
     fun StudentScreens(navController: NavHostController){
         BasicScreen(
@@ -116,7 +117,7 @@ class MainActivity: ComponentActivity() {
     @Composable
     fun MangerScreens(navController: NavHostController){
         BasicScreen(
-            screens = listOf(Screen.Home, Screen.UsersScreen(R.string.student), Screen.Notification, Screen.Profile),
+            screens = listOf(Screen.Home, Screen.UsersScreen(R.string.student,"students"), Screen.Notification, Screen.Profile),
             navController = navController
         ) {
             composable(
@@ -127,7 +128,7 @@ class MainActivity: ComponentActivity() {
                 }
             )
             composable(
-                route = Screen.UsersScreen(R.string.student).route,
+                route = Screen.UsersScreen(R.string.student,"students").route,
                 content = { UsersScreen(navController = navController, usersType = Role.STUDENT) }
             )
             composable(

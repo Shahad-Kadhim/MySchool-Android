@@ -58,7 +58,11 @@ fun NotificationScreen(navController: NavController, viewModel: NotificationView
 @Composable
 fun NotificationItem(notification: NotificationDto) {
     StrokedCard(
-        onClick = {  }
+        onClick = {  },
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .padding(16.dp, 4.dp)
     ) {
         Column (
             modifier = Modifier

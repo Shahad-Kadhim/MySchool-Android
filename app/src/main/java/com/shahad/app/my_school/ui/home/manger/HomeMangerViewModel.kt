@@ -8,6 +8,7 @@ import com.shahad.app.my_school.ui.SchoolInteractionListener
 import com.shahad.app.my_school.util.Event
 import com.shahad.app.my_school.util.State
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -23,7 +24,7 @@ class HomeMangerViewModel @Inject constructor(
 
     val schools = repository.getMangerSchool().asLiveData()
 
-    val refreshState = MutableLiveData<Boolean>(false)
+    val refreshState = MutableStateFlow<Boolean>(false)
 
     private val _clickCreateSchoolEvent = MutableLiveData<Event<Boolean>>()
     val clickCreateSchoolEvent: LiveData<Event<Boolean>> = _clickCreateSchoolEvent
@@ -71,19 +72,19 @@ class HomeMangerViewModel @Inject constructor(
         }
     }
 
-    private fun <T>checkState(state: State<T?>){
+    private suspend fun <T>checkState(state: State<T?>){
         when(state){
             State.ConnectionError,is State.Error -> {
                 _message.postValue("no connection")
-                refreshState.postValue(false)
+                refreshState.emit(false)
             }
             is State.Success -> {
                 _message.postValue("Update")
-                refreshState.postValue(false)
+                refreshState.emit(false)
             }
             State.UnAuthorization -> {
                 _unAuthentication.postValue(State.UnAuthorization)
-                refreshState.postValue(false)
+                refreshState.emit(false)
             }
         }
     }

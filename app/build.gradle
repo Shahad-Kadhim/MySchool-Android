@@ -148,4 +148,6 @@ dependencies {
     // Swipe Refresh Compose
     implementation "com.google.accompanist:accompanist-swiperefresh:0.19.0"
 
+    // constraint layout
+    implementation "androidx.constraintlayout:constraintlayout-compose:1.1.0-alpha03"
 }

@@ -78,7 +78,13 @@ fun StudentProfile(viewModel: StudentProfileViewModel){
         }
         schools.takeUnless { it.isNullOrEmpty() }?.let {
             items(it){school ->
-                SchoolItem(school = school)
+                SchoolItem(
+                    school = school,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight()
+                        .padding(16.dp, 4.dp)
+                )
             }
         } ?: item {
             NoResultAnimation(modifier = Modifier.fillMaxSize(),"No Schools here")
@@ -112,7 +118,12 @@ fun TeacherProfile(viewModel: TeacherProfileViewModel){
         }
         schools.takeUnless { it.isNullOrEmpty() }?.let {
             items(it){school ->
-                SchoolItem(school = school)
+                SchoolItem(
+                    school = school,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight()
+                        .padding(16.dp, 4.dp))
             }
         } ?: item {
             NoResultAnimation(modifier = Modifier.fillMaxSize(),"No Schools here")
@@ -145,7 +156,13 @@ fun MangerProfile(viewModel: MangerProfileViewModel){
         }
         schools.takeUnless { it.isNullOrEmpty() }?.let {
             items(it){school ->
-                SchoolItem(school = school)
+                SchoolItem(
+                    school = school,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight()
+                        .padding(16.dp, 4.dp)
+                )
             }
         } ?: item {
             NoResultAnimation(modifier = Modifier.fillMaxSize(),"No Schools here")
@@ -191,7 +208,13 @@ fun ProfileHeader(userName: String){
 fun LazyListScope.SchoolRecycle(schools: List<School>){
     schools.takeIf { it.isNotEmpty() }?.let { schools ->
         items(schools){ school->
-            SchoolItem(school = school)
+            SchoolItem(
+                school = school,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .padding(16.dp, 4.dp)
+            )
         }
     }
 }

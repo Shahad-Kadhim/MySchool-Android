@@ -60,7 +60,11 @@ fun AssignmentScreen(navController: NavController, role: Role, viewModel: BaseAs
 @Composable
 fun AssignmentItem(assignment: AssignmentDto) {
     StrokedCard(
-        onClick = { /*TODO*/ }
+        onClick = { /*TODO*/ },
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .padding(16.dp, 4.dp)
     ) {
         Column(
             Modifier

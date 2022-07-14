@@ -2,12 +2,11 @@ package com.shahad.app.my_school.ui.home.manger
 
 import android.os.Bundle
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.asLiveData
 import com.shahad.app.my_school.R
 import com.shahad.app.my_school.databinding.FragmentMangerHomeBinding
 import com.shahad.app.my_school.ui.base.BaseFragment
 import com.shahad.app.my_school.ui.main.MainActivity
-import com.shahad.app.my_school.ui.ClassesAdapterRecycler
-import com.shahad.app.my_school.ui.SchoolAdapterRecycler
 import com.shahad.app.my_school.ui.register.Role
 import com.shahad.app.my_school.util.extension.goToFragment
 import com.shahad.app.my_school.util.extension.observeEvent
@@ -82,7 +81,7 @@ class HomeMangerFragment: BaseFragment<FragmentMangerHomeBinding>() {
                     HomeMangerFragmentDirections.actionHomeMangerFragmentToProfileFragment()
                 )
             }
-            refreshState.observe(this@HomeMangerFragment){ ifRefresh ->
+            refreshState.asLiveData().observe(this@HomeMangerFragment){ ifRefresh ->
                 takeIf { ifRefresh==true }?.let {
                     refreshClasses()
                     refreshSchools()
