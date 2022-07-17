@@ -195,7 +195,11 @@ fun TeacherHome(navController: NavController, viewModel: HomeTeacherViewModel) {
             }
         ) {
             Column {
-                SearchBar(searchKey, viewModel.search)
+                SearchBar(
+                    searchKey,
+                    viewModel.search,
+                    Modifier.padding(16.dp, 16.dp, 16.dp, 8.dp)
+                )
                 LazyColumn {
                     item{
                         SectionTitle(title = "Classes")
@@ -384,11 +388,14 @@ fun HomeAppBar(
 }
 
 @Composable
-fun SearchBar(value: String?, streamData: MutableLiveData<String?>){
+fun SearchBar(
+    value: String?,
+    streamData: MutableLiveData<String?>,
+    modifier: Modifier
+){
 
     Row(
-        modifier = Modifier
-            .padding(16.dp, 16.dp, 16.dp, 8.dp)
+        modifier = modifier //TODO Change padding top later
             .fillMaxWidth()
             .height(44.dp)
             .clip(RoundedCornerShape(24.dp))

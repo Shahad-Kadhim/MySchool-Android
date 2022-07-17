@@ -9,16 +9,18 @@ import com.shahad.app.my_school.ui.add.student.MembersClassBody
 import com.shahad.app.my_school.ui.base.BaseViewModel
 import com.shahad.app.my_school.util.Event
 import com.shahad.app.my_school.util.State
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 abstract class BaseUsersViewModel(
     repository: MySchoolRepository
 ): BaseViewModel(), UserSelectedInteractionListener {
 
+    val schoolName = MutableLiveData<String?>()
+
     val schools = repository.getMangerSchool().asLiveData()
 
     val search = MutableLiveData<String?>(null)
-
-    val schoolName = MutableLiveData<String?>()
 
     val schoolId = Transformations.map(schoolName){
         schools.value?.find { it.name == schoolName.value }?.id
@@ -27,6 +29,14 @@ abstract class BaseUsersViewModel(
     abstract val users: LiveData<State<BaseResponse<List<UserSelected>>?>>
 
     val refreshState = MutableLiveData<Boolean>(false)
+
+    init {
+        viewModelScope.launch {
+            schools.asFlow().collect {
+                schoolName.postValue(it.firstOrNull()?.name)
+            }
+        }
+    }
 
     abstract fun onClickAdd()
 

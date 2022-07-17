@@ -21,7 +21,7 @@ class StudentsViewModel @Inject constructor(
     private val dataClassParser: DataClassParser
 ): BaseUsersViewModel(repository){
 
-    private val students= MediatorLiveData<State<BaseResponse<List<UserSelected>>?>>().apply {
+     val students= MediatorLiveData<State<BaseResponse<List<UserSelected>>?>>().apply {
         addSource(schoolId){
             it?.let { schoolId ->
                 viewModelScope.launch {
