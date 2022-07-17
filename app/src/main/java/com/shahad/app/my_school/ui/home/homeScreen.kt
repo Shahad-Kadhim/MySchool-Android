@@ -169,7 +169,7 @@ fun TeacherHome(navController: NavController, viewModel: HomeTeacherViewModel) {
                     modifier = Modifier
                         .size(32.dp)
                         .clickable {
-//                            navController.navigate(Screen.Profile.route)
+                            navController.navigate("schools")
                         },
                     colorFilter = ColorFilter.tint(Color.White)
                 )
@@ -479,7 +479,7 @@ fun Buttons(navController: NavController){
             )
             NavigationButton(
                 onClick = {
-//                    navController.navigate("schools") TODO LATER
+                    navController.navigate("schools")
                 },
                 icon = R.drawable.ic_school,
                 Modifier.layoutId("navToSchools")
@@ -487,7 +487,7 @@ fun Buttons(navController: NavController){
             )
             NavigationButton(
                 onClick = {
-//                    navController.navigate("classes") TODO LATER
+                    navController.navigate("classes")
                 },
                 icon = R.drawable.ic_teacher,
                 Modifier.layoutId("navToClasses")
