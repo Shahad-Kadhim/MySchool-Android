@@ -471,7 +471,7 @@ fun Buttons(navController: NavController){
 
             NavigationButton(
                 onClick = {
-//                    navController.navigate("teachers") TODO LATER
+                    navController.navigate("teachers")
                 },
                 icon = R.drawable.ic_teacher_2,
                 modifier= Modifier.layoutId("navToTeachers")

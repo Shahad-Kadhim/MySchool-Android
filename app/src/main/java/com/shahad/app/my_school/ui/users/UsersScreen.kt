@@ -37,7 +37,7 @@ import com.shahad.app.my_school.ui.users.students.StudentsViewModel
 
 
 @Composable
-fun UsersScreen(navController: NavController, usersType: Role, type: String,viewModel: StudentsViewModel) {
+fun UsersScreen(navController: NavController, usersType: Role, type: String,viewModel: BaseUsersViewModel) {
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
@@ -58,7 +58,7 @@ fun UsersScreen(navController: NavController, usersType: Role, type: String,view
         }
     ) {
         val schools by viewModel.schools.observeAsState()
-        val users by viewModel.students.observeAsState()
+        val users by viewModel.users.observeAsState()
         val search by viewModel.search.observeAsState()
         Column {
 

@@ -42,6 +42,7 @@ import com.shahad.app.my_school.ui.profile.TeacherProfileViewModel
 import com.shahad.app.my_school.ui.register.Role
 import com.shahad.app.my_school.ui.users.UsersScreen
 import com.shahad.app.my_school.ui.users.students.StudentsViewModel
+import com.shahad.app.my_school.ui.users.teachers.TeachersViewModel
 import com.shahad.app.my_school.util.extension.toRole
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -147,6 +148,13 @@ class MainActivity: ComponentActivity() {
                 content = {
                     val viewModel: MangerProfileViewModel by viewModels()
                     ProfileScreen(navController = navController, viewModel, Role.MANGER)
+                }
+            )
+            composable(
+                route = "teachers",
+                content = {
+                    val viewModel: TeachersViewModel by viewModels()
+                    UsersScreen(navController = navController,Role.TEACHER,"Teacher" ,viewModel)
                 }
             )
         }
