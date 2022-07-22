@@ -159,51 +159,6 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>() {
         }
     }
 
-    @Composable
-    private fun EditTextField(
-        modifier: Modifier = Modifier,
-        label: String,
-        value: String,
-        onchange:(String) -> Unit,
-        keyboardOptions : KeyboardOptions
-    ){
-        TextField(
-            value = value ,
-            onValueChange = onchange,
-            textStyle = TextStyle(
-                color =  Color(50,54,87),
-                fontFamily = FontFamily(Font(R.font.source_sans_pro_regular)),
-                fontSize = 16.sp
-            ),
-            keyboardOptions = keyboardOptions,
-            shape = RoundedCornerShape(8.dp) ,
-            modifier = modifier
-                .padding(top = 16.dp)
-                .fillMaxWidth(),
-            colors = TextFieldDefaults.textFieldColors(
-                backgroundColor = colorResource(R.color.card_background_color),
-                cursorColor = Color(225, 227, 232, 255),
-                disabledLabelColor = colorResource(R.color.card_background_color),
-                focusedIndicatorColor = Color(225, 227, 232, 255),
-                unfocusedIndicatorColor = Color(225, 227, 232, 255)
-            ),
-            label = { TextLabel(label) }
-        )
-    }
-
-    @Composable
-    fun TextLabel(label: String){
-        Text(
-            text = label,
-            style = TextStyle(
-                color =  Color(165,165,165),
-                fontFamily = FontFamily(Font(R.font.source_sans_pro_regular)),
-                fontSize = 12.sp
-            ),
-            modifier = Modifier
-                .fillMaxWidth()
-        )
-    }
 
     private fun observeEvents() {
         with(viewModel){
@@ -215,10 +170,58 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>() {
                 }
             }
             whenSuccess.observe(
-                this@RegisterFragment,
+                viewLifecycleOwner,
                 (requireActivity() as IdentityActivity)::onAuth
             )
         }
     }
 
+}
+
+
+@Composable
+ fun EditTextField(
+    modifier: Modifier = Modifier,
+    label: String,
+    value: String,
+    onchange:(String) -> Unit,
+    keyboardOptions : KeyboardOptions
+){
+    TextField(
+        value = value ,
+        onValueChange = onchange,
+        textStyle = TextStyle(
+            color =  Color(50,54,87),
+            fontFamily = FontFamily(Font(R.font.source_sans_pro_regular)),
+            fontSize = 16.sp
+        ),
+        keyboardOptions = keyboardOptions,
+        shape = RoundedCornerShape(8.dp) ,
+        modifier = modifier
+            .padding(top = 16.dp)
+            .fillMaxWidth(),
+        colors = TextFieldDefaults.textFieldColors(
+            backgroundColor = colorResource(R.color.card_background_color),
+            cursorColor = Color(225, 227, 232, 255),
+            disabledLabelColor = colorResource(R.color.card_background_color),
+            focusedIndicatorColor = Color(225, 227, 232, 255),
+            unfocusedIndicatorColor = Color(225, 227, 232, 255)
+        ),
+        label = { TextLabel(label) }
+    )
+}
+
+
+@Composable
+fun TextLabel(label: String){
+    Text(
+        text = label,
+        style = TextStyle(
+            color =  Color(165,165,165),
+            fontFamily = FontFamily(Font(R.font.source_sans_pro_regular)),
+            fontSize = 12.sp
+        ),
+        modifier = Modifier
+            .fillMaxWidth()
+    )
 }

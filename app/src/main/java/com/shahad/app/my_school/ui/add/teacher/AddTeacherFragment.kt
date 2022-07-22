@@ -24,7 +24,7 @@ class AddTeacherFragment: BaseBottomSheetDialogFragment<FragmentDailogAddBinding
 
     private fun observe() {
         with(viewModel){
-            onSuccessJoined.observeEvent(this@AddTeacherFragment){ ifSuccess ->
+            onSuccessRequest.observeEvent(this@AddTeacherFragment){ ifSuccess ->
                 takeIf { ifSuccess }?.let {
                     findNavController().navigateUp()
                 }

@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -41,20 +42,24 @@ import com.shahad.app.my_school.R
 import com.shahad.app.my_school.data.remote.response.BaseResponse
 import com.shahad.app.my_school.domain.models.School
 import com.shahad.app.my_school.ui.*
+import com.shahad.app.my_school.ui.add.BaseNewViewModel
+import com.shahad.app.my_school.ui.add.BottomSheetLayout
+import com.shahad.app.my_school.ui.add.school.CreateSchoolViewModel
 import com.shahad.app.my_school.ui.base.BaseViewModel
 import com.shahad.app.my_school.ui.home.manger.HomeMangerViewModel
 import com.shahad.app.my_school.ui.home.student.HomeStudentViewModel
 import com.shahad.app.my_school.ui.home.teacher.HomeTeacherViewModel
 import com.shahad.app.my_school.ui.register.Role
 import com.shahad.app.my_school.util.State
+import kotlinx.coroutines.launch
 
 
 @Composable
-fun HomeScreen(navController: NavController, role: Role, viewModel: BaseViewModel) {
+fun HomeScreen(navController: NavController, role: Role, viewModel: BaseViewModel, bottomSheatViewModel: BaseNewViewModel? = null) {
     when(role){
-        Role.TEACHER -> TeacherHome(navController, viewModel as HomeTeacherViewModel)
+        Role.TEACHER -> TeacherHome(navController, viewModel as HomeTeacherViewModel,)
         Role.STUDENT -> StudentHome(navController,viewModel as HomeStudentViewModel)
-        Role.MANGER -> MangerHome(navController, viewModel as HomeMangerViewModel)
+        Role.MANGER -> MangerHome(navController, viewModel as HomeMangerViewModel, bottomSheatViewModel as CreateSchoolViewModel)
     }
 }
 
@@ -222,81 +227,92 @@ fun TeacherHome(navController: NavController, viewModel: HomeTeacherViewModel) {
         }
     }
 }
-
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun MangerHome(navController: NavController, viewModel: HomeMangerViewModel) {
-    Scaffold(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(colorResource(id = R.color.background_color)),
-        topBar = {
-            HomeAppBar(navController = navController){
-                Image(
-                    painter = painterResource(R.drawable.ic_notifaction),
-                    contentDescription = "avatar",
-                    modifier = Modifier
-                        .size(32.dp)
-                        .clickable {
-                            navController.navigate(Screen.Notification.route)
-                        },
-                    colorFilter = ColorFilter.tint(Color.White)
-                )
-            }
-        },
-        floatingActionButton = {
-            FloatingActionButton(
-                onClick = { /*TODO*/ },
-                backgroundColor = colorResource(id = R.color.brand_color),
-                contentColor = Color.White
-            ) {
-                Icon(Icons.Filled.Add,"add school")
-            }
-        }
-    ){
-        val classes by viewModel.classes.observeAsState()
-        val schools by viewModel.schools.observeAsState()
-        val isRefreshing by viewModel.refreshState.collectAsState()
-        SwipeRefresh(
-            state = rememberSwipeRefreshState(isRefreshing = isRefreshing ),
-            onRefresh = {
-                viewModel.refreshClasses()
-                viewModel.refreshSchools()
-            }
-        ) {
-            LazyColumn {
-
-                schools.takeUnless { it.isNullOrEmpty() }?.let { schools ->
-                    item {
-                        SchoolsItemsHeaders {
-                        //TODO LATER
-                        }
-                        SchoolsRecycle(schools = schools)
-                    }
-                }
-
-                item {
-                    Buttons(navController = navController)
-                }
-                item{
-                    SectionTitle(title = "Classes")
-                }
-
-                classes?.takeIf { it.isNotEmpty() }?.let{ classesList ->
-                    items(classesList){
-                        ClassItem(it,true)
-                    }
-                } ?: item {
-                    NoResultAnimation(
-                        Modifier
-                            .fillMaxWidth()
-                            .padding(0.dp, 64.dp, 0.dp, 0.dp),
-                        "No Classes Here",
+fun MangerHome(navController: NavController, viewModel: HomeMangerViewModel, bottomSheetViewModel: CreateSchoolViewModel) {
+    val scop = rememberCoroutineScope()
+    BottomSheetLayout(
+        viewModel = bottomSheetViewModel,
+        type = "Schools",
+        scope = scop
+    ){ modalBottomSheetState ->
+        Scaffold(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(colorResource(id = R.color.background_color)),
+            topBar = {
+                HomeAppBar(navController = navController) {
+                    Image(
+                        painter = painterResource(R.drawable.ic_notifaction),
+                        contentDescription = "avatar",
+                        modifier = Modifier
+                            .size(32.dp)
+                            .clickable {
+                                navController.navigate(Screen.Notification.route)
+                            },
+                        colorFilter = ColorFilter.tint(Color.White)
                     )
                 }
+            },
+            floatingActionButton = {
+                FloatingActionButton(
+                    onClick = {
+                        scop.launch {
+                            modalBottomSheetState.show()
+                        }
+                    },
+                    backgroundColor = colorResource(id = R.color.brand_color),
+                    contentColor = Color.White
+                ) {
+                    Icon(Icons.Filled.Add, "add school")
+                }
             }
+        ) {
+            val classes by viewModel.classes.observeAsState()
+            val schools by viewModel.schools.observeAsState()
+            val isRefreshing by viewModel.refreshState.collectAsState()
+            SwipeRefresh(
+                state = rememberSwipeRefreshState(isRefreshing = isRefreshing),
+                onRefresh = {
+                    viewModel.refreshClasses()
+                    viewModel.refreshSchools()
+                }
+            ) {
+                LazyColumn {
+
+                    schools.takeUnless { it.isNullOrEmpty() }?.let { schools ->
+                        item {
+                            SchoolsItemsHeaders {
+                                //TODO LATER
+                            }
+                            SchoolsRecycle(schools = schools)
+                        }
+                    }
+
+                    item {
+                        Buttons(navController = navController)
+                    }
+                    item {
+                        SectionTitle(title = "Classes")
+                    }
+
+                    classes?.takeIf { it.isNotEmpty() }?.let { classesList ->
+                        items(classesList) {
+                            ClassItem(it, true)
+                        }
+                    } ?: item {
+                        NoResultAnimation(
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(0.dp, 64.dp, 0.dp, 0.dp),
+                            "No Classes Here",
+                        )
+                    }
+                }
+            }
+
+
         }
-
-
     }
 }
 
@@ -457,7 +473,7 @@ fun Buttons(navController: NavController){
         ConstraintLayout(
             constraint,
             Modifier
-                .padding(0.dp,16.dp,0.dp,8.dp)
+                .padding(0.dp, 16.dp, 0.dp, 8.dp)
                 .fillMaxWidth()
                 .wrapContentHeight()
         ) {
@@ -516,7 +532,9 @@ fun NavigationButton(
             painter = painterResource(id = icon),
             contentDescription = "",
             tint = colorResource(id = R.color.brand_color),
-            modifier = Modifier.padding(16.dp).fillMaxSize()
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxSize()
         )
     }
 }

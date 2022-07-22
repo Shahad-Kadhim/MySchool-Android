@@ -24,6 +24,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.shahad.app.my_school.R
+import com.shahad.app.my_school.ui.add.BottomSheetLayout
+import com.shahad.app.my_school.ui.add.school.CreateSchoolViewModel
 import com.shahad.app.my_school.ui.classes.ClassesMangerViewModel
 import com.shahad.app.my_school.ui.classes.ClassesScreen
 import com.shahad.app.my_school.ui.duty.AssignmentScreen
@@ -130,8 +132,9 @@ class MainActivity: ComponentActivity() {
             composable(
                 route = Screen.Home.route,
                 content = {
+                    val bottomViewModel: CreateSchoolViewModel by viewModels()
                     val viewModel: HomeMangerViewModel by viewModels()
-                    HomeScreen(navController = navController,role = Role.MANGER, viewModel = viewModel)
+                    HomeScreen(navController = navController,role = Role.MANGER, viewModel = viewModel,bottomViewModel)
                 }
             )
             composable(
@@ -174,6 +177,12 @@ class MainActivity: ComponentActivity() {
                 content = {
                     val viewModel: ClassesMangerViewModel by viewModels()
                     ClassesScreen(navController = navController, viewModel = viewModel)
+                }
+            )
+            composable(
+                route = "newSchool",
+                content = {
+//                    BottomSheetLayout(viewModel = viewModel,"School")
                 }
             )
         }

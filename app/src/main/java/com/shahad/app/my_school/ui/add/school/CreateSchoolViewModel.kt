@@ -21,7 +21,7 @@ class CreateSchoolViewModel @Inject constructor(
 
     private val _createRequestStatus = MutableLiveData<State<BaseResponse<SchoolDto>?>>()
 
-    val onSuccessCreated = Transformations.map(_createRequestStatus){
+    override val onSuccessRequest = Transformations.map(_createRequestStatus){
         if(it is State.Success) Event(true) else Event(false)
     }
 

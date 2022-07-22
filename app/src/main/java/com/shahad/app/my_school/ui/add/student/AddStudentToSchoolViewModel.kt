@@ -21,7 +21,7 @@ class AddStudentToSchoolViewModel @Inject constructor(
     private val _addRequestStatus = MutableLiveData<State<BaseResponse<String>?>>()
     val addRequestStatus: LiveData<State<BaseResponse<String>?>> = _addRequestStatus
 
-    val onSuccessJoined = Transformations.map(_addRequestStatus){
+    override val onSuccessRequest= Transformations.map(_addRequestStatus){
         if(it is State.Success) Event(true) else Event(false)
     }
 
