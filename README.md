@@ -4,10 +4,10 @@
 
 Android application for distance learning in schools to simulate attendance education and facilitate students' communication with teachers and their access to lessons in an easier way and Managers can monitor and organize classes and make more automation in our schools .
 
-```
 Video link : https://youtu.be/VWD8e5fFmLs
+
 Server Side repo link  : https://github.com/Shahad-Kadhim/MySchool-Ktor
-```
+
 ### LogIn & signIn screens
 
 LogIn             |  Sign In
